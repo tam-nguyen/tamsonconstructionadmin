@@ -39,7 +39,8 @@ const languages = [
   { label: "English", value: "en" },
   { label: "Czech", value: "cz" },
   { label: "German", value: "de" },
-  { label: "Ukrainian", value: "uk" },  
+  { label: "Ukrainian", value: "uk" },
+  { label: "Korean", value: "ko" },
 ] as const;
 
 const FormSchema = z.object({
