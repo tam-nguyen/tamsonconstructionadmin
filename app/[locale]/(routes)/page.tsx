@@ -51,7 +51,7 @@ const DashboardPage = async () => {
   const lang = session?.user?.userLanguage;
 
   //Fetch translations from dictionary
-  const dict = await getDictionary(lang as "en" | "cz" | "de" | "uk"); //Fetch data for dashboard
+  const dict = await getDictionary(lang as "en" | "cz" | "de" | "uk" | "ko"); //Fetch data for dashboard
 
   const modules = await getModules();
   const leads = await getLeadsCount();
@@ -84,7 +84,7 @@ const DashboardPage = async () => {
     <Container
       title={dict.DashboardPage.containerTitle}
       description={
-        "Welcome to the SaasHQ cockpit, here you can see your company overview"
+        dict.DashboardPage.containerDescription
       }
     >
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
