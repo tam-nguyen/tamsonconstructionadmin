@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Flex, ProgressBar, Text } from "@tremor/react";
-import { Database, Server } from "lucide-react";
+import { Flex, Text } from "@tremor/react";
+import { Database } from "lucide-react";
+import ProgressBarComponent from "@/app/[locale]/(routes)/components/dasboard/progress-bar-component";
 
 // Single KPI card in the demo dashboard with sample inputs
 export default function StorageQuota({
@@ -29,7 +30,7 @@ export default function StorageQuota({
           </Flex>
         </div>
         <div>
-          <ProgressBar value={percent} color={"orange"} className="mt-2" />
+          <ProgressBarComponent value={percent} color={"orange"} className="mt-2" />
         </div>
       </CardContent>
     </Card>
