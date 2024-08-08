@@ -4,9 +4,10 @@ import ModuleMenu from "./ModuleMenu";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { getDictionary } from "@/dictionaries";
+import { FC } from "react";
 
-const SideBar = async ({ build }: { build: number }) => {
-  const session = await getServerSession(authOptions);  
+const SideBar: FC<{ build: number }> = async ({ build }) => {
+  const session = await getServerSession(authOptions);
 
   if (!session) return null;
 
@@ -18,7 +19,7 @@ const SideBar = async ({ build }: { build: number }) => {
   const lang = session.user.userLanguage;
 
   //Fetch translations from dictionary
-  const dict = await getDictionary(lang as "en" | "cz" | "de"  | "ko");
+  const dict = await getDictionary(lang);
 
   if (!dict) return null;
 

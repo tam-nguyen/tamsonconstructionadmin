@@ -33,7 +33,7 @@ import fetcher from "@/lib/fetcher";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { crm_Accounts } from "@prisma/client";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 
@@ -53,7 +53,7 @@ const NewTaskForm = ({ account, onFinish }: NewTaskFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [date, setDate] = useState<Date>();
-  //  const [userSearch, setUserSearch] = useState<string>("");  
+  //  const [userSearch, setUserSearch] = useState<string>("");
 
   const { data: users, isLoading: isLoadingUsers } = useSWR(
     "/api/user",
@@ -89,7 +89,7 @@ const NewTaskForm = ({ account, onFinish }: NewTaskFormProps) => {
 
   //Actions
 
-  const onSubmit = async (data: NewAccountFormValues) => {
+  const onSubmit = form.handleSubmit(async (data) => {
     //console.log(data);
     setIsLoading(true);
     try {
@@ -98,24 +98,32 @@ const NewTaskForm = ({ account, onFinish }: NewTaskFormProps) => {
         title: "Success",
         description: `New task: ${data.title}, created successfully`,
       });
-    } catch (error: any) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: error?.response?.data,
-      });
+    } catch (error) {
+      if (error instanceof AxiosError && error?.response?.data) {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: error?.response?.data,
+        });
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: error instanceof Error ? error?.message : "",
+        });
+      }
     } finally {
       setIsLoading(false);
       onFinish();
       router.refresh();
     }
-  };
+  });
 
   if (isLoadingUsers) {
     return <LoadingComponent />;
   }
 
-    /*   const filteredUsers = users?.filter((user: any) =>
+  /*   const filteredUsers = users?.filter((user: any) =>
     user.name.toLowerCase().includes(userSearch.toLowerCase())
   ); */
 
@@ -129,10 +137,7 @@ const NewTaskForm = ({ account, onFinish }: NewTaskFormProps) => {
             <pre>{JSON.stringify(form.watch(), null, 2)}</pre>
           </div> */}
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="h-full w-full space-y-3"
-            >
+            <form onSubmit={onSubmit} className="h-full w-full space-y-3">
               <div className="flex flex-col space-y-3">
                 <FormField
                   control={form.control}
@@ -230,7 +235,7 @@ const NewTaskForm = ({ account, onFinish }: NewTaskFormProps) => {
                                 setUserSearch(e.target.value);
                               }, 1000);
                             }}
-                          /> */}                          
+                          /> */}
                           {users.map((user: any) => (
                             <SelectItem key={user.id} value={user.id}>
                               {user.name}
@@ -240,7 +245,7 @@ const NewTaskForm = ({ account, onFinish }: NewTaskFormProps) => {
                             <SelectItem key={user.id} value={user.id}>
                               {user.name}
                             </SelectItem>
-                          ))} */}                          
+                          ))} */}
                         </SelectContent>
                       </Select>
                       <FormMessage />

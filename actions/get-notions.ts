@@ -18,7 +18,7 @@ async function fetchDatabaseItems(
   notion: NotionClient,
   notionDbId: string,
   startCursor?: string
-) {
+): Promise<Awaited<ReturnType<typeof notion.databases.query>>["results"]> {
   const response = await notion.databases.query({
     database_id: notionDbId,
     start_cursor: startCursor,
@@ -28,7 +28,7 @@ async function fetchDatabaseItems(
   const items = response.results;
 
   if (response.has_more) {
-    const nextItems: any[] = await fetchDatabaseItems(
+    const nextItems = await fetchDatabaseItems(
       notion,
       notionDbId,
       response.next_cursor || ""
@@ -39,7 +39,9 @@ async function fetchDatabaseItems(
   }
 }
 
-export const getNotions = async (): Promise<any[] | null> => {
+export const getNotions = async (): Promise<
+  NotionItem[] | { error: string } | null
+> => {
   const session: Session | null = await getServerSession(authOptions);
   const userId: string | undefined = session?.user?.id;
 
@@ -47,7 +49,11 @@ export const getNotions = async (): Promise<any[] | null> => {
     return null;
   }
 
-  const notion: NotionClient = await initNotionClient(userId);
+  const notion = await initNotionClient(userId);
+
+  if ("error" in notion) {
+    return notion;
+  }
 
   //console.log(notion, "notion");
 
@@ -59,7 +65,7 @@ export const getNotions = async (): Promise<any[] | null> => {
     });
 
     if (!notionDb) {
-      const notionItems: any = {
+      const notionItems = {
         error: "API key not found in the database.",
       };
       //return notionItems;
@@ -67,35 +73,37 @@ export const getNotions = async (): Promise<any[] | null> => {
       return notionItems;
     }
 
-    const databases: any[] = await fetchDatabaseItems(
+    const databases:
+      | Awaited<ReturnType<typeof fetchDatabaseItems>>
+      | { error: string } = await fetchDatabaseItems(
       notion,
       notionDb.notion_db_id
-    )
-      .then((items: any[]) => {
-        return items;
-      })
-      .catch((error: any) => {
-        //console.error(error);
-        const notionItems: any = {
-          error: "API key is invalid.",
-        };
-        return notionItems;
-      });
+    ).catch((error) => {
+      //console.error(error);
+      const notionItems = {
+        error: "API key is invalid.",
+      };
+      return notionItems;
+    });
 
-    const notionItems = databases.map(
-      (item:any) =>
-        ({
-          id: item.id,
-          createdAt: moment(item.created_time).format("YYYY-MM-DD"),
-          title:
-            item.properties.Tweet.title[0].plain_text.substring(0, 60) + " ...",
-          urlShort:
-            item.properties["Tweet Link"]?.url?.substring(0, 40) + " ...",
-          url: item.properties["Tweet Link"]?.url,
-        } as NotionItem)
-    );
+    if (typeof databases === "object" && Array.isArray(databases)) {
+      const notionItems = databases.map(
+        (item: any) =>
+          ({
+            id: item.id,
+            createdAt: moment(item.created_time).format("YYYY-MM-DD"),
+            title:
+              item.properties.Tweet.title[0].plain_text.substring(0, 60) +
+              " ...",
+            urlShort:
+              item.properties["Tweet Link"]?.url?.substring(0, 40) + " ...",
+            url: item.properties["Tweet Link"]?.url,
+          } satisfies NotionItem)
+      );
 
-    return notionItems;
+      return notionItems;
+    }
+    return databases;
   } catch (error) {
     console.log(error);
     return null;

@@ -39,7 +39,7 @@ const FeedbackForm = ({ setOpen }: FeedbackFormProps) => {
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = form.handleSubmit(async (data) => {
     setLoading(true);
     try {
       await axios.post("/api/feedback", data);
@@ -56,13 +56,13 @@ const FeedbackForm = ({ setOpen }: FeedbackFormProps) => {
         description: "Thank you for your feedback.",
       });
       setOpen(false);
-      setLoading(false);      
+      setLoading(false);
     }
-  };
+  });
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+      <form onSubmit={onSubmit} className="space-y-3">
         <FormField
           control={form.control}
           name="feedback"

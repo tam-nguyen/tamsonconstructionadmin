@@ -25,7 +25,7 @@ export const maxDuration = 300;
 
 const BoardPage = async ({ params }: BoardDetailProps) => {
   const session = await getServerSession(authOptions);
-  const user = session?.user;  
+  const user = session?.user;
   const { boardId } = params;
   const board: any = await getBoard(boardId);
   const boards = await getBoards(user?.id!);
@@ -48,7 +48,9 @@ const BoardPage = async ({ params }: BoardDetailProps) => {
             users={users}
             sections={sections}
           />
-          <AiAssistantProject session={session} boardId={boardId} />
+          {session ? (
+            <AiAssistantProject session={session} boardId={boardId} />
+          ) : null}
         </div>
         <div>
           <DeleteProjectDialog

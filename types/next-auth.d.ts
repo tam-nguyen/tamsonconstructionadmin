@@ -17,7 +17,7 @@ declare module "next-auth" {
       _id: UserId;
       avatar?: string | null | undefined;
       isAdmin: boolean;
-      userLanguage: string;
+      userLanguage: import("@/dictionaries").SupportLanguageDict;
       userStatus: string;
     };
   }

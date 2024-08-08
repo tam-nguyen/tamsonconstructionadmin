@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 
 import ProjectModuleMenu from "./menu-items/Projects";
 import SecondBrainModuleMenu from "./menu-items/SecondBrain";
@@ -17,15 +17,16 @@ import AdministrationMenu from "./menu-items/Administration";
 import DashboardMenu from "./menu-items/Dashboard";
 import EmailsModuleMenu from "./menu-items/Emails";
 import { cn } from "@/lib/utils";
-import { any } from "cypress/types/bluebird";
+import type { system_Modules_Enabled } from "@prisma/client";
+import type { getDictionary } from "@/dictionaries";
 
 type Props = {
-  modules: any;
-  dict: any;
-  build: number;  
+  modules: system_Modules_Enabled[];
+  dict: Awaited<ReturnType<typeof getDictionary>>;
+  build: number;
 };
 
-const ModuleMenu = ({ modules, dict, build }: Props) => {
+const ModuleMenu: FC<Props> = ({ modules, dict, build }) => {
   const [open, setOpen] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -35,7 +36,7 @@ const ModuleMenu = ({ modules, dict, build }: Props) => {
 
   if (!isMounted) {
     return null;
-  }  
+  }
 
   return (
     <div className="flex flex-col">
@@ -65,48 +66,51 @@ const ModuleMenu = ({ modules, dict, build }: Props) => {
         <div className="pt-6">
           <DashboardMenu open={open} title={dict.ModuleMenu.dashboard} />
           {modules.find(
-            (menuItem: any) => menuItem.name === "crm" && menuItem.enabled
+            (menuItem) => menuItem.name === "crm" && menuItem.enabled
           ) ? (
             <CrmModuleMenu open={open} localizations={dict.ModuleMenu.crm} />
           ) : null}
           {modules.find(
-            (menuItem: any) => menuItem.name === "projects" && menuItem.enabled
+            (menuItem) => menuItem.name === "projects" && menuItem.enabled
           ) ? (
             <ProjectModuleMenu open={open} title={dict.ModuleMenu.projects} />
           ) : null}
           {modules.find(
-            (menuItem: any) => menuItem.name === "emails" && menuItem.enabled
+            (menuItem) => menuItem.name === "emails" && menuItem.enabled
           ) ? (
             <EmailsModuleMenu open={open} title={dict.ModuleMenu.emails} />
-          ) : null}          
+          ) : null}
           {modules.find(
-            (menuItem: any) =>
-              menuItem.name === "secondBrain" && menuItem.enabled
+            (menuItem) => menuItem.name === "secondBrain" && menuItem.enabled
           ) ? (
             <SecondBrainModuleMenu open={open} />
           ) : null}
           {modules.find(
-            (menuItem: any) => menuItem.name === "employee" && menuItem.enabled
+            (menuItem) => menuItem.name === "employee" && menuItem.enabled
           ) ? (
             <EmployeesModuleMenu open={open} />
           ) : null}
           {modules.find(
-            (menuItem: any) => menuItem.name === "invoice" && menuItem.enabled
+            (menuItem) => menuItem.name === "invoice" && menuItem.enabled
           ) ? (
             <InvoicesModuleMenu open={open} title={dict.ModuleMenu.invoices} />
           ) : null}
           {modules.find(
-            (menuItem: any) => menuItem.name === "workflows" && menuItem.enabled
+            (menuItem) => menuItem.name === "workflows" && menuItem.enabled
           ) ? (
-            <WorkflowsModuleMenu open={open} title={dict.ModuleMenu.workflows} />
-          ) : null}          
+            <WorkflowsModuleMenu
+              open={open}
+              //@ts-ignore-next-line
+              title={dict.ModuleMenu?.workflows}
+            />
+          ) : null}
           {modules.find(
-            (menuItem: any) => menuItem.name === "reports" && menuItem.enabled
+            (menuItem) => menuItem.name === "reports" && menuItem.enabled
           ) ? (
             <ReportsModuleMenu open={open} title={dict.ModuleMenu.reports} />
           ) : null}
           {modules.find(
-            (menuItem: any) => menuItem.name === "documents" && menuItem.enabled
+            (menuItem) => menuItem.name === "documents" && menuItem.enabled
           ) ? (
             <DocumentsModuleMenu
               open={open}
@@ -114,12 +118,12 @@ const ModuleMenu = ({ modules, dict, build }: Props) => {
             />
           ) : null}
           {modules.find(
-            (menuItem: any) => menuItem.name === "databox" && menuItem.enabled
+            (menuItem) => menuItem.name === "databox" && menuItem.enabled
           ) ? (
             <DataboxModuleMenu open={open} />
           ) : null}
           {modules.find(
-            (menuItem: any) => menuItem.name === "openai" && menuItem.enabled
+            (menuItem) => menuItem.name === "openai" && menuItem.enabled
           ) ? (
             <ChatGPTModuleMenu open={open} />
           ) : null}
@@ -134,7 +138,7 @@ const ModuleMenu = ({ modules, dict, build }: Props) => {
         <span className="text-xs text-gray-500 pb-2">
           build: 0.0.3-beta-{build}
         </span>
-      </div>      
+      </div>
     </div>
   );
 };

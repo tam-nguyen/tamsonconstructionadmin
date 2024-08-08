@@ -6,8 +6,9 @@ import axios from "axios";
 import { prismadb } from "@/lib/prisma";
 import resendHelper from "@/lib/resend";
 import AiTasksReportEmail from "@/emails/AiTasksReport";
+import { Session } from "next-auth";
 
-export async function getUserAiTasks(session: any) {
+export async function getUserAiTasks(session: Session) {
   /*
   Resend.com function init - this is a helper function that will be used to send emails
   */
@@ -44,6 +45,7 @@ export async function getUserAiTasks(session: any) {
     where: {
       AND: [
         {
+          //@ts-ignore-next-line
           user: session.user.is,
           taskStatus: "ACTIVE",
           dueDateAt: {
@@ -147,6 +149,7 @@ export async function getUserAiTasks(session: any) {
         subject: `${process.env.NEXT_PUBLIC_APP_NAME} OpenAI Project manager assistant from: ${process.env.NEXT_PUBLIC_APP_URL}`,
         text: getAiResponse.response.message.content,
         react: AiTasksReportEmail({
+          //@ts-ignore-next-line
           username: session.user.name,
           avatar: session.user.avatar,
           userLanguage: session.user.userLanguage,

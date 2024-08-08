@@ -1,6 +1,6 @@
 "use client";
 import { z } from "zod";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
@@ -17,7 +17,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-  CardDescription,  
+  CardDescription,
 } from "@/components/ui/card";
 import {
   Form,
@@ -43,7 +43,7 @@ export function RegisterComponent() {
   const router = useRouter();
   const { toast } = useToast();
 
-  //Local states  
+  //Local states
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [show, setShow] = React.useState<boolean>(false);
 
@@ -82,12 +82,20 @@ export function RegisterComponent() {
       if (response.status === 200) {
         router.push("/");
       }
-    } catch (error: any) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: error?.response?.data,
-      });
+    } catch (error) {
+      if (error instanceof AxiosError && error?.response?.data) {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: error?.response?.data,
+        });
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: error instanceof Error ? error?.message : "",
+        });
+      }
     } finally {
       setIsLoading(false);
     }
@@ -118,7 +126,7 @@ export function RegisterComponent() {
     } finally {
       setIsLoading(false);
     }
-  };  
+  };
 
   //Localizations
   const t = useTranslations("RegisterComponent");
@@ -132,9 +140,9 @@ export function RegisterComponent() {
       <CardContent className="grid gap-4">
         {/*  <pre>
           <code>{JSON.stringify(form.watch(), null, 2)}</code>
-        </pre> */}        
+        </pre> */}
         <div className="grid grid-cols-2 gap-6">
-          <Button 
+          <Button
             variant="outline"
             onClick={loginWithGithub}
             disabled={isLoading}

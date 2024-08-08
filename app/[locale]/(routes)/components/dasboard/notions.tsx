@@ -5,11 +5,11 @@ import { LightbulbIcon } from "lucide-react";
 import Link from "next/link";
 
 const NotionsBox = async () => {
-  const notions: any = await getNotions();
+  const notions = await getNotions();
 
   if (!notions) return null;
 
-  if (notions.error) {
+  if ("error" in notions) {
     return (
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">

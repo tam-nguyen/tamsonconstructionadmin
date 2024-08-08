@@ -6,16 +6,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { getDictionary } from "@/dictionaries";
 import { Coins } from "lucide-react";
 
 import { usePathname, useRouter } from "next/navigation";
+import { FC } from "react";
 
 type Props = {
   open: boolean;
-  localizations: any;  
+  localizations: Awaited<ReturnType<typeof getDictionary>>["ModuleMenu"]["crm"];
 };
 
-const CrmModuleMenu = ({ open, localizations }: Props) => {
+const CrmModuleMenu: FC<Props> = ({ open, localizations }) => {
   const router = useRouter();
   const pathname = usePathname();
   const isPath = pathname.includes("crm");

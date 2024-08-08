@@ -8,5 +8,7 @@ const dictionaries = {
   ko: () => import("./locales/ko.json").then((module) => module.default),
 };
 
-export const getDictionary = async (locale: "en" | "cz" | "de" | "uk" | "ko") =>
+export type SupportLanguageDict = keyof typeof dictionaries;
+
+export const getDictionary = async (locale: SupportLanguageDict) =>
   dictionaries[locale]();

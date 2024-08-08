@@ -72,7 +72,7 @@ export function LoginComponent() {
     try {
       await signIn("google", {
         callbackUrl: process.env.NEXT_PUBLIC_APP_URL,
-        //callbackUrl: "/",        
+        //callbackUrl: "/",
       });
     } catch (error) {
       console.log(error, "error");
@@ -80,7 +80,7 @@ export function LoginComponent() {
         variant: "destructive",
         description:
           "Something went wrong while logging into your Google account.",
-      });      
+      });
     } finally {
       setIsLoading(false);
     }
@@ -98,12 +98,11 @@ export function LoginComponent() {
         variant: "destructive",
         description:
           "Something went wrong while logging into your Github account.",
-      });      
+      });
     } finally {
       setIsLoading(false);
     }
   };
-
 
   //Login with username(email)/password
   async function onSubmit(data: LoginFormValues) {
@@ -127,14 +126,19 @@ export function LoginComponent() {
         //console.log("Status OK");
         toast({
           description: "Login successful.",
-        });        
-      }      
-    } catch (error: any) {
+        });
+      }
+    } catch (error) {
       console.log(error);
       toast({
         variant: "destructive",
         title: "Error",
-        description: error!,
+        description:
+          error instanceof Error
+            ? error?.message
+            : typeof error === "string"
+            ? error
+            : "",
       });
     } finally {
       setIsLoading(false);
@@ -174,7 +178,7 @@ export function LoginComponent() {
       </CardHeader>
       <CardContent className="grid gap-4">
         <div className="grid grid-cols-2 gap-6">
-          <Button 
+          <Button
             variant="outline"
             onClick={loginWithGithub}
             disabled={isLoading}

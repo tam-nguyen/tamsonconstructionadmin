@@ -6,8 +6,9 @@ import { prismadb } from "@/lib/prisma";
 import resendHelper from "@/lib/resend";
 
 import AiProjectReportEmail from "@/emails/AiProjectReport";
+import { Session } from "next-auth";
 
-export async function getAiReport(session: any, boardId: string) {
+export async function getAiReport(session: Session, boardId: string) {
   /*
   Resend.com function init - this is a helper function that will be used to send emails
   */
@@ -53,8 +54,10 @@ export async function getAiReport(session: any, boardId: string) {
       prompt = prompt + `Odpověď musí být v českém jazyce a ve formátu MDX.`;
       break;
     case "de":
-      prompt = prompt + `Die Antwort muss in englischer Sprache und im MDX-Format erfolgen.`;
-      break;      
+      prompt =
+        prompt +
+        `Die Antwort muss in englischer Sprache und im MDX-Format erfolgen.`;
+      break;
   }
 
   if (!prompt) return { message: "No prompt found" };
@@ -88,6 +91,7 @@ export async function getAiReport(session: any, boardId: string) {
         subject: `${process.env.NEXT_PUBLIC_APP_NAME} OpenAI Project manager assistant from: ${process.env.NEXT_PUBLIC_APP_URL}`,
         text: getAiResponse.response.message.content,
         react: AiProjectReportEmail({
+          //@ts-ignore-next-line
           username: session.user.name,
           avatar: session.user.avatar,
           userLanguage: session.user.userLanguage,
