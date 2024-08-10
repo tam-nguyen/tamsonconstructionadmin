@@ -1,14 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { FC, useState } from "react";
 
 import { getUserAiTasks } from "@/actions/cron/get-user-ai-tasks";
 
 import { Icons } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { Session } from "next-auth";
 
-const AiAssistant = ({ session }: { session: any }) => {
+const AiAssistant: FC<{ session: Session }> = ({ session }) => {
   const [loading, setLoading] = useState(false);
 
   const { toast } = useToast();

@@ -18,13 +18,13 @@ import { Button } from "@/components/ui/button";
 import Youtube from "./components/Youtube";
 
 const SecondBrainPage = async () => {
-  const notions: any = await getNotions();
-  const users: any = await getActiveUsers();
+  const notions = await getNotions();
+  const users = await getActiveUsers();
   const session = await getServerSession(authOptions);
   const userId = session?.user?.id;
-  const boards: any = await getBoards(userId!);
+  const boards = await getBoards(userId);
 
-  if (!notions || notions.error) {
+  if (!notions || "error" in notions) {
     return (
       <div>
         <H4Title>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import { crm_Accounts } from "@prisma/client";
 
@@ -32,7 +32,7 @@ interface TasksViewProps {
   account: crm_Accounts | null;
 }
 
-const AccountsTasksView = ({ data, account }: TasksViewProps) => {
+const AccountsTasksView: FC<TasksViewProps> = ({ data, account }) => {
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
@@ -60,7 +60,7 @@ const AccountsTasksView = ({ data, account }: TasksViewProps) => {
             <CardDescription></CardDescription>
           </div>
           <div className="flex space-x-2">
-          <Sheet open={open} onOpenChange={() => setOpen(false)}>
+            <Sheet open={open} onOpenChange={() => setOpen(false)}>
               <Button
                 className="m-2 cursor-pointer"
                 onClick={() => setOpen(true)}

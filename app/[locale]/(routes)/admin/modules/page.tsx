@@ -24,7 +24,7 @@ const AdminModulesPage = async () => {
     );
   }
 
-  const modules: any = await getModules();
+  const modules = await getModules();
   return (
     <Container
       title="Modules administration"

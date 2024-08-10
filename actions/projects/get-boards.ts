@@ -1,6 +1,6 @@
 import { prismadb } from "@/lib/prisma";
 
-export const getBoards = async (userId: string) => {
+export const getBoards = async (userId?: string) => {
   if (!userId) {
     return null;
   }

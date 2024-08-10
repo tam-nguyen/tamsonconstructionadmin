@@ -15,7 +15,7 @@ const initNotionClient = async (userId: string) => {
     //console.log(apiKey, "API key from Notion - lib");
 
     if (!apiKey) {
-      const notionItems: any = {
+      const notionItems = {
         error: "API key not found in the database.",
       };
       console.log(error);

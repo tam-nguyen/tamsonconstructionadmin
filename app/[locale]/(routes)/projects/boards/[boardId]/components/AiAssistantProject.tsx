@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { FC, useState } from "react";
 
 import { getUserAiTasks } from "@/actions/cron/get-user-ai-tasks";
 
@@ -8,14 +8,12 @@ import { Icons } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { getAiReport } from "@/actions/ai/projects/boards/getAiReport";
+import { Session } from "next-auth";
 
-const AiAssistantProject = ({
-  session,
-  boardId,
-}: {
-  session: any;
+const AiAssistantProject: FC<{
+  session: Session;
   boardId: string;
-}) => {
+}> = ({ session, boardId }) => {
   const [loading, setLoading] = useState(false);
 
   const { toast } = useToast();

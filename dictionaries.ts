@@ -9,5 +9,7 @@ const dictionaries = {
   tr: () => import("./locales/tr.json").then((module) => module.default),
 };
 
-export const getDictionary = async (locale: "en" | "cz" | "de" | "uk" | "ko" | "tr") =>
+export type SupportLanguageDict = keyof typeof dictionaries;
+
+export const getDictionary = async (locale: SupportLanguageDict) =>
   dictionaries[locale]();

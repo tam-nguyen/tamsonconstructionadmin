@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { ReactNode, Suspense } from "react";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import {
@@ -8,6 +8,7 @@ import {
   GitFork,
   HeartHandshakeIcon,
   LandmarkIcon,
+  LucideIcon,
   UserIcon,
   Users2Icon,
 } from "lucide-react";
@@ -83,9 +84,7 @@ const DashboardPage = async () => {
   return (
     <Container
       title={dict.DashboardPage.containerTitle}
-      description={
-        dict.DashboardPage.containerDescription
-      }
+      description={dict.DashboardPage.containerDescription}
     >
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         <Suspense fallback={<LoadingBox />}>
@@ -137,7 +136,7 @@ const DashboardPage = async () => {
               title="Employees"
               IconComponent={Users2Icon}
               content={employees}
-            />  
+            />
           )
         }
         {
@@ -150,7 +149,7 @@ const DashboardPage = async () => {
               content={workflows}
             />
           )
-        }        
+        }
         {
           //show crm module only if enabled is true
           crmModule?.enabled && (
@@ -243,7 +242,7 @@ const DashboardCard = ({
 }: {
   href?: string;
   title: string;
-  IconComponent: any;
+  IconComponent: LucideIcon;
   content: number;
 }) => (
   <Link href={href || "#"}>

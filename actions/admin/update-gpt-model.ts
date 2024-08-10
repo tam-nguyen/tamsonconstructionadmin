@@ -2,7 +2,7 @@
 
 import { prismadb } from "@/lib/prisma";
 
-const updateModel = async (model: any) => {
+const updateModel = async (model: string) => {
   await prismadb.gpt_models.updateMany({
     data: {
       status: "INACTIVE",
