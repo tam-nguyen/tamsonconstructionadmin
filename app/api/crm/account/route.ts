@@ -1,12 +1,12 @@
-import { NextResponse } from "next/server";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { NextResponse } from 'next/server';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
   try {
     const body = await req.json();
@@ -59,7 +59,7 @@ export async function POST(req: Request) {
         shipping_country,
         description,
         assigned_to,
-        status: "Active",
+        status: 'Active',
         annual_revenue,
         member_of,
         industry,
@@ -68,8 +68,8 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ newAccount }, { status: 200 });
   } catch (error) {
-    console.log("[NEW_ACCOUNT_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[NEW_ACCOUNT_POST]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }
 
@@ -77,7 +77,7 @@ export async function POST(req: Request) {
 export async function PUT(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
   try {
     const body = await req.json();
@@ -142,8 +142,8 @@ export async function PUT(req: Request) {
 
     return NextResponse.json({ newAccount }, { status: 200 });
   } catch (error) {
-    console.log("[UPDATE_ACCOUNT_PUT]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[UPDATE_ACCOUNT_PUT]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }
 
@@ -151,14 +151,14 @@ export async function PUT(req: Request) {
 export async function GET(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
   try {
     const accounts = await prismadb.crm_Accounts.findMany({});
 
     return NextResponse.json(accounts, { status: 200 });
   } catch (error) {
-    console.log("[ACCOUNTS_GET]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[ACCOUNTS_GET]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

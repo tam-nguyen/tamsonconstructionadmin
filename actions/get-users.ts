@@ -1,10 +1,10 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 //Get all users for admin module
 export const getUsers = async () => {
   const data = await prismadb.users.findMany({
     orderBy: {
-      created_on: "desc",
+      created_on: 'desc',
     },
   });
   return data;
@@ -14,10 +14,10 @@ export const getUsers = async () => {
 export const getActiveUsers = async () => {
   const data = await prismadb.users.findMany({
     orderBy: {
-      created_on: "desc",
+      created_on: 'desc',
     },
     where: {
-      userStatus: "ACTIVE",
+      userStatus: 'ACTIVE',
     },
   });
   return data;
@@ -35,18 +35,21 @@ export const getUsersByMonthAndYear = async (year: number) => {
     return {};
   }
 
-  const usersByMonth = users.reduce((acc: Record<string, number>, user) => {
-    const yearCreated = new Date(user.created_on).getFullYear();
-    const month = new Date(user.created_on).toLocaleString("default", {
-      month: "long",
-    });
+  const usersByMonth = users.reduce(
+    (acc: Record<string, number>, user) => {
+      const yearCreated = new Date(user.created_on).getFullYear();
+      const month = new Date(user.created_on).toLocaleString('default', {
+        month: 'long',
+      });
 
-    if (yearCreated === year) {
-      acc[month] = (acc[month] || 0) + 1;
-    }
+      if (yearCreated === year) {
+        acc[month] = (acc[month] || 0) + 1;
+      }
 
-    return acc;
-  }, {} satisfies Record<string, number>);
+      return acc;
+    },
+    {} satisfies Record<string, number>
+  );
 
   const chartData = Object.keys(usersByMonth).map((month) => {
     return {
@@ -70,15 +73,18 @@ export const getUsersByMonth = async () => {
     return {};
   }
 
-  const usersByMonth = users.reduce((acc: Record<string, number>, user) => {
-    const month = new Date(user.created_on).toLocaleString("default", {
-      month: "long",
-    });
+  const usersByMonth = users.reduce(
+    (acc: Record<string, number>, user) => {
+      const month = new Date(user.created_on).toLocaleString('default', {
+        month: 'long',
+      });
 
-    acc[month] = (acc[month] || 0) + 1;
+      acc[month] = (acc[month] || 0) + 1;
 
-    return acc;
-  }, {} satisfies Record<string, number>);
+      return acc;
+    },
+    {} satisfies Record<string, number>
+  );
 
   const chartData = Object.keys(usersByMonth).map((month) => {
     return {

@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-import UploadFileModal from "@/components/modals/upload-file-modal";
-import { Button } from "@/components/ui/button";
-import { FileUploaderDropzone } from "@/components/ui/file-uploader-dropzone";
+import UploadFileModal from '@/components/modals/upload-file-modal';
+import { Button } from '@/components/ui/button';
+import { FileUploaderDropzone } from '@/components/ui/file-uploader-dropzone';
 
 type Props = {
   buttonLabel: string;
   fileType:
-    | "pdfUploader"
-    | "imageUploader"
-    | "docUploader"
-    | "profilePhotoUploader";
+    | 'pdfUploader'
+    | 'imageUploader'
+    | 'docUploader'
+    | 'profilePhotoUploader';
 };
 
 const ModalDropzone = ({ buttonLabel, fileType }: Props) => {

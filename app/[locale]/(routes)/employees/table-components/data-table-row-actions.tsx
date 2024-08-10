@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { Row } from "@tanstack/react-table";
+import { DotsHorizontalIcon } from '@radix-ui/react-icons';
+import { Row } from '@tanstack/react-table';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,16 +16,16 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 
-import { employeeSchema } from "../table-data/schema";
-import { useRouter } from "next/navigation";
-import AlertModal from "@/components/modals/alert-modal";
-import { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
-import axios from "axios";
-import RightViewModalNoTrigger from "@/components/modals/right-view-notrigger";
-import { UpdateEmployeeForm } from "../components/UpdateEmployeeForm";
+import { employeeSchema } from '../table-data/schema';
+import { useRouter } from 'next/navigation';
+import AlertModal from '@/components/modals/alert-modal';
+import { useState } from 'react';
+import { useToast } from '@/components/ui/use-toast';
+import axios from 'axios';
+import RightViewModalNoTrigger from '@/components/modals/right-view-notrigger';
+import { UpdateEmployeeForm } from '../components/UpdateEmployeeForm';
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -46,17 +46,17 @@ export function DataTableRowActions<TData>({
   const onDelete = async () => {
     setLoading(true);
     try {
-       await axios.delete(`/api/employee/${employee?.id}`);
+      await axios.delete(`/api/employee/${employee?.id}`);
       toast({
-        title: "Success",
-        description: "Employee has been deleted",
+        title: 'Success',
+        description: 'Employee has been deleted',
       });
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description:
-          "Something went wrong while deleting employee. Please try again.",
+          'Something went wrong while deleting employee. Please try again.',
       });
     } finally {
       setLoading(false);
@@ -75,17 +75,20 @@ export function DataTableRowActions<TData>({
       />
       <RightViewModalNoTrigger
         title={
-          "Update Employee" +
-          " - " +
+          'Update Employee' +
+          ' - ' +
           employee?.firstName +
-          " " +
-          employee?.lastName 
+          ' ' +
+          employee?.lastName
         }
         description="Update employee details"
         open={updateOpen}
         setOpen={setUpdateOpen}
       >
-        <UpdateEmployeeForm initialData={row.original} setOpen={setUpdateOpen} />
+        <UpdateEmployeeForm
+          initialData={row.original}
+          setOpen={setUpdateOpen}
+        />
       </RightViewModalNoTrigger>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

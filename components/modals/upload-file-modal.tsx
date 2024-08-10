@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Dialog, DialogContent } from "../ui/dialog";
+import { Dialog, DialogContent } from '../ui/dialog';
 
 interface ModalProps {
   isOpen: boolean;
@@ -22,7 +22,7 @@ export default function UploadFileModal({
   return (
     <Dialog open={isOpen} onOpenChange={onChange}>
       <DialogContent className="">
-        <div className=" py-10">{children}</div>
+        <div className="py-10">{children}</div>
       </DialogContent>
     </Dialog>
   );

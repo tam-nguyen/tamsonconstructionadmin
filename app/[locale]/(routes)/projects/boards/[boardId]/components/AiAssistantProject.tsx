@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { FC, useState } from "react";
+import { FC, useState } from 'react';
 
-import { getUserAiTasks } from "@/actions/cron/get-user-ai-tasks";
+import { getUserAiTasks } from '@/actions/cron/get-user-ai-tasks';
 
-import { Icons } from "@/components/ui/icons";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
-import { getAiReport } from "@/actions/ai/projects/boards/getAiReport";
-import { Session } from "next-auth";
+import { Icons } from '@/components/ui/icons';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
+import { getAiReport } from '@/actions/ai/projects/boards/getAiReport';
+import { Session } from 'next-auth';
 
 const AiAssistantProject: FC<{
   session: Session;
@@ -23,15 +23,15 @@ const AiAssistantProject: FC<{
     try {
       await getAiReport(session, boardId);
       toast({
-        title: "Success",
-        description: "AI Assistant just send your report to your mailbox",
+        title: 'Success',
+        description: 'AI Assistant just send your report to your mailbox',
       });
     } catch (error) {
-      console.log(error, "error from AI Assistant");
+      console.log(error, 'error from AI Assistant');
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Something went wrong, please try again",
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Something went wrong, please try again',
       });
     } finally {
       setLoading(false);
@@ -45,7 +45,7 @@ const AiAssistantProject: FC<{
           Creating report <Icons.spinner className="animate-spin" />
         </span>
       ) : (
-        "AI report"
+        'AI report'
       )}
     </Button>
   );

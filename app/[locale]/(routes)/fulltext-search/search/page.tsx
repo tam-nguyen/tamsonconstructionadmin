@@ -1,7 +1,7 @@
-import ResultPage from "./components/ResultPage";
+import ResultPage from './components/ResultPage';
 
-import { getSearch } from "@/actions/fulltext/get-search-results";
-import Container from "../../components/ui/Container";
+import { getSearch } from '@/actions/fulltext/get-search-results';
+import Container from '../../components/ui/Container';
 
 const FullTextSearchPage = async ({
   params,

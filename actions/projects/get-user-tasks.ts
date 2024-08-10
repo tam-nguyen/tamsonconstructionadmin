@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getUserTasks = async (userId: string) => {
   const data = await prismadb.tasks.findMany({
@@ -14,7 +14,7 @@ export const getUserTasks = async (userId: string) => {
       },
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   });
 

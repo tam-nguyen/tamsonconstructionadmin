@@ -1,18 +1,18 @@
-import { WorkflowLogger } from "../logger/index";
+import { WorkflowLogger } from '../logger/index';
 
-import { TaskStatus, type Task, TaskType } from "../tasks/index";
+import { TaskStatus, type Task, TaskType } from '../tasks/index';
 
-import { FunctionProcessor } from "./function";
+import { FunctionProcessor } from './function';
 
-import { safeAsync } from "@/lib/utils";
-import { GuardProcessor } from "./guard";
-import { WaitProcessor } from "./wait";
+import { safeAsync } from '@/lib/utils';
+import { GuardProcessor } from './guard';
+import { WaitProcessor } from './wait';
 
-import { EngineService } from "../engine.service";
+import { EngineService } from '../engine.service';
 
-import { EngineTransport } from "../engine.transport";
-import { BadRequestException } from "../engine.interface";
-import { RuntimeStatus, Runtimes } from "@prisma/client";
+import { EngineTransport } from '../engine.transport';
+import { BadRequestException } from '../engine.interface';
+import { RuntimeStatus, Runtimes } from '@prisma/client';
 
 export class Processor {
   private engineService: EngineService;
@@ -25,13 +25,12 @@ export class Processor {
   async processTask(workflowRuntimeId: string, taskName: string) {
     console.log(`Processing ${taskName} Started`);
 
-    const workflowRuntimeData = await this.engineService.findCurrentRuntime(
-      workflowRuntimeId
-    );
+    const workflowRuntimeData =
+      await this.engineService.findCurrentRuntime(workflowRuntimeId);
 
     if (!workflowRuntimeData) {
       throw new BadRequestException({
-        message: "Bad Request",
+        message: 'Bad Request',
         error: `Can not fetch runtime for runtime: ${workflowRuntimeId} and taskName: ${taskName}`,
         statusCode: 400,
       });
@@ -48,7 +47,7 @@ export class Processor {
         `No currentTask found for runtime: ${workflowRuntimeId} and taskName: ${taskName}`
       );
       throw new BadRequestException({
-        message: "Bad Request",
+        message: 'Bad Request',
         error: `No currentTask found for runtime: ${workflowRuntimeId} and taskName: ${taskName}`,
         statusCode: 400,
       });
@@ -62,17 +61,17 @@ export class Processor {
       )
     );
 
-    if (currentTask.type === "FUNCTION") {
+    if (currentTask.type === 'FUNCTION') {
       return this.processFunctionTask(workflowRuntimeData, currentTask);
-    } else if (currentTask.type === "START") {
+    } else if (currentTask.type === 'START') {
       return this.processStartTask(workflowRuntimeData, currentTask);
-    } else if (currentTask.type === "END") {
+    } else if (currentTask.type === 'END') {
       return this.processEndTask(workflowRuntimeData, currentTask);
-    } else if (currentTask.type === "WAIT") {
+    } else if (currentTask.type === 'WAIT') {
       return this.processWaitTask(workflowRuntimeData, currentTask);
-    } else if (currentTask.type === "GUARD") {
+    } else if (currentTask.type === 'GUARD') {
       return this.processGuardTask(workflowRuntimeData, currentTask);
-    } else if (currentTask.type === "LISTEN") {
+    } else if (currentTask.type === 'LISTEN') {
       return this.processListenTask(workflowRuntimeData, currentTask);
     } else {
       console.error(
@@ -80,7 +79,7 @@ export class Processor {
       );
       throw new BadRequestException({
         statusCode: 400,
-        message: "Bad Request",
+        message: 'Bad Request',
         error: `Unknown Task type received: ${currentTask.type} for runtime: ${workflowRuntimeId} and taskName: ${taskName}`,
       });
     }
@@ -90,7 +89,7 @@ export class Processor {
     workflowRuntimeData: Runtimes,
     currentTask: Task
   ): Promise<{
-    status: "success" | "failure";
+    status: 'success' | 'failure';
   }> {
     const loggerObj = new WorkflowLogger(currentTask.name);
 
@@ -129,7 +128,7 @@ export class Processor {
       );
 
       return {
-        status: "failure",
+        status: 'failure',
       };
     }
 
@@ -150,8 +149,8 @@ export class Processor {
 
     // Updated Workflow Status
     let updatedWorkflowStatus: RuntimeStatus = RuntimeStatus.pending;
-    const endTask = updatedTasks.find((task) => task.type === TaskType["END"]);
-    const allCompleted = endTask?.status === "completed";
+    const endTask = updatedTasks.find((task) => task.type === TaskType['END']);
+    const allCompleted = endTask?.status === 'completed';
     if (allCompleted) {
       updatedWorkflowStatus = RuntimeStatus.completed;
     }
@@ -198,7 +197,7 @@ export class Processor {
     });
 
     return {
-      status: "success",
+      status: 'success',
     };
   }
 
@@ -206,7 +205,7 @@ export class Processor {
     workflowRuntimeData: Runtimes,
     currentTask: Task
   ): Promise<{
-    status: "success" | "failure";
+    status: 'success' | 'failure';
   }> {
     const loggerObj = new WorkflowLogger(currentTask.name);
 
@@ -239,7 +238,7 @@ export class Processor {
       );
 
       return {
-        status: "failure",
+        status: 'failure',
       };
     }
 
@@ -260,8 +259,8 @@ export class Processor {
 
     // Updated Workflow Status
     let updatedWorkflowStatus: RuntimeStatus = RuntimeStatus.pending;
-    const endTask = updatedTasks.find((task) => task.type === TaskType["END"]);
-    const allCompleted = endTask?.status === "completed";
+    const endTask = updatedTasks.find((task) => task.type === TaskType['END']);
+    const allCompleted = endTask?.status === 'completed';
     if (allCompleted) {
       updatedWorkflowStatus = RuntimeStatus.completed;
     }
@@ -310,7 +309,7 @@ export class Processor {
     }
 
     return {
-      status: "success",
+      status: 'success',
     };
   }
 
@@ -318,7 +317,7 @@ export class Processor {
     workflowRuntimeData: Runtimes,
     currentTask: Task
   ): Promise<{
-    status: "success" | "failure";
+    status: 'success' | 'failure';
   }> {
     // Updated Task
     const updatedTasks: Task[] = [
@@ -334,8 +333,8 @@ export class Processor {
 
     // Updated Workflow Status
     let updatedWorkflowStatus: RuntimeStatus = RuntimeStatus.pending;
-    const endTask = updatedTasks.find((task) => task.type === TaskType["END"]);
-    const allCompleted = endTask?.status === "completed";
+    const endTask = updatedTasks.find((task) => task.type === TaskType['END']);
+    const allCompleted = endTask?.status === 'completed';
     if (allCompleted) {
       updatedWorkflowStatus = RuntimeStatus.completed;
     }
@@ -378,7 +377,7 @@ export class Processor {
     });
 
     return {
-      status: "success",
+      status: 'success',
     };
   }
 
@@ -386,7 +385,7 @@ export class Processor {
     workflowRuntimeData: Runtimes,
     currentTask: Task
   ): Promise<{
-    status: "success" | "failure";
+    status: 'success' | 'failure';
   }> {
     // Updated Task
     const updatedTasks: Task[] = [
@@ -402,8 +401,8 @@ export class Processor {
 
     // Updated Workflow Status
     let updatedWorkflowStatus: RuntimeStatus = RuntimeStatus.pending;
-    const endTask = updatedTasks.find((task) => task.type === TaskType["END"]);
-    const allCompleted = endTask?.status === "completed";
+    const endTask = updatedTasks.find((task) => task.type === TaskType['END']);
+    const allCompleted = endTask?.status === 'completed';
     if (allCompleted) {
       updatedWorkflowStatus = RuntimeStatus.completed;
     }
@@ -435,7 +434,7 @@ export class Processor {
     );
 
     return {
-      status: "success",
+      status: 'success',
     };
   }
 
@@ -443,11 +442,11 @@ export class Processor {
     workflowRuntimeData: Runtimes,
     currentTask: Task
   ): Promise<{
-    status: "success" | "failure";
+    status: 'success' | 'failure';
   }> {
     if (currentTask.status === TaskStatus.completed) {
       return {
-        status: "success",
+        status: 'success',
       };
     }
 
@@ -472,7 +471,7 @@ export class Processor {
       );
 
       return {
-        status: "failure",
+        status: 'failure',
       };
     }
 
@@ -490,8 +489,8 @@ export class Processor {
 
     // Updated Workflow Status
     let updatedWorkflowStatus: RuntimeStatus = RuntimeStatus.pending;
-    const endTask = updatedTasks.find((task) => task.type === TaskType["END"]);
-    const allCompleted = endTask?.status === "completed";
+    const endTask = updatedTasks.find((task) => task.type === TaskType['END']);
+    const allCompleted = endTask?.status === 'completed';
     if (allCompleted) {
       updatedWorkflowStatus = RuntimeStatus.completed;
     }
@@ -536,7 +535,7 @@ export class Processor {
     }
 
     return {
-      status: "success",
+      status: 'success',
     };
   }
 
@@ -544,11 +543,11 @@ export class Processor {
     workflowRuntimeData: Runtimes,
     currentTask: Task
   ): Promise<{
-    status: "success" | "failure";
+    status: 'success' | 'failure';
   }> {
     if (currentTask.status === TaskStatus.completed) {
       return {
-        status: "success",
+        status: 'success',
       };
     }
 
@@ -566,8 +565,8 @@ export class Processor {
 
     // Updated Workflow Status
     let updatedWorkflowStatus: RuntimeStatus = RuntimeStatus.pending;
-    const endTask = updatedTasks.find((task) => task.type === TaskType["END"]);
-    const allCompleted = endTask?.status === "completed";
+    const endTask = updatedTasks.find((task) => task.type === TaskType['END']);
+    const allCompleted = endTask?.status === 'completed';
     if (allCompleted) {
       updatedWorkflowStatus = RuntimeStatus.completed;
     }
@@ -610,7 +609,7 @@ export class Processor {
     });
 
     return {
-      status: "success",
+      status: 'success',
     };
   }
 }

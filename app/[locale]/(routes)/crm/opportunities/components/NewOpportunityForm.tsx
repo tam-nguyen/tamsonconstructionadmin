@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { z } from "zod";
-import axios from "axios";
-import { useState } from "react";
-import { format } from "date-fns";
-import { useForm } from "react-hook-form";
-import { CalendarIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from 'zod';
+import axios from 'axios';
+import { useState } from 'react';
+import { format } from 'date-fns';
+import { useForm } from 'react-hook-form';
+import { CalendarIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/components/ui/use-toast';
 import {
   Form,
   FormControl,
@@ -23,28 +23,28 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from '@/components/ui/popover';
 import {
   crm_Accounts,
   crm_Contacts,
   crm_Opportunities_Sales_Stages,
   crm_Opportunities_Type,
   crm_campaigns,
-} from "@prisma/client";
+} from '@prisma/client';
 
-import useDebounce from "@/hooks/useDebounce";
+import useDebounce from '@/hooks/useDebounce';
 
 //TODO: fix all the types
 type NewTaskFormProps = {
@@ -55,7 +55,7 @@ type NewTaskFormProps = {
   saleStages: crm_Opportunities_Sales_Stages[];
   campaigns: crm_campaigns[];
   selectedStage?: string;
-  accountId?: string;  
+  accountId?: string;
   onDialogClose: () => void;
 };
 
@@ -67,7 +67,7 @@ export function NewOpportunityForm({
   saleStages,
   campaigns,
   selectedStage,
-  accountId,  
+  accountId,
   onDialogClose,
 }: NewTaskFormProps) {
   const router = useRouter();
@@ -75,21 +75,21 @@ export function NewOpportunityForm({
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [searchUserValue, setSearchUserValue] = useState<string>("");
+  const [searchUserValue, setSearchUserValue] = useState<string>('');
   const debouncedValue = useDebounce(searchUserValue, 1000);
 
   const filteredUsers = users.filter((user) =>
     user.name.toLowerCase().includes(debouncedValue.toLowerCase())
   );
 
-  const [searchAccountValue, setSearchAccountValue] = useState<string>("");
+  const [searchAccountValue, setSearchAccountValue] = useState<string>('');
   const debouncedAccountValue = useDebounce(searchAccountValue, 1000);
 
   const filteredAccounts = accounts.filter((account) =>
     account.name.toLowerCase().includes(debouncedAccountValue.toLowerCase())
   );
 
-  const [searchContactValue, setSearchContactValue] = useState<string>("");
+  const [searchContactValue, setSearchContactValue] = useState<string>('');
   const debouncedContactValue = useDebounce(searchContactValue, 1000);
 
   const filteredContacts = contacts.filter(
@@ -106,7 +106,7 @@ export function NewOpportunityForm({
   const formSchema = z.object({
     name: z.string(),
     close_date: z.date({
-      required_error: "A expected close date is required.",
+      required_error: 'A expected close date is required.',
     }),
     description: z.string(),
     type: z.string(),
@@ -134,15 +134,15 @@ export function NewOpportunityForm({
   const onSubmit = async (data: NewAccountFormValues) => {
     setIsLoading(true);
     try {
-      await axios.post("/api/crm/opportunity", data);
+      await axios.post('/api/crm/opportunity', data);
       toast({
-        title: "Success",
-        description: "Opportunity created successfully",
+        title: 'Success',
+        description: 'Opportunity created successfully',
       });
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
@@ -150,19 +150,19 @@ export function NewOpportunityForm({
       router.refresh();
       onDialogClose();
       form.reset({
-        name: "",
+        name: '',
         close_date: new Date(),
-        description: "",
-        type: "",
-        sales_stage: "",
-        budget: "",
-        currency: "",
-        expected_revenue: "",
-        next_step: "",
-        assigned_to: "",
-        account: "",
-        contact: "",
-        campaign: "",
+        description: '',
+        type: '',
+        sales_stage: '',
+        budget: '',
+        currency: '',
+        expected_revenue: '',
+        next_step: '',
+        assigned_to: '',
+        account: '',
+        contact: '',
+        campaign: '',
       });
     }
   };
@@ -171,7 +171,7 @@ export function NewOpportunityForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full h-full px-10"
+        className="h-full w-full px-10"
       >
         {/*         <div>
           <pre>
@@ -179,8 +179,8 @@ export function NewOpportunityForm({
           </pre>
         </div> */}
 
-        <div className=" w-[800px] text-sm">
-          <div className="pb-5 space-y-2">
+        <div className="w-[800px] text-sm">
+          <div className="space-y-2 pb-5">
             <FormField
               control={form.control}
               name="name"
@@ -208,14 +208,14 @@ export function NewOpportunityForm({
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
-                          variant={"outline"}
+                          variant={'outline'}
                           className={cn(
-                            "w-[240px] pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
+                            'w-[240px] pl-3 text-left font-normal',
+                            !field.value && 'text-muted-foreground'
                           )}
                         >
                           {field.value ? (
-                            format(field.value, "PPP")
+                            format(field.value, 'PPP')
                           ) : (
                             <span>Pick a expected close date</span>
                           )}
@@ -230,7 +230,7 @@ export function NewOpportunityForm({
                         //@ts-ignore
                         //TODO: fix this
                         onSelect={field.onChange}
-                        disabled={(date) => date < new Date("1900-01-01")}
+                        disabled={(date) => date < new Date('1900-01-01')}
                         initialFocus
                       />
                     </PopoverContent>
@@ -273,7 +273,7 @@ export function NewOpportunityForm({
                             <SelectValue placeholder="Choose type " />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="flex overflow-y-auto h-56">
+                        <SelectContent className="flex h-56 overflow-y-auto">
                           {salesType.map((type) => (
                             <SelectItem key={type.id} value={type.id}>
                               {type.name}
@@ -300,7 +300,7 @@ export function NewOpportunityForm({
                             <SelectValue placeholder="Choose actual stage " />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="flex overflow-y-auto h-56">
+                        <SelectContent className="flex h-56 overflow-y-auto">
                           {saleStages.map((stage) => (
                             <SelectItem key={stage.id} value={stage.id}>
                               {stage.name}
@@ -399,7 +399,7 @@ export function NewOpportunityForm({
                             <SelectValue placeholder="Select a user to assign the account" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="overflow-y-auto h-56">
+                        <SelectContent className="h-56 overflow-y-auto">
                           <Input
                             placeholder="Search user..."
                             onChange={(e) => setSearchUserValue(e.target.value)}
@@ -430,7 +430,7 @@ export function NewOpportunityForm({
                             <SelectValue placeholder="Choose account " />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="flex overflow-y-auto h-56">
+                        <SelectContent className="flex h-56 overflow-y-auto">
                           <Input
                             placeholder="Search account..."
                             onChange={(e) =>
@@ -463,7 +463,7 @@ export function NewOpportunityForm({
                             <SelectValue placeholder="Select a user to assign the account" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="flex overflow-y-auto h-56">
+                        <SelectContent className="flex h-56 overflow-y-auto">
                           <Input
                             placeholder="Search contact..."
                             onChange={(e) =>
@@ -472,7 +472,7 @@ export function NewOpportunityForm({
                           />
                           {filteredContacts.map((contact) => (
                             <SelectItem key={contact.id} value={contact.id}>
-                              {contact.first_name + " " + contact.last_name}
+                              {contact.first_name + ' ' + contact.last_name}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -496,7 +496,7 @@ export function NewOpportunityForm({
                             <SelectValue placeholder="Select a campaign" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="flex overflow-y-auto h-56">
+                        <SelectContent className="flex h-56 overflow-y-auto">
                           {campaigns.map((campaign) => (
                             <SelectItem key={campaign.id} value={campaign.id}>
                               {campaign.name}
@@ -576,11 +576,11 @@ export function NewOpportunityForm({
         <div className="grid gap-2 py-5">
           <Button disabled={isLoading} type="submit">
             {isLoading ? (
-              <span className="flex items-center animate-pulse">
+              <span className="flex animate-pulse items-center">
                 Saving data ...
               </span>
             ) : (
-              "Create opportunity"
+              'Create opportunity'
             )}
           </Button>
         </div>

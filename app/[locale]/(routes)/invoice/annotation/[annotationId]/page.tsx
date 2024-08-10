@@ -1,8 +1,8 @@
 /*
 TODO: delete this page in future - it is for testing only
 */
-import { getRossumToken } from "@/lib/get-rossum-token";
-import React from "react";
+import { getRossumToken } from '@/lib/get-rossum-token';
+import React from 'react';
 
 async function AnnotationPage({
   params,
@@ -16,7 +16,7 @@ async function AnnotationPage({
   const data = await fetch(
     `${process.env.ROSSUM_API_URL}/queues/${queueId}/export/?format=json&id=${annotationId}`,
     {
-      method: "POST",
+      method: 'POST',
       headers: { Authorization: token },
     }
   )

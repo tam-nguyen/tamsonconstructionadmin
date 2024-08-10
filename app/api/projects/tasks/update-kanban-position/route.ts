@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { NextResponse } from 'next/server';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 export async function PUT(req: Request) {
   const session = await getServerSession(authOptions);
@@ -15,7 +15,7 @@ export async function PUT(req: Request) {
   } = body;
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   try {
@@ -39,7 +39,7 @@ export async function PUT(req: Request) {
             data: {
               section: resourceSectionId,
               position: position,
-              updatedBy: session.user.id,              
+              updatedBy: session.user.id,
             },
           });
         }
@@ -56,14 +56,14 @@ export async function PUT(req: Request) {
           data: {
             section: destinationSectionId,
             position: position,
-            updatedBy: session.user.id,            
+            updatedBy: session.user.id,
           },
         });
       }
-      console.log("Task positions updated successfully");
+      console.log('Task positions updated successfully');
       return NextResponse.json(
         {
-          message: "Task positions updated successfully",
+          message: 'Task positions updated successfully',
         },
         {
           status: 200,
@@ -73,7 +73,7 @@ export async function PUT(req: Request) {
       console.log(err);
       return NextResponse.json(
         {
-          message: "Error updating task positions",
+          message: 'Error updating task positions',
         },
         {
           status: 500,
@@ -81,7 +81,7 @@ export async function PUT(req: Request) {
       );
     }
   } catch (error) {
-    console.log("[UPDATE_TASK_POSITION_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[UPDATE_TASK_POSITION_POST]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

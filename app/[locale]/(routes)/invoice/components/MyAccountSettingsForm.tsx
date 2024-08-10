@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import React from "react";
-import { z } from "zod";
+import React from 'react';
+import { z } from 'zod';
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from '@/components/ui/use-toast';
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
-import { Input } from "@/components/ui/input";
+import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
@@ -21,21 +21,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import fetcher from "@/lib/fetcher";
-import useSWR from "swr";
-import SuspenseLoading from "@/components/loadings/suspense";
-import { MyAccount, crm_Accounts } from "@prisma/client";
-import { init } from "next/dist/compiled/@vercel/og/satori";
-import { Switch } from "@/components/ui/switch";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import fetcher from '@/lib/fetcher';
+import useSWR from 'swr';
+import SuspenseLoading from '@/components/loadings/suspense';
+import { MyAccount, crm_Accounts } from '@prisma/client';
+import { init } from 'next/dist/compiled/@vercel/og/satori';
+import { Switch } from '@/components/ui/switch';
 
 interface UpdateAccountFormProps {
   //TODO: fix this any
@@ -51,41 +51,41 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
     id: z.string().optional(),
     company_name: z.string(),
     is_person: z.boolean(),
-    email: z.string().email({ message: "Invalid email" }),
-    email_accountant: z.string().email({ message: "Invalid email" }),
+    email: z.string().email({ message: 'Invalid email' }),
+    email_accountant: z.string().email({ message: 'Invalid email' }),
     phone_prefix: z
       .string()
-      .max(5, { message: "Invalid phone prefix" })
+      .max(5, { message: 'Invalid phone prefix' })
       .nullable()
       .optional(),
     phone: z
       .string()
-      .max(20, { message: "Invalid phone number" })
+      .max(20, { message: 'Invalid phone number' })
       .nullable()
       .optional(),
     mobile_prefix: z
       .string()
-      .max(5, { message: "Invalid mobile prefix" })
+      .max(5, { message: 'Invalid mobile prefix' })
       .nullable()
       .optional(),
     mobile: z
       .string()
-      .max(20, { message: "Invalid mobile number" })
+      .max(20, { message: 'Invalid mobile number' })
       .nullable()
       .optional(),
     fax_prefix: z
       .string()
-      .max(5, { message: "Invalid fax prefix" })
+      .max(5, { message: 'Invalid fax prefix' })
       .nullable()
       .optional(),
     fax: z
       .string()
-      .max(20, { message: "Invalid fax number" })
+      .max(20, { message: 'Invalid fax number' })
       .nullable()
       .optional(),
     website: z
       .string()
-      .url({ message: "Invalid website url" })
+      .url({ message: 'Invalid website url' })
       .nullable()
       .optional(),
     street: z.string().nullable().optional(),
@@ -95,7 +95,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
     country: z.string().nullable().optional(),
     country_code: z
       .string()
-      .max(2, { message: "Invalid country code" })
+      .max(2, { message: 'Invalid country code' })
       .nullable()
       .optional(),
     billing_street: z.string(),
@@ -105,7 +105,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
     billing_country: z.string(),
     billing_country_code: z
       .string()
-      .max(2, { message: "Invalid country code" }),
+      .max(2, { message: 'Invalid country code' }),
     currency: z.string(),
     currency_symbol: z.string(),
     VAT_number: z.string(),
@@ -125,10 +125,10 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
     defaultValues: initialData
       ? initialData
       : {
-          company_name: "",
+          company_name: '',
           is_person: false,
-          email: "",
-          email_accountant: "",
+          email: '',
+          email_accountant: '',
           phone_prefix: null,
           phone: null,
           mobile_prefix: null,
@@ -136,7 +136,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
           fax_prefix: null,
           fax: null,
           website: null,
-          street: "",
+          street: '',
           city: null,
           state: null,
           zip: null,
@@ -150,7 +150,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
           billing_country_code: null,
           currency: null,
           currency_symbol: null,
-          VAT_number: "",
+          VAT_number: '',
           TAX_number: null,
           bank_name: null,
           bank_account: null,
@@ -166,16 +166,16 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
 
     try {
       if (initialData?.id) {
-        await axios.put("/api/my-account", data);
+        await axios.put('/api/my-account', data);
         toast({
-          title: "Success",
-          description: "My account updated successfully",
+          title: 'Success',
+          description: 'My account updated successfully',
         });
       } else {
-        await axios.post("/api/my-account", data);
+        await axios.post('/api/my-account', data);
         toast({
-          title: "Success",
-          description: "My account created successfully",
+          title: 'Success',
+          description: 'My account created successfully',
         });
       }
       /*     if (response.status === 200) {
@@ -183,8 +183,8 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
       } */
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
@@ -208,13 +208,13 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
           </pre> */}
         </div>
 
-        <div className=" w-[800px] text-sm">
-          <div className="pb-5 space-y-2 ">
+        <div className="w-[800px] text-sm">
+          <div className="space-y-2 pb-5">
             <div className="flex space-x-5 py-2">
               <div className="w-1/2 space-y-2">
                 <FormField
                   control={form.control}
-                  name={"company_name"}
+                  name={'company_name'}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Company name</FormLabel>
@@ -231,7 +231,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                 />
                 <FormField
                   control={form.control}
-                  name={"VAT_number"}
+                  name={'VAT_number'}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>VAT number (ICO)</FormLabel>
@@ -248,7 +248,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                 />
                 <FormField
                   control={form.control}
-                  name={"tax_number"}
+                  name={'tax_number'}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>TAX number</FormLabel>
@@ -265,7 +265,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                 />
                 <FormField
                   control={form.control}
-                  name={"bank_name"}
+                  name={'bank_name'}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Bank name</FormLabel>
@@ -282,7 +282,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                 />
                 <FormField
                   control={form.control}
-                  name={"bank_account"}
+                  name={'bank_account'}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Bank account</FormLabel>
@@ -299,7 +299,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                 />
                 <FormField
                   control={form.control}
-                  name={"bank_code"}
+                  name={'bank_code'}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Bank code</FormLabel>
@@ -316,7 +316,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                 />
                 <FormField
                   control={form.control}
-                  name={"bank_IBAN"}
+                  name={'bank_IBAN'}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>IBAN</FormLabel>
@@ -333,7 +333,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                 />
                 <FormField
                   control={form.control}
-                  name={"bank_SWIFT"}
+                  name={'bank_SWIFT'}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>SWIFT</FormLabel>
@@ -371,7 +371,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                 />
                 <FormField
                   control={form.control}
-                  name={"email"}
+                  name={'email'}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Company e-mail</FormLabel>
@@ -388,7 +388,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                 />
                 <FormField
                   control={form.control}
-                  name={"email_accountant"}
+                  name={'email_accountant'}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Company e-mail for exported XML</FormLabel>
@@ -405,7 +405,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                 />
                 <FormField
                   control={form.control}
-                  name={"currency"}
+                  name={'currency'}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Currency</FormLabel>
@@ -422,7 +422,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                 />
                 <FormField
                   control={form.control}
-                  name={"currency_symbol"}
+                  name={'currency_symbol'}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Currency symbol</FormLabel>
@@ -444,16 +444,12 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
             <div className="w-1/2 space-y-2">
               <FormField
                 control={form.control}
-                name={"phone_prefix"}
+                name={'phone_prefix'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Phone prefix</FormLabel>
                     <FormControl>
-                      <Input
-                        disabled={isLoading}
-                        placeholder="+1"
-                        {...field}
-                      />
+                      <Input disabled={isLoading} placeholder="+1" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -461,7 +457,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
               />
               <FormField
                 control={form.control}
-                name={"phone"}
+                name={'phone'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Phone</FormLabel>
@@ -478,7 +474,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
               />
               <FormField
                 control={form.control}
-                name={"mobile_prefix"}
+                name={'mobile_prefix'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Mobile prefix</FormLabel>
@@ -495,7 +491,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
               />
               <FormField
                 control={form.control}
-                name={"mobile"}
+                name={'mobile'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Mobile phone</FormLabel>
@@ -514,16 +510,12 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
             <div className="w-1/2 space-y-2">
               <FormField
                 control={form.control}
-                name={"fax_prefix"}
+                name={'fax_prefix'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Fax prefix</FormLabel>
                     <FormControl>
-                      <Input
-                        disabled={isLoading}
-                        placeholder="+1"
-                        {...field}
-                      />
+                      <Input disabled={isLoading} placeholder="+1" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -531,7 +523,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
               />
               <FormField
                 control={form.control}
-                name={"fax"}
+                name={'fax'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Fax</FormLabel>
@@ -553,7 +545,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
             <div className="w-1/2 space-y-2">
               <FormField
                 control={form.control}
-                name={"street"}
+                name={'street'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Office street</FormLabel>
@@ -563,10 +555,10 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                     <FormMessage />
                   </FormItem>
                 )}
-              />{" "}
+              />{' '}
               <FormField
                 control={form.control}
-                name={"city"}
+                name={'city'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Office City</FormLabel>
@@ -580,10 +572,10 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                     <FormMessage />
                   </FormItem>
                 )}
-              />{" "}
+              />{' '}
               <FormField
                 control={form.control}
-                name={"state"}
+                name={'state'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Office state</FormLabel>
@@ -593,10 +585,10 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                     <FormMessage />
                   </FormItem>
                 )}
-              />{" "}
+              />{' '}
               <FormField
                 control={form.control}
-                name={"zip"}
+                name={'zip'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Office zip</FormLabel>
@@ -606,10 +598,10 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                     <FormMessage />
                   </FormItem>
                 )}
-              />{" "}
+              />{' '}
               <FormField
                 control={form.control}
-                name={"country"}
+                name={'country'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Office country</FormLabel>
@@ -622,7 +614,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
               />
               <FormField
                 control={form.control}
-                name={"country_code"}
+                name={'country_code'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Office country code</FormLabel>
@@ -637,7 +629,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
             <div className="w-1/2 space-y-2">
               <FormField
                 control={form.control}
-                name={"billing_street"}
+                name={'billing_street'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Business street</FormLabel>
@@ -647,10 +639,10 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                     <FormMessage />
                   </FormItem>
                 )}
-              />{" "}
+              />{' '}
               <FormField
                 control={form.control}
-                name={"billing_city"}
+                name={'billing_city'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Business City</FormLabel>
@@ -664,10 +656,10 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                     <FormMessage />
                   </FormItem>
                 )}
-              />{" "}
+              />{' '}
               <FormField
                 control={form.control}
-                name={"billing_state"}
+                name={'billing_state'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Business state</FormLabel>
@@ -677,10 +669,10 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                     <FormMessage />
                   </FormItem>
                 )}
-              />{" "}
+              />{' '}
               <FormField
                 control={form.control}
-                name={"billing_zip"}
+                name={'billing_zip'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Business zip</FormLabel>
@@ -690,10 +682,10 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
                     <FormMessage />
                   </FormItem>
                 )}
-              />{" "}
+              />{' '}
               <FormField
                 control={form.control}
-                name={"billing_country"}
+                name={'billing_country'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Business country</FormLabel>
@@ -706,7 +698,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
               />
               <FormField
                 control={form.control}
-                name={"billing_country_code"}
+                name={'billing_country_code'}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Business country code</FormLabel>
@@ -722,7 +714,7 @@ export function MyAccountSettingsForm({ initialData }: UpdateAccountFormProps) {
         </div>
         <div className="grid gap-2 py-5">
           <Button disabled={isLoading} type="submit">
-            {initialData?.id ? "Update" : "Create"}
+            {initialData?.id ? 'Update' : 'Create'}
           </Button>
         </div>
       </form>

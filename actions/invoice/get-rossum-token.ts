@@ -5,9 +5,9 @@ export const getRossumToken = async () => {
     const password = process.env.NEXT_PUBLIC_ROSSUM_PASS;
 
     const showKey = await fetch(loginUrl, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify({ username, password }),
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
     })
       .then((r) => r.json())
       .then(({ key }) => {
@@ -16,7 +16,7 @@ export const getRossumToken = async () => {
       });
     return showKey;
   } catch (error) {
-    console.log(error, "error - getRossumToken action");
+    console.log(error, 'error - getRossumToken action');
     return error;
   }
 };

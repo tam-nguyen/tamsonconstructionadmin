@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 const H4Title = ({ children }: { children: ReactNode }) => {
   return (
-    <h4 className="scroll-m-20 text-xl font-semibold tracking-tight py-5">
+    <h4 className="scroll-m-20 py-5 text-xl font-semibold tracking-tight">
       {children}
     </h4>
   );

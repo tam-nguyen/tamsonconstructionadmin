@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { Row } from "@tanstack/react-table";
+import { Row } from '@tanstack/react-table';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 
-import { adminUserSchema } from "../table-data/schema";
-import { useRouter } from "next/navigation";
-import AlertModal from "@/components/modals/alert-modal";
-import { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
-import axios from "axios";
+import { adminUserSchema } from '../table-data/schema';
+import { useRouter } from 'next/navigation';
+import AlertModal from '@/components/modals/alert-modal';
+import { useState } from 'react';
+import { useToast } from '@/components/ui/use-toast';
+import axios from 'axios';
 
-import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
+import { Copy, Edit, MoreHorizontal, Trash } from 'lucide-react';
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -38,8 +38,8 @@ export function DataTableRowActions<TData>({
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
     toast({
-      title: "Copied",
-      description: "The URL has been copied to your clipboard.",
+      title: 'Copied',
+      description: 'The URL has been copied to your clipboard.',
     });
   };
 
@@ -50,14 +50,14 @@ export function DataTableRowActions<TData>({
       await axios.delete(`/api/user/${data.id}`);
       router.refresh();
       toast({
-        title: "Success",
-        description: "User has been deleted",
+        title: 'Success',
+        description: 'User has been deleted',
       });
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Something went wrong: " + error + ". Please try again.",
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Something went wrong: ' + error + '. Please try again.',
       });
     } finally {
       setLoading(false);
@@ -71,15 +71,15 @@ export function DataTableRowActions<TData>({
       await axios.post(`/api/user/activate/${data.id}`);
       router.refresh();
       toast({
-        title: "Success",
-        description: "User has been activated.",
+        title: 'Success',
+        description: 'User has been activated.',
       });
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description:
-          "Something went wrong while activating user. Please try again.",
+          'Something went wrong while activating user. Please try again.',
       });
     } finally {
       setLoading(false);
@@ -93,15 +93,15 @@ export function DataTableRowActions<TData>({
       await axios.post(`/api/user/deactivate/${data.id}`);
       router.refresh();
       toast({
-        title: "Success",
-        description: "User has been deactivated.",
+        title: 'Success',
+        description: 'User has been deactivated.',
       });
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description:
-          "Something went wrong while deactivating user. Please try again.",
+          'Something went wrong while deactivating user. Please try again.',
       });
     } finally {
       setLoading(false);
@@ -114,15 +114,15 @@ export function DataTableRowActions<TData>({
       await axios.post(`/api/user/deactivateAdmin/${data.id}`);
       router.refresh();
       toast({
-        title: "Success",
-        description: "User Admin rights has been deactivated.",
+        title: 'Success',
+        description: 'User Admin rights has been deactivated.',
       });
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description:
-          "Something went wrong while deactivating user as a admin. Please try again.",
+          'Something went wrong while deactivating user as a admin. Please try again.',
       });
     } finally {
       setLoading(false);
@@ -136,15 +136,15 @@ export function DataTableRowActions<TData>({
       await axios.post(`/api/user/activateAdmin/${data.id}`);
       router.refresh();
       toast({
-        title: "Success",
-        description: "User Admin rights has been activated.",
+        title: 'Success',
+        description: 'User Admin rights has been activated.',
       });
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description:
-          "Something went wrong while activating uses as a admin. Please try again.",
+          'Something went wrong while activating uses as a admin. Please try again.',
       });
     } finally {
       setLoading(false);
@@ -162,7 +162,7 @@ export function DataTableRowActions<TData>({
       />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant={"ghost"} className="h-8 w-8 p-0">
+          <Button variant={'ghost'} className="h-8 w-8 p-0">
             <span className="sr-only">Open menu</span>
             <MoreHorizontal className="h-4 w-4" />
           </Button>
@@ -170,27 +170,27 @@ export function DataTableRowActions<TData>({
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem onClick={() => onCopy(data?.id)}>
-            <Copy className="mr-2 w-4 h-4" />
+            <Copy className="mr-2 h-4 w-4" />
             Copy ID
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onActivate()}>
-            <Edit className="mr-2 w-4 h-4" />
+            <Edit className="mr-2 h-4 w-4" />
             Activate
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onDeactivate()}>
-            <Edit className="mr-2 w-4 h-4" />
+            <Edit className="mr-2 h-4 w-4" />
             Deactivate
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onActivateAdmin()}>
-            <Edit className="mr-2 w-4 h-4" />
+            <Edit className="mr-2 h-4 w-4" />
             Activate Admin rights
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onDeactivateAdmin()}>
-            <Edit className="mr-2 w-4 h-4" />
+            <Edit className="mr-2 h-4 w-4" />
             Deactivate Admin rights
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 w-4 h-4" />
+            <Trash className="mr-2 h-4 w-4" />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>

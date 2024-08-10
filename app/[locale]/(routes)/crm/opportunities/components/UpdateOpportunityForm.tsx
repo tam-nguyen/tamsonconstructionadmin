@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { z } from "zod";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { CalendarIcon } from "lucide-react";
-import { format } from "date-fns";
+import { useState } from 'react';
+import { z } from 'zod';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+import { CalendarIcon } from 'lucide-react';
+import { format } from 'date-fns';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
-import { useToast } from "@/components/ui/use-toast";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
@@ -21,29 +21,29 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import SuspenseLoading from "@/components/loadings/suspense";
-import fetcher from "@/lib/fetcher";
-import useSWR from "swr";
+} from '@/components/ui/popover';
+import { Calendar } from '@/components/ui/calendar';
+import SuspenseLoading from '@/components/loadings/suspense';
+import fetcher from '@/lib/fetcher';
+import useSWR from 'swr';
 
 //TODO: fix all the types
 type NewTaskFormProps = {
   initialData: any;
-  setOpen: (value: boolean) => void;  
+  setOpen: (value: boolean) => void;
 };
 
 export function UpdateOpportunityForm({
@@ -56,7 +56,7 @@ export function UpdateOpportunityForm({
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { data: opportunities, isLoading: isLoadingOpportunities } = useSWR(
-    "/api/crm/opportunity",
+    '/api/crm/opportunity',
     fetcher
   );
 
@@ -64,7 +64,7 @@ export function UpdateOpportunityForm({
     id: z.string().min(5).max(30),
     name: z.string(),
     close_date: z.date({
-      required_error: "A expected close date is required.",
+      required_error: 'A expected close date is required.',
     }),
     description: z.string(),
     type: z.string(),
@@ -94,20 +94,20 @@ export function UpdateOpportunityForm({
     setIsLoading(true);
     try {
       //Convert data.budget and data.expected_revenue to number
-      await axios.put("/api/crm/opportunity", data);
+      await axios.put('/api/crm/opportunity', data);
       toast({
-        title: "Success",
-        description: "Opportunity updated successfully",
+        title: 'Success',
+        description: 'Opportunity updated successfully',
       });
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
       setIsLoading(false);
-      setOpen(false);      
+      setOpen(false);
       router.refresh();
     }
   };
@@ -141,8 +141,8 @@ export function UpdateOpportunityForm({
             <code>{JSON.stringify(form.watch(), null, 2)}</code>
           </pre>
         </div> */}
-        <div className=" w-[800px] text-sm">
-          <div className="pb-5 space-y-2">
+        <div className="w-[800px] text-sm">
+          <div className="space-y-2 pb-5">
             <FormField
               control={form.control}
               name="name"
@@ -170,14 +170,14 @@ export function UpdateOpportunityForm({
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
-                          variant={"outline"}
+                          variant={'outline'}
                           className={cn(
-                            "w-[240px] pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
+                            'w-[240px] pl-3 text-left font-normal',
+                            !field.value && 'text-muted-foreground'
                           )}
                         >
                           {field.value ? (
-                            format(field.value, "PPP")
+                            format(field.value, 'PPP')
                           ) : (
                             <span>Pick a expected close date</span>
                           )}
@@ -192,7 +192,7 @@ export function UpdateOpportunityForm({
                         //@ts-ignore
                         //TODO: fix this
                         onSelect={field.onChange}
-                        disabled={(date) => date < new Date("1900-01-01")}
+                        disabled={(date) => date < new Date('1900-01-01')}
                         initialFocus
                       />
                     </PopoverContent>
@@ -235,7 +235,7 @@ export function UpdateOpportunityForm({
                             <SelectValue placeholder="Choose type " />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="flex overflow-y-auto h-56">
+                        <SelectContent className="flex h-56 overflow-y-auto">
                           {saleTypes.map((type: any) => (
                             <SelectItem key={type.id} value={type.id}>
                               {type.name}
@@ -262,7 +262,7 @@ export function UpdateOpportunityForm({
                             <SelectValue placeholder="Choose actual stage " />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="flex overflow-y-auto h-56">
+                        <SelectContent className="flex h-56 overflow-y-auto">
                           {saleStages.map((stage: any) => (
                             <SelectItem key={stage.id} value={stage.id}>
                               {stage.name}
@@ -282,7 +282,7 @@ export function UpdateOpportunityForm({
                       <FormLabel>Bugdget</FormLabel>
                       <FormControl>
                         <Input
-                          type={"number"}                        
+                          type={'number'}
                           disabled={isLoading}
                           placeholder="1000000"
                           {...field}
@@ -317,7 +317,7 @@ export function UpdateOpportunityForm({
                       <FormLabel>Expected revenue</FormLabel>
                       <FormControl>
                         <Input
-                          type="number"                        
+                          type="number"
                           disabled={isLoading}
                           placeholder="500000"
                           {...field}
@@ -361,7 +361,7 @@ export function UpdateOpportunityForm({
                             <SelectValue placeholder="Select a user to assign the account" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="overflow-y-auto h-56">
+                        <SelectContent className="h-56 overflow-y-auto">
                           {users.map((user: any) => (
                             <SelectItem key={user.id} value={user.id}>
                               {user.name}
@@ -415,10 +415,10 @@ export function UpdateOpportunityForm({
                             <SelectValue placeholder="Select a user to assign the account" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="flex overflow-y-auto h-56">
+                        <SelectContent className="flex h-56 overflow-y-auto">
                           {contacts.map((contact: any) => (
                             <SelectItem key={contact.id} value={contact.id}>
-                              {contact.first_name + " " + contact.last_name}
+                              {contact.first_name + ' ' + contact.last_name}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -442,7 +442,7 @@ export function UpdateOpportunityForm({
                             <SelectValue placeholder="Select a campaign" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="flex overflow-y-auto h-56">
+                        <SelectContent className="flex h-56 overflow-y-auto">
                           {campaigns.map((campaign: any) => (
                             <SelectItem key={campaign.id} value={campaign.id}>
                               {campaign.name}
@@ -461,11 +461,11 @@ export function UpdateOpportunityForm({
         <div className="grid gap-2 py-5">
           <Button disabled={isLoading} type="submit">
             {isLoading ? (
-              <span className="flex items-center animate-pulse">
+              <span className="flex animate-pulse items-center">
                 Saving data ...
               </span>
             ) : (
-              "Updates opportunity"
+              'Updates opportunity'
             )}
           </Button>
         </div>

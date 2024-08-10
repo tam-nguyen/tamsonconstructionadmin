@@ -1,16 +1,16 @@
-import { S3 } from "@aws-sdk/client-s3";
+import { S3 } from '@aws-sdk/client-s3';
 
 if (!process.env.DO_ENDPOINT) {
-  throw new Error("DO_ENDPOINT is not defined");
+  throw new Error('DO_ENDPOINT is not defined');
 }
 if (!process.env.DO_REGION) {
-  throw new Error("DO_REGION is not defined");
+  throw new Error('DO_REGION is not defined');
 }
 if (!process.env.DO_ACCESS_KEY_ID) {
-  throw new Error("DO_ACCESS_KEY_ID is not defined");
+  throw new Error('DO_ACCESS_KEY_ID is not defined');
 }
 if (!process.env.DO_ACCESS_KEY_SECRET) {
-  throw new Error("DO_ACCESS_KEY_SECRET is not defined");
+  throw new Error('DO_ACCESS_KEY_SECRET is not defined');
 }
 
 const s3Client = new S3({

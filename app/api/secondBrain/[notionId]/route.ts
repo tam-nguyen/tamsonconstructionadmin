@@ -1,9 +1,9 @@
-import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
+import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
 
-import { prismadb } from "@/lib/prisma";
-import { authOptions } from "@/lib/auth";
-import initNotionClient from "@/lib/notion";
+import { prismadb } from '@/lib/prisma';
+import { authOptions } from '@/lib/auth';
+import initNotionClient from '@/lib/notion';
 
 export async function DELETE(
   req: Request,
@@ -13,7 +13,7 @@ export async function DELETE(
   const notion = await initNotionClient(session?.user?.id!);
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   try {
@@ -26,16 +26,16 @@ export async function DELETE(
 
     const { notionId } = params;
 
-    console.log(notionId, "notionId");
+    console.log(notionId, 'notionId');
 
     await deleteTweet(notion, notionId, notionDb?.notion_db_id!);
 
     const databases = await fetchDatabases(notion, notionDb?.notion_db_id!);
 
-    return NextResponse.json({ message: "Account deleted" }, { status: 200 });
+    return NextResponse.json({ message: 'Account deleted' }, { status: 200 });
   } catch (error) {
-    console.log("[Account_DELETE]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[Account_DELETE]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }
 

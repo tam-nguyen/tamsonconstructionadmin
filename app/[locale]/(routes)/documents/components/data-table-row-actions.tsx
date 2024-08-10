@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { Row } from "@tanstack/react-table";
+import { DotsHorizontalIcon } from '@radix-ui/react-icons';
+import { Row } from '@tanstack/react-table';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,17 +11,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 
-import { labels } from "../data/data";
-import { taskSchema } from "../data/schema";
-import { useRouter } from "next/navigation";
-import DocumentViewModal from "@/components/modals/document-view-modal";
-import { useState } from "react";
-import AlertModal from "@/components/modals/alert-modal";
-import { useToast } from "@/components/ui/use-toast";
-import axios from "axios";
-import Link from "next/link";
+import { labels } from '../data/data';
+import { taskSchema } from '../data/schema';
+import { useRouter } from 'next/navigation';
+import DocumentViewModal from '@/components/modals/document-view-modal';
+import { useState } from 'react';
+import AlertModal from '@/components/modals/alert-modal';
+import { useToast } from '@/components/ui/use-toast';
+import axios from 'axios';
+import Link from 'next/link';
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -45,15 +45,15 @@ export function DataTableRowActions<TData>({
       await axios.delete(`/api/documents/${document.id}`);
       router.refresh();
       toast({
-        title: "Success",
-        description: "Document has been deleted",
+        title: 'Success',
+        description: 'Document has been deleted',
       });
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description:
-          "Something went wrong while deleting document. Please try again.",
+          'Something went wrong while deleting document. Please try again.',
       });
     } finally {
       setLoading(false);

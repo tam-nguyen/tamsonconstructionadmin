@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from '@tanstack/react-table';
 
-import { CellAction } from "./cell-action";
+import { CellAction } from './cell-action';
 
 export type ModuleColumn = {
   id: string;
@@ -12,20 +12,20 @@ export type ModuleColumn = {
 
 export const columns: ColumnDef<ModuleColumn>[] = [
   {
-    accessorKey: "id",
-    header: "ID",
+    accessorKey: 'id',
+    header: 'ID',
   },
   {
-    accessorKey: "name",
-    header: "Name",
+    accessorKey: 'name',
+    header: 'Name',
   },
   {
-    accessorKey: "enabled",
-    header: "Status",
+    accessorKey: 'enabled',
+    header: 'Status',
   },
   {
-    id: "actions",
-    header: "Actions",
+    id: 'actions',
+    header: 'Actions',
     cell: ({ row }) => <CellAction data={row.original} />,
   },
 ];

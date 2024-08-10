@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { LucideIcon } from "lucide-react";
+import Link from 'next/link';
+import { LucideIcon } from 'lucide-react';
 
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
+import { cn } from '@/lib/utils';
+import { buttonVariants } from '@/components/ui/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 
 interface NavProps {
   isCollapsed: boolean;
@@ -17,7 +17,7 @@ interface NavProps {
     title: string;
     label?: string;
     icon: LucideIcon;
-    variant: "default" | "ghost";
+    variant: 'default' | 'ghost';
   }[];
 }
 
@@ -35,10 +35,10 @@ export function Nav({ links, isCollapsed }: NavProps) {
                 <Link
                   href="#"
                   className={cn(
-                    buttonVariants({ variant: link.variant, size: "icon" }),
-                    "h-8 w-8",
-                    link.variant === "default" &&
-                      "dark:bg-muted dark:text-muted-foreground"
+                    buttonVariants({ variant: link.variant, size: 'icon' }),
+                    'h-8 w-8',
+                    link.variant === 'default' &&
+                      'dark:bg-muted dark:text-muted-foreground'
                   )}
                 >
                   <link.icon className="h-4 w-4" />
@@ -59,9 +59,9 @@ export function Nav({ links, isCollapsed }: NavProps) {
               key={index}
               href="#"
               className={cn(
-                buttonVariants({ variant: link.variant, size: "sm" }),
-                link.variant === "default" && "dark:bg-muted dark:text-white",
-                "justify-start"
+                buttonVariants({ variant: link.variant, size: 'sm' }),
+                link.variant === 'default' && 'dark:bg-muted dark:text-white',
+                'justify-start'
               )}
             >
               <link.icon className="mr-2 h-4 w-4" />
@@ -69,9 +69,9 @@ export function Nav({ links, isCollapsed }: NavProps) {
               {link.label && (
                 <span
                   className={cn(
-                    "ml-auto",
-                    link.variant === "default" &&
-                      "text-background dark:text-white"
+                    'ml-auto',
+                    link.variant === 'default' &&
+                      'text-background dark:text-white'
                   )}
                 >
                   {link.label}

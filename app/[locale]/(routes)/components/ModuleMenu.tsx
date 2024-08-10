@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from 'react';
 
-import ProjectModuleMenu from "./menu-items/Projects";
-import SecondBrainModuleMenu from "./menu-items/SecondBrain";
-import InvoicesModuleMenu from "./menu-items/Invoices";
-import ReportsModuleMenu from "./menu-items/Reports";
-import DocumentsModuleMenu from "./menu-items/Documents";
-import ChatGPTModuleMenu from "./menu-items/ChatGPT";
-import EmployeesModuleMenu from "./menu-items/Employees";
-import WorkflowsModuleMenu from "./menu-items/Workflows";
-import DataboxModuleMenu from "./menu-items/Databoxes";
-import CrmModuleMenu from "./menu-items/Crm";
+import ProjectModuleMenu from './menu-items/Projects';
+import SecondBrainModuleMenu from './menu-items/SecondBrain';
+import InvoicesModuleMenu from './menu-items/Invoices';
+import ReportsModuleMenu from './menu-items/Reports';
+import DocumentsModuleMenu from './menu-items/Documents';
+import ChatGPTModuleMenu from './menu-items/ChatGPT';
+import EmployeesModuleMenu from './menu-items/Employees';
+import WorkflowsModuleMenu from './menu-items/Workflows';
+import DataboxModuleMenu from './menu-items/Databoxes';
+import CrmModuleMenu from './menu-items/Crm';
 
-import AdministrationMenu from "./menu-items/Administration";
-import DashboardMenu from "./menu-items/Dashboard";
-import EmailsModuleMenu from "./menu-items/Emails";
-import { cn } from "@/lib/utils";
-import type { system_Modules_Enabled } from "@prisma/client";
-import type { getDictionary } from "@/dictionaries";
+import AdministrationMenu from './menu-items/Administration';
+import DashboardMenu from './menu-items/Dashboard';
+import EmailsModuleMenu from './menu-items/Emails';
+import { cn } from '@/lib/utils';
+import type { system_Modules_Enabled } from '@prisma/client';
+import type { getDictionary } from '@/dictionaries';
 
 type Props = {
   modules: system_Modules_Enabled[];
@@ -42,13 +42,13 @@ const ModuleMenu: FC<Props> = ({ modules, dict, build }) => {
     <div className="flex flex-col">
       <div
         className={` ${
-          open ? "w-72" : "w-20 "
-        }  h-screen p-5  pt-8 relative duration-300`}
+          open ? 'w-72' : 'w-20'
+        } relative h-screen p-5 pt-8 duration-300`}
       >
-        <div className="flex gap-x-4 items-center">
+        <div className="flex items-center gap-x-4">
           <div
-            className={`cursor-pointer duration-500 border rounded-full px-4 py-2 ${
-              open && "rotate-[360deg]"
+            className={`cursor-pointer rounded-full border px-4 py-2 duration-500 ${
+              open && 'rotate-[360deg]'
             }`}
             onClick={() => setOpen(!open)}
           >
@@ -56,8 +56,8 @@ const ModuleMenu: FC<Props> = ({ modules, dict, build }) => {
           </div>
 
           <h1
-            className={` origin-left font-medium text-xl duration-200 ${
-              !open && "scale-0"
+            className={`origin-left text-xl font-medium duration-200 ${
+              !open && 'scale-0'
             }`}
           >
             {process.env.NEXT_PUBLIC_APP_NAME}
@@ -66,37 +66,37 @@ const ModuleMenu: FC<Props> = ({ modules, dict, build }) => {
         <div className="pt-6">
           <DashboardMenu open={open} title={dict.ModuleMenu.dashboard} />
           {modules.find(
-            (menuItem) => menuItem.name === "crm" && menuItem.enabled
+            (menuItem) => menuItem.name === 'crm' && menuItem.enabled
           ) ? (
             <CrmModuleMenu open={open} localizations={dict.ModuleMenu.crm} />
           ) : null}
           {modules.find(
-            (menuItem) => menuItem.name === "projects" && menuItem.enabled
+            (menuItem) => menuItem.name === 'projects' && menuItem.enabled
           ) ? (
             <ProjectModuleMenu open={open} title={dict.ModuleMenu.projects} />
           ) : null}
           {modules.find(
-            (menuItem) => menuItem.name === "emails" && menuItem.enabled
+            (menuItem) => menuItem.name === 'emails' && menuItem.enabled
           ) ? (
             <EmailsModuleMenu open={open} title={dict.ModuleMenu.emails} />
           ) : null}
           {modules.find(
-            (menuItem) => menuItem.name === "secondBrain" && menuItem.enabled
+            (menuItem) => menuItem.name === 'secondBrain' && menuItem.enabled
           ) ? (
             <SecondBrainModuleMenu open={open} />
           ) : null}
           {modules.find(
-            (menuItem) => menuItem.name === "employee" && menuItem.enabled
+            (menuItem) => menuItem.name === 'employee' && menuItem.enabled
           ) ? (
             <EmployeesModuleMenu open={open} />
           ) : null}
           {modules.find(
-            (menuItem) => menuItem.name === "invoice" && menuItem.enabled
+            (menuItem) => menuItem.name === 'invoice' && menuItem.enabled
           ) ? (
             <InvoicesModuleMenu open={open} title={dict.ModuleMenu.invoices} />
           ) : null}
           {modules.find(
-            (menuItem) => menuItem.name === "workflows" && menuItem.enabled
+            (menuItem) => menuItem.name === 'workflows' && menuItem.enabled
           ) ? (
             <WorkflowsModuleMenu
               open={open}
@@ -105,12 +105,12 @@ const ModuleMenu: FC<Props> = ({ modules, dict, build }) => {
             />
           ) : null}
           {modules.find(
-            (menuItem) => menuItem.name === "reports" && menuItem.enabled
+            (menuItem) => menuItem.name === 'reports' && menuItem.enabled
           ) ? (
             <ReportsModuleMenu open={open} title={dict.ModuleMenu.reports} />
           ) : null}
           {modules.find(
-            (menuItem) => menuItem.name === "documents" && menuItem.enabled
+            (menuItem) => menuItem.name === 'documents' && menuItem.enabled
           ) ? (
             <DocumentsModuleMenu
               open={open}
@@ -118,12 +118,12 @@ const ModuleMenu: FC<Props> = ({ modules, dict, build }) => {
             />
           ) : null}
           {modules.find(
-            (menuItem) => menuItem.name === "databox" && menuItem.enabled
+            (menuItem) => menuItem.name === 'databox' && menuItem.enabled
           ) ? (
             <DataboxModuleMenu open={open} />
           ) : null}
           {modules.find(
-            (menuItem) => menuItem.name === "openai" && menuItem.enabled
+            (menuItem) => menuItem.name === 'openai' && menuItem.enabled
           ) ? (
             <ChatGPTModuleMenu open={open} />
           ) : null}
@@ -131,11 +131,11 @@ const ModuleMenu: FC<Props> = ({ modules, dict, build }) => {
         </div>
       </div>
       <div
-        className={cn("flex justify-center items-center w-full", {
+        className={cn('flex w-full items-center justify-center', {
           hidden: !open,
         })}
       >
-        <span className="text-xs text-gray-500 pb-2">
+        <span className="pb-2 text-xs text-gray-500">
           build: 0.0.3-beta-{build}
         </span>
       </div>

@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { Row } from "@tanstack/react-table";
+import { DotsHorizontalIcon } from '@radix-ui/react-icons';
+import { Row } from '@tanstack/react-table';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,22 +18,22 @@ import {
   DropdownMenuTrigger,
   DropdownMenuLabel,
   DropdownMenuGroup,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 
-import {} from "../data/data";
-import { taskSchema } from "../data/schema";
-import { useRouter } from "next/navigation";
-import AlertModal from "@/components/modals/alert-modal";
-import { useToast } from "@/components/ui/use-toast";
-import { useState } from "react";
-import axios from "axios";
-import InvoiceViewModal from "@/components/modals/invoice-view-modal";
-import RightViewModalNoTrigger from "@/components/modals/right-view-notrigger";
-import RossumCockpit from "../components/RossumCockpit";
-import Link from "next/link";
-import LoadingModal from "@/components/modals/loading-modal";
-import { useAppStore } from "@/store/store";
-import { Edit } from "lucide-react";
+import {} from '../data/data';
+import { taskSchema } from '../data/schema';
+import { useRouter } from 'next/navigation';
+import AlertModal from '@/components/modals/alert-modal';
+import { useToast } from '@/components/ui/use-toast';
+import { useState } from 'react';
+import axios from 'axios';
+import InvoiceViewModal from '@/components/modals/invoice-view-modal';
+import RightViewModalNoTrigger from '@/components/modals/right-view-notrigger';
+import RossumCockpit from '../components/RossumCockpit';
+import Link from 'next/link';
+import LoadingModal from '@/components/modals/loading-modal';
+import { useAppStore } from '@/store/store';
+import { Edit } from 'lucide-react';
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -66,15 +66,15 @@ export function DataTableRowActions<TData>({
       await axios.delete(`/api/invoice/${invoice.id}`);
       router.refresh();
       toast({
-        title: "Success",
-        description: "Document has been deleted",
+        title: 'Success',
+        description: 'Document has been deleted',
       });
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description:
-          "Something went wrong while deleting document. Please try again.",
+          'Something went wrong while deleting document. Please try again.',
       });
     } finally {
       setLoading(false);
@@ -90,14 +90,14 @@ export function DataTableRowActions<TData>({
         `/api/invoice/rossum/get-annotation/${invoice.rossum_annotation_id}`
       );
       toast({
-        title: "Success",
+        title: 'Success',
         description: `Data from invoice with annotation ID ${invoice.rossum_annotation_id} has been extracted`,
       });
     } catch (error: any) {
       //console.log(error);
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error.response.data.error,
       });
     } finally {
@@ -113,14 +113,14 @@ export function DataTableRowActions<TData>({
     try {
       await axios.get(`/api/invoice/money-s3-xml/${invoice.id}`);
       toast({
-        title: "Success",
+        title: 'Success',
         description: `Create XML fro Money S3 import and store XML in S3 bucket`,
       });
     } catch (error: any) {
       //console.log(error);
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error.response.data.error,
       });
     } finally {
@@ -136,14 +136,14 @@ export function DataTableRowActions<TData>({
     try {
       await axios.get(`/api/invoice/send-by-email/${invoice.id}`);
       toast({
-        title: "Success",
+        title: 'Success',
         description: `XML for ERP import sent to accountant email`,
       });
     } catch (error: any) {
       //console.log(error);
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error.response.data.error,
       });
     } finally {
@@ -185,7 +185,7 @@ export function DataTableRowActions<TData>({
       />
 
       <RightViewModalNoTrigger
-        title={"Update Invoice" + " - " + invoice?.id}
+        title={'Update Invoice' + ' - ' + invoice?.id}
         description="Update invoice metadata with Rossum cockpit"
         open={openRossumView}
         setOpen={setOpenRossumView}
@@ -202,7 +202,7 @@ export function DataTableRowActions<TData>({
             <span className="sr-only">Open menu</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-[260px] ">
+        <DropdownMenuContent align="end" className="w-[260px]">
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>Actions</DropdownMenuSubTrigger>
             <DropdownMenuSubContent>
@@ -216,7 +216,7 @@ export function DataTableRowActions<TData>({
                 Invoice detail
               </DropdownMenuItem>
 
-              <Link href={invoice.invoice_file_url} target={"_blank"}>
+              <Link href={invoice.invoice_file_url} target={'_blank'}>
                 <DropdownMenuItem>
                   Preview invoice in new window
                 </DropdownMenuItem>
@@ -226,10 +226,10 @@ export function DataTableRowActions<TData>({
                   setIsOpen(true);
                   setNotionUrl(
                     `${process.env.NEXT_PUBLIC_APP_URL}/invoice/detail/${invoice.id}`
-                  );                  
+                  );
                 }}
               >
-                <Edit className="mr-2 w-4 h-4" />
+                <Edit className="mr-2 h-4 w-4" />
                 Create task from Notion
               </DropdownMenuItem>
             </DropdownMenuSubContent>
@@ -267,7 +267,7 @@ export function DataTableRowActions<TData>({
                   router.push(
                     invoice.rossum_annotation_json_url
                       ? invoice.rossum_annotation_json_url
-                      : "/invoice"
+                      : '/invoice'
                   )
                 }
               >
@@ -276,7 +276,7 @@ export function DataTableRowActions<TData>({
               <DropdownMenuItem
                 onClick={() =>
                   router.push(
-                    invoice.money_s3_url ? invoice.money_s3_url : "/invoice"
+                    invoice.money_s3_url ? invoice.money_s3_url : '/invoice'
                   )
                 }
               >
@@ -297,7 +297,7 @@ export function DataTableRowActions<TData>({
             Delete
             <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
           </DropdownMenuItem>
-          {process.env.NODE_ENV === "development" && (
+          {process.env.NODE_ENV === 'development' && (
             <>
               <DropdownMenuSeparator />
               <DropdownMenuLabel>Development mode only</DropdownMenuLabel>

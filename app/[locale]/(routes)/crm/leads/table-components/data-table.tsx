@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import * as React from "react";
+import * as React from 'react';
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -14,7 +14,7 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table';
 
 import {
   Table,
@@ -23,11 +23,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from '@/components/ui/table';
 
-import { DataTablePagination } from "./data-table-pagination";
-import { DataTableToolbar } from "./data-table-toolbar";
-import { PanelTopClose, PanelTopOpen } from "lucide-react";
+import { DataTablePagination } from './data-table-pagination';
+import { DataTableToolbar } from './data-table-toolbar';
+import { PanelTopClose, PanelTopOpen } from 'lucide-react';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -72,7 +72,7 @@ export function LeadDataTable<TData, TValue>({
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-start gap-3">
+      <div className="flex items-start justify-between gap-3">
         <div></div>
         {/*         <RightViewModal
           label={"Create account"}
@@ -129,7 +129,7 @@ export function LeadDataTable<TData, TValue>({
                   table.getRowModel().rows.map((row) => (
                     <TableRow
                       key={row.id}
-                      data-state={row.getIsSelected() && "selected"}
+                      data-state={row.getIsSelected() && 'selected'}
                     >
                       {row.getVisibleCells().map((cell) => (
                         <TableCell key={cell.id}>

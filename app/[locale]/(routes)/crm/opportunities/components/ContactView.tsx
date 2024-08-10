@@ -1,24 +1,24 @@
-"use client";
-import { Button } from "@/components/ui/button";
+'use client';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { useToast } from "@/components/ui/use-toast";
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import axios from "axios";
-import { PlusIcon, User } from "lucide-react";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+} from '@/components/ui/dropdown-menu';
+import { useToast } from '@/components/ui/use-toast';
+import { DotsHorizontalIcon } from '@radix-ui/react-icons';
+import axios from 'axios';
+import { PlusIcon, User } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
 const ContactView = ({ data, opportunityId }: any) => {
   const router = useRouter();
@@ -36,7 +36,7 @@ const ContactView = ({ data, opportunityId }: any) => {
   }
 
   const onAddNew = () => {
-    alert("Actions - not yet implemented");
+    alert('Actions - not yet implemented');
   };
 
   const onView = (id: string) => {
@@ -49,15 +49,15 @@ const ContactView = ({ data, opportunityId }: any) => {
         opportunityId,
       });
       toast({
-        variant: "default",
-        description: "Contact unlinked",
+        variant: 'default',
+        description: 'Contact unlinked',
       });
       router.refresh();
     } catch (error) {
       console.log(error);
       toast({
-        variant: "destructive",
-        description: "Failed to unlink contact",
+        variant: 'destructive',
+        description: 'Failed to unlink contact',
       });
     }
   };
@@ -82,7 +82,7 @@ const ContactView = ({ data, opportunityId }: any) => {
       </Card>
     );
 
-  console.log(data, "data - contacts");
+  console.log(data, 'data - contacts');
 
   return (
     <Card>
@@ -105,8 +105,8 @@ const ContactView = ({ data, opportunityId }: any) => {
             <div key={data.id}>
               <div className="-mx-2 flex items-center space-x-4 rounded-md p-2 transition-all hover:bg-accent hover:text-accent-foreground">
                 <User className="mt-px h-5 w-5" />
-                <div className="flex justify-between w-full">
-                  <div className="flex justify-start items-center space-x-5">
+                <div className="flex w-full justify-between">
+                  <div className="flex items-center justify-start space-x-5">
                     <p className="text-sm font-medium leading-none">
                       {contact.id}
                     </p>

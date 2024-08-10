@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getAccount = async (accountId: string) => {
   const data = await prismadb.crm_Accounts.findFirst({
@@ -15,7 +15,7 @@ export const getAccount = async (accountId: string) => {
           name: true,
         },
       },
-    },    
+    },
   });
   return data;
 };

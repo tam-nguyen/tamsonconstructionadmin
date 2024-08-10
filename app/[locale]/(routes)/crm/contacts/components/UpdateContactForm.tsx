@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { z } from "zod";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
+import { useState } from 'react';
+import { z } from 'zod';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
 
-import { useToast } from "@/components/ui/use-toast";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
@@ -17,25 +17,25 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 
-import { Switch } from "@/components/ui/switch";
-import fetcher from "@/lib/fetcher";
-import useSWR from "swr";
-import SuspenseLoading from "@/components/loadings/suspense";
+import { Switch } from '@/components/ui/switch';
+import fetcher from '@/lib/fetcher';
+import useSWR from 'swr';
+import SuspenseLoading from '@/components/loadings/suspense';
 
 //TODO: fix all the types
 type NewTaskFormProps = {
   initialData: any;
-  setOpen: (value: boolean) => void;  
+  setOpen: (value: boolean) => void;
 };
 
 export function UpdateContactForm({ initialData, setOpen }: NewTaskFormProps) {
@@ -45,16 +45,16 @@ export function UpdateContactForm({ initialData, setOpen }: NewTaskFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { data: accounts, isLoading: isLoadingAccounts } = useSWR(
-    "/api/crm/account",
+    '/api/crm/account',
     fetcher
   );
 
   const { data: users, isLoading: isLoadingUsers } = useSWR(
-    "/api/user",
+    '/api/user',
     fetcher
   );
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   const formSchema = z.object({
     id: z.string().min(5).max(30),
@@ -92,23 +92,23 @@ export function UpdateContactForm({ initialData, setOpen }: NewTaskFormProps) {
   });
 
   const contactType = [
-    { name: "Customer", id: "Customer" },
-    { name: "Partner", id: "Partner" },
-    { name: "Vendor", id: "Vendor" },
+    { name: 'Customer', id: 'Customer' },
+    { name: 'Partner', id: 'Partner' },
+    { name: 'Vendor', id: 'Vendor' },
   ];
 
   const onSubmit = async (data: NewAccountFormValues) => {
     setIsLoading(true);
     try {
-      await axios.put("/api/crm/contacts", data);
+      await axios.put('/api/crm/contacts', data);
       toast({
-        title: "Success",
-        description: "Contact updated successfully",
+        title: 'Success',
+        description: 'Contact updated successfully',
       });
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
@@ -155,8 +155,8 @@ export function UpdateContactForm({ initialData, setOpen }: NewTaskFormProps) {
             <code>{JSON.stringify(form.watch(), null, 2)}</code>
           </pre>
         </div> */}
-        <div className=" w-[800px] text-sm">
-          <div className="pb-5 space-y-2">
+        <div className="w-[800px] text-sm">
+          <div className="space-y-2 pb-5">
             <FormField
               control={form.control}
               name="first_name"
@@ -270,16 +270,16 @@ export function UpdateContactForm({ initialData, setOpen }: NewTaskFormProps) {
               )}
             />
             <h3>Birthday - (optional)</h3>
-            <div className="flex space-x-3 w-full mx-auto">
+            <div className="mx-auto flex w-full space-x-3">
               <FormField
                 control={form.control}
                 name="birthday_year"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <div className="flex space-x-2 w-32">
+                    <div className="flex w-32 space-x-2">
                       <Select onValueChange={field.onChange}>
                         <SelectTrigger>Year</SelectTrigger>
-                        <SelectContent className="flex overflow-y-auto h-56">
+                        <SelectContent className="flex h-56 overflow-y-auto">
                           {yearArray.map((yearOption) => (
                             <SelectItem
                               key={yearOption}
@@ -300,7 +300,7 @@ export function UpdateContactForm({ initialData, setOpen }: NewTaskFormProps) {
                 name="birthday_month"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <div className="flex space-x-2 w-28">
+                    <div className="flex w-28 space-x-2">
                       <Select onValueChange={field.onChange}>
                         <SelectTrigger>Month</SelectTrigger>
                         <SelectContent>
@@ -424,7 +424,7 @@ export function UpdateContactForm({ initialData, setOpen }: NewTaskFormProps) {
                             <SelectValue placeholder="Choose assigned account " />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="flex overflow-y-auto h-56">
+                        <SelectContent className="flex h-56 overflow-y-auto">
                           {
                             //TODO: fix this
                             accounts.map((account: any) => (
@@ -490,7 +490,7 @@ export function UpdateContactForm({ initialData, setOpen }: NewTaskFormProps) {
                             <SelectValue placeholder="Choose contact type " />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="flex overflow-y-auto h-56">
+                        <SelectContent className="flex h-56 overflow-y-auto">
                           {contactType.map((type) => (
                             <SelectItem key={type.id} value={type.id}>
                               {type.name}
@@ -613,11 +613,11 @@ export function UpdateContactForm({ initialData, setOpen }: NewTaskFormProps) {
         <div className="grid gap-2 py-5">
           <Button disabled={isLoading} type="submit">
             {isLoading ? (
-              <span className="flex items-center animate-pulse">
+              <span className="flex animate-pulse items-center">
                 Saving data ...
               </span>
             ) : (
-              "Update contact"
+              'Update contact'
             )}
           </Button>
         </div>

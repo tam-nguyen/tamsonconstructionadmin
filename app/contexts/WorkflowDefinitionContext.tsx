@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import type { FC, ReactNode } from 'react';
 import { createContext, useContext, useState } from 'react';
@@ -13,7 +13,8 @@ const WorkflowDefinitionContext = createContext<{
   setConfig: () => null,
 });
 
-export const useWorkflowDefinitionContext = () => useContext(WorkflowDefinitionContext);
+export const useWorkflowDefinitionContext = () =>
+  useContext(WorkflowDefinitionContext);
 
 interface Props {
   children: ReactNode;

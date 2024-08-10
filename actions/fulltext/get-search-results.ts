@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getSearch = async (search: string) => {
   //TODO: This action is now offtopic, because it is not used in the frontend.
@@ -7,8 +7,8 @@ export const getSearch = async (search: string) => {
   const resultsCrmOpportunities = await prismadb.crm_Opportunities.findMany({
     where: {
       OR: [
-        { description: { contains: search, mode: "insensitive" } },
-        { name: { contains: search, mode: "insensitive" } },
+        { description: { contains: search, mode: 'insensitive' } },
+        { name: { contains: search, mode: 'insensitive' } },
         // add more fields as needed
       ],
     },
@@ -18,9 +18,9 @@ export const getSearch = async (search: string) => {
   const resultsCrmAccounts = await prismadb.crm_Accounts.findMany({
     where: {
       OR: [
-        { description: { contains: search, mode: "insensitive" } },
-        { name: { contains: search, mode: "insensitive" } },
-        { email: { contains: search, mode: "insensitive" } },
+        { description: { contains: search, mode: 'insensitive' } },
+        { name: { contains: search, mode: 'insensitive' } },
+        { email: { contains: search, mode: 'insensitive' } },
         // add more fields as needed
       ],
     },
@@ -30,9 +30,9 @@ export const getSearch = async (search: string) => {
   const resultsCrmContacts = await prismadb.crm_Contacts.findMany({
     where: {
       OR: [
-        { last_name: { contains: search, mode: "insensitive" } },
-        { first_name: { contains: search, mode: "insensitive" } },
-        { email: { contains: search, mode: "insensitive" } },
+        { last_name: { contains: search, mode: 'insensitive' } },
+        { first_name: { contains: search, mode: 'insensitive' } },
+        { email: { contains: search, mode: 'insensitive' } },
         // add more fields as needed
       ],
     },
@@ -42,10 +42,10 @@ export const getSearch = async (search: string) => {
   const resultsUser = await prismadb.users.findMany({
     where: {
       OR: [
-        { email: { contains: search, mode: "insensitive" } },
-        { account_name: { contains: search, mode: "insensitive" } },
-        { name: { contains: search, mode: "insensitive" } },
-        { username: { contains: search, mode: "insensitive" } },
+        { email: { contains: search, mode: 'insensitive' } },
+        { account_name: { contains: search, mode: 'insensitive' } },
+        { name: { contains: search, mode: 'insensitive' } },
+        { username: { contains: search, mode: 'insensitive' } },
         // add more fields as needed
       ],
     },
@@ -54,8 +54,8 @@ export const getSearch = async (search: string) => {
   const resultsTasks = await prismadb.tasks.findMany({
     where: {
       OR: [
-        { title: { contains: search, mode: "insensitive" } },
-        { content: { contains: search, mode: "insensitive" } },
+        { title: { contains: search, mode: 'insensitive' } },
+        { content: { contains: search, mode: 'insensitive' } },
         // add more fields as needed
       ],
     },
@@ -64,15 +64,15 @@ export const getSearch = async (search: string) => {
   const reslutsProjects = await prismadb.boards.findMany({
     where: {
       OR: [
-        { title: { contains: search, mode: "insensitive" } },
-        { description: { contains: search, mode: "insensitive" } },
+        { title: { contains: search, mode: 'insensitive' } },
+        { description: { contains: search, mode: 'insensitive' } },
         // add more fields as needed
       ],
     },
   });
 
   const data = {
-    message: "Fulltext search response",
+    message: 'Fulltext search response',
     results: {
       opportunities: resultsCrmOpportunities,
       accounts: resultsCrmAccounts,

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import LoadingComponent from "@/components/LoadingComponent";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+import LoadingComponent from '@/components/LoadingComponent';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
 
 import {
   Form,
@@ -11,38 +11,38 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from '@/components/ui/popover';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { SheetTrigger } from "@/components/ui/sheet";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
+} from '@/components/ui/select';
+import { SheetTrigger } from '@/components/ui/sheet';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/components/ui/use-toast';
 
-import fetcher from "@/lib/fetcher";
-import { cn } from "@/lib/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { crm_Accounts } from "@prisma/client";
-import axios, { AxiosError } from "axios";
-import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import fetcher from '@/lib/fetcher';
+import { cn } from '@/lib/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { crm_Accounts } from '@prisma/client';
+import axios, { AxiosError } from 'axios';
+import { format } from 'date-fns';
+import { CalendarIcon } from 'lucide-react';
 
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter } from 'next/navigation';
 
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import useSWR from "swr";
-import { z } from "zod";
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import useSWR from 'swr';
+import { z } from 'zod';
 
 interface NewTaskFormProps {
   account: crm_Accounts | null;
@@ -56,7 +56,7 @@ const NewTaskForm = ({ account, onFinish }: NewTaskFormProps) => {
   //  const [userSearch, setUserSearch] = useState<string>("");
 
   const { data: users, isLoading: isLoadingUsers } = useSWR(
-    "/api/user",
+    '/api/user',
     fetcher
   );
 
@@ -95,21 +95,21 @@ const NewTaskForm = ({ account, onFinish }: NewTaskFormProps) => {
     try {
       await axios.post(`/api/crm/account/${account?.id}/task/create`, data);
       toast({
-        title: "Success",
+        title: 'Success',
         description: `New task: ${data.title}, created successfully`,
       });
     } catch (error) {
       if (error instanceof AxiosError && error?.response?.data) {
         toast({
-          variant: "destructive",
-          title: "Error",
+          variant: 'destructive',
+          title: 'Error',
           description: error?.response?.data,
         });
       } else {
         toast({
-          variant: "destructive",
-          title: "Error",
-          description: error instanceof Error ? error?.message : "",
+          variant: 'destructive',
+          title: 'Error',
+          description: error instanceof Error ? error?.message : '',
         });
       }
     } finally {
@@ -132,7 +132,7 @@ const NewTaskForm = ({ account, onFinish }: NewTaskFormProps) => {
       {isLoading ? (
         <LoadingComponent />
       ) : (
-        <div className="flex w-full ">
+        <div className="flex w-full">
           {/*           <div>
             <pre>{JSON.stringify(form.watch(), null, 2)}</pre>
           </div> */}
@@ -183,14 +183,14 @@ const NewTaskForm = ({ account, onFinish }: NewTaskFormProps) => {
                         <Popover>
                           <PopoverTrigger asChild>
                             <Button
-                              variant={"outline"}
+                              variant={'outline'}
                               className={cn(
-                                "w-[240px] justify-start text-left font-normal",
-                                !date && "text-muted-foreground"
+                                'w-[240px] justify-start text-left font-normal',
+                                !date && 'text-muted-foreground'
                               )}
                             >
                               {field.value ? (
-                                format(field.value, "PPP")
+                                format(field.value, 'PPP')
                               ) : (
                                 <span>Pick a date</span>
                               )}
@@ -281,7 +281,7 @@ const NewTaskForm = ({ account, onFinish }: NewTaskFormProps) => {
               </div>
               <div className="flex w-full justify-end space-x-2 pt-2">
                 <SheetTrigger asChild>
-                  <Button variant={"destructive"}>Close</Button>
+                  <Button variant={'destructive'}>Close</Button>
                 </SheetTrigger>
                 <Button type="submit">Create</Button>
               </div>

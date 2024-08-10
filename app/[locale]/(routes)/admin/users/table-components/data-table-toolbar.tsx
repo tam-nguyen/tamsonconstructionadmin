@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { Cross2Icon } from "@radix-ui/react-icons";
-import { Table } from "@tanstack/react-table";
+import { Cross2Icon } from '@radix-ui/react-icons';
+import { Table } from '@tanstack/react-table';
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { DataTableViewOptions } from "./data-table-view-options";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { DataTableViewOptions } from './data-table-view-options';
 
-import { statuses, isAdmin } from "../table-data/data";
-import { DataTableFacetedFilter } from "./data-table-faceted-filter";
+import { statuses, isAdmin } from '../table-data/data';
+import { DataTableFacetedFilter } from './data-table-faceted-filter';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -24,27 +24,27 @@ export function DataTableToolbar<TData>({
       <div className="flex flex-1 items-center space-x-2">
         <Input
           placeholder="Filter Users ..."
-          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+          value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
           onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
+            table.getColumn('name')?.setFilterValue(event.target.value)
           }
           className="h-8 w-[150px] lg:w-[250px]"
         />
 
-        {table.getColumn("userStatus") && (
+        {table.getColumn('userStatus') && (
           <DataTableFacetedFilter
-            column={table.getColumn("userStatus")}
+            column={table.getColumn('userStatus')}
             title="Status"
             options={statuses}
           />
         )}
-        {table.getColumn("is_admin") && (
+        {table.getColumn('is_admin') && (
           <DataTableFacetedFilter
-            column={table.getColumn("is_admin")}
+            column={table.getColumn('is_admin')}
             title="Admin"
             options={isAdmin}
           />
-        )}        
+        )}
         {isFiltered && (
           <Button
             variant="ghost"

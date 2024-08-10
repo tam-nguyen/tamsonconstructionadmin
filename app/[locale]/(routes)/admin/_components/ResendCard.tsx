@@ -1,30 +1,30 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
-import { revalidatePath } from "next/cache";
-import { Input } from "@/components/ui/input";
-import CopyKeyComponent from "./copy-key";
+import { revalidatePath } from 'next/cache';
+import { Input } from '@/components/ui/input';
+import CopyKeyComponent from './copy-key';
 
 const ResendCard = async () => {
   const setSMTP = async (formData: FormData) => {
-    "use server";
+    'use server';
     const schema = z.object({
       id: z.string(),
       serviceKey: z.string(),
     });
     const parsed = schema.parse({
-      id: formData.get("id"),
-      serviceKey: formData.get("serviceKey"),
+      id: formData.get('id'),
+      serviceKey: formData.get('serviceKey'),
     });
 
     //console.log(parsed.id, "id");
@@ -33,11 +33,11 @@ const ResendCard = async () => {
     if (!parsed.id) {
       await prismadb.systemServices.create({
         data: {
-          name: "resend_smtp",
+          name: 'resend_smtp',
           serviceKey: parsed.serviceKey,
         },
       });
-      revalidatePath("/admin");
+      revalidatePath('/admin');
     } else {
       await prismadb.systemServices.update({
         where: {
@@ -47,13 +47,13 @@ const ResendCard = async () => {
           serviceKey: parsed.serviceKey,
         },
       });
-      revalidatePath("/admin");
+      revalidatePath('/admin');
     }
   };
 
   const resend_key = await prismadb.systemServices.findFirst({
     where: {
-      name: "resend_smtp",
+      name: 'resend_smtp',
     },
   });
 
@@ -70,7 +70,7 @@ const ResendCard = async () => {
                 message="Resend - API Key"
               />
             ) : (
-              "not enabled"
+              'not enabled'
             )}
           </p>
           <p>API key from DB:</p>
@@ -81,7 +81,7 @@ const ResendCard = async () => {
                 message="Resend - API Key"
               />
             ) : (
-              "not enabled"
+              'not enabled'
             )}
           </p>
         </CardDescription>
@@ -92,8 +92,8 @@ const ResendCard = async () => {
             <input type="hidden" name="id" value={resend_key?.id} />
             <Input type="text" name="serviceKey" placeholder="Your API key" />
           </div>
-          <div className="flex justify-end pt-2 gap-2">
-            <Button type={"reset"}>Reset</Button>
+          <div className="flex justify-end gap-2 pt-2">
+            <Button type={'reset'}>Reset</Button>
             <Button type="submit">Set Resend key</Button>
           </div>
         </form>

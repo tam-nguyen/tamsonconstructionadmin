@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { KeyboardEventHandler, forwardRef } from "react";
+import { KeyboardEventHandler, forwardRef } from 'react';
 
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
-import { FormErrors } from "./form-errors";
-import { useFormStatus } from "react-dom";
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { cn } from '@/lib/utils';
+import { FormErrors } from './form-errors';
+import { useFormStatus } from 'react-dom';
 
 interface FormTextareaProps {
   id: string;
@@ -42,8 +42,8 @@ export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>(
     const { pending } = useFormStatus();
 
     return (
-      <div className="space-y-2 w-full">
-        <div className="space-y-1 w-full">
+      <div className="w-full space-y-2">
+        <div className="w-full space-y-1">
           {label ? (
             <Label
               htmlFor={id}
@@ -62,7 +62,7 @@ export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>(
             id={id}
             disabled={pending || disabled}
             className={cn(
-              "resize-none focus-visible:ring-0 focus-visible:ring-offset-0 ring-0 focus:ring-0 outline-none shadow-sm",
+              'resize-none shadow-sm outline-none ring-0 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0',
               className
             )}
             aria-describedby={`${id}-error`}
@@ -75,4 +75,4 @@ export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>(
   }
 );
 
-FormTextarea.displayName = "FormTextarea";
+FormTextarea.displayName = 'FormTextarea';

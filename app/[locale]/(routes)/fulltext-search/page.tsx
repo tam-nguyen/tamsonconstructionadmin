@@ -1,7 +1,7 @@
-import React, { Suspense } from "react";
+import React, { Suspense } from 'react';
 
-import SearchResult from "./components/SearchResult";
-import SuspenseLoading from "@/components/loadings/suspense";
+import SearchResult from './components/SearchResult';
+import SuspenseLoading from '@/components/loadings/suspense';
 
 const FulltextPage = () => {
   return (

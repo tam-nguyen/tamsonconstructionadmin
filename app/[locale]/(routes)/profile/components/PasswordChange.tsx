@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -12,13 +12,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 
-import { useToast } from "@/components/ui/use-toast";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useToast } from '@/components/ui/use-toast';
+import { Input } from '@/components/ui/input';
+import { useState } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const FormSchema = z.object({
   password: z.string().min(5).max(50),
@@ -42,16 +42,16 @@ export function PasswordChangeForm({ userId }: { userId: string }) {
       await axios.put(`/api/user/${userId}/setnewpass`, data);
       //TODO: send data to the server
       toast({
-        title: "Password changed  successfully",
+        title: 'Password changed  successfully',
       });
       router.refresh();
     } catch (error: any) {
       console.log(error.response.data);
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description:
-          "Something went wrong while changing your password: " +
+          'Something went wrong while changing your password: ' +
           error.response.data,
       });
     } finally {
@@ -63,7 +63,7 @@ export function PasswordChangeForm({ userId }: { userId: string }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex space-x-5 w-full p-5 items-end"
+        className="flex w-full items-end space-x-5 p-5"
       >
         <FormField
           control={form.control}

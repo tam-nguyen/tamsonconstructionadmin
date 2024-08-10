@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import EndTask from "@/components/Tasks/End/page";
+import EndTask from '@/components/Tasks/End/page';
 import FunctionTask from '@/components/Tasks/Function/page';
 import GuardTask from '@/components/Tasks/Guard/page';
 import ListenTask from '@/components/Tasks/Listen/page';
@@ -17,7 +17,10 @@ export const nodeTypes: NodeTypes = {
   listen: ListenTask,
 } as const;
 
-export const taskCreator: Record<'function' | 'start' | 'end' | 'guard' | 'wait' | 'listen', () => Node> = {
+export const taskCreator: Record<
+  'function' | 'start' | 'end' | 'guard' | 'wait' | 'listen',
+  () => Node
+> = {
   function: () => ({
     id: crypto.randomUUID(),
     data: {

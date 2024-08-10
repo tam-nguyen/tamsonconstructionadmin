@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
+import Link from 'next/link';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -14,19 +14,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { toast } from "@/components/ui/use-toast";
-import updateModel from "@/actions/admin/update-gpt-model";
-import { useRouter } from "next/navigation";
-import { gpt_models } from "@prisma/client";
-import { FC } from "react";
+} from '@/components/ui/select';
+import { toast } from '@/components/ui/use-toast';
+import updateModel from '@/actions/admin/update-gpt-model';
+import { useRouter } from 'next/navigation';
+import { gpt_models } from '@prisma/client';
+import { FC } from 'react';
 
 const FormSchema = z.object({
   model: z.string().min(10).max(30),
@@ -50,7 +50,7 @@ const SetGptModel: FC<{
     try {
       await updateModel(data.model);
       toast({
-        title: "GPT model updated",
+        title: 'GPT model updated',
       });
     } catch (error) {
       console.log(error);
@@ -64,7 +64,7 @@ const SetGptModel: FC<{
       {/*       <pre>{JSON.stringify(form.watch(), null, 2)}</pre> */}
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className=" space-y-6 flex space-x-3 items-center justify-center"
+        className="flex items-center justify-center space-x-3 space-y-6"
       >
         <FormField
           control={form.control}

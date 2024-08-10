@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { columns } from "@/app/[locale]/(routes)/documents/components/columns";
-import { DocumentsDataTable } from "@/app/[locale]/(routes)/documents/components/data-table";
+import { columns } from '@/app/[locale]/(routes)/documents/components/columns';
+import { DocumentsDataTable } from '@/app/[locale]/(routes)/documents/components/data-table';
 
 import {
   Card,
@@ -9,11 +9,11 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { useRouter } from "next/navigation";
+} from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { useRouter } from 'next/navigation';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 interface DocumentsViewProps {
   data: any;
@@ -37,7 +37,7 @@ const DocumentsView = ({ data }: DocumentsViewProps) => {
         <div className="flex justify-between">
           <div>
             <CardTitle
-              onClick={() => router.push("/documents")}
+              onClick={() => router.push('/documents')}
               className="cursor-pointer"
             >
               Documents
@@ -50,7 +50,7 @@ const DocumentsView = ({ data }: DocumentsViewProps) => {
       </CardHeader>
       <CardContent>
         {!data || data.length === 0 ? (
-          "No assigned documents found"
+          'No assigned documents found'
         ) : (
           <DocumentsDataTable data={data} columns={columns} />
         )}

@@ -1,17 +1,17 @@
-import { NextResponse } from "next/server";
-import { prismadb } from "@/lib/prisma";
+import { NextResponse } from 'next/server';
+import { prismadb } from '@/lib/prisma';
 
-import { generateRandomPassword } from "@/lib/utils";
+import { generateRandomPassword } from '@/lib/utils';
 
-import { hash } from "bcryptjs";
-import PasswordResetEmail from "@/emails/PasswordReset";
-import resendHelper from "@/lib/resend";
+import { hash } from 'bcryptjs';
+import PasswordResetEmail from '@/emails/PasswordReset';
+import resendHelper from '@/lib/resend';
 
 export async function POST(req: Request) {
   /*
   Resend.com function init - this is a helper function that will be used to send emails
   */
-  const resend = await resendHelper();  
+  const resend = await resendHelper();
   try {
     const body = await req.json();
     const { email } = body;
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     //console.log(email, "email");
 
     if (!email) {
-      return new NextResponse("Email is required!", {
+      return new NextResponse('Email is required!', {
         status: 401,
       });
     }
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     });
 
     if (!user) {
-      return new NextResponse("No user with that Email exist in Db!", {
+      return new NextResponse('No user with that Email exist in Db!', {
         status: 401,
       });
     }
@@ -47,16 +47,16 @@ export async function POST(req: Request) {
     });
 
     if (!newpassword) {
-      return new NextResponse("Password not updated!", {
+      return new NextResponse('Password not updated!', {
         status: 401,
       });
     } else {
       const data = await resend.emails.send({
-        from: "SaasHQ <saashqdev@saashq.org>",
+        from: 'SaasHQ <saashqdev@saashq.org>',
         to: user.email,
         //to: ["saashqdev@gmail.com"],
-        subject: "SaasHQ - Password reset",
-        text: "", // Add this line to fix the types issue
+        subject: 'SaasHQ - Password reset',
+        text: '', // Add this line to fix the types issue
         //react: DemoTemplate({ firstName: "John" }),
         react: PasswordResetEmail({
           username: user?.name!,
@@ -66,13 +66,13 @@ export async function POST(req: Request) {
           userLanguage: user.userLanguage,
         }),
       });
-      console.log(data, "data");
-      console.log("Email sent to: " + user.email);      
+      console.log(data, 'data');
+      console.log('Email sent to: ' + user.email);
     }
 
-    return NextResponse.json({ message: "Password changed!", status: true });
+    return NextResponse.json({ message: 'Password changed!', status: true });
   } catch (error) {
-    console.log("[USER_PASSWORD_CHANGE_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[USER_PASSWORD_CHANGE_POST]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

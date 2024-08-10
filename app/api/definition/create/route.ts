@@ -1,11 +1,11 @@
-import { prismadb } from "@/lib/prisma";
-import { safeAsync } from "@/lib/utils";
-import { ServerRuntime } from "next";
-import { NextResponse } from "next/server";
-import { z } from "zod";
+import { prismadb } from '@/lib/prisma';
+import { safeAsync } from '@/lib/utils';
+import { ServerRuntime } from 'next';
+import { NextResponse } from 'next/server';
+import { z } from 'zod';
 
-export const runtime: ServerRuntime = "nodejs";
-export const dynamic = "force-dynamic";
+export const runtime: ServerRuntime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 const bodySchema = z.object({
   key: z.string(),
@@ -13,7 +13,7 @@ const bodySchema = z.object({
   workflowData: z.object({
     name: z.string(),
     description: z.string(),
-    status: z.enum(["active", "inactive"]),
+    status: z.enum(['active', 'inactive']),
     global: z.record(z.string(), z.any()).optional(),
     tasks: z.array(
       z.object({
@@ -37,7 +37,7 @@ export const POST = async (req: Request) => {
   if (!bodyResult.success) {
     return NextResponse.json(
       {
-        message: "Body json parse failed",
+        message: 'Body json parse failed',
       },
       {
         status: 400,
@@ -51,7 +51,7 @@ export const POST = async (req: Request) => {
     console.error(requestBodyResult.error);
     return NextResponse.json(
       {
-        message: "Bad Request body",
+        message: 'Bad Request body',
         error: requestBodyResult.error.flatten(),
       },
       {
@@ -73,7 +73,8 @@ export const POST = async (req: Request) => {
             [requestBodyResult.data.key]: requestBodyResult.data.ui,
           },
         }),
-        userWfDefinitionId: requestBodyResult.data.workflowData.userWfDefinitionId,
+        userWfDefinitionId:
+          requestBodyResult.data.workflowData.userWfDefinitionId,
       },
     })
   );
@@ -83,7 +84,7 @@ export const POST = async (req: Request) => {
     console.error(definitionCreateResult.error);
     return NextResponse.json(
       {
-        message: "Internal Server Error",
+        message: 'Internal Server Error',
         error: `Definition create failed`,
       },
       {
@@ -94,7 +95,7 @@ export const POST = async (req: Request) => {
 
   return NextResponse.json(
     {
-      message: "Definition created successfully",
+      message: 'Definition created successfully',
     },
     {
       status: 201,

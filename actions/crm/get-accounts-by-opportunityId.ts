@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getAccountsByOpportunityId = async (opportunityId: string) => {
   const data = await prismadb.crm_Accounts.findMany({
@@ -23,7 +23,7 @@ export const getAccountsByOpportunityId = async (opportunityId: string) => {
       },
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   });
   return data;

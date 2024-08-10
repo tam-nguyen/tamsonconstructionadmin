@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import SuspenseLoading from "../loadings/suspense";
+import SuspenseLoading from '../loadings/suspense';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "../ui/dialog";
-import { type } from "os";
+} from '../ui/dialog';
+import { type } from 'os';
 
 type LoadingModalProps = {
   isOpen: boolean;

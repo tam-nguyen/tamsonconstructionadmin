@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { z } from "zod";
-import axios from "axios";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from 'zod';
+import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
   Form,
@@ -14,7 +14,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Dialog,
   DialogContent,
@@ -22,11 +22,11 @@ import {
   DialogTrigger,
   DialogTitle,
   DialogDescription,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
-import LoadingComponent from "@/components/LoadingComponent";
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
+import LoadingComponent from '@/components/LoadingComponent';
 
 type Props = {
   boardId: string;
@@ -66,19 +66,19 @@ const NewSectionDialog = ({ boardId }: Props) => {
     try {
       await axios.post(`/api/projects/sections/${boardId}`, data);
       toast({
-        title: "Success",
+        title: 'Success',
         description: `New project: ${data.title}, created successfully`,
       });
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
       form.reset({
-        title: "",
-      });      
+        title: '',
+      });
       setIsLoading(false);
       setOpen(false);
       router.refresh();
@@ -100,7 +100,7 @@ const NewSectionDialog = ({ boardId }: Props) => {
         {isLoading ? (
           <LoadingComponent />
         ) : (
-          <div className="flex w-full ">
+          <div className="flex w-full">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -127,9 +127,9 @@ const NewSectionDialog = ({ boardId }: Props) => {
                 </div>
                 <div className="flex w-full justify-end space-x-2 pt-2">
                   <DialogTrigger asChild>
-                    <Button variant={"destructive"}>Cancel</Button>
+                    <Button variant={'destructive'}>Cancel</Button>
                   </DialogTrigger>
-                  <Button type="submit">Create</Button>                  
+                  <Button type="submit">Create</Button>
                 </div>
               </form>
             </Form>

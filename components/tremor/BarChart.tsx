@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Card, Title, BarChart, Subtitle } from "@tremor/react";
+import { Card, Title, BarChart, Subtitle } from '@tremor/react';
 
 const dataFormatter = (number: number) => {
   // return number no decimal places
@@ -16,8 +16,8 @@ export const BarChartDemo = ({ chartData, title }: any) => {
         className="mt-6"
         data={chartData}
         index="name"
-        categories={["Number"]}
-        colors={["orange"]}
+        categories={['Number']}
+        colors={['orange']}
         valueFormatter={dataFormatter}
         yAxisWidth={48}
       />

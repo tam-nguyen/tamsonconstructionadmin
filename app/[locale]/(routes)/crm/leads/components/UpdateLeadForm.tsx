@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { z } from "zod";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { CalendarIcon } from "lucide-react";
-import { format } from "date-fns";
+import { useState } from 'react';
+import { z } from 'zod';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+import { CalendarIcon } from 'lucide-react';
+import { format } from 'date-fns';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
-import { useToast } from "@/components/ui/use-toast";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
@@ -21,24 +21,24 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 
-import fetcher from "@/lib/fetcher";
-import useSWR from "swr";
-import SuspenseLoading from "@/components/loadings/suspense";
+import fetcher from '@/lib/fetcher';
+import useSWR from 'swr';
+import SuspenseLoading from '@/components/loadings/suspense';
 
 //TODO: fix all the types
 type NewTaskFormProps = {
   initialData: any;
-  setOpen: (value: boolean) => void;  
+  setOpen: (value: boolean) => void;
 };
 
 export function UpdateLeadForm({ initialData, setOpen }: NewTaskFormProps) {
@@ -48,12 +48,12 @@ export function UpdateLeadForm({ initialData, setOpen }: NewTaskFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { data: accounts, isLoading: isLoadingAccounts } = useSWR(
-    "/api/crm/account",
+    '/api/crm/account',
     fetcher
   );
 
   const { data: users, isLoading: isLoadingUsers } = useSWR(
-    "/api/user",
+    '/api/user',
     fetcher
   );
 
@@ -88,28 +88,28 @@ export function UpdateLeadForm({ initialData, setOpen }: NewTaskFormProps) {
   const onSubmit = async (data: NewLeadFormValues) => {
     setIsLoading(true);
     try {
-      await axios.put("/api/crm/leads", data);
+      await axios.put('/api/crm/leads', data);
       toast({
-        title: "Success",
-        description: "Lead updated successfully",
+        title: 'Success',
+        description: 'Lead updated successfully',
       });
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
       setIsLoading(false);
-      setOpen(false);      
+      setOpen(false);
       router.refresh();
     }
   };
 
   const leadStatus = [
-    { name: "New", id: "NEW" },
-    { name: "In progress", id: "IN_PROGRESS" },
-    { name: "Completed", id: "COMPLETED" },
+    { name: 'New', id: 'NEW' },
+    { name: 'In progress', id: 'IN_PROGRESS' },
+    { name: 'Completed', id: 'COMPLETED' },
   ];
 
   if (isLoadingUsers || isLoadingAccounts)
@@ -131,8 +131,8 @@ export function UpdateLeadForm({ initialData, setOpen }: NewTaskFormProps) {
             <code>{JSON.stringify(form.formState.errors, null, 2)}</code>
           </pre>
         </div> */}
-        <div className=" w-[800px] text-sm">
-          <div className="pb-5 space-y-2">
+        <div className="w-[800px] text-sm">
+          <div className="space-y-2 pb-5">
             <FormField
               control={form.control}
               name="firstName"
@@ -300,7 +300,7 @@ export function UpdateLeadForm({ initialData, setOpen }: NewTaskFormProps) {
                 </FormItem>
               )}
             />
-            <div className="flex w-full  space-x-5">
+            <div className="flex w-full space-x-5">
               <div className="w-1/2">
                 <FormField
                   control={form.control}
@@ -317,7 +317,7 @@ export function UpdateLeadForm({ initialData, setOpen }: NewTaskFormProps) {
                             <SelectValue placeholder="Select a user to assign the account" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="overflow-y-auto h-56">
+                        <SelectContent className="h-56 overflow-y-auto">
                           {users.map((user: any) => (
                             <SelectItem key={user.id} value={user.id}>
                               {user.name}
@@ -355,7 +355,7 @@ export function UpdateLeadForm({ initialData, setOpen }: NewTaskFormProps) {
                       <FormMessage />
                     </FormItem>
                   )}
-                />                
+                />
               </div>
               <div className="w-1/2 space-y-3">
                 <FormField
@@ -409,11 +409,11 @@ export function UpdateLeadForm({ initialData, setOpen }: NewTaskFormProps) {
         <div className="grid gap-2 py-5">
           <Button disabled={isLoading} type="submit">
             {isLoading ? (
-              <span className="flex items-center animate-pulse">
+              <span className="flex animate-pulse items-center">
                 Saving data ...
               </span>
             ) : (
-              "Update lead"
+              'Update lead'
             )}
           </Button>
         </div>

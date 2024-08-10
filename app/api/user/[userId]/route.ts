@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
+import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
 
-import { prismadb } from "@/lib/prisma";
-import { authOptions } from "@/lib/auth";
+import { prismadb } from '@/lib/prisma';
+import { authOptions } from '@/lib/auth';
 
 export async function GET(
   req: Request,
@@ -11,7 +11,7 @@ export async function GET(
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   try {
@@ -23,8 +23,8 @@ export async function GET(
 
     return NextResponse.json(user);
   } catch (error) {
-    console.log("[USER_GET]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[USER_GET]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }
 
@@ -35,7 +35,7 @@ export async function DELETE(
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   try {
@@ -47,7 +47,7 @@ export async function DELETE(
 
     return NextResponse.json(user);
   } catch (error) {
-    console.log("[USER_DELETE]", error);
+    console.log('[USER_DELETE]', error);
     return NextResponse.json({ message: error }, { status: 500 });
   }
 }

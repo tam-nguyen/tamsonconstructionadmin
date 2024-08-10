@@ -13,7 +13,7 @@
       "leads": "Leads"
     },
     "projects": "Projects",
-    "emails": "E-mails",    
+    "emails": "E-mails",
     "tasks": "Tasks",
     "invoices": "Invoices",
     "reports": "Reports",
@@ -37,7 +37,7 @@
     "invoices": "Invoices",
     "documents": "Documents",
     "storage": "Storage"
-  },  
+  },
   "RegisterComponent": {
     "cardTitle": "Create new account",
     "cardDescription": "Create account by login with",
@@ -48,6 +48,6 @@
     "menuTitle": "Sales",
     "cardDescription": "Create an account by signing in with",
     "label": "Language",
-    "locale": "{locale, select, de {German} en {English} cz {Czech} uk {Ukrainian} other {Unknown}}"        
+    "locale": "{locale, select, de {German} en {English} cz {Czech} uk {Ukrainian} other {Unknown}}"
   }
 }

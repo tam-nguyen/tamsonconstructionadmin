@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import { useReactFlow } from 'reactflow';
-import { Input } from "@/components/ui/input";
+import { Input } from '@/components/ui/input';
 import {
   Sheet,
   SheetClose,
@@ -16,7 +16,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet';
 import {
   Form,
   FormControl,
@@ -24,7 +24,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/components/ui/use-toast';
 
@@ -45,14 +45,19 @@ interface Props {
   id: string;
 }
 
-const EndConfigPanel: FC<Props> = ({ onSubmit, initialValue, deleteNode, id }) => {
-  const [ isLoading ] = useState<boolean>(false);
+const EndConfigPanel: FC<Props> = ({
+  onSubmit,
+  initialValue,
+  deleteNode,
+  id,
+}) => {
+  const [isLoading] = useState<boolean>(false);
   const { toast } = useToast();
 
-  const [ openConfigPanel, setOpenConfigPanel ] = useState<boolean>(false);  
+  const [openConfigPanel, setOpenConfigPanel] = useState<boolean>(false);
   const { getNodes } = useReactFlow();
-  const [ labelUniqueError, setLabelUniqueError ] = useState<string | null>(null);
-  
+  const [labelUniqueError, setLabelUniqueError] = useState<string | null>(null);
+
   const { handleSubmit, watch } = useForm<EndConfigSchema>({
     resolver: zodResolver(endConfigSchema),
     values: {
@@ -90,14 +95,16 @@ const EndConfigPanel: FC<Props> = ({ onSubmit, initialValue, deleteNode, id }) =
     };
   }, [getNodes, id, labelValue]);
 
-  const submitHandler = handleSubmit(async (value: z.infer<typeof endConfigSchema>) => {
-    onSubmit(value);
-    toast({
-      title: "Success",
-      description: "Config changed successfully."
-    })
-    handleConfigPanelClose();
-  });
+  const submitHandler = handleSubmit(
+    async (value: z.infer<typeof endConfigSchema>) => {
+      onSubmit(value);
+      toast({
+        title: 'Success',
+        description: 'Config changed successfully.',
+      });
+      handleConfigPanelClose();
+    }
+  );
 
   const handleConfigPanelOpen = () => {
     setOpenConfigPanel(() => true);
@@ -117,23 +124,26 @@ const EndConfigPanel: FC<Props> = ({ onSubmit, initialValue, deleteNode, id }) =
                 Configure
                 <span>
                   {Object.keys(form?.formState.errors).length > 0 ? (
-                    <span className="absolute bg-red-500 text-red-100 px-2 py-1 text-xs font-bold rounded-full -top-2 -right-2">
-                      {Object.keys(form?.formState.errors).length + (labelUniqueError ? 1 : 0)}
-                    </span>  
+                    <span className="absolute -right-2 -top-2 rounded-full bg-red-500 px-2 py-1 text-xs font-bold text-red-100">
+                      {Object.keys(form?.formState.errors).length +
+                        (labelUniqueError ? 1 : 0)}
+                    </span>
                   ) : null}
-                </span>            
+                </span>
               </Button>
             </SheetTrigger>
             <SheetContent className="sm:max-w-[540px]">
               <SheetHeader>
-                <SheetTitle>{[initialValue?.label, 'Configuration'].join(' ')}</SheetTitle>
-                  <SheetDescription>
-                    Make changes to End Configuration panel.
-                  </SheetDescription>
-                </SheetHeader>
+                <SheetTitle>
+                  {[initialValue?.label, 'Configuration'].join(' ')}
+                </SheetTitle>
+                <SheetDescription>
+                  Make changes to End Configuration panel.
+                </SheetDescription>
+              </SheetHeader>
               <Separator className="mt-6" />
               <div className="grid gap-4 py-4">
-                <div className="space-y-2 w-full">
+                <div className="w-full space-y-2">
                   <FormField
                     control={form.control}
                     name="label"
@@ -151,18 +161,18 @@ const EndConfigPanel: FC<Props> = ({ onSubmit, initialValue, deleteNode, id }) =
                       </FormItem>
                     )}
                   />
-                </div>                
+                </div>
               </div>
               <SheetFooter>
                 <SheetClose asChild>
-                  <Button 
+                  <Button
                     type="submit"
                     onClick={() => {
                       toast({
-                        title: "Success",
-                        description: "Task changed successfully."
-                      })
-                    }}                  
+                        title: 'Success',
+                        description: 'Task changed successfully.',
+                      });
+                    }}
                   >
                     Submit
                   </Button>

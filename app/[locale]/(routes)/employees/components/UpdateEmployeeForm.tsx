@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { z } from "zod";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
+import { useState } from 'react';
+import { z } from 'zod';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
 
-import { useToast } from "@/components/ui/use-toast";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
@@ -17,25 +17,29 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 
-import { Switch } from "@/components/ui/switch";
-import fetcher from "@/lib/fetcher";
-import useSWR from "swr";
-import SuspenseLoading from "@/components/loadings/suspense";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { format } from "date-fns";
-import { CalendarIcon } from "@radix-ui/react-icons";
-import { Calendar } from "@/components/ui/calendar";
+import { Switch } from '@/components/ui/switch';
+import fetcher from '@/lib/fetcher';
+import useSWR from 'swr';
+import SuspenseLoading from '@/components/loadings/suspense';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import { format } from 'date-fns';
+import { CalendarIcon } from '@radix-ui/react-icons';
+import { Calendar } from '@/components/ui/calendar';
 
 //TODO: fix all the types
 type NewEmployeeFormProps = {
@@ -43,18 +47,21 @@ type NewEmployeeFormProps = {
   setOpen: (value: boolean) => void;
 };
 
-export function UpdateEmployeeForm({ initialData, setOpen }: NewEmployeeFormProps) {
+export function UpdateEmployeeForm({
+  initialData,
+  setOpen,
+}: NewEmployeeFormProps) {
   const router = useRouter();
   const { toast } = useToast();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { data: users, isLoading: isLoadingUsers } = useSWR(
-    "/api/user",
+    '/api/user',
     fetcher
   );
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   const formSchema = z.object({
     id: z.string(),
@@ -82,15 +89,15 @@ export function UpdateEmployeeForm({ initialData, setOpen }: NewEmployeeFormProp
   const onSubmit = async (data: NewEmployeeFormValues) => {
     setIsLoading(true);
     try {
-      await axios.put("/api/employee", data);
+      await axios.put('/api/employee', data);
       toast({
-        title: "Success",
-        description: "Employee updated successfully",
+        title: 'Success',
+        description: 'Employee updated successfully',
       });
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
@@ -154,8 +161,8 @@ export function UpdateEmployeeForm({ initialData, setOpen }: NewEmployeeFormProp
             </FormItem>
           )}
         />
-        <div className=" w-[800px] text-sm">
-          <div className="pb-5 space-y-2">
+        <div className="w-[800px] text-sm">
+          <div className="space-y-2 pb-5">
             <div className="flex gap-5 pb-5">
               <div className="w-1/2 space-y-2">
                 <FormField
@@ -298,47 +305,47 @@ export function UpdateEmployeeForm({ initialData, setOpen }: NewEmployeeFormProp
               />
             </div>
             <div className="w-1/2 space-y-2">
-            <FormField
-              control={form.control}
-              name="onBoarding"
-              render={({ field }) => (
-                <FormItem className="flex flex-col">
-                  <FormLabel>onBoarding</FormLabel>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant={"outline"}
-                          className={cn(
-                            "w-[240px] pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
-                          )}
-                        >
-                          {field.value ? (
-                            format(field?.value, "PPP")
-                          ) : (
-                            <span>Pick a expected close date</span>
-                          )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={field.value}
-                        //@ts-ignore
-                        //TODO: fix this
-                        onSelect={field.onChange}
-                        disabled={(date) => date < new Date("1900-01-01")}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="onBoarding"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>onBoarding</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant={'outline'}
+                            className={cn(
+                              'w-[240px] pl-3 text-left font-normal',
+                              !field.value && 'text-muted-foreground'
+                            )}
+                          >
+                            {field.value ? (
+                              format(field?.value, 'PPP')
+                            ) : (
+                              <span>Pick a expected close date</span>
+                            )}
+                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          //@ts-ignore
+                          //TODO: fix this
+                          onSelect={field.onChange}
+                          disabled={(date) => date < new Date('1900-01-01')}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
           </div>
           <div className="flex gap-5 pb-5">
@@ -406,11 +413,11 @@ export function UpdateEmployeeForm({ initialData, setOpen }: NewEmployeeFormProp
         <div className="grid gap-2 py-5">
           <Button type="submit">
             {isLoading ? (
-              <span className="flex items-center animate-pulse">
+              <span className="flex animate-pulse items-center">
                 Saving data ...
               </span>
             ) : (
-              "Update Employee"
+              'Update Employee'
             )}
           </Button>
         </div>

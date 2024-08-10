@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { MessagesSquare } from "lucide-react";
+import { MessagesSquare } from 'lucide-react';
 
 import {
   Sheet,
@@ -8,13 +8,13 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet';
 
 const InvoiceChat = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <MessagesSquare className="w-6 h-6 m-2 cursor-pointer" />
+        <MessagesSquare className="m-2 h-6 w-6 cursor-pointer" />
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>

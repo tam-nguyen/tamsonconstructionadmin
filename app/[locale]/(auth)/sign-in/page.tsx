@@ -1,7 +1,6 @@
-import { LoginComponent } from "./components/LoginComponent";
+import { LoginComponent } from './components/LoginComponent';
 
 const SignInPage = async () => {
-    
   return (
     <div>
       <div className="py-10">

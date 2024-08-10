@@ -1,10 +1,10 @@
-import { safeSync } from "@/lib/utils";
+import { safeSync } from '@/lib/utils';
 
 export enum LogSeverity {
-  "log" = "log",
-  "info" = "info",
-  "warn" = "warn",
-  "error" = "error",
+  'log' = 'log',
+  'info' = 'info',
+  'warn' = 'warn',
+  'error' = 'error',
 }
 
 export interface LogObject {

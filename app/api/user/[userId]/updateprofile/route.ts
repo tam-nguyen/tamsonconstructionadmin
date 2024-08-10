@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { hash } from "bcryptjs";
+import { NextResponse } from 'next/server';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { hash } from 'bcryptjs';
 
 export async function PUT(
   req: Request,
@@ -12,11 +12,11 @@ export async function PUT(
   const { name, username, account_name } = await req.json();
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   if (!params.userId) {
-    return new NextResponse("No user ID provided", { status: 400 });
+    return new NextResponse('No user ID provided', { status: 400 });
   }
 
   try {
@@ -33,7 +33,7 @@ export async function PUT(
 
     return NextResponse.json(newUserPass);
   } catch (error) {
-    console.log("[UPDATE_USER_PROFILE_PUT]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[UPDATE_USER_PROFILE_PUT]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

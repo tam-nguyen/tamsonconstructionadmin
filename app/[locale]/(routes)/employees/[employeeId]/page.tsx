@@ -1,6 +1,6 @@
-import Container from "@/app/[locale]/(routes)/components/ui/Container";
-import { BasicView } from "./components/BasicView";
-import { getEmployeesData } from "@/actions/employees/get-employees";
+import Container from '@/app/[locale]/(routes)/components/ui/Container';
+import { BasicView } from './components/BasicView';
+import { getEmployeesData } from '@/actions/employees/get-employees';
 
 interface EmployeeDetailPageProps {
   params: {
@@ -17,7 +17,7 @@ const EmployeeViewPage = async ({ params }: EmployeeDetailPageProps) => {
   return (
     <Container
       title={`Employee detail view: ${employee?.firstName} ${employee?.lastName}`}
-      description={"Everything you need to know about employees"}
+      description={'Everything you need to know about employees'}
     >
       <div className="space-y-5">
         <BasicView data={employee} />

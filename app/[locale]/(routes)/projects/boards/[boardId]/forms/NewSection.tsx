@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { z } from "zod";
-import axios from "axios";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from 'zod';
+import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
   Form,
@@ -13,13 +13,13 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 
-import { Input } from "@/components/ui/input";
-import { Icons } from "@/components/ui/icons";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
-import { DialogClose } from "@radix-ui/react-dialog";
+import { Input } from '@/components/ui/input';
+import { Icons } from '@/components/ui/icons';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
+import { DialogClose } from '@radix-ui/react-dialog';
 
 type NewSectionFormProps = {
   boardId: string;
@@ -58,18 +58,18 @@ const NewSectionForm = ({ boardId, onClose }: NewSectionFormProps) => {
     try {
       await axios.post(`/api/projects/sections/${boardId}`, data);
       toast({
-        title: "Success",
+        title: 'Success',
         description: `New project: ${data.title}, created successfully`,
       });
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
       form.reset({
-        title: "",
+        title: '',
       });
       setIsLoading(false);
       router.refresh();
@@ -102,7 +102,7 @@ const NewSectionForm = ({ boardId, onClose }: NewSectionFormProps) => {
         </div>
         <div className="flex w-full justify-end space-x-2 pt-2">
           <DialogClose asChild>
-            <Button variant={"destructive"}>Cancel</Button>
+            <Button variant={'destructive'}>Cancel</Button>
           </DialogClose>
           <Button type="submit" disabled={isLoading}>
             {isLoading ? (

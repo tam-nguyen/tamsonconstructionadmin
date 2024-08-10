@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from '@tanstack/react-table';
 
-import { statuses } from "../data/data";
-import { Task } from "../data/schema";
-import { DataTableColumnHeader } from "./data-table-column-header";
-import { DataTableRowActions } from "./data-table-row-actions";
-import moment from "moment";
+import { statuses } from '../data/data';
+import { Task } from '../data/schema';
+import { DataTableColumnHeader } from './data-table-column-header';
+import { DataTableRowActions } from './data-table-row-actions';
+import moment from 'moment';
 
 export const columns: ColumnDef<Task>[] = [
   /*   {
@@ -23,58 +23,58 @@ export const columns: ColumnDef<Task>[] = [
     enableHiding: true,
   }, */
   {
-    accessorKey: "date_due",
+    accessorKey: 'date_due',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Date due" />
     ),
     cell: ({ row }) => (
       <div className="w-[120px]">
-        {moment(row.getValue("date_due")).format("YY-MM-DD-HH:mm")}
+        {moment(row.getValue('date_due')).format('YY-MM-DD-HH:mm')}
       </div>
     ),
     enableSorting: true,
     enableHiding: true,
   },
   {
-    accessorKey: "variable_symbol",
+    accessorKey: 'variable_symbol',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Number" />
     ),
     cell: ({ row }) => (
-      <div className="w-[120px]">{row.getValue("variable_symbol")}</div>
+      <div className="w-[120px]">{row.getValue('variable_symbol')}</div>
     ),
     enableSorting: false,
     enableHiding: true,
   },
   {
-    accessorKey: "invoice_amount",
+    accessorKey: 'invoice_amount',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title=" Amount" />
     ),
     cell: ({ row }) => (
-      <div className="w-[120px]">{row.getValue("invoice_amount")}</div>
+      <div className="w-[120px]">{row.getValue('invoice_amount')}</div>
     ),
     enableSorting: true,
     enableHiding: false,
   },
   {
-    accessorKey: "invoice_currency",
+    accessorKey: 'invoice_currency',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Currency" />
     ),
     cell: ({ row }) => (
-      <div className="w-[120px]">{row.getValue("invoice_currency")}</div>
+      <div className="w-[120px]">{row.getValue('invoice_currency')}</div>
     ),
     enableSorting: true,
     enableHiding: true,
   },
   {
-    accessorKey: "partner",
+    accessorKey: 'partner',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Partner" />
     ),
     cell: ({ row }) => (
-      <div className="w-[120px]">{row.getValue("partner")}</div>
+      <div className="w-[120px]">{row.getValue('partner')}</div>
     ),
     enableSorting: false,
     enableHiding: true,
@@ -109,13 +109,13 @@ export const columns: ColumnDef<Task>[] = [
     enableHiding: true,
   }, */
   {
-    accessorKey: "status",
+    accessorKey: 'status',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }) => {
       const status = statuses.find(
-        (status) => status.value === row.getValue("status")
+        (status) => status.value === row.getValue('status')
       );
 
       if (!status) {
@@ -137,7 +137,7 @@ export const columns: ColumnDef<Task>[] = [
   },
 
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ];

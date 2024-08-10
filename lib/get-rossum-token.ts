@@ -4,16 +4,16 @@ export async function getRossumToken() {
   const password = process.env.ROSSUM_PASS;
 
   const key = await fetch(loginUrl, {
-    method: "POST",
+    method: 'POST',
     body: JSON.stringify({ username, password }),
-    headers: { "Content-Type": "application/json" },
+    headers: { 'Content-Type': 'application/json' },
   })
     .then((r) => r.json())
     .then(({ key }) => {
       return key;
     });
 
-  const token = "token " + " " + key;
+  const token = 'token ' + ' ' + key;
 
   return token;
 }

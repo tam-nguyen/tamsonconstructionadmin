@@ -1,21 +1,21 @@
-import { prismadb } from "@/lib/prisma";
-import { NextAuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import GithubProvider from "next-auth/providers/github";
-import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcrypt";
-import { newUserNotify } from "./new-user-notify";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { prismadb } from '@/lib/prisma';
+import { NextAuthOptions } from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
+import GithubProvider from 'next-auth/providers/github';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import bcrypt from 'bcrypt';
+import { newUserNotify } from './new-user-notify';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
 function getGoogleCredentials(): { clientId: string; clientSecret: string } {
   const clientId = process.env.GOOGLE_ID;
   const clientSecret = process.env.GOOGLE_SECRET;
   if (!clientId || clientId.length === 0) {
-    throw new Error("Missing GOOGLE_ID");
+    throw new Error('Missing GOOGLE_ID');
   }
 
   if (!clientSecret || clientSecret.length === 0) {
-    throw new Error("Missing GOOGLE_SECRET");
+    throw new Error('Missing GOOGLE_SECRET');
   }
 
   return { clientId, clientSecret };
@@ -25,7 +25,7 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.JWT_SECRET,
   //adapter: PrismaAdapter(prismadb),
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
 
   providers: [
@@ -40,16 +40,16 @@ export const authOptions: NextAuthOptions = {
     }),
 
     CredentialsProvider({
-      name: "credentials",
+      name: 'credentials',
       credentials: {
-        email: { label: "email", type: "text" },
-        password: { label: "password", type: "password" },
+        email: { label: 'email', type: 'text' },
+        password: { label: 'password', type: 'password' },
       },
 
       async authorize(credentials) {
         // console.log(credentials, "credentials");
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Invalid credentials");
+          throw new Error('Invalid credentials');
         }
 
         const user = await prismadb.users.findFirst({
@@ -59,10 +59,10 @@ export const authOptions: NextAuthOptions = {
         });
 
         //clear white space from password
-        const trimmedPassword = credentials.password.trim();        
+        const trimmedPassword = credentials.password.trim();
 
         if (!user || !user?.password) {
-          throw new Error("Email or password is missing");
+          throw new Error('Email or password is missing');
         }
 
         const isCorrectPassword = await bcrypt.compare(
@@ -71,7 +71,7 @@ export const authOptions: NextAuthOptions = {
         );
 
         if (!isCorrectPassword) {
-          throw new Error("Password is incorrect");
+          throw new Error('Password is incorrect');
         }
 
         //console.log(user, "user");
@@ -97,11 +97,11 @@ export const authOptions: NextAuthOptions = {
               avatar: token.picture,
               is_admin: false,
               is_account_admin: false,
-              lastLoginAt: new Date(),              
+              lastLoginAt: new Date(),
               userStatus:
-                process.env.NEXT_PUBLIC_APP_URL === "https://demo.saashq.org"
-                  ? "ACTIVE"
-                  : "PENDING",
+                process.env.NEXT_PUBLIC_APP_URL === 'https://demo.saashq.org'
+                  ? 'ACTIVE'
+                  : 'PENDING',
             },
           });
 
@@ -129,7 +129,7 @@ export const authOptions: NextAuthOptions = {
           data: {
             lastLoginAt: new Date(),
           },
-        });        
+        });
         //User allready exist in localDB, put user data in session
         session.user.id = user.id;
         session.user.name = user.name;

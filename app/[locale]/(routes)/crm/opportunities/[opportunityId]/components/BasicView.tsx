@@ -4,8 +4,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { crm_Opportunities } from "@prisma/client";
+} from '@/components/ui/card';
+import { crm_Opportunities } from '@prisma/client';
 import {
   CalendarDays,
   ClipboardList,
@@ -16,10 +16,10 @@ import {
   SquareStack,
   Text,
   User,
-} from "lucide-react";
-import moment from "moment";
-import { Clapperboard } from "lucide-react";
-import { prismadb } from "@/lib/prisma";
+} from 'lucide-react';
+import moment from 'moment';
+import { Clapperboard } from 'lucide-react';
+import { prismadb } from '@/lib/prisma';
 
 interface OppsViewProps {
   data: {
@@ -59,7 +59,7 @@ export async function BasicView({ data }: OppsViewProps) {
               <p className="text-sm text-muted-foreground">
                 {data.assigned_sales_stage?.name
                   ? data.assigned_sales_stage?.name
-                  : "Not assigned"}
+                  : 'Not assigned'}
               </p>
             </div>
           </div>
@@ -97,7 +97,7 @@ export async function BasicView({ data }: OppsViewProps) {
               <p className="text-sm text-muted-foreground">
                 {data.assigned_account?.name
                   ? data.assigned_account?.name
-                  : "Not assigned"}
+                  : 'Not assigned'}
               </p>
             </div>
           </div>
@@ -108,7 +108,7 @@ export async function BasicView({ data }: OppsViewProps) {
                 Expected close date
               </p>
               <p className="text-sm text-muted-foreground">
-                {moment(data.close_date).format("MMM DD YYYY")}
+                {moment(data.close_date).format('MMM DD YYYY')}
               </p>
             </div>
           </div>
@@ -117,7 +117,7 @@ export async function BasicView({ data }: OppsViewProps) {
             <div className="space-y-1">
               <p className="text-sm font-medium leading-none">Date created</p>
               <p className="text-sm text-muted-foreground">
-                {moment(data.createdAt).format("MMM DD YYYY")}
+                {moment(data.createdAt).format('MMM DD YYYY')}
               </p>
             </div>
             <div className="space-y-1">
@@ -132,7 +132,7 @@ export async function BasicView({ data }: OppsViewProps) {
             <div className="space-y-1">
               <p className="text-sm font-medium leading-none">Last update</p>
               <p className="text-sm text-muted-foreground">
-                {moment(data.updatedAt).format("MMM DD YYYY")}
+                {moment(data.updatedAt).format('MMM DD YYYY')}
               </p>
             </div>
             <div className="space-y-1">
@@ -147,7 +147,7 @@ export async function BasicView({ data }: OppsViewProps) {
             <div className="space-y-1">
               <p className="text-sm font-medium leading-none">Type</p>
               <p className="text-sm text-muted-foreground">
-                {data.assigned_type?.name ? data.assigned_type?.name : "N/A"}
+                {data.assigned_type?.name ? data.assigned_type?.name : 'N/A'}
               </p>
             </div>
           </div>

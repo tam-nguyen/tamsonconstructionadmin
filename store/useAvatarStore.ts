@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 interface AvatarState {
   avatar: string;
@@ -6,7 +6,7 @@ interface AvatarState {
 }
 
 const useAvatarStore = create<AvatarState>((set) => ({
-  avatar: "",
+  avatar: '',
   setAvatar: (avatar) => set({ avatar }),
 }));
 

@@ -1,6 +1,6 @@
-import { z } from "zod";
-import { ActionState } from "@/lib/create-safe-action";
-import { SendMailToAll } from "./schema";
+import { z } from 'zod';
+import { ActionState } from '@/lib/create-safe-action';
+import { SendMailToAll } from './schema';
 
 type Message = {
   title: string;

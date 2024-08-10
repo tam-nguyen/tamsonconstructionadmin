@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { Row } from "@tanstack/react-table";
+import { DotsHorizontalIcon } from '@radix-ui/react-icons';
+import { Row } from '@tanstack/react-table';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 
-import { taskSchema } from "../data/schema";
-import { useRouter } from "next/navigation";
-import AlertModal from "@/components/modals/alert-modal";
-import { useState } from "react";
-import axios from "axios";
+import { taskSchema } from '../data/schema';
+import { useRouter } from 'next/navigation';
+import AlertModal from '@/components/modals/alert-modal';
+import { useState } from 'react';
+import axios from 'axios';
 import {
   Eye,
   EyeIcon,
@@ -25,17 +25,17 @@ import {
   Magnet,
   Pencil,
   Trash,
-} from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
+} from 'lucide-react';
+import { useToast } from '@/components/ui/use-toast';
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet';
 
-import UpdateProjectForm from "../forms/UpdateProject";
+import UpdateProjectForm from '../forms/UpdateProject';
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -48,7 +48,7 @@ export function DataTableRowActions<TData>({
   const project = taskSchema.parse(row.original);
 
   const [open, setOpen] = useState(false);
-  const [editOpen, setEditOpen] = useState(false);  
+  const [editOpen, setEditOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const { toast } = useToast();
@@ -59,13 +59,13 @@ export function DataTableRowActions<TData>({
       await axios.delete(`/api/projects/${project.id}`);
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error, project not deleted. Please try again.",
+        variant: 'destructive',
+        title: 'Error, project not deleted. Please try again.',
       });
       console.log(error);
-    } finally {      
+    } finally {
       toast({
-        title: "Success",
+        title: 'Success',
         description: `Project: ${project.title}, deleted successfully`,
       });
       router.refresh();
@@ -77,16 +77,16 @@ export function DataTableRowActions<TData>({
   const onWatch = async () => {
     setLoading(true);
     try {
-      await axios.post(`/api/projects/${project.id}/watch`);      
+      await axios.post(`/api/projects/${project.id}/watch`);
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error, project not watched. Please try again.",
+        variant: 'destructive',
+        title: 'Error, project not watched. Please try again.',
       });
       console.log(error);
     } finally {
       toast({
-        title: "Success",
+        title: 'Success',
         description: `Project: ${project.title}, watched successfully`,
       });
       setLoading(false);
@@ -99,13 +99,13 @@ export function DataTableRowActions<TData>({
       await axios.post(`/api/projects/${project.id}/unwatch`);
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error, project not watched. Please try again.",
+        variant: 'destructive',
+        title: 'Error, project not watched. Please try again.',
       });
       console.log(error);
     } finally {
       toast({
-        title: "Success",
+        title: 'Success',
         description: `Project: ${project.title}, You stop watching this project successfully`,
       });
       setLoading(false);
@@ -128,7 +128,7 @@ export function DataTableRowActions<TData>({
           </SheetHeader>
           <UpdateProjectForm initialData={project} openEdit={setEditOpen} />
         </SheetContent>
-      </Sheet>      
+      </Sheet>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
@@ -143,25 +143,25 @@ export function DataTableRowActions<TData>({
           <DropdownMenuItem
             onClick={() => router.push(`/projects/boards/${project.id}`)}
           >
-            <Glasses className="mr-2 w-4 h-4" />
+            <Glasses className="mr-2 h-4 w-4" />
             View detail
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setEditOpen(true)}>
-            <Pencil className="mr-2 w-4 h-4" />
+            <Pencil className="mr-2 h-4 w-4" />
             Edit
           </DropdownMenuItem>
-          <DropdownMenuSeparator />          
+          <DropdownMenuSeparator />
           <DropdownMenuItem onClick={onWatch}>
-            <Eye className="mr-2 w-4 h-4" />
+            <Eye className="mr-2 h-4 w-4" />
             Watch project
           </DropdownMenuItem>
           <DropdownMenuItem onClick={onUnWatch}>
-            <EyeOff className="mr-2 w-4 h-4" />
+            <EyeOff className="mr-2 h-4 w-4" />
             Stop watching project
-          </DropdownMenuItem>          
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => setOpen(true)}>
-            <Trash className="mr-2 w-4 h-4" />
+            <Trash className="mr-2 h-4 w-4" />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>

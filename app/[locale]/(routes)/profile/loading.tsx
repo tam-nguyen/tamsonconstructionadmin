@@ -1,8 +1,8 @@
-import LoadingComponent from "@/components/LoadingComponent";
+import LoadingComponent from '@/components/LoadingComponent';
 
 export default function loading() {
   return (
-    <div className="flex w-full h-screen justify-center items-center">
+    <div className="flex h-screen w-full items-center justify-center">
       <LoadingComponent />
     </div>
   );

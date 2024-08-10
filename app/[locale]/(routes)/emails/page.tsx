@@ -1,12 +1,12 @@
-import React, { Suspense } from "react";
-import { cookies } from "next/headers";
-import { MailComponent } from "./components/mail";
-import { accounts, mails } from "@/app/[locale]/(routes)/emails/data";
-import Container from "../components/ui/Container";
-import SuspenseLoading from "@/components/loadings/suspense";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { getDictionary } from "@/dictionaries";
+import React, { Suspense } from 'react';
+import { cookies } from 'next/headers';
+import { MailComponent } from './components/mail';
+import { accounts, mails } from '@/app/[locale]/(routes)/emails/data';
+import Container from '../components/ui/Container';
+import SuspenseLoading from '@/components/loadings/suspense';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { getDictionary } from '@/dictionaries';
 
 const EmailRoute = async () => {
   const session = await getServerSession(authOptions);
@@ -14,7 +14,7 @@ const EmailRoute = async () => {
   if (!session) {
     return {
       redirect: {
-        destination: "/",
+        destination: '/',
         permanent: false,
       },
     };
@@ -23,10 +23,10 @@ const EmailRoute = async () => {
   const lang = session.user.userLanguage;
 
   //Fetch translations from dictionary
-  const dict = await getDictionary(lang as "en" | "cz" | "de" | "ko");
+  const dict = await getDictionary(lang as 'en' | 'cz' | 'de' | 'ko');
 
-  const layout = cookies().get("react-resizable-panels:layout");
-  const collapsed = cookies().get("react-resizable-panels:collapsed");
+  const layout = cookies().get('react-resizable-panels:layout');
+  const collapsed = cookies().get('react-resizable-panels:collapsed');
   //console.log(layout, collapsed, "layout, collapsed");
 
   const defaultLayout = layout ? JSON.parse(layout.value) : undefined;
@@ -36,7 +36,7 @@ const EmailRoute = async () => {
     <Container
       title={dict.ModuleMenu.emails}
       description={
-        "This module is in development. This is only a frontend demo."
+        'This module is in development. This is only a frontend demo.'
       }
     >
       <Suspense fallback={<SuspenseLoading />}>

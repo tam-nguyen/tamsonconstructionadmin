@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from 'react';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
-import * as Dialog from "@radix-ui/react-dialog";
-import { Cross1Icon } from "@radix-ui/react-icons";
+import * as Dialog from '@radix-ui/react-dialog';
+import { Cross1Icon } from '@radix-ui/react-icons';
 
 type Props = {
   label?: string;
@@ -13,7 +13,15 @@ type Props = {
   description: string;
   width?: string;
   children: ReactNode;
-  buttonVariant?: "link" | "default" | "outline" | "destructive" | "secondary" | "ghost" | null | undefined;
+  buttonVariant?:
+    | 'link'
+    | 'default'
+    | 'outline'
+    | 'destructive'
+    | 'secondary'
+    | 'ghost'
+    | null
+    | undefined;
 };
 
 const RightViewModal = ({
@@ -38,36 +46,38 @@ const RightViewModal = ({
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <Button className="mb-5" variant={buttonVariant}>{label}</Button>
+        <Button className="mb-5" variant={buttonVariant}>
+          {label}
+        </Button>
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="data-[state=open]:animate-[dialog-overlay-show_1000ms] data-[state=closed]:animate-[dialog-overlay-hide_1000ms] fixed inset-0 bg-black/50" />
+        <Dialog.Overlay className="fixed inset-0 bg-black/50 data-[state=closed]:animate-[dialog-overlay-hide_1000ms] data-[state=open]:animate-[dialog-overlay-show_1000ms]" />
         <Dialog.Content
           className={
-            "data-[state=open]:animate-[dialog-content-show_1000ms] data-[state=closed]:animate-[dialog-content-hide_1000ms] fixed top-0 right-0 rounded-md border  h-full bg-white dark:bg-slate-900 shadow-md overflow-hidden"
+            'fixed right-0 top-0 h-full overflow-hidden rounded-md border bg-white shadow-md data-[state=closed]:animate-[dialog-content-hide_1000ms] data-[state=open]:animate-[dialog-content-show_1000ms] dark:bg-slate-900'
           }
         >
-          <div className={`flex flex-col h-full ${width}`}>
-            <div className="flex justify-between w-full">
-              <Dialog.Title className="font-semibold p-3 w-full">
+          <div className={`flex h-full flex-col ${width}`}>
+            <div className="flex w-full justify-between">
+              <Dialog.Title className="w-full p-3 font-semibold">
                 <span className="scroll-m-20 text-xl font-semibold tracking-tight">
                   {title}
                 </span>
               </Dialog.Title>
-              <Dialog.Close className="flex justify-end text-right w-full pr-5 pt-5">
-                <Cross1Icon className="w-5 h-5 opacity-50 hover:opacity-100" />
+              <Dialog.Close className="flex w-full justify-end pr-5 pt-5 text-right">
+                <Cross1Icon className="h-5 w-5 opacity-50 hover:opacity-100" />
               </Dialog.Close>
             </div>
-            <Dialog.Description className="text-slate-400 p-3 overflow-auto opacity-75">
+            <Dialog.Description className="overflow-auto p-3 text-slate-400 opacity-75">
               {description}
             </Dialog.Description>
-            <div className="flex-grow border p-5 w-full h-full overflow-auto">
+            <div className="h-full w-full flex-grow overflow-auto border p-5">
               {children}
             </div>
-            <div className="flex justify-end w-full p-3">
-              {" "}
+            <div className="flex w-full justify-end p-3">
+              {' '}
               <Dialog.Close asChild>
-                <Button variant={"destructive"} onClick={() => setOpen(false)}>
+                <Button variant={'destructive'} onClick={() => setOpen(false)}>
                   Close
                 </Button>
               </Dialog.Close>

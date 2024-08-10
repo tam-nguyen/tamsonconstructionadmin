@@ -1,11 +1,11 @@
-import Heading from "@/components/ui/heading";
-import { Separator } from "@/components/ui/separator";
-import React from "react";
+import Heading from '@/components/ui/heading';
+import { Separator } from '@/components/ui/separator';
+import React from 'react';
 
 interface ContainerProps {
   title: string;
   description: string;
-  visibility?: string;  
+  visibility?: string;
   children: React.ReactNode;
 }
 
@@ -16,14 +16,14 @@ const Container = ({
   children,
 }: ContainerProps) => {
   return (
-    <div className="flex-1 space-y-4 p-8 pt-6 border-l h-full overflow-hidden">
+    <div className="h-full flex-1 space-y-4 overflow-hidden border-l p-8 pt-6">
       <Heading
         title={title}
         description={description}
         visibility={visibility}
       />
       <Separator />
-      <div className="text-sm h-full overflow-auto pb-32  space-y-5">
+      <div className="h-full space-y-5 overflow-auto pb-32 text-sm">
         {children}
       </div>
     </div>

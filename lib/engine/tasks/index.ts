@@ -1,20 +1,20 @@
 export const TaskStatus = {
-  pending: "pending",
-  completed: "completed",
-  started: "started",
-  failed: "failed",
+  pending: 'pending',
+  completed: 'completed',
+  started: 'started',
+  failed: 'failed',
 } as const;
 
 export type TaskStatusType = keyof typeof TaskStatus;
 export const TaskStatusEnum = Object.keys(TaskStatus);
 
 export const TaskType = {
-  FUNCTION: "FUNCTION",
-  WAIT: "WAIT",
-  START: "START",
-  END: "END",
-  LISTEN: "LISTEN",
-  GUARD: "GUARD",
+  FUNCTION: 'FUNCTION',
+  WAIT: 'WAIT',
+  START: 'START',
+  END: 'END',
+  LISTEN: 'LISTEN',
+  GUARD: 'GUARD',
 } as const;
 
 export type TaskTypeType = keyof typeof TaskType;
@@ -37,5 +37,5 @@ export interface Workflow {
   description: string;
   global: Record<string, any>;
   tasks: Task[];
-  status: "pending" | "completed" | "failed";
+  status: 'pending' | 'completed' | 'failed';
 }

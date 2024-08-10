@@ -1,8 +1,8 @@
-"use client";
-import * as React from "react";
+'use client';
+import * as React from 'react';
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 import {
   ColumnDef,
@@ -13,14 +13,14 @@ import {
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table';
 
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 
 import {
   Table,
@@ -29,7 +29,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from '@/components/ui/table';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -74,7 +74,7 @@ export function DataTable<TData, TValue>({
       <div className="flex items-center py-4">
         <Input
           placeholder="Search in Titles ..."
-          value={(table.getColumn(search)?.getFilterValue() as string) ?? ""}
+          value={(table.getColumn(search)?.getFilterValue() as string) ?? ''}
           onChange={(event) =>
             table.getColumn(search)?.setFilterValue(event.target.value)
           }
@@ -134,7 +134,7 @@ export function DataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
+                  data-state={row.getIsSelected() && 'selected'}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

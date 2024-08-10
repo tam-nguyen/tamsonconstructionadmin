@@ -1,5 +1,5 @@
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -7,11 +7,11 @@ export function cn(...inputs: ClassValue[]) {
 
 export function generateRandomPassword() {
   const length = 10;
-  const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const numericChars = "0123456789";
-  const specialChars = "!@#$%^&*()_+-={}[];',./<>?~`|:\"\\";
+  const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const numericChars = '0123456789';
+  const specialChars = '!@#$%^&*()_+-={}[];\',./<>?~`|:"\\';
 
-  let password = "";
+  let password = '';
 
   // Add one uppercase letter
   password += uppercaseChars.charAt(
@@ -39,17 +39,17 @@ export function generateRandomPassword() {
 
   // Shuffle the password to make it more random
   password = password
-    .split("")
+    .split('')
     .sort(function () {
       return 0.5 - Math.random();
     })
-    .join("");
+    .join('');
 
   return password;
 }
 
 export async function safeAsync<T = unknown>(
-  promise: Promise<T>,
+  promise: Promise<T>
 ): Promise<{ success: true; data: T } | { success: false; error: any }> {
   try {
     const data = await promise;
@@ -66,7 +66,7 @@ export async function safeAsync<T = unknown>(
 }
 
 export function safeSync<T = unknown>(
-  operation: () => T,
+  operation: () => T
 ): { success: true; data: T } | { success: false; error: any } {
   try {
     const data = operation();

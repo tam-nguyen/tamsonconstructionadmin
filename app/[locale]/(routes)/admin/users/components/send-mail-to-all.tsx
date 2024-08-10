@@ -1,25 +1,25 @@
-"use client";
+'use client';
 
-import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
-import React, { ElementRef, useRef, useState } from "react";
+import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
+import React, { ElementRef, useRef, useState } from 'react';
 
-import { sendMailToAll } from "@/actions/admin/send-mail-to-all";
+import { sendMailToAll } from '@/actions/admin/send-mail-to-all';
 
-import { Button } from "@/components/ui/button";
-import { FormInput } from "@/components/form/form-input";
-import { FormSubmit } from "@/components/form/form-submit";
-import { FormTextarea } from "@/components/form/form-textarea";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from '@/components/ui/button';
+import { FormInput } from '@/components/form/form-input';
+import { FormSubmit } from '@/components/form/form-submit';
+import { FormTextarea } from '@/components/form/form-textarea';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
-import { useAction } from "@/hooks/use-action";
+import { useAction } from '@/hooks/use-action';
 
 const SendMailToAll = () => {
-  const closeRef = useRef<ElementRef<"button">>(null);
+  const closeRef = useRef<ElementRef<'button'>>(null);
 
   const { execute, fieldErrors, isLoading } = useAction(sendMailToAll, {
     onSuccess: (data) => {
-      toast.success("Message sent!");
+      toast.success('Message sent!');
       closeRef.current?.click();
     },
     onError: (error) => {
@@ -28,8 +28,8 @@ const SendMailToAll = () => {
   });
 
   const onSendMail = async (formData: FormData) => {
-    const title = formData.get("title") as string;
-    const message = formData.get("message") as string;
+    const title = formData.get('title') as string;
+    const message = formData.get('message') as string;
 
     await execute({ title, message });
   };
@@ -62,9 +62,9 @@ const SendMailToAll = () => {
               />
               <FormSubmit className="w-full">
                 {isLoading ? (
-                  <Loader2 className="h-6 w-6  animate-spin" />
+                  <Loader2 className="h-6 w-6 animate-spin" />
                 ) : (
-                  "Send mail"
+                  'Send mail'
                 )}
               </FormSubmit>
             </form>

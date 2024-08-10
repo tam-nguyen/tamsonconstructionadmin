@@ -1,7 +1,7 @@
-import { authOptions } from "@/lib/auth";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { authOptions } from '@/lib/auth';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { NextResponse } from 'next/server';
 
 export async function POST(
   req: Request,
@@ -9,11 +9,11 @@ export async function POST(
 ) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return NextResponse.json({ error: "Unauthenticated" }, { status: 401 });
+    return NextResponse.json({ error: 'Unauthenticated' }, { status: 401 });
   }
 
   if (!params.accountId) {
-    return new NextResponse("Missing account ID", { status: 400 });
+    return new NextResponse('Missing account ID', { status: 400 });
   }
 
   const accountId = params.accountId;
@@ -31,7 +31,7 @@ export async function POST(
         },
       },
     });
-    return NextResponse.json({ message: "Board watched" }, { status: 200 });
+    return NextResponse.json({ message: 'Board watched' }, { status: 200 });
   } catch (error) {
     console.log(error);
   }

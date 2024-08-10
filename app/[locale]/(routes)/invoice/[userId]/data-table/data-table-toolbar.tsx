@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { Cross2Icon } from "@radix-ui/react-icons";
-import { Table } from "@tanstack/react-table";
+import { Cross2Icon } from '@radix-ui/react-icons';
+import { Table } from '@tanstack/react-table';
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { DataTableViewOptions } from "./data-table-view-options";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { DataTableViewOptions } from './data-table-view-options';
 
-import { statuses } from "../data/data";
-import { DataTableFacetedFilter } from "./data-table-faceted-filter";
+import { statuses } from '../data/data';
+import { DataTableFacetedFilter } from './data-table-faceted-filter';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -25,12 +25,12 @@ export function DataTableToolbar<TData>({
         <Input
           placeholder="Filter by invoice number ..."
           value={
-            (table.getColumn("variable_symbol")?.getFilterValue() as string) ??
-            ""
+            (table.getColumn('variable_symbol')?.getFilterValue() as string) ??
+            ''
           }
           onChange={(event) =>
             table
-              .getColumn("variable_symbol")
+              .getColumn('variable_symbol')
               ?.setFilterValue(event.target.value)
           }
           className="h-8 w-[150px] lg:w-[250px]"

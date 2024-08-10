@@ -1,7 +1,7 @@
 import { Box } from '@radix-ui/themes';
 import { Suspense } from 'react';
 
-import ReactFlowProvider from "../../components/ReactFlow";
+import ReactFlowProvider from '../../components/ReactFlow';
 
 import WorkflowEdit from './components/WorkflowEdit';
 import WorkflowDefinitionContextProvider from '@/app/contexts/WorkflowDefinitionContext';
@@ -14,9 +14,8 @@ const DefinitionEditPage = async ({
 }: {
   params: { definitionId: string };
 }) => {
-
   const editData = await getDefinitionSingle(definitionId);
-  
+
   return (
     <Box className="height: 80vh padding: 3">
       <ReactFlowProvider>

@@ -1,9 +1,9 @@
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
-import React from "react";
-import Container from "../../../components/ui/Container";
-import { getAccountsTasks } from "@/actions/crm/account/get-tasks";
-import { getUserCRMTasks } from "@/actions/crm/tasks/get-user-tasks";
+import { authOptions } from '@/lib/auth';
+import { getServerSession } from 'next-auth';
+import React from 'react';
+import Container from '../../../components/ui/Container';
+import { getAccountsTasks } from '@/actions/crm/account/get-tasks';
+import { getUserCRMTasks } from '@/actions/crm/tasks/get-user-tasks';
 
 const UserCRMDashboard = async () => {
   const session = await getServerSession(authOptions);
@@ -11,7 +11,7 @@ const UserCRMDashboard = async () => {
   if (!session) {
     return {
       redirect: {
-        destination: "/auth/signin",
+        destination: '/auth/signin',
         permanent: false,
       },
     };
@@ -25,7 +25,7 @@ const UserCRMDashboard = async () => {
         title={`${session.user.name} | CRM Dashboard (in-progress) `}
         description="Your sales data in one place"
       >
-        <div className="grid grid-cols-2 w-full ">
+        <div className="grid w-full grid-cols-2">
           <div className="">Calls overview</div>
           <div className="">
             <h1>Tasks in Accounts</h1>

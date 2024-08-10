@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 import {
   Card,
@@ -8,14 +8,14 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import RightViewModal from "@/components/modals/right-view-modal";
+} from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import RightViewModal from '@/components/modals/right-view-modal';
 
-import { columns } from "../table-components/columns";
-import { NewEmployeeForm } from "./NewEmployeeForm";
-import { EmployeeDataTable } from "../table-components/data-table";
-import { useRouter } from "next/navigation";
+import { columns } from '../table-components/columns';
+import { NewEmployeeForm } from './NewEmployeeForm';
+import { EmployeeDataTable } from '../table-components/data-table';
+import { useRouter } from 'next/navigation';
 
 const EmployeesView = ({ data, crmData }: any) => {
   const router = useRouter();
@@ -37,7 +37,7 @@ const EmployeesView = ({ data, crmData }: any) => {
         <div className="flex justify-between">
           <div>
             <CardTitle
-              onClick={() => router.push("/employees")}
+              onClick={() => router.push('/employees')}
               className="cursor-pointer"
             >
               Employees
@@ -45,7 +45,7 @@ const EmployeesView = ({ data, crmData }: any) => {
             <CardDescription></CardDescription>
           </div>
           <div className="flex space-x-2">
-            <RightViewModal label={"+"} title="Create Employee" description="">
+            <RightViewModal label={'+'} title="Create Employee" description="">
               <NewEmployeeForm users={users} />
             </RightViewModal>
           </div>
@@ -55,7 +55,7 @@ const EmployeesView = ({ data, crmData }: any) => {
 
       <CardContent>
         {!data || data.length === 0 ? (
-          "No assigned employees found"
+          'No assigned employees found'
         ) : (
           <EmployeeDataTable data={data} columns={columns} />
         )}

@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 import { z } from 'zod';
 
 const ResponseSchema = z.array(

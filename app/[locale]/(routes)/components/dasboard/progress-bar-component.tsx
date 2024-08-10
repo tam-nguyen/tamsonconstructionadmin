@@ -1,14 +1,11 @@
-"use client"
+'use client';
 import React from 'react';
-import {ProgressBar, ProgressBarProps} from "@tremor/react";
+import { ProgressBar, ProgressBarProps } from '@tremor/react';
 
-interface ProgressBarComponentProps extends ProgressBarProps {
-}
+interface ProgressBarComponentProps extends ProgressBarProps {}
 
-const ProgressBarComponent = (props : ProgressBarComponentProps) => {
-    return (
-            <ProgressBar {...props} />
-    );
+const ProgressBarComponent = (props: ProgressBarComponentProps) => {
+  return <ProgressBar {...props} />;
 };
 
 export default ProgressBarComponent;

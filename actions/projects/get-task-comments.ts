@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 /*
 This function is used for CRM tasks and Projects tasks. CRM Tasks (crm_Acccount_Tasks) models are different then Project Tasks (Tasks) but use the same comments model!.
 */
@@ -17,7 +17,7 @@ export const getTaskComments = async (taskId: string) => {
       },
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   });
   return data;

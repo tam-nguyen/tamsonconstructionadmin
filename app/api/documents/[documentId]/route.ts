@@ -1,8 +1,8 @@
-import { authOptions } from "@/lib/auth";
-import { prismadb } from "@/lib/prisma";
-import { utapi } from "@/lib/server/uploadthings";
-import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { authOptions } from '@/lib/auth';
+import { prismadb } from '@/lib/prisma';
+import { utapi } from '@/lib/server/uploadthings';
+import { getServerSession } from 'next-auth';
+import { NextResponse } from 'next/server';
 
 export async function DELETE(
   req: Request,
@@ -11,12 +11,12 @@ export async function DELETE(
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   try {
     if (!params.documentId)
-      return new NextResponse("Document ID not found", { status: 404 });
+      return new NextResponse('Document ID not found', { status: 404 });
 
     const document = await prismadb.documents.findMany({
       where: {
@@ -25,7 +25,7 @@ export async function DELETE(
     });
 
     if (!document) {
-      return new NextResponse("Document in DB not found", { status: 404 });
+      return new NextResponse('Document in DB not found', { status: 404 });
     }
 
     //console.log(document[0].key, "document to delete");
@@ -36,17 +36,17 @@ export async function DELETE(
       },
     });
 
-    console.log("Document deleted:", deletedDocument);
+    console.log('Document deleted:', deletedDocument);
 
     if (!document[0].key)
-      return new NextResponse("Document key not found", { status: 404 });
+      return new NextResponse('Document key not found', { status: 404 });
 
     const utapiFile = await utapi.deleteFiles([document[0].key]);
-    console.log(utapiFile, "utapiFile");
+    console.log(utapiFile, 'utapiFile');
 
-    return NextResponse.json("deletedDocument");
+    return NextResponse.json('deletedDocument');
   } catch (error) {
-    console.log("[Document_DELETE]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[Document_DELETE]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

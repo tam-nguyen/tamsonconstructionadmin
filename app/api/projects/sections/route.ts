@@ -1,7 +1,7 @@
-import { authOptions } from "@/lib/auth";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { authOptions } from '@/lib/auth';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { NextResponse } from 'next/server';
 
 export async function DELETE(req: Request) {
   const session = await getServerSession(authOptions);
@@ -9,14 +9,14 @@ export async function DELETE(req: Request) {
   const { id } = body;
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   if (!id) {
-    return new NextResponse("Missing section ID ", { status: 400 });
+    return new NextResponse('Missing section ID ', { status: 400 });
   }
 
-  console.log(id, "id");
+  console.log(id, 'id');
 
   try {
     const tasks = await prismadb.tasks.findMany({});
@@ -37,9 +37,9 @@ export async function DELETE(req: Request) {
       },
     });
 
-    return NextResponse.json("deletedSection");
+    return NextResponse.json('deletedSection');
   } catch (error) {
-    console.log("[PROJECT_SECTION_DELETE]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[PROJECT_SECTION_DELETE]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

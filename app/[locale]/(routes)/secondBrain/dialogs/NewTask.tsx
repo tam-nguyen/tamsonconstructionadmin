@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import LoadingComponent from "@/components/LoadingComponent";
-import { Button } from "@/components/ui/button";
+import LoadingComponent from '@/components/LoadingComponent';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -18,25 +18,25 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
-import { useAppStore } from "@/store/store";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/components/ui/use-toast';
+import { useAppStore } from '@/store/store';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 type Props = {
   users: any;
@@ -46,13 +46,7 @@ type Props = {
   notionUrl: string;
 };
 
-const NewTaskDialog = ({
-  users,
-  boards,
-  open,
-  setOpen,
-  notionUrl,
-}: Props) => {
+const NewTaskDialog = ({ users, boards, open, setOpen, notionUrl }: Props) => {
   //const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { setIsOpen } = useAppStore();
@@ -78,7 +72,7 @@ const NewTaskDialog = ({
   });
 
   useEffect(() => {
-    form.setValue("notionUrl", notionUrl);
+    form.setValue('notionUrl', notionUrl);
     setIsMounted(true);
   }, [notionUrl, form]);
 
@@ -94,13 +88,13 @@ const NewTaskDialog = ({
     try {
       await axios.post(`/api/projects/tasks/create-task`, data);
       toast({
-        title: "Success",
+        title: 'Success',
         description: `New task: ${data.title}, created successfully`,
       });
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
@@ -123,14 +117,14 @@ const NewTaskDialog = ({
         <DialogHeader>
           <DialogTitle className="p-2">Create New Task</DialogTitle>
           <DialogDescription className="p-2">
-            Fill out the form below to create a new task. This URL: {notionUrl}{" "}
+            Fill out the form below to create a new task. This URL: {notionUrl}{' '}
             will be add as a part of your task description.
           </DialogDescription>
         </DialogHeader>
         {isLoading ? (
           <LoadingComponent />
         ) : (
-          <div className="flex flex-col w-full ">
+          <div className="flex w-full flex-col">
             {/*     <pre>
               <code>{JSON.stringify(form.getValues(), null, 2)}</code>
             </pre> */}
@@ -258,9 +252,9 @@ const NewTaskDialog = ({
                 </div>
                 <div className="flex w-full justify-end space-x-2 pt-2">
                   <DialogTrigger asChild>
-                    <Button variant={"destructive"}>Cancel</Button>
+                    <Button variant={'destructive'}>Cancel</Button>
                   </DialogTrigger>
-                  <Button type="submit">Create</Button>                  
+                  <Button type="submit">Create</Button>
                 </div>
               </form>
             </Form>

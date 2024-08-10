@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
+import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
 
-import { prismadb } from "@/lib/prisma";
-import { authOptions } from "@/lib/auth";
+import { prismadb } from '@/lib/prisma';
+import { authOptions } from '@/lib/auth';
 
 export async function PUT(
   req: Request,
@@ -11,11 +11,11 @@ export async function PUT(
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   if (!params.opportunityId) {
-    return new NextResponse("Opportunity ID is required", { status: 400 });
+    return new NextResponse('Opportunity ID is required', { status: 400 });
   }
 
   const body = await req.json();
@@ -44,13 +44,13 @@ export async function PUT(
     });
 
     return NextResponse.json(
-      { message: "Opportunity updated", data },
-      
+      { message: 'Opportunity updated', data },
+
       { status: 200 }
     );
   } catch (error) {
-    console.log("[OPPORTUNITY_UPDATE]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[OPPORTUNITY_UPDATE]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }
 
@@ -61,11 +61,11 @@ export async function DELETE(
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   if (!params.opportunityId) {
-    return new NextResponse("Opportunity ID is required", { status: 400 });
+    return new NextResponse('Opportunity ID is required', { status: 400 });
   }
 
   try {
@@ -76,11 +76,11 @@ export async function DELETE(
     });
 
     return NextResponse.json(
-      { message: "Opportunity deleted" },
+      { message: 'Opportunity deleted' },
       { status: 200 }
     );
   } catch (error) {
-    console.log("[OPPORTUNITY_DELETE]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[OPPORTUNITY_DELETE]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

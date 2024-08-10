@@ -1,15 +1,26 @@
-"use client";
+'use client';
 
-import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
-import type { FC } from "react";
-import { useCallback } from "react";
-import type { NodeProps } from "reactflow";
-import { Handle, Position, useReactFlow } from "reactflow";
-import { CircleOff } from "lucide-react";
-import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent} from "@/components/ui/tooltip";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+} from '@/components/ui/card';
+import type { FC } from 'react';
+import { useCallback } from 'react';
+import type { NodeProps } from 'reactflow';
+import { Handle, Position, useReactFlow } from 'reactflow';
+import { CircleOff } from 'lucide-react';
+import {
+  TooltipProvider,
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from '@/components/ui/tooltip';
 
-import type { EndConfigSchema } from "./Config/EndConfigPanel";
-import EndConfigPanel from "./Config/EndConfigPanel";
+import type { EndConfigSchema } from './Config/EndConfigPanel';
+import EndConfigPanel from './Config/EndConfigPanel';
 
 interface DataProps {
   label: string;
@@ -58,17 +69,22 @@ const EndTask: FC<NodeProps<DataProps>> = ({ data, id }) => {
                 <CircleOff width="15" height="15" />
               </TooltipTrigger>
               <TooltipContent side="bottom">
-                  {['ID', id].join(' : ')}
+                {['ID', id].join(' : ')}
               </TooltipContent>
             </Tooltip>
-          </TooltipProvider>          
+          </TooltipProvider>
         </CardTitle>
         <CardDescription className="text-md text-muted-foreground">
           {'End'}
-        </CardDescription>  
+        </CardDescription>
       </CardHeader>
       <CardFooter>
-        <EndConfigPanel id={id} initialValue={data} deleteNode={deleteNode} onSubmit={changeValues} />
+        <EndConfigPanel
+          id={id}
+          initialValue={data}
+          deleteNode={deleteNode}
+          onSubmit={changeValues}
+        />
       </CardFooter>
     </Card>
   );

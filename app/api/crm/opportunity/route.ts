@@ -1,20 +1,20 @@
-import { NextResponse } from "next/server";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import sendEmail from "@/lib/sendmail";
+import { NextResponse } from 'next/server';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import sendEmail from '@/lib/sendmail';
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
   try {
     const body = await req.json();
     const userId = session.user.id;
 
     if (!body) {
-      return new NextResponse("No form data", { status: 400 });
+      return new NextResponse('No form data', { status: 400 });
     }
 
     const {
@@ -52,7 +52,7 @@ export async function POST(req: Request) {
         name: name,
         next_step: next_step,
         sales_stage: sales_stage,
-        status: "ACTIVE",
+        status: 'ACTIVE',
         type: type,
       },
     });
@@ -65,18 +65,18 @@ export async function POST(req: Request) {
       });
 
       if (!notifyRecipient) {
-        return new NextResponse("No user found", { status: 400 });
+        return new NextResponse('No user found', { status: 400 });
       }
 
       await sendEmail({
         from: process.env.EMAIL_FROM as string,
-        to: notifyRecipient.email || "info@saashq.org",
+        to: notifyRecipient.email || 'info@saashq.org',
         subject:
-          notifyRecipient.userLanguage === "en"
+          notifyRecipient.userLanguage === 'en'
             ? `New opportunity ${name} has been added to the system and assigned to you.`
             : `Nová příležitost ${name} byla přidána do systému a přidělena vám.`,
         text:
-          notifyRecipient.userLanguage === "en"
+          notifyRecipient.userLanguage === 'en'
             ? `New opportunity ${name} has been added to the system and assigned to you. You can click here for detail: ${process.env.NEXT_PUBLIC_APP_URL}/crm/opportunities/${newOpportunity.id}`
             : `Nová příležitost ${name} byla přidána do systému a přidělena vám. Detaily naleznete zde: ${process.env.NEXT_PUBLIC_APP_URL}/crm/opportunities/${newOpportunity.id}`,
       });
@@ -84,21 +84,21 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ newOpportunity }, { status: 200 });
   } catch (error) {
-    console.log("[NEW_OPPORTUNITY_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[NEW_OPPORTUNITY_POST]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }
 export async function PUT(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
   try {
     const body = await req.json();
     const userId = session.user.id;
 
     if (!body) {
-      return new NextResponse("No form data", { status: 400 });
+      return new NextResponse('No form data', { status: 400 });
     }
 
     const {
@@ -136,7 +136,7 @@ export async function PUT(req: Request) {
         name: name,
         next_step: next_step,
         sales_stage: sales_stage,
-        status: "ACTIVE",
+        status: 'ACTIVE',
         type: type,
       },
     });
@@ -168,15 +168,15 @@ export async function PUT(req: Request) {
 
     return NextResponse.json({ updatedOpportunity }, { status: 200 });
   } catch (error) {
-    console.log("[UPDATED_OPPORTUNITY_PUT]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[UPDATED_OPPORTUNITY_PUT]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }
 
 export async function GET(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   try {
@@ -202,7 +202,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
-    console.log("[GET_OPPORTUNITIES]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[GET_OPPORTUNITIES]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

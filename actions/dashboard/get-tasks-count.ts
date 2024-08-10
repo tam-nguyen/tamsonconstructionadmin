@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getTasksCount = async () => {
   const data = await prismadb.tasks.count();

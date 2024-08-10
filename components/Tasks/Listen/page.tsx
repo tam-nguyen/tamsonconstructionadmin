@@ -1,6 +1,12 @@
-"use client";
+'use client';
 
-import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+} from '@/components/ui/card';
 import type { FC } from 'react';
 import { useCallback } from 'react';
 import type { NodeProps } from 'reactflow';
@@ -8,7 +14,12 @@ import { Handle, Position, useReactFlow } from 'reactflow';
 import type { ListenConfigSchema } from './Config/ListenConfigPanel';
 import ListenConfigPanel from './Config/ListenConfigPanel';
 import { Webhook } from 'lucide-react';
-import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent} from "@/components/ui/tooltip";
+import {
+  TooltipProvider,
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from '@/components/ui/tooltip';
 
 interface DataProps {
   label: string;
@@ -59,20 +70,29 @@ const ListenTask: FC<NodeProps<DataProps>> = ({ data, id }) => {
                 <Webhook width="15" height="15" />
               </TooltipTrigger>
               <TooltipContent side="bottom">
-                  {['ID', id].join(' : ')}
+                {['ID', id].join(' : ')}
               </TooltipContent>
             </Tooltip>
-          </TooltipProvider>          
+          </TooltipProvider>
         </CardTitle>
         <CardDescription className="text-md text-muted-foreground">
           {'Listen'}
-        </CardDescription>  
+        </CardDescription>
       </CardHeader>
       <CardFooter>
-        <ListenConfigPanel id={id} initialValue={data} deleteNode={deleteNode} onSubmit={changeValues} />
+        <ListenConfigPanel
+          id={id}
+          initialValue={data}
+          deleteNode={deleteNode}
+          onSubmit={changeValues}
+        />
       </CardFooter>
 
-      <Handle type="source" position={Position.Bottom} id={data?.outputBoundId} />
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id={data?.outputBoundId}
+      />
     </Card>
   );
 };

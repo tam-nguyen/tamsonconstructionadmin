@@ -1,12 +1,12 @@
-import { authOptions } from "@/lib/auth";
-import { s3Client } from "@/lib/digital-ocean-s3";
-import { prismadb } from "@/lib/prisma";
-import { fillXmlTemplate } from "@/lib/xml-generator";
-import { PutObjectAclCommand, PutObjectCommand } from "@aws-sdk/client-s3";
-import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { authOptions } from '@/lib/auth';
+import { s3Client } from '@/lib/digital-ocean-s3';
+import { prismadb } from '@/lib/prisma';
+import { fillXmlTemplate } from '@/lib/xml-generator';
+import { PutObjectAclCommand, PutObjectCommand } from '@aws-sdk/client-s3';
+import { getServerSession } from 'next-auth';
+import { NextResponse } from 'next/server';
 
-const fs = require("fs");
+const fs = require('fs');
 
 export async function GET(
   req: Request,
@@ -14,7 +14,7 @@ export async function GET(
 ) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return NextResponse.json({ status: 401, body: { error: "Unauthorized" } });
+    return NextResponse.json({ status: 401, body: { error: 'Unauthorized' } });
   }
 
   //console.log(myCompany, "myCompany");
@@ -24,7 +24,7 @@ export async function GET(
   if (!invoiceId) {
     return NextResponse.json({
       status: 400,
-      body: { error: "There is no inovice ID, invoice ID is mandatory" },
+      body: { error: 'There is no inovice ID, invoice ID is mandatory' },
     });
   }
 
@@ -53,8 +53,8 @@ export async function GET(
     Bucket: process.env.DO_BUCKET,
     Key: `xml/invoice-${invoiceId}.xml`,
     Body: buffer,
-    ContentType: "application/json",
-    ContentDisposition: "inline",
+    ContentType: 'application/json',
+    ContentDisposition: 'inline',
     //   ACL: "public-read",
   };
 

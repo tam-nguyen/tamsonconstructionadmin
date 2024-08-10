@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import axios from "axios";
-import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import ResultPage from "../search/components/ResultPage";
+import axios from 'axios';
+import { useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import ResultPage from '../search/components/ResultPage';
 
 type Props = {};
 
 const SearchResult = (props: Props) => {
   const searchParams = useSearchParams();
 
-  const search = searchParams?.get("q");
+  const search = searchParams?.get('q');
 
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

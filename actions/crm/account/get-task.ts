@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getCrMTask = async (taskId: string) => {
   const data = await prismadb.crm_Accounts_Tasks.findFirst({

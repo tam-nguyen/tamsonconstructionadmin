@@ -29,11 +29,11 @@ export async function GET(
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   if (!params.definitionId) {
-    return new NextResponse("Definition ID is required", { status: 400 });
+    return new NextResponse('Definition ID is required', { status: 400 });
   }
 
   try {
@@ -41,11 +41,11 @@ export async function GET(
       where: {
         id: params.definitionId,
       },
-    })
+    });
 
-    return NextResponse.json({definitions});
+    return NextResponse.json({ definitions });
   } catch (error) {
-    console.log("[DEFINITIONS_SINGLE_GET]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[DEFINITIONS_SINGLE_GET]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

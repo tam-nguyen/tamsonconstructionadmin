@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import * as Dialog from "@radix-ui/react-dialog";
-import { CrossIcon, PencilIcon } from "lucide-react";
-import React, { useState } from "react";
+import * as Dialog from '@radix-ui/react-dialog';
+import { CrossIcon, PencilIcon } from 'lucide-react';
+import React, { useState } from 'react';
 
 type Props = {
   open2: boolean;

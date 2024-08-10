@@ -1,5 +1,5 @@
-"use client";
-import React from "react";
+'use client';
+import React from 'react';
 
 type Props = {
   results: any;
@@ -8,7 +8,7 @@ type Props = {
 
 const ResultPage = ({ results, search }: Props) => {
   return (
-    <div className="flex flex-col w-full h-full p-2">
+    <div className="flex h-full w-full flex-col p-2">
       {/*       <pre>
         {JSON.stringify(
           {

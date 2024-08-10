@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import LoadingComponent from "@/components/LoadingComponent";
-import { Button } from "@/components/ui/button";
+import LoadingComponent from '@/components/LoadingComponent';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -18,24 +18,24 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/components/ui/use-toast';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 const NewProjectDialog = () => {
   const [open, setOpen] = useState(false);
@@ -72,15 +72,15 @@ const NewProjectDialog = () => {
     console.log(data);
     setIsLoading(true);
     try {
-      await axios.post("/api/projects/", data);
+      await axios.post('/api/projects/', data);
       toast({
-        title: "Success",
+        title: 'Success',
         description: `New project: ${data.title}, created successfully`,
       });
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
@@ -105,7 +105,7 @@ const NewProjectDialog = () => {
         {isLoading ? (
           <LoadingComponent />
         ) : (
-          <div className="flex w-full ">
+          <div className="flex w-full">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -162,9 +162,9 @@ const NewProjectDialog = () => {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value={"public"}>{`Public`}</SelectItem>
+                            <SelectItem value={'public'}>{`Public`}</SelectItem>
                             <SelectItem
-                              value={"private"}
+                              value={'private'}
                             >{`Private`}</SelectItem>
                           </SelectContent>
                         </Select>
@@ -175,9 +175,9 @@ const NewProjectDialog = () => {
                 </div>
                 <div className="flex w-full justify-end space-x-2 pt-2">
                   <DialogTrigger asChild>
-                    <Button variant={"destructive"}>Cancel</Button>
+                    <Button variant={'destructive'}>Cancel</Button>
                   </DialogTrigger>
-                  <Button type="submit">Create</Button>                  
+                  <Button type="submit">Create</Button>
                 </div>
               </form>
             </Form>

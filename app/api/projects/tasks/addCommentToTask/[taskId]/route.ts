@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { NextResponse } from 'next/server';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
-import NewTaskCommentEmail from "@/emails/NewTaskComment";
-import resendHelper from "@/lib/resend";
+import NewTaskCommentEmail from '@/emails/NewTaskComment';
+import resendHelper from '@/lib/resend';
 
 export async function POST(
   req: Request,
@@ -13,22 +13,22 @@ export async function POST(
   /*
   Resend.com function init - this is a helper function that will be used to send emails
   */
-  const resend = await resendHelper();  
+  const resend = await resendHelper();
   const session = await getServerSession(authOptions);
   const body = await req.json();
   const { comment } = body;
   const { taskId } = params;
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   if (!taskId) {
-    return new NextResponse("Missing taskId", { status: 400 });
+    return new NextResponse('Missing taskId', { status: 400 });
   }
 
   if (!comment) {
-    return new NextResponse("Missing comment", { status: 400 });
+    return new NextResponse('Missing comment', { status: 400 });
   }
 
   try {
@@ -37,13 +37,13 @@ export async function POST(
     });
 
     if (!task) {
-      return new NextResponse("Task not found", { status: 404 });
+      return new NextResponse('Task not found', { status: 404 });
     }
 
     //console.log(task, "task");
 
     if (!task.section) {
-      return new NextResponse("Task section not found", { status: 404 });
+      return new NextResponse('Task section not found', { status: 404 });
     }
 
     //TODO: this can be done in a single query if there will be boardID in task
@@ -103,15 +103,15 @@ export async function POST(
         await resend.emails.send({
           from:
             process.env.NEXT_PUBLIC_APP_NAME +
-            " <" +
+            ' <' +
             process.env.EMAIL_FROM +
-            ">",
+            '>',
           to: user?.email!,
           subject:
-            session.user.userLanguage === "en"
+            session.user.userLanguage === 'en'
               ? `New comment  on task ${task.title}.`
               : `Nový komentář k úkolu ${task.title}.`,
-          text: "", // Add this line to fix the types issue
+          text: '', // Add this line to fix the types issue
           react: NewTaskCommentEmail({
             commentFromUser: session.user.name!,
             username: user?.name!,
@@ -137,7 +137,7 @@ export async function POST(
 
     /*      */
   } catch (error) {
-    console.log("[COMMENTS_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[COMMENTS_POST]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

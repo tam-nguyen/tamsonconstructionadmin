@@ -1,12 +1,12 @@
-"use server";
+'use server';
 
-import dayjs from "dayjs";
-import axios from "axios";
+import dayjs from 'dayjs';
+import axios from 'axios';
 
-import { prismadb } from "@/lib/prisma";
-import resendHelper from "@/lib/resend";
-import AiTasksReportEmail from "@/emails/AiTasksReport";
-import { Session } from "next-auth";
+import { prismadb } from '@/lib/prisma';
+import resendHelper from '@/lib/resend';
+import AiTasksReportEmail from '@/emails/AiTasksReport';
+import { Session } from 'next-auth';
 
 export async function getUserAiTasks(session: Session) {
   /*
@@ -14,10 +14,10 @@ export async function getUserAiTasks(session: Session) {
   */
   const resend = await resendHelper();
 
-  const today = dayjs().startOf("day");
-  const nextWeek = dayjs().add(7, "day").startOf("day");
+  const today = dayjs().startOf('day');
+  const nextWeek = dayjs().add(7, 'day').startOf('day');
 
-  let prompt = "";
+  let prompt = '';
 
   const user = await prismadb.users.findUnique({
     where: {
@@ -25,14 +25,14 @@ export async function getUserAiTasks(session: Session) {
     },
   });
 
-  if (!user) return { message: "No user found" };
+  if (!user) return { message: 'No user found' };
 
   const getTaskPastDue = await prismadb.tasks.findMany({
     where: {
       AND: [
         {
           id: session.user.id,
-          taskStatus: "ACTIVE",
+          taskStatus: 'ACTIVE',
           dueDateAt: {
             lte: new Date(),
           },
@@ -47,7 +47,7 @@ export async function getUserAiTasks(session: Session) {
         {
           //@ts-ignore-next-line
           user: session.user.is,
-          taskStatus: "ACTIVE",
+          taskStatus: 'ACTIVE',
           dueDateAt: {
             //lte: dayjs().add(7, "day").toDate(),
             gt: today.toDate(), // Due date is greater than or equal to today
@@ -59,11 +59,11 @@ export async function getUserAiTasks(session: Session) {
   });
 
   if (!getTaskPastDue || !getTaskPastDueInSevenDays) {
-    return { message: "No tasks found" };
+    return { message: 'No tasks found' };
   }
 
   switch (user.userLanguage) {
-    case "en":
+    case 'en':
       prompt = `Hi, Iam ${process.env.NEXT_PUBLIC_APP_URL} API Bot.
       \n\n
       There are ${getTaskPastDue.length} tasks past due and ${
@@ -83,7 +83,7 @@ export async function getUserAiTasks(session: Session) {
       Final result must be in MDX format.
       `;
       break;
-    case "de":
+    case 'de':
       prompt = `Als professionelle Assistentin ist Emma mit perfekten Kenntnissen im Projektmanagement für die Projekte vor Ort verantwortlich${
         process.env.NEXT_PUBLIC_APP_URL
       }, Erstellen Sie eine Managementzusammenfassung der Aufgaben, einschließlich ihrer Details und Fristen. Alles muss perfekt tschechisch und prägnant sein.
@@ -110,7 +110,7 @@ export async function getUserAiTasks(session: Session) {
     
       \n\n
       Schreiben Sie am Ende eine Managementzusammenfassung und fügen Sie einen Link hinzu ${
-        process.env.NEXT_PUBLIC_APP_URL + "/projects/dashboard"
+        process.env.NEXT_PUBLIC_APP_URL + '/projects/dashboard'
       } als Link zum Aufgabendetail. Am Ende der Zusammenfassung hinzufügen. 1 Management-Skill-Tipp im Bereich Projektmanagement und Zeitmanagement, 2-3 Sätze mit positiver Einstellung und Unterstützung, abschließend einen schönen Arbeitstag wünschen und mitteilen, dass diese Nachricht durch die künstliche Intelligenz von OpenAi generiert wurde.
       \n\n
       Das Endergebnis muss im MDX-Format vorliegen.
@@ -118,29 +118,29 @@ export async function getUserAiTasks(session: Session) {
       break;
   }
 
-  if (!prompt) return { message: "No prompt found" };
+  if (!prompt) return { message: 'No prompt found' };
 
   const getAiResponse = await axios
     .post(
       `${process.env.NEXT_PUBLIC_APP_URL}/api/openai/create-chat-completion`,
       {
         prompt: prompt,
-        userId: session.user.id,        
+        userId: session.user.id,
       },
       {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       }
     )
     .then((res) => res.data);
 
   //console.log(getAiResponse, "getAiResponse");
-  //console.log(getAiResponse.response.message.content, "getAiResponse");  
+  //console.log(getAiResponse.response.message.content, "getAiResponse");
 
   //skip if api response is error
   if (getAiResponse.error) {
-    console.log("Error from OpenAI API");
+    console.log('Error from OpenAI API');
   } else {
     try {
       const data = await resend.emails.send({
@@ -158,7 +158,7 @@ export async function getUserAiTasks(session: Session) {
       });
       //console.log(data, "Email sent");
     } catch (error) {
-      console.log(error, "Error from get-user-ai-tasks");
+      console.log(error, 'Error from get-user-ai-tasks');
     }
   }
 

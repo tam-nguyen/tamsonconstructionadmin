@@ -13,7 +13,7 @@
       "leads": "Leady"
     },
     "projects": "Projekty",
-    "emails": "Pošta",    
+    "emails": "Pošta",
     "tasks": "Úkoly",
     "invoices": "Faktury",
     "reports": "Reporty",
@@ -37,17 +37,17 @@
     "invoices": "Faktury",
     "documents": "Dokumenty",
     "storage": "Úložiště"
-  },  
+  },
   "RegisterComponent": {
     "cardTitle": "Vytvořit nový účet",
     "cardDescription": "Vytvořte si účet přihlášením pomocí",
     "label": "Jazyk",
-    "locale": "{locale, select, de {Němčina} en {Angličtina} cz {Čeština} uk {Ukrainian} other {Neznámý}}"    
+    "locale": "{locale, select, de {Němčina} en {Angličtina} cz {Čeština} uk {Ukrainian} other {Neznámý}}"
   },
   "CrmModuleMenuComponent": {
     "menuTitle": "Obchod",
     "cardDescription": "Vytvořte si účet přihlášením pomocí",
     "label": "Jazyk",
     "locale": "{locale, select, de {Němčina} en {Angličtina} cz {Čeština} uk {Ukrainian} other {Neznámý}}"
-  }  
+  }
 }

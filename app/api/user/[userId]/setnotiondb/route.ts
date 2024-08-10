@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { set } from "zod";
+import { NextResponse } from 'next/server';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { set } from 'zod';
 
 export async function POST(
   req: Request,
@@ -11,19 +11,19 @@ export async function POST(
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   const userId = params.userId;
 
   if (!userId) {
-    return new NextResponse("No userID, userId is required", { status: 401 });
+    return new NextResponse('No userID, userId is required', { status: 401 });
   }
 
   const { databaseId, secretKey } = await req.json();
 
   if (!databaseId || !secretKey) {
-    return new NextResponse("No data from form (databaseId, secretKey)", {
+    return new NextResponse('No data from form (databaseId, secretKey)', {
       status: 401,
     });
   }
@@ -66,7 +66,7 @@ export async function POST(
       });
     }
   } catch (error) {
-    console.log("[USER_UPDATE_NOTION]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[USER_UPDATE_NOTION]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

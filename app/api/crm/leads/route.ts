@@ -1,21 +1,21 @@
-import { NextResponse } from "next/server";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import sendEmail from "@/lib/sendmail";
+import { NextResponse } from 'next/server';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import sendEmail from '@/lib/sendmail';
 
 //Create a new lead route
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
   try {
     const body = await req.json();
     const userId = session.user.id;
 
     if (!body) {
-      return new NextResponse("No form data", { status: 400 });
+      return new NextResponse('No form data', { status: 400 });
     }
 
     const {
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
       refered_by,
       campaign,
       assigned_to,
-      accountIDs,      
+      accountIDs,
     } = body;
 
     //console.log(req.body, "req.body");
@@ -50,9 +50,9 @@ export async function POST(req: Request) {
         refered_by,
         campaign,
         assigned_to: assigned_to || userId,
-        accountsIDs: accountIDs,        
-        status: "NEW",
-        type: "DEMO",
+        accountsIDs: accountIDs,
+        status: 'NEW',
+        type: 'DEMO',
       },
     });
 
@@ -64,18 +64,18 @@ export async function POST(req: Request) {
       });
 
       if (!notifyRecipient) {
-        return new NextResponse("No user found", { status: 400 });
+        return new NextResponse('No user found', { status: 400 });
       }
 
       await sendEmail({
         from: process.env.EMAIL_FROM as string,
-        to: notifyRecipient.email || "info@saashq.org",
+        to: notifyRecipient.email || 'info@saashq.org',
         subject:
-          notifyRecipient.userLanguage === "en"
+          notifyRecipient.userLanguage === 'en'
             ? `New lead ${first_name} ${last_name} has been added to the system and assigned to you.`
             : `Nová příležitost ${first_name} ${last_name} byla přidána do systému a přidělena vám.`,
         text:
-          notifyRecipient.userLanguage === "en"
+          notifyRecipient.userLanguage === 'en'
             ? `New lead ${first_name} ${last_name} has been added to the system and assigned to you. You can click here for detail: ${process.env.NEXT_PUBLIC_APP_URL}/crm/opportunities/${newLead.id}`
             : `Nová příležitost ${first_name} ${last_name} byla přidána do systému a přidělena vám. Detaily naleznete zde: ${process.env.NEXT_PUBLIC_APP_URL}/crm/opportunities/${newLead.id}`,
       });
@@ -83,8 +83,8 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ newLead }, { status: 200 });
   } catch (error) {
-    console.log("[NEW_LEAD_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[NEW_LEAD_POST]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }
 
@@ -92,14 +92,14 @@ export async function POST(req: Request) {
 export async function PUT(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
   try {
     const body = await req.json();
     const userId = session.user.id;
 
     if (!body) {
-      return new NextResponse("No form data", { status: 400 });
+      return new NextResponse('No form data', { status: 400 });
     }
 
     const {
@@ -115,7 +115,7 @@ export async function PUT(req: Request) {
       refered_by,
       campaign,
       assigned_to,
-      accountIDs,      
+      accountIDs,
       status,
       type,
     } = body;
@@ -137,7 +137,7 @@ export async function PUT(req: Request) {
         refered_by,
         campaign,
         assigned_to: assigned_to || userId,
-        accountsIDs: accountIDs,        
+        accountsIDs: accountIDs,
         status,
         type,
       },
@@ -151,26 +151,26 @@ export async function PUT(req: Request) {
       });
 
       if (!notifyRecipient) {
-        return new NextResponse("No user found", { status: 400 });
+        return new NextResponse('No user found', { status: 400 });
       }
 
       await sendEmail({
         from: process.env.EMAIL_FROM as string,
-        to: notifyRecipient.email || "info@saashq.org",
+        to: notifyRecipient.email || 'info@saashq.org',
         subject:
-          notifyRecipient.userLanguage === "en"
+          notifyRecipient.userLanguage === 'en'
             ? `New lead ${firstName} ${lastName} has been added to the system and assigned to you.`
             : `Eine neue Chance ${firstName} ${lastName} wurde dem System hinzugefügt und Ihnen zugewiesen.`,
         text:
-          notifyRecipient.userLanguage === "en"
-          ? `New lead ${firstName} ${lastName} has been added to the system and assigned to you. You can click here for detail: ${process.env.NEXT_PUBLIC_APP_URL}/crm/opportunities/${updatedLead.id}`
-          : `Eine neue Chance ${firstName} ${lastName} wurde dem System hinzugefügt und Ihnen zugewiesen. Details finden Sie hier: ${process.env.NEXT_PUBLIC_APP_URL}/crm/opportunities/${updatedLead.id}`,
+          notifyRecipient.userLanguage === 'en'
+            ? `New lead ${firstName} ${lastName} has been added to the system and assigned to you. You can click here for detail: ${process.env.NEXT_PUBLIC_APP_URL}/crm/opportunities/${updatedLead.id}`
+            : `Eine neue Chance ${firstName} ${lastName} wurde dem System hinzugefügt und Ihnen zugewiesen. Details finden Sie hier: ${process.env.NEXT_PUBLIC_APP_URL}/crm/opportunities/${updatedLead.id}`,
       });
     }
 
     return NextResponse.json({ updatedLead }, { status: 200 });
   } catch (error) {
-    console.log("[UPDATED_LEAD_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[UPDATED_LEAD_POST]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

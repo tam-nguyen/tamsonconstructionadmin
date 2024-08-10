@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { z } from "zod";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
+import { useState } from 'react';
+import { z } from 'zod';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
 
-import { useToast } from "@/components/ui/use-toast";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
@@ -17,18 +17,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 
-import { Switch } from "@/components/ui/switch";
-import useDebounce from "@/hooks/useDebounce";
+import { Switch } from '@/components/ui/switch';
+import useDebounce from '@/hooks/useDebounce';
 
 //TODO: fix all the types
 type NewTaskFormProps = {
@@ -40,7 +40,7 @@ export function NewContactForm({ users, accounts }: NewTaskFormProps) {
   const router = useRouter();
   const { toast } = useToast();
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   const debounceSearchTerm = useDebounce(searchTerm, 1000);
 
@@ -82,9 +82,9 @@ export function NewContactForm({ users, accounts }: NewTaskFormProps) {
   });
 
   const contactType = [
-    { name: "Customer", id: "Customer" },
-    { name: "Partner", id: "Partner" },
-    { name: "Vendor", id: "Vendor" },
+    { name: 'Customer', id: 'Customer' },
+    { name: 'Partner', id: 'Partner' },
+    { name: 'Vendor', id: 'Vendor' },
   ];
 
   const yearArray = Array.from(
@@ -98,43 +98,43 @@ export function NewContactForm({ users, accounts }: NewTaskFormProps) {
     alert(data);
     setIsLoading(true);
     try {
-      await axios.post("/api/crm/contacts", data);
+      await axios.post('/api/crm/contacts', data);
       toast({
-        title: "Success",
-        description: "Contact created successfully",
+        title: 'Success',
+        description: 'Contact created successfully',
       });
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
       setIsLoading(false);
       form.reset({
-        first_name: "",
-        last_name: "",
-        description: "",
-        email: "",
-        personal_email: "",
-        office_phone: "",
-        mobile_phone: "",
-        website: "",
-        position: "",
+        first_name: '',
+        last_name: '',
+        description: '',
+        email: '',
+        personal_email: '',
+        office_phone: '',
+        mobile_phone: '',
+        website: '',
+        position: '',
         status: false,
-        type: "",
-        assigned_to: "",
-        assigned_account: "",
-        social_twitter: "",
-        social_facebook: "",
-        social_linkedin: "",
-        social_skype: "",
-        social_youtube: "",
-        social_tiktok: "",
-        birthday_year: "",
-        birthday_month: "",
-        birthday_day: "",
-      });      
+        type: '',
+        assigned_to: '',
+        assigned_account: '',
+        social_twitter: '',
+        social_facebook: '',
+        social_linkedin: '',
+        social_skype: '',
+        social_youtube: '',
+        social_tiktok: '',
+        birthday_year: '',
+        birthday_month: '',
+        birthday_day: '',
+      });
       router.refresh();
     }
   };
@@ -151,8 +151,8 @@ export function NewContactForm({ users, accounts }: NewTaskFormProps) {
             <code>{JSON.stringify(form.formState.errors, null, 2)}</code>
           </pre>
         </div> */}
-        <div className=" w-[800px] text-sm">
-          <div className="pb-5 space-y-2">
+        <div className="w-[800px] text-sm">
+          <div className="space-y-2 pb-5">
             <FormField
               control={form.control}
               name="first_name"
@@ -173,7 +173,11 @@ export function NewContactForm({ users, accounts }: NewTaskFormProps) {
                 <FormItem>
                   <FormLabel>Last name</FormLabel>
                   <FormControl>
-                    <Input disabled={isLoading} placeholder="Curtis" {...field} />
+                    <Input
+                      disabled={isLoading}
+                      placeholder="Curtis"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -265,13 +269,13 @@ export function NewContactForm({ users, accounts }: NewTaskFormProps) {
               )}
             />
             <h3>Birthday - (optional)</h3>
-            <div className="flex space-x-3 w-full mx-auto">
+            <div className="mx-auto flex w-full space-x-3">
               <FormField
                 control={form.control}
                 name="birthday_year"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <div className="flex space-x-2 w-32">
+                    <div className="flex w-32 space-x-2">
                       <Select onValueChange={field.onChange}>
                         <SelectTrigger>Year</SelectTrigger>
                         <SelectContent>
@@ -295,7 +299,7 @@ export function NewContactForm({ users, accounts }: NewTaskFormProps) {
                 name="birthday_month"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <div className="flex space-x-2 w-28">
+                    <div className="flex w-28 space-x-2">
                       <Select onValueChange={field.onChange}>
                         <SelectTrigger>Month</SelectTrigger>
                         <SelectContent>
@@ -411,7 +415,7 @@ export function NewContactForm({ users, accounts }: NewTaskFormProps) {
                             <SelectValue placeholder="Choose assigned account " />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="flex overflow-y-auto h-56">
+                        <SelectContent className="flex h-56 overflow-y-auto">
                           {accounts.map((account) => (
                             <SelectItem key={account.id} value={account.id}>
                               {account.name}
@@ -474,7 +478,7 @@ export function NewContactForm({ users, accounts }: NewTaskFormProps) {
                             <SelectValue placeholder="Choose contact type " />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="flex overflow-y-auto h-56">
+                        <SelectContent className="flex h-56 overflow-y-auto">
                           {contactType.map((type) => (
                             <SelectItem key={type.id} value={type.id}>
                               {type.name}
@@ -597,11 +601,11 @@ export function NewContactForm({ users, accounts }: NewTaskFormProps) {
         <div className="grid gap-2 py-5">
           <Button disabled={isLoading} type="submit">
             {isLoading ? (
-              <span className="flex items-center animate-pulse">
+              <span className="flex animate-pulse items-center">
                 Saving data ...
               </span>
             ) : (
-              "Create contact"
+              'Create contact'
             )}
           </Button>
         </div>

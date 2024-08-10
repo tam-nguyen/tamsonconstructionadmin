@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import moment from "moment";
-import Link from "next/link";
+import moment from 'moment';
+import Link from 'next/link';
 
-import { TeamConversations } from "../../tasks/viewtask/[taskId]/components/team-conversation";
-import { useToast } from "@/components/ui/use-toast";
+import { TeamConversations } from '../../tasks/viewtask/[taskId]/components/team-conversation';
+import { useToast } from '@/components/ui/use-toast';
 
-import { useRouter } from "next/navigation";
-import { getTaskDone } from "../../actions/get-task-done";
+import { useRouter } from 'next/navigation';
+import { getTaskDone } from '../../actions/get-task-done';
 import {
   Card,
   CardContent,
@@ -15,18 +15,18 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+} from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { CheckSquare, Eye, MessagesSquare, Pencil } from "lucide-react";
-import UpdateTaskDialog from "../../dialogs/UpdateTask";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/sheet';
+import { CheckSquare, Eye, MessagesSquare, Pencil } from 'lucide-react';
+import UpdateTaskDialog from '../../dialogs/UpdateTask';
+import { Button } from '@/components/ui/button';
 
 interface DashboardData {
   getTaskPastDue: Tasks[];
@@ -52,7 +52,7 @@ export interface Comment {
 const ProjectDashboardCockpit = ({
   dashboardData,
   users,
-  boards,  
+  boards,
 }: {
   dashboardData: DashboardData;
   users: any;
@@ -67,12 +67,12 @@ const ProjectDashboardCockpit = ({
       await getTaskDone(taskId);
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error, task not marked as done.",
+        variant: 'destructive',
+        title: 'Error, task not marked as done.',
       });
     } finally {
       toast({
-        title: "Success, task marked as done.",
+        title: 'Success, task marked as done.',
       });
       router.refresh();
     }
@@ -81,10 +81,10 @@ const ProjectDashboardCockpit = ({
   //Console logs
 
   return (
-    <div className="flex flex-col md:flex-row items-start justify-center h-full w-full overflow-auto">
+    <div className="flex h-full w-full flex-col items-start justify-center overflow-auto md:flex-row">
       <div className="w-full md:w-1/2">
         <div>
-          <h2 className="font-bold text-lg ">
+          <h2 className="text-lg font-bold">
             Tasks due Today ({dashboardData?.getTaskPastDue?.length})
           </h2>
           {/*         <pre>
@@ -96,45 +96,45 @@ const ProjectDashboardCockpit = ({
           <Card key={task.id} className="m-2">
             <CardHeader>
               <CardTitle className="text-xl">
-                {task.title === "" ? "Untitled" : task.title}
+                {task.title === '' ? 'Untitled' : task.title}
               </CardTitle>
               <CardDescription>{task.content}</CardDescription>
             </CardHeader>
             <CardContent>
               <div
                 className={
-                  task.dueDateAt < new Date() ? "text-red-500 text-xs" : ""
+                  task.dueDateAt < new Date() ? 'text-xs text-red-500' : ''
                 }
               >
-                Due date: {moment(task.dueDateAt).format("YYYY-MM-DD")}
+                Due date: {moment(task.dueDateAt).format('YYYY-MM-DD')}
               </div>
               <div>
                 <p
                   className={
-                    task.priority === "normal"
+                    task.priority === 'normal'
                       ? `text-yellow-500`
-                      : task.priority === "high"
-                      ? `text-red-500`
-                      : task.priority === "low"
-                      ? `text-green-500`
-                      : `text-slate-600`
+                      : task.priority === 'high'
+                        ? `text-red-500`
+                        : task.priority === 'low'
+                          ? `text-green-500`
+                          : `text-slate-600`
                   }
                 >
                   Priorita: {task.priority}
                 </p>
               </div>
             </CardContent>
-            <CardFooter className="space-x-2 ">
+            <CardFooter className="space-x-2">
               <Link href={`/projects/tasks/viewtask/${task.id}`}>
-                <Badge variant={"outline"}>
-                  <Eye className="w-4 h-4 mr-2" />
+                <Badge variant={'outline'}>
+                  <Eye className="mr-2 h-4 w-4" />
                   <span>View task</span>
                 </Badge>
               </Link>
               <Sheet>
                 <SheetTrigger asChild>
-                  <Badge variant={"outline"} className="cursor-pointer">
-                    <MessagesSquare className="w-4 h-4 mr-2" />
+                  <Badge variant={'outline'} className="cursor-pointer">
+                    <MessagesSquare className="mr-2 h-4 w-4" />
                     <span>Chat</span>
                   </Badge>
                 </SheetTrigger>
@@ -146,15 +146,15 @@ const ProjectDashboardCockpit = ({
                 </SheetContent>
               </Sheet>
               <Badge
-                variant={"outline"}
+                variant={'outline'}
                 onClick={() => onDone(task.id)}
                 className="cursor-pointer"
               >
-                <CheckSquare className="w-4 h-4 mr-2" />
+                <CheckSquare className="mr-2 h-4 w-4" />
                 <span>Mark as done</span>
               </Badge>
-              <Badge variant={"outline"} className="cursor-pointer">
-                <Pencil className="w-4 h-4 mr-2" />
+              <Badge variant={'outline'} className="cursor-pointer">
+                <Pencil className="mr-2 h-4 w-4" />
                 <Sheet>
                   <SheetTrigger>
                     <span>Edit</span>
@@ -167,19 +167,19 @@ const ProjectDashboardCockpit = ({
                     />
                     <div className="flex w-full justify-end pt-2">
                       <SheetTrigger asChild>
-                        <Button variant={"destructive"}>Close</Button>
+                        <Button variant={'destructive'}>Close</Button>
                       </SheetTrigger>
-                    </div>                    
+                    </div>
                   </SheetContent>
                 </Sheet>
-              </Badge>              
+              </Badge>
             </CardFooter>
           </Card>
         ))}
       </div>
       <div className="w-full pt-5 md:w-1/2 md:pt-0">
         <div>
-          <h2 className="font-bold text-lg ">
+          <h2 className="text-lg font-bold">
             Tasks due in 7 days (
             {dashboardData?.getTaskPastDueInSevenDays?.length})
           </h2>
@@ -188,7 +188,7 @@ const ProjectDashboardCockpit = ({
           <Card key={task.id} className="m-2">
             <CardHeader>
               <CardTitle className="text-xl">
-                {task.title === "" ? "Untitled" : task.title}
+                {task.title === '' ? 'Untitled' : task.title}
               </CardTitle>
               <CardDescription>{task.content}</CardDescription>
             </CardHeader>
@@ -196,22 +196,22 @@ const ProjectDashboardCockpit = ({
               <div
                 className={
                   task.dueDateAt < new Date()
-                    ? "text-red-500 text-xs"
-                    : "text-xs"
+                    ? 'text-xs text-red-500'
+                    : 'text-xs'
                 }
               >
-                Due date: {moment(task.dueDateAt).format("YYYY-MM-DD")}
+                Due date: {moment(task.dueDateAt).format('YYYY-MM-DD')}
               </div>
               <div>
                 <p
                   className={
-                    task.priority === "normal"
+                    task.priority === 'normal'
                       ? `text-yellow-500`
-                      : task.priority === "high"
-                      ? `text-red-500`
-                      : task.priority === "low"
-                      ? `text-green-500`
-                      : `text-slate-600`
+                      : task.priority === 'high'
+                        ? `text-red-500`
+                        : task.priority === 'low'
+                          ? `text-green-500`
+                          : `text-slate-600`
                   }
                 >
                   Priority: {task.priority}
@@ -220,16 +220,16 @@ const ProjectDashboardCockpit = ({
             </CardContent>
             <CardFooter className="space-x-2">
               <Link href={`/projects/tasks/viewtask/${task.id}`}>
-                <Badge variant={"outline"}>
-                  <Eye className="w-4 h-4 mr-2" />
+                <Badge variant={'outline'}>
+                  <Eye className="mr-2 h-4 w-4" />
                   <span>View task</span>
                 </Badge>
               </Link>
 
               <Sheet>
                 <SheetTrigger asChild>
-                  <Badge variant={"outline"}>
-                    <MessagesSquare className="w-4 h-4 mr-2" />
+                  <Badge variant={'outline'}>
+                    <MessagesSquare className="mr-2 h-4 w-4" />
                     <span>Chat</span>
                   </Badge>
                 </SheetTrigger>
@@ -242,12 +242,12 @@ const ProjectDashboardCockpit = ({
                 </SheetContent>
               </Sheet>
 
-              <Badge variant={"outline"} onClick={() => onDone(task.id)}>
-                <CheckSquare className="w-4 h-4 mr-2" />
+              <Badge variant={'outline'} onClick={() => onDone(task.id)}>
+                <CheckSquare className="mr-2 h-4 w-4" />
                 <span>Mark as done</span>
               </Badge>
-              <Badge variant={"outline"} className="cursor-pointer">
-                <Pencil className="w-4 h-4 mr-2" />
+              <Badge variant={'outline'} className="cursor-pointer">
+                <Pencil className="mr-2 h-4 w-4" />
                 <Sheet>
                   <SheetTrigger>
                     <span>Edit</span>
@@ -260,7 +260,7 @@ const ProjectDashboardCockpit = ({
                     />
                   </SheetContent>
                 </Sheet>
-              </Badge>              
+              </Badge>
             </CardFooter>
           </Card>
         ))}

@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getBoards = async (userId?: string) => {
   if (!userId) {
@@ -11,7 +11,7 @@ export const getBoards = async (userId?: string) => {
           user: userId,
         },
         {
-          visibility: "public",
+          visibility: 'public',
         },
       ],
     },
@@ -23,7 +23,7 @@ export const getBoards = async (userId?: string) => {
       },
     },
     orderBy: {
-      updatedAt: "desc",
+      updatedAt: 'desc',
     },
   });
   return data;

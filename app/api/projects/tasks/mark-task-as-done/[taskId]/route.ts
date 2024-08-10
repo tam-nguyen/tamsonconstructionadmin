@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { NextResponse } from 'next/server';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 export async function POST(
   req: Request,
@@ -11,11 +11,11 @@ export async function POST(
   const { taskId } = params;
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   if (!taskId) {
-    return new NextResponse("Missing task id", { status: 400 });
+    return new NextResponse('Missing task id', { status: 400 });
   }
 
   try {
@@ -24,14 +24,14 @@ export async function POST(
         id: taskId,
       },
       data: {
-        taskStatus: "COMPLETE",
-        updatedBy: session.user.id,        
+        taskStatus: 'COMPLETE',
+        updatedBy: session.user.id,
       },
     });
 
     return NextResponse.json({ status: 200 });
   } catch (error) {
-    console.log("[NEW_TASK_IN_PROJECT_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[NEW_TASK_IN_PROJECT_POST]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { Card, Title, AreaChart } from "@tremor/react";
+import { Card, Title, AreaChart } from '@tremor/react';
 
 const dataFormatter = (number: number) => {
-  return Intl.NumberFormat("us").format(number).toString();
+  return Intl.NumberFormat('us').format(number).toString();
 };
 
 export const AreaChartDemo = ({ chartData, title }: any) => (
   <Card>
     <Title>{title}</Title>
     <AreaChart
-      className="h-72 mt-4"
+      className="mt-4 h-72"
       data={chartData}
       index="date"
-      categories={["Number"]}
-      colors={["orange"]}
+      categories={['Number']}
+      colors={['orange']}
       valueFormatter={dataFormatter}
     />
   </Card>

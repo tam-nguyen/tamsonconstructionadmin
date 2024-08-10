@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { signIn } from "next-auth/react";
-import Link from "next/link";
+import React, { useState } from 'react';
+import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 
-import { Icons } from "@/components/ui/icons";
-import { Button } from "@/components/ui/button";
+import { Icons } from '@/components/ui/icons';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -13,12 +13,12 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { useRouter } from 'next/navigation';
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Form,
   FormControl,
@@ -26,10 +26,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { useToast } from "@/components/ui/use-toast";
-import { FingerprintIcon } from "lucide-react";
-import axios from "axios";
+} from '@/components/ui/form';
+import { useToast } from '@/components/ui/use-toast';
+import { FingerprintIcon } from 'lucide-react';
+import axios from 'axios';
 import {
   Dialog,
   DialogContent,
@@ -37,9 +37,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 
-import LoadingComponent from "@/components/LoadingComponent";
+import LoadingComponent from '@/components/LoadingComponent';
 
 export function LoginComponent() {
   const [isLoading, setIsLoading] = useState(false);
@@ -47,7 +47,7 @@ export function LoginComponent() {
   //State for dialog to be by opened and closed by DialogTrigger
   const [open, setOpen] = useState(false);
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const { toast } = useToast();
 
   const router = useRouter();
@@ -62,24 +62,24 @@ export function LoginComponent() {
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   });
 
   const loginWithGoogle = async () => {
     setIsLoading(true);
     try {
-      await signIn("google", {
+      await signIn('google', {
         callbackUrl: process.env.NEXT_PUBLIC_APP_URL,
         //callbackUrl: "/",
       });
     } catch (error) {
-      console.log(error, "error");
+      console.log(error, 'error');
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         description:
-          "Something went wrong while logging into your Google account.",
+          'Something went wrong while logging into your Google account.',
       });
     } finally {
       setIsLoading(false);
@@ -89,15 +89,15 @@ export function LoginComponent() {
   const loginWithGithub = async () => {
     setIsLoading(true);
     try {
-      await signIn("github", {
+      await signIn('github', {
         callbackUrl: process.env.NEXT_PUBLIC_APP_URL,
       });
     } catch (error) {
       console.log(error);
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         description:
-          "Something went wrong while logging into your Github account.",
+          'Something went wrong while logging into your Github account.',
       });
     } finally {
       setIsLoading(false);
@@ -108,7 +108,7 @@ export function LoginComponent() {
   async function onSubmit(data: LoginFormValues) {
     setIsLoading(true);
     try {
-      const status = await signIn("credentials", {
+      const status = await signIn('credentials', {
         redirect: false,
         email: data.email,
         password: data.password,
@@ -117,51 +117,51 @@ export function LoginComponent() {
       //console.log(status, "status");
       if (status?.error) {
         toast({
-          variant: "destructive",
-          title: "Error",
+          variant: 'destructive',
+          title: 'Error',
           description: status.error,
         });
       }
       if (status?.ok) {
         //console.log("Status OK");
         toast({
-          description: "Login successful.",
+          description: 'Login successful.',
         });
       }
     } catch (error) {
       console.log(error);
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description:
           error instanceof Error
             ? error?.message
-            : typeof error === "string"
-            ? error
-            : "",
+            : typeof error === 'string'
+              ? error
+              : '',
       });
     } finally {
       setIsLoading(false);
-      router.push("/");
+      router.push('/');
     }
   }
 
   async function onPasswordReset(email: string) {
     try {
       setIsLoading(true);
-      await axios.post("/api/user/passwordReset", {
+      await axios.post('/api/user/passwordReset', {
         email,
       });
       toast({
-        title: "Success",
-        description: "Password reset email has been sent.",
+        title: 'Success',
+        description: 'Password reset email has been sent.',
       });
     } catch (error) {
       if (error) {
         toast({
-          variant: "destructive",
-          title: "Error",
-          description: "Something went wrong while resetting the password.",
+          variant: 'destructive',
+          title: 'Error',
+          description: 'Something went wrong while resetting the password.',
         });
       }
     } finally {
@@ -171,7 +171,7 @@ export function LoginComponent() {
   }
 
   return (
-    <Card className="shadow-lg my-5 ">
+    <Card className="my-5 shadow-lg">
       <CardHeader className="space-y-1">
         <CardTitle className="text-2xl">Login</CardTitle>
         <CardDescription>Click here to login with: </CardDescription>
@@ -187,7 +187,7 @@ export function LoginComponent() {
               <Icons.gitHub className="mr-2 h-4 w-4 animate-spin" />
             ) : (
               <Icons.gitHub className="mr-2 h-4 w-4" />
-            )}{" "}
+            )}{' '}
             Github
           </Button>
           <Button
@@ -199,7 +199,7 @@ export function LoginComponent() {
               <Icons.google className="mr-2 h-4 w-4 animate-spin" />
             ) : (
               <Icons.google className="mr-2 h-4 w-4" />
-            )}{" "}
+            )}{' '}
             Google
           </Button>
         </div>
@@ -233,7 +233,7 @@ export function LoginComponent() {
                   </FormItem>
                 )}
               />
-              <div className="flex items-center w-full ">
+              <div className="flex w-full items-center">
                 <FormField
                   control={form.control}
                   name="password"
@@ -245,7 +245,7 @@ export function LoginComponent() {
                           className="w-full"
                           disabled={isLoading}
                           placeholder="Password"
-                          type={show ? "text" : "password"}
+                          type={show ? 'text' : 'password'}
                           {...field}
                         />
                       </FormControl>
@@ -254,7 +254,7 @@ export function LoginComponent() {
                   )}
                 />
                 <span
-                  className="flex px-4 pt-7 w-16"
+                  className="flex w-16 px-4 pt-7"
                   onClick={() => setShow(!show)}
                 >
                   <FingerprintIcon size={25} className="text-gray-400" />
@@ -265,19 +265,19 @@ export function LoginComponent() {
               <Button
                 disabled={isLoading}
                 type="submit"
-                className="flex gap-2 h-12"
+                className="flex h-12 gap-2"
               >
                 <span
                   className={
                     isLoading
-                      ? " border rounded-full px-3 py-2 animate-spin"
-                      : "hidden"
+                      ? 'animate-spin rounded-full border px-3 py-2'
+                      : 'hidden'
                   }
                 >
                   Q
                 </span>
-                <span className={isLoading ? " " : "hidden"}>Loading ...</span>
-                <span className={isLoading ? "hidden" : ""}>Login</span>
+                <span className={isLoading ? ' ' : 'hidden'}>Loading ...</span>
+                <span className={isLoading ? 'hidden' : ''}>Login</span>
               </Button>
             </div>
           </form>
@@ -285,8 +285,8 @@ export function LoginComponent() {
       </CardContent>
       <CardFooter className="flex flex-col space-y-5">
         <div className="text-sm text-gray-500">
-          Need account? Register{" "}
-          <Link href={"/register"} className="text-blue-500">
+          Need account? Register{' '}
+          <Link href={'/register'} className="text-blue-500">
             here
           </Link>
         </div>
@@ -308,14 +308,14 @@ export function LoginComponent() {
               {isLoading ? (
                 <LoadingComponent />
               ) : (
-                <div className="flex px-2 space-x-5 py-5">
+                <div className="flex space-x-5 px-2 py-5">
                   <Input
                     type="email"
                     placeholder="name@domain.com"
                     onChange={(e) => setEmail(e.target.value)}
                   />
                   <Button
-                    disabled={email === ""}
+                    disabled={email === ''}
                     onClick={() => {
                       onPasswordReset(email);
                     }}
@@ -324,8 +324,8 @@ export function LoginComponent() {
                   </Button>
                 </div>
               )}
-              <DialogTrigger className="w-full text-right pt-5 ">
-                <Button variant={"destructive"}>Cancel</Button>
+              <DialogTrigger className="w-full pt-5 text-right">
+                <Button variant={'destructive'}>Cancel</Button>
               </DialogTrigger>
             </DialogContent>
           </Dialog>

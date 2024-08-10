@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
 import type { OnChange, OnMount } from '@monaco-editor/react';
 import { Editor } from '@monaco-editor/react';
-import { useTheme } from "next-themes";
+import { useTheme } from 'next-themes';
 import type { ElementRef, FC } from 'react';
 import { useRef } from 'react';
 

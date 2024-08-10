@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import {
   Card,
@@ -9,19 +9,19 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 
-import { columns } from "../opportunities/table-components/columns";
-import { NewOpportunityForm } from "../opportunities/components/NewOpportunityForm";
-import { OpportunitiesDataTable } from "../opportunities/table-components/data-table";
+import { columns } from '../opportunities/table-components/columns';
+import { NewOpportunityForm } from '../opportunities/components/NewOpportunityForm';
+import { OpportunitiesDataTable } from '../opportunities/table-components/data-table';
 const OpportunitiesView = ({
   data,
   crmData,
@@ -54,7 +54,7 @@ const OpportunitiesView = ({
         <div className="flex justify-between">
           <div>
             <CardTitle
-              onClick={() => router.push("/crm/opportunities")}
+              onClick={() => router.push('/crm/opportunities')}
               className="cursor-pointer"
             >
               Opportunities
@@ -89,7 +89,7 @@ const OpportunitiesView = ({
       <CardContent>
         {!data ||
           (data.length === 0 ? (
-            "No assigned opportunities found"
+            'No assigned opportunities found'
           ) : (
             <OpportunitiesDataTable data={data} columns={columns} />
           ))}

@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { NextResponse } from 'next/server';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 export async function POST(
   req: Request,
@@ -10,7 +10,7 @@ export async function POST(
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   try {
@@ -19,13 +19,13 @@ export async function POST(
         id: params.userId,
       },
       data: {
-        userStatus: "INACTIVE",
+        userStatus: 'INACTIVE',
       },
     });
 
     return NextResponse.json(user);
   } catch (error) {
-    console.log("[USERACTIVATE_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[USERACTIVATE_POST]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

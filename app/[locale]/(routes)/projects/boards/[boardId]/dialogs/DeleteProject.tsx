@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import LoadingComponent from "@/components/LoadingComponent";
-import { Button } from "@/components/ui/button";
+import LoadingComponent from '@/components/LoadingComponent';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -18,25 +18,25 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { TrashIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/components/ui/use-toast';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+import { TrashIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
-import React, { useEffect, useState } from "react";
-import { set, useForm } from "react-hook-form";
-import { z } from "zod";
+import React, { useEffect, useState } from 'react';
+import { set, useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 type Props = {
   boardId: string;
@@ -69,29 +69,29 @@ const DeleteProjectDialog = ({ boardId, boardName }: Props) => {
       //await new Promise((resolve) => setTimeout(resolve, 5000));
       await axios.delete(`/api/projects/${boardId}`);
       toast({
-        title: "Success",
+        title: 'Success',
         description: `Project: ${boardName} deleted successfully`,
       });
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description:
-          "Something went wrong while deleting project. Please try again.",
+          'Something went wrong while deleting project. Please try again.',
       });
     } finally {
       setOpen(false);
       setIsLoading(false);
       router.refresh();
-      router.push("/projects");
+      router.push('/projects');
     }
   };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
-        <Button className="px-2" variant={"destructive"} asChild>
-          <div className="px-3 gap-2">
+        <Button className="px-2" variant={'destructive'} asChild>
+          <div className="gap-2 px-3">
             Delete project
             <TrashIcon size={15} />
           </div>

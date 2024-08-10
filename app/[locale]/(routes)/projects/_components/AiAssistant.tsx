@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { FC, useState } from "react";
+import { FC, useState } from 'react';
 
-import { getUserAiTasks } from "@/actions/cron/get-user-ai-tasks";
+import { getUserAiTasks } from '@/actions/cron/get-user-ai-tasks';
 
-import { Icons } from "@/components/ui/icons";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
-import { Session } from "next-auth";
+import { Icons } from '@/components/ui/icons';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
+import { Session } from 'next-auth';
 
 const AiAssistant: FC<{ session: Session }> = ({ session }) => {
   const [loading, setLoading] = useState(false);
@@ -19,15 +19,15 @@ const AiAssistant: FC<{ session: Session }> = ({ session }) => {
     try {
       await getUserAiTasks(session);
       toast({
-        title: "Success",
-        description: "AI Assistant just send your report to your mailbox",
+        title: 'Success',
+        description: 'AI Assistant just send your report to your mailbox',
       });
     } catch (error) {
-      console.log(error, "error from AI Assistant");
+      console.log(error, 'error from AI Assistant');
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Something went wrong, please try again",
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Something went wrong, please try again',
       });
     } finally {
       setLoading(false);
@@ -41,7 +41,7 @@ const AiAssistant: FC<{ session: Session }> = ({ session }) => {
           Creating report <Icons.spinner className="animate-spin" />
         </span>
       ) : (
-        "AI Assistant"
+        'AI Assistant'
       )}
     </Button>
   );

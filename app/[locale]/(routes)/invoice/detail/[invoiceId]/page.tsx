@@ -1,8 +1,8 @@
-import React from "react";
-import Container from "../../../components/ui/Container";
-import { getInvoice } from "@/actions/invoice/get-invoice";
-import { MessageCircle, MessagesSquare } from "lucide-react";
-import InvoiceChat from "../_dialogs/InvoiceChat";
+import React from 'react';
+import Container from '../../../components/ui/Container';
+import { getInvoice } from '@/actions/invoice/get-invoice';
+import { MessageCircle, MessagesSquare } from 'lucide-react';
+import InvoiceChat from '../_dialogs/InvoiceChat';
 
 interface InvoiceDetailProps {
   params: { invoiceId: string };
@@ -18,8 +18,8 @@ const InvoiceDetailPage = async ({ params }: InvoiceDetailProps) => {
         <div className="w-1/2">
           <embed
             style={{
-              width: "100%",
-              height: "100%",
+              width: '100%',
+              height: '100%',
             }}
             type="application/pdf"
             src={invoiceData.invoice_file_url}

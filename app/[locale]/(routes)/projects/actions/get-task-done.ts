@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 //Actions
 export const getTaskDone = async (taskId: string) => {

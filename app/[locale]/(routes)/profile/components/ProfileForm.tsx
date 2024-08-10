@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -13,20 +13,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { useToast } from "@/components/ui/use-toast";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { Users } from "@prisma/client";
+} from '@/components/ui/select';
+import { useToast } from '@/components/ui/use-toast';
+import { Input } from '@/components/ui/input';
+import { useState } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import { Users } from '@prisma/client';
 
 interface ProfileFormProps {
   data: any;
@@ -51,9 +51,9 @@ export function ProfileForm({ data }: ProfileFormProps) {
     defaultValues: data
       ? { ...data }
       : {
-          name: "",
-          username: "",
-          account_name: "",
+          name: '',
+          username: '',
+          account_name: '',
         },
   });
 
@@ -63,7 +63,7 @@ export function ProfileForm({ data }: ProfileFormProps) {
       await axios.put(`/api/user/${data.id}/updateprofile`, data);
       //TODO: send data to the server
       toast({
-        title: "You submitted the following values:",
+        title: 'You submitted the following values:',
         description: (
           <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
             <code className="text-white">{JSON.stringify(data, null, 2)}</code>
@@ -73,10 +73,10 @@ export function ProfileForm({ data }: ProfileFormProps) {
       router.refresh();
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description:
-          "Something went wrong while activating your notion integration.",
+          'Something went wrong while activating your notion integration.',
       });
     } finally {
       setIsLoading(false);
@@ -87,7 +87,7 @@ export function ProfileForm({ data }: ProfileFormProps) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex space-x-5 w-full p-5 items-end"
+        className="flex w-full items-end space-x-5 p-5"
       >
         <FormField
           control={form.control}

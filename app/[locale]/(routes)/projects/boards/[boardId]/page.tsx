@@ -1,21 +1,21 @@
-import { getBoard } from "@/actions/projects/get-board";
-import React, { Suspense } from "react";
+import { getBoard } from '@/actions/projects/get-board';
+import React, { Suspense } from 'react';
 
-import Container from "@/app/[locale]/(routes)/components/ui/Container";
-import NewSectionDialog from "./dialogs/NewSection";
+import Container from '@/app/[locale]/(routes)/components/ui/Container';
+import NewSectionDialog from './dialogs/NewSection';
 
-import NewTaskInProjectDialog from "./dialogs/NewTaskInProject";
-import { getActiveUsers } from "@/actions/get-users";
-import { getBoardSections } from "@/actions/projects/get-board-sections";
-import DeleteProjectDialog from "./dialogs/DeleteProject";
-import { getKanbanData } from "@/actions/projects/get-kanban-data";
-import Kanban from "./components/Kanban";
-import { getBoards } from "@/actions/projects/get-boards";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { Users } from "@prisma/client";
-import AiAssistantProject from "./components/AiAssistantProject";
-import { Lock } from "lucide-react";
+import NewTaskInProjectDialog from './dialogs/NewTaskInProject';
+import { getActiveUsers } from '@/actions/get-users';
+import { getBoardSections } from '@/actions/projects/get-board-sections';
+import DeleteProjectDialog from './dialogs/DeleteProject';
+import { getKanbanData } from '@/actions/projects/get-kanban-data';
+import Kanban from './components/Kanban';
+import { getBoards } from '@/actions/projects/get-boards';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { Users } from '@prisma/client';
+import AiAssistantProject from './components/AiAssistantProject';
+import { Lock } from 'lucide-react';
 
 interface BoardDetailProps {
   params: { boardId: string };
@@ -40,7 +40,7 @@ const BoardPage = async ({ params }: BoardDetailProps) => {
       description={board?.board?.description}
       visibility={board?.board?.visibility}
     >
-      <div className="flex justify-between py-5 w-full">
+      <div className="flex w-full justify-between py-5">
         <div className="space-x-2">
           <NewSectionDialog boardId={boardId} />
           <NewTaskInProjectDialog

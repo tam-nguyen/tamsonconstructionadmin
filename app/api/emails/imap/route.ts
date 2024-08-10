@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
-import Imap from "imap";
-import { simpleParser, ParsedMail } from "mailparser";
+import { NextResponse } from 'next/server';
+import Imap from 'imap';
+import { simpleParser, ParsedMail } from 'mailparser';
 
 interface Email {
   body?: string;
@@ -19,25 +19,25 @@ export async function GET(): Promise<NextResponse> {
   });
 
   function openInbox(cb: (err: Error, box: any) => void) {
-    imap.openBox("INBOX", true, cb);
+    imap.openBox('INBOX', true, cb);
   }
 
   return new Promise<NextResponse<Email[]>>((resolve, reject) => {
-    imap.once("ready", function () {
+    imap.once('ready', function () {
       openInbox(function (err: Error, box: any) {
         if (err) reject(err);
-        const f = imap.seq.fetch("1:3", {
-          bodies: ["HEADER.FIELDS (FROM TO SUBJECT DATE)", "TEXT"],
+        const f = imap.seq.fetch('1:3', {
+          bodies: ['HEADER.FIELDS (FROM TO SUBJECT DATE)', 'TEXT'],
           struct: true,
         });
 
         const emails: Email[] = [];
 
-        f.on("message", function (msg: any, seqno: any) {
+        f.on('message', function (msg: any, seqno: any) {
           const email: Email = {};
-          msg.on("body", function (stream: any, info: any) {
+          msg.on('body', function (stream: any, info: any) {
             simpleParser(stream, (err: Error, mail: ParsedMail) => {
-              if (info.which === "TEXT") {
+              if (info.which === 'TEXT') {
                 email.body = mail.text;
               } else {
                 email.subject = mail.subject;
@@ -46,20 +46,20 @@ export async function GET(): Promise<NextResponse> {
               }
             });
           });
-          msg.once("end", function () {
+          msg.once('end', function () {
             emails.push(email);
           });
         });
 
-        f.once("end", function () {
+        f.once('end', function () {
           imap.end();
           resolve(NextResponse.json(emails));
         });
       });
     });
 
-    imap.once("error", function (err: Error) {
-      reject(new NextResponse("Initial error", { status: 500 }));
+    imap.once('error', function (err: Error) {
+      reject(new NextResponse('Initial error', { status: 500 }));
     });
 
     imap.connect();

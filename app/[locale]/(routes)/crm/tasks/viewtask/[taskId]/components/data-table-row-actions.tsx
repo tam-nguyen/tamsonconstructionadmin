@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { Row } from "@tanstack/react-table";
+import { DotsHorizontalIcon } from '@radix-ui/react-icons';
+import { Row } from '@tanstack/react-table';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,17 +16,17 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 
-import { useParams } from "next/navigation";
+import { useParams } from 'next/navigation';
 
-import { labels } from "../data/data";
-import { taskSchema } from "../data/schema";
-import { useRouter } from "next/navigation";
-import DocumentViewModal from "@/components/modals/document-view-modal";
-import { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
-import axios from "axios";
+import { labels } from '../data/data';
+import { taskSchema } from '../data/schema';
+import { useRouter } from 'next/navigation';
+import DocumentViewModal from '@/components/modals/document-view-modal';
+import { useState } from 'react';
+import { useToast } from '@/components/ui/use-toast';
+import axios from 'axios';
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -55,13 +55,13 @@ export function DataTableRowActions<TData>({
     } catch (error) {
       console.error(error);
       toast({
-        title: "Error",
-        description: "Something went wrong, while assigning document to task",
+        title: 'Error',
+        description: 'Something went wrong, while assigning document to task',
       });
     } finally {
       toast({
-        title: "Success",
-        description: "Document was assigned to task",
+        title: 'Success',
+        description: 'Document was assigned to task',
       });
       router.refresh();
       setLoading(false);

@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { DialogTitle } from "@radix-ui/react-dialog";
+import { DialogTitle } from '@radix-ui/react-dialog';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
-} from "./dialog";
+} from './dialog';
 
 interface ModalProps {
   title: string;

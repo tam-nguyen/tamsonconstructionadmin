@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getWorkflowCount = async () => {
   const data = await prismadb.definitions.count();

@@ -1,51 +1,51 @@
-"use client";
+'use client';
 
-import axios from "axios";
-import moment from "moment";
+import axios from 'axios';
+import moment from 'moment';
 import {
   DragDropContext,
   Droppable,
   Draggable,
   DropResult,
-} from "react-beautiful-dnd";
-import { useRouter } from "next/navigation";
-import { ChangeEvent, useEffect, useState } from "react";
-import { Check, EyeIcon, Pencil, PlusCircle, PlusIcon } from "lucide-react";
+} from 'react-beautiful-dnd';
+import { useRouter } from 'next/navigation';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { Check, EyeIcon, Pencil, PlusCircle, PlusIcon } from 'lucide-react';
 
 import {
   ChatBubbleIcon,
   DotsHorizontalIcon,
   ExclamationTriangleIcon,
   TrashIcon,
-} from "@radix-ui/react-icons";
+} from '@radix-ui/react-icons';
 
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/ui/hover-card";
+} from '@/components/ui/hover-card';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
-import AlertModal from "@/components/modals/alert-modal";
-import LoadingComponent from "@/components/LoadingComponent";
-import { DialogHeader } from "@/components/ui/dialog-document-view";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
+import AlertModal from '@/components/modals/alert-modal';
+import LoadingComponent from '@/components/LoadingComponent';
+import { DialogHeader } from '@/components/ui/dialog-document-view';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
-import NewSectionForm from "../forms/NewSection";
-import UpdateTaskDialog from "../../../dialogs/UpdateTask";
-import { getTaskDone } from "../../../actions/get-task-done";
+import NewSectionForm from '../forms/NewSection';
+import UpdateTaskDialog from '../../../dialogs/UpdateTask';
+import { getTaskDone } from '../../../actions/get-task-done';
 
 let timer: any;
 const timeout = 1000;
@@ -84,8 +84,8 @@ const Kanban = (props: any) => {
 
   const onDragEnd = async ({ source, destination }: DropResult) => {
     if (!destination) return;
-    console.log(source, "source - onDragEnd");
-    console.log(destination, "destination - onDragEnd");
+    console.log(source, 'source - onDragEnd');
+    console.log(destination, 'destination - onDragEnd');
     const sourceColIndex = data.findIndex(
       (e: any) => e.id === source.droppableId
     );
@@ -123,8 +123,8 @@ const Kanban = (props: any) => {
         destinationSectionId: destinationSectionId,
       });
       toast({
-        title: "Task moved",
-        description: "New task position saved in database",
+        title: 'Task moved',
+        description: 'New task position saved in database',
       });
     } catch (err) {
       alert(err);
@@ -138,14 +138,14 @@ const Kanban = (props: any) => {
       const newData = [...data].filter((e) => e.id !== sectionId);
       setData(newData);
       toast({
-        title: "Section deleted",
-        description: "Section deleted successfully",
+        title: 'Section deleted',
+        description: 'Section deleted successfully',
       });
     } catch (err) {
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Something went wrong, during deleting section",
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Something went wrong, during deleting section',
       });
     } finally {
       setIsLoadingSection(false);
@@ -173,8 +173,8 @@ const Kanban = (props: any) => {
           newTitle,
         });
         toast({
-          title: "Section title updated",
-          description: "New section title saved in database",
+          title: 'Section title updated',
+          description: 'New section title saved in database',
         });
       } catch (err) {
         alert(err);
@@ -200,15 +200,15 @@ const Kanban = (props: any) => {
       newData[index].tasks.unshift(task);
       setData(newData);
       toast({
-        title: "Task created",
-        description: "New task saved in database",
+        title: 'Task created',
+        description: 'New task saved in database',
       });
     } catch (error) {
       console.log(error);
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Something went wrong, during creating task",
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Something went wrong, during creating task',
       });
     } finally {
       setIsLoading(false);
@@ -221,12 +221,12 @@ const Kanban = (props: any) => {
     try {
       await getTaskDone(id);
       toast({
-        title: "Success, task marked as done.",
+        title: 'Success, task marked as done.',
       });
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error, task not marked as done.",
+        variant: 'destructive',
+        title: 'Error, task not marked as done.',
       });
     } finally {
       setIsLoading(false);
@@ -239,9 +239,9 @@ const Kanban = (props: any) => {
     setIsLoading(true);
     if (!selectedTask || !selectedTask.id || !selectedTask.section) {
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Invalid task. Please select a valid task to delete.",
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Invalid task. Please select a valid task to delete.',
       });
       setIsLoading(false);
       return;
@@ -254,15 +254,15 @@ const Kanban = (props: any) => {
         },
       });
       toast({
-        title: "Task deleted",
-        description: "Task deleted successfully",
+        title: 'Task deleted',
+        description: 'Task deleted successfully',
       });
     } catch (error) {
       console.log(error);
       toast({
-        variant: "destructive",
-        title: "Task deleted",
-        description: "Something went wrong, during deleting task",
+        variant: 'destructive',
+        title: 'Task deleted',
+        description: 'Something went wrong, during deleting task',
       });
     } finally {
       setIsLoading(false);
@@ -289,7 +289,7 @@ const Kanban = (props: any) => {
         onConfirm={onDeleteSection}
         loading={isLoadingSection}
       />
-      <div className="overflow-scroll flex flex-col space-y-2  ">
+      <div className="flex flex-col space-y-2 overflow-scroll">
         {/* Dialogs */}
         <Dialog
           open={sectionOpenDialog}
@@ -320,15 +320,15 @@ const Kanban = (props: any) => {
             <UpdateTaskDialog
               users={users}
               boards={boards}
-              boardId={boardId}              
+              boardId={boardId}
               initialData={selectedTask}
               onDone={() => setUpdateOpenSheet(false)}
             />
             <div className="flex w-full justify-end pt-2">
               <SheetTrigger asChild>
-                <Button variant={"destructive"}>Close</Button>
+                <Button variant={'destructive'}>Close</Button>
               </SheetTrigger>
-            </div>            
+            </div>
           </SheetContent>
         </Sheet>
         {
@@ -340,10 +340,10 @@ const Kanban = (props: any) => {
         </div>
         <div className="flex">
           <DragDropContext onDragEnd={onDragEnd}>
-            <div className="flex flex-row items-start  ">
+            <div className="flex flex-row items-start">
               {data?.map((section: any, index: any) => (
                 <div
-                  className="flex flex-col items-center justify-center  h-full w-80 "
+                  className="flex h-full w-80 flex-col items-center justify-center"
                   key={section.id}
                 >
                   <Droppable key={section.id} droppableId={section.id}>
@@ -351,25 +351,25 @@ const Kanban = (props: any) => {
                       <div
                         ref={provided.innerRef}
                         {...provided.droppableProps}
-                        className="flex flex-col  w-full h-full px-2 "
+                        className="flex h-full w-full flex-col px-2"
                       >
-                        <div className="flex flex-col items-center justify-center py-2   ">
-                          <div className="flex flex-row items-center justify-between w-full border ">
+                        <div className="flex flex-col items-center justify-center py-2">
+                          <div className="flex w-full flex-row items-center justify-between border">
                             <input
                               type="text"
-                              className="  pl-2  px-1 py-1 rounded-md m-2  "
+                              className="m-2 rounded-md px-1 py-1 pl-2"
                               placeholder={section?.title}
                               onChange={(e) =>
                                 updateSectionTitle(e, section.id)
                               }
                             />
                             <div className="flex items-center justify-end pr-2">
-                              <span className="border rounded-full px-2 m-2">
+                              <span className="m-2 rounded-full border px-2">
                                 {section?.tasks?.length}
                               </span>
 
                               <TrashIcon
-                                className="w-4 h-4"
+                                className="h-4 w-4"
                                 onClick={() => {
                                   setSectionId(section.id);
                                   setOpenSectionAlert(true);
@@ -378,12 +378,12 @@ const Kanban = (props: any) => {
                             </div>
                           </div>
                           <div className="w-full">
-                            <div className="flex flex-row items-center justify-center space-x-5 py-2  w-full">
+                            <div className="flex w-full flex-row items-center justify-center space-x-5 py-2">
                               <button
-                                className="w-80 border justify-center items-center flex flex-row "
+                                className="flex w-80 flex-row items-center justify-center border"
                                 onClick={() => createTask(section.id)}
                               >
-                                <PlusIcon className="w-6 h-6" />
+                                <PlusIcon className="h-6 w-6" />
                               </button>
                             </div>
                           </div>
@@ -401,35 +401,35 @@ const Kanban = (props: any) => {
                                   {...provided.draggableProps}
                                   {...provided.dragHandleProps}
                                   cursor={
-                                    snapshot.isDragging ? "grabbing" : "grab"
+                                    snapshot.isDragging ? 'grabbing' : 'grab'
                                   }
-                                  className="flex flex-col overflow-hidden items-start justify-center text-xs p-3 mb-2  rounded-md border  shadow-md "
-                                  type="button"                                  
+                                  className="mb-2 flex flex-col items-start justify-center overflow-hidden rounded-md border p-3 text-xs shadow-md"
+                                  type="button"
                                 >
-                                  <div className="flex flex-row justify-between mx-auto w-full py-1">
-                                    {/*  <pre>{JSON.stringify(task, null, 2)}</pre> */}                                  
-                                    <h2 className="grow font-bold text-sm ">
-                                      {task.title === ""
-                                        ? "Untitled"
+                                  <div className="mx-auto flex w-full flex-row justify-between py-1">
+                                    {/*  <pre>{JSON.stringify(task, null, 2)}</pre> */}
+                                    <h2 className="grow text-sm font-bold">
+                                      {task.title === ''
+                                        ? 'Untitled'
                                         : task.title}
                                     </h2>
                                     <div className="ml-1">
                                       {task?.dueDateAt &&
-                                        task.taskStatus != "COMPLETE" &&
+                                        task.taskStatus != 'COMPLETE' &&
                                         task.dueDateAt < Date.now() && (
                                           <HoverCard>
                                             <HoverCardTrigger>
-                                              <ExclamationTriangleIcon className="w-4 h-4 text-red-500" />
+                                              <ExclamationTriangleIcon className="h-4 w-4 text-red-500" />
                                             </HoverCardTrigger>
                                             <HoverCardContent>
                                               Attention! This task is overdue!
                                             </HoverCardContent>
                                           </HoverCard>
                                         )}
-                                      {task.taskStatus === "COMPLETE" && (
+                                      {task.taskStatus === 'COMPLETE' && (
                                         <HoverCard>
                                           <HoverCardTrigger>
-                                          <Check className="w-4 h-4 text-green-500" />
+                                            <Check className="h-4 w-4 text-green-500" />
                                           </HoverCardTrigger>
                                           <HoverCardContent>
                                             This task is done!
@@ -440,9 +440,9 @@ const Kanban = (props: any) => {
                                     <DropdownMenu>
                                       <DropdownMenuTrigger
                                         asChild
-                                        className="w-[25px] ml-1 "
+                                        className="ml-1 w-[25px]"
                                       >
-                                        <DotsHorizontalIcon className="w-4 h-4 text-slate-600 pl-2" />
+                                        <DotsHorizontalIcon className="h-4 w-4 pl-2 text-slate-600" />
                                       </DropdownMenuTrigger>
                                       <DropdownMenuContent className="w-[200px]">
                                         <DropdownMenuItem
@@ -453,10 +453,10 @@ const Kanban = (props: any) => {
                                             )
                                           }
                                         >
-                                          <EyeIcon className="w-4 h-4 opacity-50" />
+                                          <EyeIcon className="h-4 w-4 opacity-50" />
                                           View
                                         </DropdownMenuItem>
-                                        {task.taskStatus !== "COMPLETE" && (
+                                        {task.taskStatus !== 'COMPLETE' && (
                                           <DropdownMenuItem
                                             className="gap-2"
                                             onClick={() => {
@@ -464,18 +464,18 @@ const Kanban = (props: any) => {
                                               setSelectedTask(task);
                                             }}
                                           >
-                                            <Pencil className="w-4 h-4 opacity-50" />
+                                            <Pencil className="h-4 w-4 opacity-50" />
                                             Edit
                                           </DropdownMenuItem>
                                         )}
-                                        {task.taskStatus !== "COMPLETE" && (
+                                        {task.taskStatus !== 'COMPLETE' && (
                                           <DropdownMenuItem
                                             className="gap-2"
                                             onClick={() => {
                                               onDone(task.id);
                                             }}
                                           >
-                                            <Check className="w-4 h-4 opacity-50" />
+                                            <Check className="h-4 w-4 opacity-50" />
                                             Mark as done
                                           </DropdownMenuItem>
                                         )}
@@ -486,35 +486,35 @@ const Kanban = (props: any) => {
                                             setOpen(true);
                                           }}
                                         >
-                                          <TrashIcon className="w-4 h-4 opacity-50" />
+                                          <TrashIcon className="h-4 w-4 opacity-50" />
                                           Delete
                                         </DropdownMenuItem>
                                       </DropdownMenuContent>
                                     </DropdownMenu>
                                   </div>
                                   <div className="py-1">
-                                    Due date:{" "}
+                                    Due date:{' '}
                                     {moment(task.dueDateAt).format(
-                                      "YYYY-MM-DD"
+                                      'YYYY-MM-DD'
                                     )}
                                   </div>
                                   <div className="my-2">
                                     <p
                                       className={
-                                        task.priority === "normal"
+                                        task.priority === 'normal'
                                           ? `text-yellow-500`
-                                          : task.priority === "high"
-                                          ? `text-red-500`
-                                          : task.priority === "low"
-                                          ? `text-green-500`
-                                          : `text-slate-600`
+                                          : task.priority === 'high'
+                                            ? `text-red-500`
+                                            : task.priority === 'low'
+                                              ? `text-green-500`
+                                              : `text-slate-600`
                                       }
                                     >
                                       Priority: {task.priority}
                                     </p>
                                   </div>
                                   <HoverCard>
-                                    <HoverCardTrigger className="line-clamp-2 mb-2">
+                                    <HoverCardTrigger className="mb-2 line-clamp-2">
                                       {task.content}
                                     </HoverCardTrigger>
                                     <HoverCardContent>
@@ -533,9 +533,9 @@ const Kanban = (props: any) => {
                 </div>
               ))}
             </div>
-            <div className="flex justify-center items-center pl-3 h-16">
+            <div className="flex h-16 items-center justify-center pl-3">
               <PlusCircle
-                className="w-8 h-8 text-slate-600 cursor-pointer"
+                className="h-8 w-8 cursor-pointer text-slate-600"
                 onClick={() => {
                   setSectionOpenDialog(true);
                 }}

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 import {
   Card,
@@ -8,14 +8,14 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import RightViewModal from "@/components/modals/right-view-modal";
+} from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import RightViewModal from '@/components/modals/right-view-modal';
 
-import { columns } from "../contacts/table-components/columns";
-import { NewContactForm } from "../contacts/components/NewContactForm";
-import { ContactsDataTable } from "../contacts/table-components/data-table";
-import { useRouter } from "next/navigation";
+import { columns } from '../contacts/table-components/columns';
+import { NewContactForm } from '../contacts/components/NewContactForm';
+import { ContactsDataTable } from '../contacts/table-components/data-table';
+import { useRouter } from 'next/navigation';
 
 const ContactsView = ({ data, crmData }: any) => {
   const router = useRouter();
@@ -37,7 +37,7 @@ const ContactsView = ({ data, crmData }: any) => {
         <div className="flex justify-between">
           <div>
             <CardTitle
-              onClick={() => router.push("/crm/contacts")}
+              onClick={() => router.push('/crm/contacts')}
               className="cursor-pointer"
             >
               Contacts
@@ -45,7 +45,7 @@ const ContactsView = ({ data, crmData }: any) => {
             <CardDescription></CardDescription>
           </div>
           <div className="flex space-x-2">
-            <RightViewModal label={"+"} title="Create Contact" description="">
+            <RightViewModal label={'+'} title="Create Contact" description="">
               <NewContactForm users={users} accounts={accounts} />
             </RightViewModal>
           </div>
@@ -55,7 +55,7 @@ const ContactsView = ({ data, crmData }: any) => {
 
       <CardContent>
         {!data || data.length === 0 ? (
-          "No assigned contacts found"
+          'No assigned contacts found'
         ) : (
           <ContactsDataTable data={data} columns={columns} />
         )}

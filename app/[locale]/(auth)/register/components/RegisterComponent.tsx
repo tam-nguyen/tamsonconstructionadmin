@@ -1,15 +1,15 @@
-"use client";
-import { z } from "zod";
-import axios, { AxiosError } from "axios";
-import Link from "next/link";
-import { signIn } from "next-auth/react";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import React from "react";
-import { FingerprintIcon } from "lucide-react";
-import { zodResolver } from "@hookform/resolvers/zod";
+'use client';
+import { z } from 'zod';
+import axios, { AxiosError } from 'axios';
+import Link from 'next/link';
+import { signIn } from 'next-auth/react';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
+import React from 'react';
+import { FingerprintIcon } from 'lucide-react';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl';
 
 import {
   Card,
@@ -18,7 +18,7 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 import {
   Form,
   FormControl,
@@ -26,18 +26,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Icons } from "@/components/ui/icons";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
+} from '@/components/ui/select';
+import { Icons } from '@/components/ui/icons';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
 
 export function RegisterComponent() {
   const router = useRouter();
@@ -61,39 +61,39 @@ export function RegisterComponent() {
   const form = useForm<BillboardFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      username: "",
-      email: "",
-      language: "",
-      password: "",
-      confirmPassword: "",
+      name: '',
+      username: '',
+      email: '',
+      language: '',
+      password: '',
+      confirmPassword: '',
     },
   });
 
   const onSubmit = async (data: BillboardFormValues) => {
     setIsLoading(true);
     try {
-      const response = await axios.post("/api/user", data);
+      const response = await axios.post('/api/user', data);
       toast({
-        title: "Success",
-        description: "User created successfully, please login.",
+        title: 'Success',
+        description: 'User created successfully, please login.',
       });
 
       if (response.status === 200) {
-        router.push("/");
+        router.push('/');
       }
     } catch (error) {
       if (error instanceof AxiosError && error?.response?.data) {
         toast({
-          variant: "destructive",
-          title: "Error",
+          variant: 'destructive',
+          title: 'Error',
           description: error?.response?.data,
         });
       } else {
         toast({
-          variant: "destructive",
-          title: "Error",
-          description: error instanceof Error ? error?.message : "",
+          variant: 'destructive',
+          title: 'Error',
+          description: error instanceof Error ? error?.message : '',
         });
       }
     } finally {
@@ -105,7 +105,7 @@ export function RegisterComponent() {
     setIsLoading(true);
 
     try {
-      await signIn("google", {
+      await signIn('google', {
         callbackUrl: process.env.NEXT_PUBLIC_APP_URL,
       });
     } catch (error) {
@@ -118,7 +118,7 @@ export function RegisterComponent() {
     setIsLoading(true);
 
     try {
-      await signIn("github", {
+      await signIn('github', {
         callbackUrl: process.env.NEXT_PUBLIC_APP_URL,
       });
     } catch (error) {
@@ -129,13 +129,13 @@ export function RegisterComponent() {
   };
 
   //Localizations
-  const t = useTranslations("RegisterComponent");
+  const t = useTranslations('RegisterComponent');
 
   return (
-    <Card className="shadow-lg ">
+    <Card className="shadow-lg">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl">{t("cardTitle")}</CardTitle>
-        <CardDescription>{t("cardDescription")}:</CardDescription>
+        <CardTitle className="text-2xl">{t('cardTitle')}</CardTitle>
+        <CardDescription>{t('cardDescription')}:</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
         {/*  <pre>
@@ -151,7 +151,7 @@ export function RegisterComponent() {
               <Icons.gitHub className="mr-2 h-4 w-4 animate-spin" />
             ) : (
               <Icons.gitHub className="mr-2 h-4 w-4" />
-            )}{" "}
+            )}{' '}
             Github
           </Button>
           <Button
@@ -163,7 +163,7 @@ export function RegisterComponent() {
               <Icons.google className="mr-2 h-4 w-4 animate-spin" />
             ) : (
               <Icons.google className="mr-2 h-4 w-4" />
-            )}{" "}
+            )}{' '}
             Google
           </Button>
         </div>
@@ -246,11 +246,11 @@ export function RegisterComponent() {
                           <SelectValue placeholder="Select a language" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="flex overflow-y-auto h-56">
-                        {["en", "de", "cz", "uk"].map(
+                      <SelectContent className="flex h-56 overflow-y-auto">
+                        {['en', 'de', 'cz', 'uk'].map(
                           (lng: string, index: number) => (
                             <SelectItem key={index} value={lng}>
-                              {t("locale", { locale: lng })}
+                              {t('locale', { locale: lng })}
                             </SelectItem>
                           )
                         )}
@@ -260,7 +260,7 @@ export function RegisterComponent() {
                   </FormItem>
                 )}
               />
-              <div className="flex items-center w-full ">
+              <div className="flex w-full items-center">
                 <FormField
                   control={form.control}
                   name="password"
@@ -272,7 +272,7 @@ export function RegisterComponent() {
                           className="w-full"
                           disabled={isLoading}
                           placeholder="Password"
-                          type={show ? "text" : "password"}
+                          type={show ? 'text' : 'password'}
                           {...field}
                         />
                       </FormControl>
@@ -281,13 +281,13 @@ export function RegisterComponent() {
                   )}
                 />
                 <span
-                  className="flex px-4 pt-7 w-16"
+                  className="flex w-16 px-4 pt-7"
                   onClick={() => setShow(!show)}
                 >
                   <FingerprintIcon size={25} className="text-gray-400" />
                 </span>
               </div>
-              <div className="flex items-center w-full ">
+              <div className="flex w-full items-center">
                 <FormField
                   control={form.control}
                   name="confirmPassword"
@@ -299,7 +299,7 @@ export function RegisterComponent() {
                           className="w-full"
                           disabled={isLoading}
                           placeholder="Password"
-                          type={show ? "text" : "password"}
+                          type={show ? 'text' : 'password'}
                           {...field}
                         />
                       </FormControl>
@@ -308,7 +308,7 @@ export function RegisterComponent() {
                   )}
                 />
                 <span
-                  className="flex px-4 pt-7 w-16"
+                  className="flex w-16 px-4 pt-7"
                   onClick={() => setShow(!show)}
                 >
                   <FingerprintIcon size={25} className="text-gray-400" />
@@ -326,8 +326,8 @@ export function RegisterComponent() {
       </CardContent>
       <CardFooter className="flex flex-col space-y-5">
         <div className="text-sm text-gray-500">
-          Already have an account?{" "}
-          <Link href={"/sign-in"} className="text-blue-500">
+          Already have an account?{' '}
+          <Link href={'/sign-in'} className="text-blue-500">
             sign-in
           </Link>
         </div>

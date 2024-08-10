@@ -1,10 +1,10 @@
-import { prismadb } from "@/lib/prisma";
-import initNotionClient from "@/lib/notion";
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
-import { Session } from "next-auth";
-import { Client as NotionClient } from "@notionhq/client";
-import moment from "moment";
+import { prismadb } from '@/lib/prisma';
+import initNotionClient from '@/lib/notion';
+import { authOptions } from '@/lib/auth';
+import { getServerSession } from 'next-auth';
+import { Session } from 'next-auth';
+import { Client as NotionClient } from '@notionhq/client';
+import moment from 'moment';
 
 type NotionItem = {
   id: string;
@@ -18,7 +18,7 @@ async function fetchDatabaseItems(
   notion: NotionClient,
   notionDbId: string,
   startCursor?: string
-): Promise<Awaited<ReturnType<typeof notion.databases.query>>["results"]> {
+): Promise<Awaited<ReturnType<typeof notion.databases.query>>['results']> {
   const response = await notion.databases.query({
     database_id: notionDbId,
     start_cursor: startCursor,
@@ -31,7 +31,7 @@ async function fetchDatabaseItems(
     const nextItems = await fetchDatabaseItems(
       notion,
       notionDbId,
-      response.next_cursor || ""
+      response.next_cursor || ''
     );
     return items.concat(nextItems);
   } else {
@@ -51,7 +51,7 @@ export const getNotions = async (): Promise<
 
   const notion = await initNotionClient(userId);
 
-  if ("error" in notion) {
+  if ('error' in notion) {
     return notion;
   }
 
@@ -66,10 +66,10 @@ export const getNotions = async (): Promise<
 
     if (!notionDb) {
       const notionItems = {
-        error: "API key not found in the database.",
+        error: 'API key not found in the database.',
       };
       //return notionItems;
-      console.log("User has no notion database enabled yet.");
+      console.log('User has no notion database enabled yet.');
       return notionItems;
     }
 
@@ -81,24 +81,24 @@ export const getNotions = async (): Promise<
     ).catch((error) => {
       //console.error(error);
       const notionItems = {
-        error: "API key is invalid.",
+        error: 'API key is invalid.',
       };
       return notionItems;
     });
 
-    if (typeof databases === "object" && Array.isArray(databases)) {
+    if (typeof databases === 'object' && Array.isArray(databases)) {
       const notionItems = databases.map(
         (item: any) =>
           ({
             id: item.id,
-            createdAt: moment(item.created_time).format("YYYY-MM-DD"),
+            createdAt: moment(item.created_time).format('YYYY-MM-DD'),
             title:
               item.properties.Tweet.title[0].plain_text.substring(0, 60) +
-              " ...",
+              ' ...',
             urlShort:
-              item.properties["Tweet Link"]?.url?.substring(0, 40) + " ...",
-            url: item.properties["Tweet Link"]?.url,
-          } satisfies NotionItem)
+              item.properties['Tweet Link']?.url?.substring(0, 40) + ' ...',
+            url: item.properties['Tweet Link']?.url,
+          }) satisfies NotionItem
       );
 
       return notionItems;

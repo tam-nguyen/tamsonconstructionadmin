@@ -1,6 +1,6 @@
-import { authOptions } from "@/lib/auth";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
+import { authOptions } from '@/lib/auth';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
 
 export const getTasks = async () => {
   const session = await getServerSession(authOptions);
@@ -13,7 +13,7 @@ export const getTasks = async () => {
           user: userId,
         },
         {
-          visibility: "public",
+          visibility: 'public',
         },
       ],
     },
@@ -25,7 +25,7 @@ export const getTasks = async () => {
       },
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   });
 
@@ -59,7 +59,7 @@ export const getTasks = async () => {
         },
       },
     },
-    orderBy: { createdAt: "desc" },
+    orderBy: { createdAt: 'desc' },
   });
   return data;
 };
@@ -76,15 +76,18 @@ export const getTasksByMonth = async () => {
     return {};
   }
 
-  const tasksByMonth = tasks.reduce((acc: Record<string, number>, task) => {
-    if (task?.createdAt) {
-      const month = new Date(task.createdAt).toLocaleString("default", {
-        month: "long",
-      });
-      acc[month] = (acc[month] || 0) + 1;
-    }
-    return acc;
-  }, {} satisfies Record<string, number>);
+  const tasksByMonth = tasks.reduce(
+    (acc: Record<string, number>, task) => {
+      if (task?.createdAt) {
+        const month = new Date(task.createdAt).toLocaleString('default', {
+          month: 'long',
+        });
+        acc[month] = (acc[month] || 0) + 1;
+      }
+      return acc;
+    },
+    {} satisfies Record<string, number>
+  );
 
   const chartData = Object.keys(tasksByMonth).map((month) => {
     return {

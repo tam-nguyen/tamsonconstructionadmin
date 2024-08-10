@@ -1,8 +1,8 @@
-import { GitFork } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { GitFork } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-import React from "react";
+import React from 'react';
 
 type Props = {
   open: boolean;
@@ -11,15 +11,15 @@ type Props = {
 
 const WorkflowsModuleMenu = ({ open, title }: Props) => {
   const pathname = usePathname();
-  const isPath = pathname.includes("workflows");
+  const isPath = pathname.includes('workflows');
   return (
-    <div className="flex flex-row items-center mx-auto p-2">
+    <div className="mx-auto flex flex-row items-center p-2">
       <Link
-        href={"/workflows"}
-        className={`flex gap-2 p-2 ${isPath ? "text-muted-foreground" : null}`}
+        href={'/workflows'}
+        className={`flex gap-2 p-2 ${isPath ? 'text-muted-foreground' : null}`}
       >
         <GitFork className="w-6" />
-        <span className={open ? "" : "hidden"}>Workflows</span>
+        <span className={open ? '' : 'hidden'}>Workflows</span>
       </Link>
     </div>
   );

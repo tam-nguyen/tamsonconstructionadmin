@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { NextResponse } from 'next/server';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
@@ -9,15 +9,15 @@ export async function POST(req: Request) {
   const { title, description, visibility } = body;
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   if (!title) {
-    return new NextResponse("Missing project name", { status: 400 });
+    return new NextResponse('Missing project name', { status: 400 });
   }
 
   if (!description) {
-    return new NextResponse("Missing project description", { status: 400 });
+    return new NextResponse('Missing project description', { status: 400 });
   }
 
   try {
@@ -31,22 +31,22 @@ export async function POST(req: Request) {
         position: boardsCount > 0 ? boardsCount : 0,
         visibility: visibility,
         sharedWith: [session.user.id],
-        createdBy: session.user.id,        
+        createdBy: session.user.id,
       },
     });
 
     await prismadb.sections.create({
       data: {
         board: newBoard.id,
-        title: "Backlog",
+        title: 'Backlog',
         position: 0,
       },
     });
 
     return NextResponse.json({ newBoard }, { status: 200 });
   } catch (error) {
-    console.log("[NEW_BOARD_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[NEW_BOARD_POST]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }
 
@@ -56,15 +56,15 @@ export async function PUT(req: Request) {
   const { id, title, description, visibility } = body;
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   if (!title) {
-    return new NextResponse("Missing project name", { status: 400 });
+    return new NextResponse('Missing project name', { status: 400 });
   }
 
   if (!description) {
-    return new NextResponse("Missing project description", { status: 400 });
+    return new NextResponse('Missing project description', { status: 400 });
   }
 
   try {
@@ -77,16 +77,16 @@ export async function PUT(req: Request) {
         description: description,
         visibility: visibility,
         updatedBy: session.user.id,
-        updatedAt: new Date(),        
+        updatedAt: new Date(),
       },
     });
 
     return NextResponse.json(
-      { message: "Board updated successfully" },
+      { message: 'Board updated successfully' },
       { status: 200 }
     );
   } catch (error) {
-    console.log("[UPDATE_BOARD_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[UPDATE_BOARD_POST]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

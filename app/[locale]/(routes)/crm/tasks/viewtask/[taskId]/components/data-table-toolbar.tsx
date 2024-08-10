@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { Cross2Icon } from "@radix-ui/react-icons";
-import { Table } from "@tanstack/react-table";
+import { Cross2Icon } from '@radix-ui/react-icons';
+import { Table } from '@tanstack/react-table';
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { DataTableViewOptions } from "./data-table-view-options";
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { DataTableViewOptions } from './data-table-view-options';
 
-import { priorities, statuses } from "../data/data";
-import { DataTableFacetedFilter } from "./data-table-faceted-filter";
+import { priorities, statuses } from '../data/data';
+import { DataTableFacetedFilter } from './data-table-faceted-filter';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -25,23 +25,23 @@ export function DataTableToolbar<TData>({
         <Input
           placeholder="Document name ..."
           value={
-            (table.getColumn("document_name")?.getFilterValue() as string) ?? ""
+            (table.getColumn('document_name')?.getFilterValue() as string) ?? ''
           }
           onChange={(event) =>
-            table.getColumn("document_name")?.setFilterValue(event.target.value)
+            table.getColumn('document_name')?.setFilterValue(event.target.value)
           }
           className="h-8 w-[150px] lg:w-[350px]"
         />
-        {table.getColumn("taskStatus") && (
+        {table.getColumn('taskStatus') && (
           <DataTableFacetedFilter
-            column={table.getColumn("taskStatus")}
+            column={table.getColumn('taskStatus')}
             title="Status"
             options={statuses}
           />
         )}
-        {table.getColumn("priority") && (
+        {table.getColumn('priority') && (
           <DataTableFacetedFilter
-            column={table.getColumn("priority")}
+            column={table.getColumn('priority')}
             title="Priority"
             options={priorities}
           />

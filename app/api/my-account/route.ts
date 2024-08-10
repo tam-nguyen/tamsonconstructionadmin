@@ -1,7 +1,7 @@
-import { authOptions } from "@/lib/auth";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { authOptions } from '@/lib/auth';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { NextResponse } from 'next/server';
 
 //Endpoint: /api/my-account
 
@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session) {
     return NextResponse.json(
-      { message: "Unauthorized" },
+      { message: 'Unauthorized' },
       {
         status: 401,
       }
@@ -91,14 +91,14 @@ export async function POST(req: Request) {
     },
   });
 
-  return NextResponse.json({ message: "PUT" }, { status: 200 });
+  return NextResponse.json({ message: 'PUT' }, { status: 200 });
 }
 //Endpoint for updating my account
 export async function PUT(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session) {
     return NextResponse.json(
-      { message: "Unauthorized" },
+      { message: 'Unauthorized' },
       {
         status: 401,
       }
@@ -106,11 +106,11 @@ export async function PUT(req: Request) {
   }
 
   const body = await req.json();
-  console.log(body, "body");
+  console.log(body, 'body');
 
   if (!body.id) {
     return NextResponse.json(
-      { message: "Misssing ID in body, ID is required" },
+      { message: 'Misssing ID in body, ID is required' },
       {
         status: 400,
       }
@@ -191,5 +191,5 @@ export async function PUT(req: Request) {
     },
   });
 
-  return NextResponse.json({ message: "PUT" }, { status: 200 });
+  return NextResponse.json({ message: 'PUT' }, { status: 200 });
 }

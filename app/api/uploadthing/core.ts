@@ -1,7 +1,7 @@
-import { authOptions } from "@/lib/auth";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { createUploadthing, type FileRouter } from "uploadthing/next";
+import { authOptions } from '@/lib/auth';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { createUploadthing, type FileRouter } from 'uploadthing/next';
 
 const f = createUploadthing();
 
@@ -17,14 +17,14 @@ export const ourFileRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
 
   //FileRoute for uploading images
-  imageUploader: f({ image: { maxFileSize: "4MB" } })
+  imageUploader: f({ image: { maxFileSize: '4MB' } })
     // Set permissions and file types for this FileRoute
     .middleware(async ({ req }) => {
       // This code runs on your server before upload
       const user = await auth(req);
 
       // If you throw, the user will not be able to upload
-      if (!user) throw new Error("Unauthorized");
+      if (!user) throw new Error('Unauthorized');
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: user.id };
@@ -35,11 +35,11 @@ export const ourFileRouter = {
       await prismadb.documents.create({
         data: {
           document_name: file.name,
-          description: "new document",
+          description: 'new document',
           document_file_url: file.url,
           key: file.key,
           size: file.size,
-          document_file_mimeType: `image/${file.name.split(".").pop()}`,
+          document_file_mimeType: `image/${file.name.split('.').pop()}`,
           createdBy: metadata.userId,
           assigned_user: metadata.userId,
           localFile: file.url,
@@ -47,20 +47,20 @@ export const ourFileRouter = {
         },
       });
 
-      console.log("Upload complete for userId:", metadata.userId);
-      console.log("file data:", file);
+      console.log('Upload complete for userId:', metadata.userId);
+      console.log('file data:', file);
       //TODO: save file.url to database
     }),
 
   //FileRoute for uploading profile photos
-  profilePhotoUploader: f({ image: { maxFileSize: "4MB" } })
+  profilePhotoUploader: f({ image: { maxFileSize: '4MB' } })
     // Set permissions and file types for this FileRoute
     .middleware(async ({ req }) => {
       // This code runs on your server before upload
       const user = await auth(req);
 
       // If you throw, the user will not be able to upload
-      if (!user) throw new Error("Unauthorized");
+      if (!user) throw new Error('Unauthorized');
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: user.id };
@@ -68,14 +68,14 @@ export const ourFileRouter = {
     .onUploadComplete(async ({ metadata, file }) => {}),
 
   //FileRoute for documents
-  pdfUploader: f({ pdf: { maxFileSize: "64MB", maxFileCount: 1 } })
+  pdfUploader: f({ pdf: { maxFileSize: '64MB', maxFileCount: 1 } })
     // Set permissions and file types for this FileRoute
     .middleware(async ({ req }) => {
       // This code runs on your server before upload
       const user = await auth(req);
 
       // If you throw, the user will not be able to upload
-      if (!user) throw new Error("Unauthorized");
+      if (!user) throw new Error('Unauthorized');
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: user.id };
@@ -88,28 +88,28 @@ export const ourFileRouter = {
       await prismadb.documents.create({
         data: {
           document_name: file.name,
-          description: "new document",
+          description: 'new document',
           document_file_url: file.url,
           key: file.key,
           size: file.size,
-          document_file_mimeType: "application/pdf",
+          document_file_mimeType: 'application/pdf',
           createdBy: metadata.userId,
           assigned_user: metadata.userId,
           localFile: file.url,
-          employeeID: metadata.userId,          
+          employeeID: metadata.userId,
         },
       });
     }),
 
   //FileRoute for documents
-  docUploader: f({ blob: { maxFileSize: "64MB", maxFileCount: 1 } })
+  docUploader: f({ blob: { maxFileSize: '64MB', maxFileCount: 1 } })
     // Set permissions and file types for this FileRoute
     .middleware(async ({ req }) => {
       // This code runs on your server before upload
       const user = await auth(req);
 
       // If you throw, the user will not be able to upload
-      if (!user) throw new Error("Unauthorized");
+      if (!user) throw new Error('Unauthorized');
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: user.id };
@@ -122,15 +122,15 @@ export const ourFileRouter = {
       await prismadb.documents.create({
         data: {
           document_name: file.name,
-          description: "new document",
+          description: 'new document',
           document_file_url: file.url,
           key: file.key,
           size: file.size,
-          document_file_mimeType: "application/docs",
+          document_file_mimeType: 'application/docs',
           createdBy: metadata.userId,
           assigned_user: metadata.userId,
           localFile: file.url,
-          employeeID: metadata.userId,          
+          employeeID: metadata.userId,
         },
       });
     }),

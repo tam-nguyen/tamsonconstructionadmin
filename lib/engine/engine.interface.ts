@@ -1,5 +1,5 @@
-import type { WorkflowLogger } from "./logger";
-import type { Task } from "./tasks";
+import type { WorkflowLogger } from './logger';
+import type { Task } from './tasks';
 
 export interface ProcessorProcess {
   process(

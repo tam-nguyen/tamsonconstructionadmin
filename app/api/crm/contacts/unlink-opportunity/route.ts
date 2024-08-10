@@ -1,7 +1,7 @@
-import { authOptions } from "@/lib/auth";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { authOptions } from '@/lib/auth';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { NextResponse } from 'next/server';
 
 //Route to unlink contact from opportunity
 export async function PUT(
@@ -10,22 +10,22 @@ export async function PUT(
 ) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   if (!params.contactId) {
-    return new NextResponse("contact ID is required", { status: 400 });
+    return new NextResponse('contact ID is required', { status: 400 });
   }
 
   const body = await req.json();
 
   const { opportunityId } = body;
 
-  console.log(params.contactId, "contactId");
-  console.log(opportunityId, "opportunityId");
+  console.log(params.contactId, 'contactId');
+  console.log(opportunityId, 'opportunityId');
 
   if (!opportunityId) {
-    return new NextResponse("opportunity ID is required", { status: 400 });
+    return new NextResponse('opportunity ID is required', { status: 400 });
   }
 
   try {
@@ -45,9 +45,9 @@ export async function PUT(
   } catch (error) {
     console.log(error);
     return new NextResponse(
-      "[CONTACTS - UNLINK - PUT] - Error, somethings went wrong",
+      '[CONTACTS - UNLINK - PUT] - Error, somethings went wrong',
       { status: 500 }
     );
   }
-  return NextResponse.json("Hello World", { status: 200 });
+  return NextResponse.json('Hello World', { status: 200 });
 }

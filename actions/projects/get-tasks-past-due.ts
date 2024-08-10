@@ -1,12 +1,12 @@
-import { authOptions } from "@/lib/auth";
-import { prismadb } from "@/lib/prisma";
-import dayjs from "dayjs";
-import { getServerSession } from "next-auth";
+import { authOptions } from '@/lib/auth';
+import { prismadb } from '@/lib/prisma';
+import dayjs from 'dayjs';
+import { getServerSession } from 'next-auth';
 
 export const getTasksPastDue = async () => {
   const session = await getServerSession(authOptions);
-  const today = dayjs().startOf("day");
-  const nextWeek = dayjs().add(7, "day").startOf("day");
+  const today = dayjs().startOf('day');
+  const nextWeek = dayjs().add(7, 'day').startOf('day');
   if (session) {
     const getTaskPastDue = await prismadb.tasks.findMany({
       where: {
@@ -21,7 +21,7 @@ export const getTasksPastDue = async () => {
           },
           {
             taskStatus: {
-              not: "COMPLETE",
+              not: 'COMPLETE',
             },
           },
         ],
@@ -41,7 +41,7 @@ export const getTasksPastDue = async () => {
             },
           },
           orderBy: {
-            createdAt: "desc",
+            createdAt: 'desc',
           },
         },
       },
@@ -62,7 +62,7 @@ export const getTasksPastDue = async () => {
           },
           {
             taskStatus: {
-              not: "COMPLETE",
+              not: 'COMPLETE',
             },
           },
         ],
@@ -82,7 +82,7 @@ export const getTasksPastDue = async () => {
             },
           },
           orderBy: {
-            createdAt: "desc",
+            createdAt: 'desc',
           },
         },
       },

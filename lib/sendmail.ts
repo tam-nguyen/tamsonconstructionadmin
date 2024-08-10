@@ -1,11 +1,11 @@
-import nodemailer from "nodemailer";
+import nodemailer from 'nodemailer';
 
 interface EmailOptions {
   from: string | undefined;
   to: string;
   subject: string;
   text: string;
-  html?: string;  
+  html?: string;
 }
 
 export default async function sendEmail(

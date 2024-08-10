@@ -1,13 +1,13 @@
-import { Processor } from "@/lib/engine/processor";
-import { Task } from "@/lib/engine/tasks";
-import { prismadb } from "@/lib/prisma";
-import { safeAsync } from "@/lib/utils";
-import { ServerRuntime } from "next";
-import { NextResponse } from "next/server";
-import { z } from "zod";
+import { Processor } from '@/lib/engine/processor';
+import { Task } from '@/lib/engine/tasks';
+import { prismadb } from '@/lib/prisma';
+import { safeAsync } from '@/lib/utils';
+import { ServerRuntime } from 'next';
+import { NextResponse } from 'next/server';
+import { z } from 'zod';
 
-export const runtime: ServerRuntime = "nodejs";
-export const dynamic = "force-dynamic";
+export const runtime: ServerRuntime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 const bodySchema = z.object({
   workflowRuntimeId: z.string(),
@@ -16,12 +16,12 @@ const bodySchema = z.object({
 });
 
 export const POST = async (req: Request) => {
-  const authValue = req.headers.get("x-api-key");
+  const authValue = req.headers.get('x-api-key');
 
   if (!authValue) {
     return NextResponse.json(
       {
-        message: "No Auth Header found",
+        message: 'No Auth Header found',
       },
       {
         status: 401,
@@ -34,7 +34,7 @@ export const POST = async (req: Request) => {
   if (!bodyResult.success) {
     return NextResponse.json(
       {
-        message: "Body json parse failed",
+        message: 'Body json parse failed',
       },
       {
         status: 400,
@@ -48,7 +48,7 @@ export const POST = async (req: Request) => {
     console.error(requestBodyResult.error);
     return NextResponse.json(
       {
-        message: "Bad Request body",
+        message: 'Bad Request body',
         error: requestBodyResult.error.flatten(),
       },
       {
@@ -61,7 +61,7 @@ export const POST = async (req: Request) => {
     prismadb.runtimes.findUnique({
       where: {
         id: requestBodyResult.data.workflowRuntimeId,
-      }
+      },
     })
   );
 
@@ -73,7 +73,7 @@ export const POST = async (req: Request) => {
 
     return NextResponse.json(
       {
-        message: "Internal Server Error",
+        message: 'Internal Server Error',
         error: `Runtimes findUnique failed for ${requestBodyResult.data.workflowRuntimeId}`,
       },
       {
@@ -85,7 +85,7 @@ export const POST = async (req: Request) => {
   if (!runtimeResult.data) {
     return NextResponse.json(
       {
-        message: "Bad Request",
+        message: 'Bad Request',
         error: `No data found for ${requestBodyResult.data.workflowRuntimeId}`,
       },
       {
@@ -94,10 +94,10 @@ export const POST = async (req: Request) => {
     );
   }
 
-  if (runtimeResult.data.workflowStatus === "completed") {
+  if (runtimeResult.data.workflowStatus === 'completed') {
     return NextResponse.json(
       {
-        message: "Bad Request",
+        message: 'Bad Request',
         error: `Runtime for ${requestBodyResult.data.workflowRuntimeId} is completed`,
       },
       {
@@ -115,7 +115,7 @@ export const POST = async (req: Request) => {
   if (!listenTask) {
     return NextResponse.json(
       {
-        message: "Bad Request",
+        message: 'Bad Request',
         error: `Can not find Listen Task for Runtime ${requestBodyResult.data.workflowRuntimeId} and Task Name ${requestBodyResult.data.taskName}`,
       },
       {
@@ -124,10 +124,10 @@ export const POST = async (req: Request) => {
     );
   }
 
-  if (listenTask.status === "completed") {
+  if (listenTask.status === 'completed') {
     return NextResponse.json(
       {
-        message: "Bad Request",
+        message: 'Bad Request',
         error: `Listen Task for Runtime ${requestBodyResult.data.workflowRuntimeId} and Task Name ${requestBodyResult.data.taskName} is completed`,
       },
       {
@@ -139,7 +139,7 @@ export const POST = async (req: Request) => {
   if (listenTask?.params?.apiKey !== authValue) {
     return NextResponse.json(
       {
-        message: "Unauthorized",
+        message: 'Unauthorized',
       },
       {
         status: 401,
@@ -177,7 +177,7 @@ export const POST = async (req: Request) => {
 
   return NextResponse.json(
     {
-      message: "Processing complete",
+      message: 'Processing complete',
       data: {
         success: listenTaskProcessResult.success,
       },

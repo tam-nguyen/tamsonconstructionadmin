@@ -1,13 +1,13 @@
-import { getAccounts } from "@/actions/crm/get-accounts";
-import { getContacts } from "@/actions/crm/get-contacts";
-import { getAllCrmData } from "@/actions/crm/get-crm-data";
-import { getLeads } from "@/actions/crm/get-leads";
-import { getOpportunitiesFull } from "@/actions/crm/get-opportunities-with-includes";
-import React from "react";
-import AccountsView from "./AccountsView";
-import ContactsView from "./ContactsView";
-import OpportunitiesView from "./OpportunitiesView";
-import LeadsView from "./LeadsView";
+import { getAccounts } from '@/actions/crm/get-accounts';
+import { getContacts } from '@/actions/crm/get-contacts';
+import { getAllCrmData } from '@/actions/crm/get-crm-data';
+import { getLeads } from '@/actions/crm/get-leads';
+import { getOpportunitiesFull } from '@/actions/crm/get-opportunities-with-includes';
+import React from 'react';
+import AccountsView from './AccountsView';
+import ContactsView from './ContactsView';
+import OpportunitiesView from './OpportunitiesView';
+import LeadsView from './LeadsView';
 
 const MainPageView = async () => {
   const crmData = await getAllCrmData();

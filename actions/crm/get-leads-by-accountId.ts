@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getLeadsByAccountId = async (accountId: string) => {
   const data = await prismadb.crm_Leads.findMany({
@@ -13,7 +13,7 @@ export const getLeadsByAccountId = async (accountId: string) => {
       },
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   });
   return data;

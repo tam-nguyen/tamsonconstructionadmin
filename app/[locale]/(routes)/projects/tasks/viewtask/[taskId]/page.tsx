@@ -1,20 +1,20 @@
-import { getTask } from "@/actions/projects/get-task";
-import React from "react";
-import moment from "moment";
+import { getTask } from '@/actions/projects/get-task';
+import React from 'react';
+import moment from 'moment';
 
-import { getDocuments } from "@/actions/documents/get-documents";
-import { getTaskComments } from "@/actions/projects/get-task-comments";
-import { getTaskDocuments } from "@/actions/projects/get-task-documents";
+import { getDocuments } from '@/actions/documents/get-documents';
+import { getTaskComments } from '@/actions/projects/get-task-comments';
+import { getTaskDocuments } from '@/actions/projects/get-task-documents';
 
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
 
-import { TeamConversations } from "./components/team-conversation";
-import { TaskDataTable } from "./components/data-table";
-import { columns } from "./components/columns";
-import { columnsTask } from "./components/columns-task";
+import { TeamConversations } from './components/team-conversation';
+import { TaskDataTable } from './components/data-table';
+import { columns } from './components/columns';
+import { columnsTask } from './components/columns-task';
 
-import TaskViewActions from "./components/TaskViewActions";
+import TaskViewActions from './components/TaskViewActions';
 import {
   Card,
   CardContent,
@@ -22,12 +22,12 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Calendar, Shield, User } from "lucide-react";
-import { getActiveUsers } from "@/actions/get-users";
-import { getBoards } from "@/actions/projects/get-boards";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+} from '@/components/ui/card';
+import { Calendar, Shield, User } from 'lucide-react';
+import { getActiveUsers } from '@/actions/get-users';
+import { getBoards } from '@/actions/projects/get-boards';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 type TaskPageProps = {
   params: {
@@ -37,7 +37,7 @@ type TaskPageProps = {
 
 const TaskPage = async ({ params }: TaskPageProps) => {
   const session = await getServerSession(authOptions);
-  const user = session?.user;  
+  const user = session?.user;
 
   const { taskId } = params;
   const task: any = await getTask(taskId);
@@ -50,9 +50,9 @@ const TaskPage = async ({ params }: TaskPageProps) => {
   //console.log(taskDocuments, "taskDocuments");
 
   return (
-    <div className="flex flex-col md:flex-row w-full px-2 space-x-2 ">
-      <div className="flex flex-col w-full md:w-2/3">
-        <div className="w-full border rounded-lg mb-5">
+    <div className="flex w-full flex-col space-x-2 px-2 md:flex-row">
+      <div className="flex w-full flex-col md:w-2/3">
+        <div className="mb-5 w-full rounded-lg border">
           {/*      <pre>
             <code>{JSON.stringify(task, null, 2)}</code>
           </pre> */}
@@ -70,7 +70,7 @@ const TaskPage = async ({ params }: TaskPageProps) => {
                       Date created
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      {moment(task.createdAt).format("YYYY-MM-DD HH:mm:ss")}
+                      {moment(task.createdAt).format('YYYY-MM-DD HH:mm:ss')}
                     </p>
                   </div>
                 </div>
@@ -79,7 +79,7 @@ const TaskPage = async ({ params }: TaskPageProps) => {
                   <div className="space-y-1">
                     <p className="text-sm font-medium leading-none">Date due</p>
                     <p className="text-sm text-muted-foreground">
-                      {moment(task.dueDateAt).format("YYYY-MM-DD HH:mm")}
+                      {moment(task.dueDateAt).format('YYYY-MM-DD HH:mm')}
                     </p>
                   </div>
                 </div>
@@ -90,7 +90,7 @@ const TaskPage = async ({ params }: TaskPageProps) => {
                       Last modified
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      {moment(task.lastEditedAt).format("YYYY-MM-DD HH:mm:ss")}
+                      {moment(task.lastEditedAt).format('YYYY-MM-DD HH:mm:ss')}
                     </p>
                   </div>
                 </div>
@@ -100,7 +100,7 @@ const TaskPage = async ({ params }: TaskPageProps) => {
                     <p className="text-sm font-medium leading-none">Priority</p>
                     <Badge
                       variant={
-                        task.priority === "high" ? `destructive` : `outline`
+                        task.priority === 'high' ? `destructive` : `outline`
                       }
                     >
                       {task.priority}
@@ -113,7 +113,7 @@ const TaskPage = async ({ params }: TaskPageProps) => {
                     <p className="text-sm font-medium leading-none">Status</p>
                     <Badge
                       variant={
-                        task.taskStatus === "COMPLETE"
+                        task.taskStatus === 'COMPLETE'
                           ? `destructive`
                           : `outline`
                       }
@@ -129,7 +129,7 @@ const TaskPage = async ({ params }: TaskPageProps) => {
                       Assigned to
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      {task.assigned_user?.name || "Not assigned"}
+                      {task.assigned_user?.name || 'Not assigned'}
                     </p>
                   </div>
                 </div>
@@ -142,10 +142,10 @@ const TaskPage = async ({ params }: TaskPageProps) => {
                     <p className="text-sm text-muted-foreground">
                       {activeUsers.find(
                         (user: any) => user.id === task.createdBy
-                      )?.name || "Unknown"}
+                      )?.name || 'Unknown'}
                     </p>
                   </div>
-                </div>                
+                </div>
               </div>
             </CardContent>
             <CardFooter className="space-x-2">
@@ -161,12 +161,12 @@ const TaskPage = async ({ params }: TaskPageProps) => {
         {/*         <pre>
           <code>{JSON.stringify(taskDocuments, null, 2)}</code>
         </pre> */}
-        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight py-5">
+        <h4 className="scroll-m-20 py-5 text-xl font-semibold tracking-tight">
           Task documents ({taskDocuments.length})
         </h4>
         <TaskDataTable data={taskDocuments} columns={columnsTask} />
         <Separator />
-        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight py-5">
+        <h4 className="scroll-m-20 py-5 text-xl font-semibold tracking-tight">
           Available documents ({documents.length})
         </h4>
         <TaskDataTable data={documents} columns={columns} />

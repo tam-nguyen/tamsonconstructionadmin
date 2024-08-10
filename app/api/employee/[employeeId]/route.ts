@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
+import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
 
-import { prismadb } from "@/lib/prisma";
-import { authOptions } from "@/lib/auth";
+import { prismadb } from '@/lib/prisma';
+import { authOptions } from '@/lib/auth';
 
 //Contact delete route
 export async function DELETE(
@@ -12,11 +12,11 @@ export async function DELETE(
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   if (!params.employeeId) {
-    return new NextResponse("Employee ID is required", { status: 400 });
+    return new NextResponse('Employee ID is required', { status: 400 });
   }
 
   try {
@@ -26,9 +26,9 @@ export async function DELETE(
       },
     });
 
-    return NextResponse.json({ message: "Employee Deleted" }, { status: 200 });
+    return NextResponse.json({ message: 'Employee Deleted' }, { status: 200 });
   } catch (error) {
-    console.log("[EMPLOYEE_DELETE]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[EMPLOYEE_DELETE]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

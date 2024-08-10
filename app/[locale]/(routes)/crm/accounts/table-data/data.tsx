@@ -2,17 +2,17 @@ import {
   CircleIcon,
   QuestionMarkCircledIcon,
   StopwatchIcon,
-} from "@radix-ui/react-icons";
+} from '@radix-ui/react-icons';
 
 export const statuses = [
   {
-    value: "Active",
-    label: "Active",
+    value: 'Active',
+    label: 'Active',
     icon: QuestionMarkCircledIcon,
   },
   {
-    value: "IN_PROGRESS",
-    label: "In progress",
+    value: 'IN_PROGRESS',
+    label: 'In progress',
     icon: StopwatchIcon,
   },
 ];

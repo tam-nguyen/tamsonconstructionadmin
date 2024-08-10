@@ -1,18 +1,18 @@
-import Container from "@/app/[locale]/(routes)/components/ui/Container";
-import React from "react";
-import { BasicView } from "./components/BasicView";
+import Container from '@/app/[locale]/(routes)/components/ui/Container';
+import React from 'react';
+import { BasicView } from './components/BasicView';
 
-import { getAccount } from "@/actions/crm/get-account";
-import { getAllCrmData } from "@/actions/crm/get-crm-data";
-import { getOpportunitiesFullByAccountId } from "@/actions/crm/get-opportunities-with-includes-by-accountId";
-import { getContactsByAccountId } from "@/actions/crm/get-contacts-by-accountId";
-import { getLeadsByAccountId } from "@/actions/crm/get-leads-by-accountId";
-import { getDocumentsByAccountId } from "@/actions/documents/get-documents-by-accountId";
+import { getAccount } from '@/actions/crm/get-account';
+import { getAllCrmData } from '@/actions/crm/get-crm-data';
+import { getOpportunitiesFullByAccountId } from '@/actions/crm/get-opportunities-with-includes-by-accountId';
+import { getContactsByAccountId } from '@/actions/crm/get-contacts-by-accountId';
+import { getLeadsByAccountId } from '@/actions/crm/get-leads-by-accountId';
+import { getDocumentsByAccountId } from '@/actions/documents/get-documents-by-accountId';
 
-import OpportunitiesView from "../../components/OpportunitiesView";
-import LeadsView from "../../components/LeadsView";
-import ContactsView from "../../components/ContactsView";
-import DocumentsView from "../../components/DocumentsView";
+import OpportunitiesView from '../../components/OpportunitiesView';
+import LeadsView from '../../components/LeadsView';
+import ContactsView from '../../components/ContactsView';
+import DocumentsView from '../../components/DocumentsView';
 
 import {
   Documents,
@@ -21,9 +21,9 @@ import {
   crm_Contacts,
   crm_Leads,
   crm_Opportunities,
-} from "@prisma/client";
-import AccountsTasksView from "./components/TasksView";
-import { getAccountsTasks } from "@/actions/crm/account/get-tasks";
+} from '@prisma/client';
+import AccountsTasksView from './components/TasksView';
+import { getAccountsTasks } from '@/actions/crm/account/get-tasks';
 
 interface AccountDetailPageProps {
   params: {
@@ -39,7 +39,7 @@ const AccountDetailPage = async ({ params }: AccountDetailPageProps) => {
   const contacts: crm_Contacts[] = await getContactsByAccountId(accountId);
   const leads: crm_Leads[] = await getLeadsByAccountId(accountId);
   const documents: Documents[] = await getDocumentsByAccountId(accountId);
-  const tasks: crm_Accounts_Tasks[] = await getAccountsTasks(accountId);  
+  const tasks: crm_Accounts_Tasks[] = await getAccountsTasks(accountId);
   const crmData = await getAllCrmData();
 
   if (!account) return <div>Account not found</div>;
@@ -47,7 +47,7 @@ const AccountDetailPage = async ({ params }: AccountDetailPageProps) => {
   return (
     <Container
       title={`Account: ${account?.name}`}
-      description={"Everything you need to know about sales potential"}
+      description={'Everything you need to know about sales potential'}
     >
       <div className="space-y-5">
         <BasicView data={account} />
@@ -57,7 +57,7 @@ const AccountDetailPage = async ({ params }: AccountDetailPageProps) => {
           crmData={crmData}
           accountId={accountId}
         />
-        <ContactsView data={contacts} crmData={crmData} accountId={accountId} />        
+        <ContactsView data={contacts} crmData={crmData} accountId={accountId} />
         <LeadsView data={leads} crmData={crmData} />
         <DocumentsView data={documents} />
       </div>

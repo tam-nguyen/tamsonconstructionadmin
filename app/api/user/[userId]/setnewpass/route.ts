@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { hash } from "bcryptjs";
+import { NextResponse } from 'next/server';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { hash } from 'bcryptjs';
 
 export async function PUT(
   req: Request,
@@ -12,22 +12,22 @@ export async function PUT(
   const { password, cpassword } = await req.json();
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   if (!params.userId) {
-    return new NextResponse("No user ID provided", { status: 400 });
+    return new NextResponse('No user ID provided', { status: 400 });
   }
 
   if (!password || !cpassword) {
-    return new NextResponse("No password provided", { status: 400 });
+    return new NextResponse('No password provided', { status: 400 });
   }
 
   if (password !== cpassword) {
-    return new NextResponse("Passwords do not match", { status: 400 });
+    return new NextResponse('Passwords do not match', { status: 400 });
   }
 
-  if (session.user.email === "demo@saashq.org") {
+  if (session.user.email === 'demo@saashq.org') {
     return new NextResponse(
       "Hey, don't be a fool! There are so many works done! Thanks!",
       {
@@ -48,7 +48,7 @@ export async function PUT(
 
     return NextResponse.json(newUserPass);
   } catch (error) {
-    console.log("[NEW_USERPASS_PUT]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[NEW_USERPASS_PUT]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

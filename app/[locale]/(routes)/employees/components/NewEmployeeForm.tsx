@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { z } from "zod";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
+import { useState } from 'react';
+import { z } from 'zod';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
 
-import { useToast } from "@/components/ui/use-toast";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
@@ -17,24 +17,28 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from '@/components/ui/textarea';
 
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import { format } from 'date-fns';
+import { CalendarIcon } from 'lucide-react';
+import { Calendar } from '@/components/ui/calendar';
 
-import useDebounce from "@/hooks/useDebounce";
+import useDebounce from '@/hooks/useDebounce';
 
 //TODO: fix all the types
 type NewTaskFormProps = {
@@ -45,7 +49,7 @@ export function NewEmployeeForm({ users }: NewTaskFormProps) {
   const router = useRouter();
   const { toast } = useToast();
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   const debounceSearchTerm = useDebounce(searchTerm, 1000);
 
@@ -80,34 +84,34 @@ export function NewEmployeeForm({ users }: NewTaskFormProps) {
   const onSubmit = async (data: NewAccountFormValues) => {
     setIsLoading(true);
     try {
-      await axios.post("/api/employee", data);
+      await axios.post('/api/employee', data);
       toast({
-        title: "Success",
-        description: "Employee created successfully",
+        title: 'Success',
+        description: 'Employee created successfully',
       });
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
       setIsLoading(false);
       form.reset({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        position: "",
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        position: '',
         salary: 0,
-        IBAN: "",
-        photo: "",
-        taxid: "",
-        address: "",
-        insurance: "",
+        IBAN: '',
+        photo: '',
+        taxid: '',
+        address: '',
+        insurance: '',
         onBoarding: undefined,
-        assigned_to: "",
-      });      
+        assigned_to: '',
+      });
       router.refresh();
     }
   };
@@ -124,8 +128,8 @@ export function NewEmployeeForm({ users }: NewTaskFormProps) {
             <code>{JSON.stringify(form.formState.errors, null, 2)}</code>
           </pre>
         </div> */}
-        <div className=" w-[800px] text-sm">
-          <div className="pb-5 space-y-2">
+        <div className="w-[800px] text-sm">
+          <div className="space-y-2 pb-5">
             <div className="flex gap-5 pb-5">
               <div className="w-1/2 space-y-2">
                 <FormField
@@ -237,7 +241,7 @@ export function NewEmployeeForm({ users }: NewTaskFormProps) {
                         <Input
                           disabled={isLoading}
                           placeholder="3500"
-                          {...field}                       
+                          {...field}
                         />
                       </FormControl>
                       <FormMessage />
@@ -256,14 +260,14 @@ export function NewEmployeeForm({ users }: NewTaskFormProps) {
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
-                          variant={"outline"}
+                          variant={'outline'}
                           className={cn(
-                            "w-[240px] pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
+                            'w-[240px] pl-3 text-left font-normal',
+                            !field.value && 'text-muted-foreground'
                           )}
                         >
                           {field.value ? (
-                            format(field?.value, "PPP")
+                            format(field?.value, 'PPP')
                           ) : (
                             <span>Pick a expected close date</span>
                           )}
@@ -278,7 +282,7 @@ export function NewEmployeeForm({ users }: NewTaskFormProps) {
                         //@ts-ignore
                         //TODO: fix this
                         onSelect={field.onChange}
-                        disabled={(date) => date < new Date("1900-01-01")}
+                        disabled={(date) => date < new Date('1900-01-01')}
                         initialFocus
                       />
                     </PopoverContent>
@@ -309,38 +313,38 @@ export function NewEmployeeForm({ users }: NewTaskFormProps) {
               />
             </div>
             <div className="w-1/2 space-y-2">
-            <FormField
-                  control={form.control}
-                  name="assigned_to"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Assigned user</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Choose an user " />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent className="h-96 overflow-y-auto">
-                          <Input
-                            type="text"
-                            placeholder="Search in users ..."
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                          />
-                          {filteredData?.map((item, index) => (
-                            <SelectItem key={index} value={item.id}>
-                              {item.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+              <FormField
+                control={form.control}
+                name="assigned_to"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Assigned user</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Choose an user " />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="h-96 overflow-y-auto">
+                        <Input
+                          type="text"
+                          placeholder="Search in users ..."
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        {filteredData?.map((item, index) => (
+                          <SelectItem key={index} value={item.id}>
+                            {item.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
           </div>
           <div className="flex gap-5 pb-5">
@@ -364,7 +368,7 @@ export function NewEmployeeForm({ users }: NewTaskFormProps) {
               />
             </div>
             <div className="w-1/2 space-y-2">
-            <FormField
+              <FormField
                 control={form.control}
                 name="insurance"
                 render={({ field }) => (
@@ -408,11 +412,11 @@ export function NewEmployeeForm({ users }: NewTaskFormProps) {
         <div className="grid gap-2 py-5">
           <Button disabled={isLoading} type="submit">
             {isLoading ? (
-              <span className="flex items-center animate-pulse">
+              <span className="flex animate-pulse items-center">
                 Saving data ...
               </span>
             ) : (
-              "Create employeee"
+              'Create employeee'
             )}
           </Button>
         </div>

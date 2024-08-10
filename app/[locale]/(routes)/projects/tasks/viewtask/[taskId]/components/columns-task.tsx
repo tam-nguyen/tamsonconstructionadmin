@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from '@tanstack/react-table';
 
-import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
 
-import { labels, priorities, statuses } from "../data/data";
-import { Task } from "../data/schema";
-import { DataTableColumnHeader } from "./data-table-column-header";
-import { DataTableRowActions } from "./data-table-row-actions";
-import moment from "moment";
-import { DataTableRowActionsTasks } from "./data-table-row-actions-tasks";
+import { labels, priorities, statuses } from '../data/data';
+import { Task } from '../data/schema';
+import { DataTableColumnHeader } from './data-table-column-header';
+import { DataTableRowActions } from './data-table-row-actions';
+import moment from 'moment';
+import { DataTableRowActionsTasks } from './data-table-row-actions-tasks';
 
 export const columnsTask: ColumnDef<Task>[] = [
   {
-    accessorKey: "assigned_to_user",
+    accessorKey: 'assigned_to_user',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Assigned to" />
     ),
@@ -24,7 +24,7 @@ export const columnsTask: ColumnDef<Task>[] = [
         {
           //@ts-ignore
           //TODO: fix this - must change schema but problem is if value is null now. You must change db
-          row.original.assigned_to_user.name ?? "Unassigned"
+          row.original.assigned_to_user.name ?? 'Unassigned'
         }
       </div>
     ),
@@ -32,7 +32,7 @@ export const columnsTask: ColumnDef<Task>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "document_name",
+    accessorKey: 'document_name',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Document name" />
     ),
@@ -53,7 +53,7 @@ export const columnsTask: ColumnDef<Task>[] = [
   },
 
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => <DataTableRowActionsTasks row={row} />,
   },
 ];

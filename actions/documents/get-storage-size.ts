@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getStorageSize = async () => {
   const data = await prismadb.documents.findMany({});

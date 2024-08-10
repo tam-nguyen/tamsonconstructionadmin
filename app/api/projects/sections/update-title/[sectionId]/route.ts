@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { NextResponse } from 'next/server';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 export async function PUT(
   req: Request,
@@ -9,7 +9,7 @@ export async function PUT(
 ) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
   const body = await req.json();
   const { sectionId } = params;
@@ -26,11 +26,11 @@ export async function PUT(
     });
 
     return NextResponse.json(
-      { message: "Section Title change successfully" },
+      { message: 'Section Title change successfully' },
       { status: 200 }
     );
   } catch (error) {
-    console.log("[NEW_SECTION_TITLE_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[NEW_SECTION_TITLE_POST]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import * as z from "zod";
-import axios from "axios";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from 'zod';
+import axios from 'axios';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
   Form,
@@ -14,16 +14,16 @@ import {
   FormControl,
   FormDescription,
   FormMessage,
-} from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
 
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
-import { Icons } from "@/components/ui/icons";
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/components/ui/use-toast';
+import { Icons } from '@/components/ui/icons';
 
 const formSchema = z.object({
   feedback: z.string().min(1, {
-    message: "Feedback must be at least 1 character.",
+    message: 'Feedback must be at least 1 character.',
   }),
 });
 
@@ -42,18 +42,18 @@ const FeedbackForm = ({ setOpen }: FeedbackFormProps) => {
   const onSubmit = form.handleSubmit(async (data) => {
     setLoading(true);
     try {
-      await axios.post("/api/feedback", data);
+      await axios.post('/api/feedback', data);
     } catch (error) {
       console.error(error);
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Something went wrong. Please try again later.",
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Something went wrong. Please try again later.',
       });
     } finally {
       toast({
-        title: "Success",
-        description: "Thank you for your feedback.",
+        title: 'Success',
+        description: 'Thank you for your feedback.',
       });
       setOpen(false);
       setLoading(false);
@@ -86,20 +86,20 @@ const FeedbackForm = ({ setOpen }: FeedbackFormProps) => {
         />
         <div className="flex justify-end space-x-2">
           <Button
-            variant={"outline"}
+            variant={'outline'}
             onClick={() => setOpen(false)}
             disabled={loading}
           >
             Cancel
           </Button>
-          <Button type="submit" variant={"secondary"} disabled={loading}>
+          <Button type="submit" variant={'secondary'} disabled={loading}>
             {loading ? (
               <div className="flex space-x-2">
                 <Icons.spinner className="h-4 w-4 animate-spin" />
                 <span>Sending ...</span>
               </div>
             ) : (
-              "Submit"
+              'Submit'
             )}
           </Button>
         </div>

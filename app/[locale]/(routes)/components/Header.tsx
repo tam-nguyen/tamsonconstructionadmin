@@ -1,12 +1,12 @@
-import Feedback from "./Feedback";
-import FulltextSearch from "./FulltextSearch";
-import AvatarDropdown from "./ui/AvatarDropdown";
+import Feedback from './Feedback';
+import FulltextSearch from './FulltextSearch';
+import AvatarDropdown from './ui/AvatarDropdown';
 
-import { Separator } from "@/components/ui/separator";
-import { SetLanguage } from "@/components/SetLanguage";
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { CommandComponent } from "@/components/CommandComponent";
-import SupportComponent from "@/components/support";
+import { Separator } from '@/components/ui/separator';
+import { SetLanguage } from '@/components/SetLanguage';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { CommandComponent } from '@/components/CommandComponent';
+import SupportComponent from '@/components/support';
 
 type Props = {
   id: string;
@@ -19,8 +19,8 @@ type Props = {
 const Header = ({ id, name, email, avatar, lang }: Props) => {
   return (
     <>
-      <div className="flex h-20 justify-between items-center p-5 space-x-5">
-        <div className="flex justify-center ">
+      <div className="flex h-20 items-center justify-between space-x-5 p-5">
+        <div className="flex justify-center">
           <FulltextSearch />
         </div>
         <div className="flex items-center gap-3">
@@ -28,7 +28,7 @@ const Header = ({ id, name, email, avatar, lang }: Props) => {
           <SetLanguage userId={id} />
           <Feedback />
           <ThemeToggle />
-          <SupportComponent />          
+          <SupportComponent />
           <AvatarDropdown
             avatar={avatar}
             userId={id}

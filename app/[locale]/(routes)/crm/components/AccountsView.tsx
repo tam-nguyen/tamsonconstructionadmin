@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 import {
   Card,
@@ -8,20 +8,20 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+} from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 
-import { columns } from "../accounts/table-components/columns";
-import { NewAccountForm } from "../accounts/components/NewAccountForm";
-import { AccountDataTable } from "../accounts/table-components/data-table";
-import { useRouter } from "next/navigation";
+import { columns } from '../accounts/table-components/columns';
+import { NewAccountForm } from '../accounts/components/NewAccountForm';
+import { AccountDataTable } from '../accounts/table-components/data-table';
+import { useRouter } from 'next/navigation';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
 
 const AccountsView = ({ data, crmData }: any) => {
   const router = useRouter();
@@ -45,7 +45,7 @@ const AccountsView = ({ data, crmData }: any) => {
         <div className="flex justify-between">
           <div>
             <CardTitle
-              onClick={() => router.push("/crm/accounts")}
+              onClick={() => router.push('/crm/accounts')}
               className="cursor-pointer"
             >
               Accounts

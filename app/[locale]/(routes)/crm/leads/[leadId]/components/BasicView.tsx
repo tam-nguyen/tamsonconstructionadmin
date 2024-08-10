@@ -4,8 +4,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { crm_Opportunities } from "@prisma/client";
+} from '@/components/ui/card';
+import { crm_Opportunities } from '@prisma/client';
 import {
   CalendarDays,
   ClipboardList,
@@ -17,19 +17,19 @@ import {
   Landmark,
   List,
   Medal,
-  MoreHorizontal,  
+  MoreHorizontal,
   Percent,
   Phone,
   SquareStack,
   Text,
   User,
-} from "lucide-react";
-import moment from "moment";
-import { Clapperboard } from "lucide-react";
-import { prismadb } from "@/lib/prisma";
-import Link from "next/link";
-import { EnvelopeClosedIcon, LightningBoltIcon } from "@radix-ui/react-icons";
-import { LucideLandmark } from "lucide-react";
+} from 'lucide-react';
+import moment from 'moment';
+import { Clapperboard } from 'lucide-react';
+import { prismadb } from '@/lib/prisma';
+import Link from 'next/link';
+import { EnvelopeClosedIcon, LightningBoltIcon } from '@radix-ui/react-icons';
+import { LucideLandmark } from 'lucide-react';
 
 interface OppsViewProps {
   data: any;
@@ -40,7 +40,7 @@ export async function BasicView({ data }: OppsViewProps) {
   const users = await prismadb.users.findMany();
   if (!data) return <div>Opportunity not found</div>;
   return (
-    <div className="pb-3 space-y-5">
+    <div className="space-y-5 pb-3">
       {/*      <pre>{JSON.stringify(data, null, 2)}</pre> */}
       <Card>
         <CardHeader className="pb-3">
@@ -61,7 +61,7 @@ export async function BasicView({ data }: OppsViewProps) {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 w-full gap-5 ">
+          <div className="grid w-full grid-cols-2 gap-5">
             <div>
               <div className="-mx-2 flex items-start space-x-4 rounded-md p-2 transition-all hover:bg-accent hover:text-accent-foreground">
                 <User className="mt-px h-5 w-5" />
@@ -88,7 +88,7 @@ export async function BasicView({ data }: OppsViewProps) {
                 <div className="space-y-1">
                   <p className="text-sm font-medium leading-none">Job title</p>
                   <p className="text-sm text-muted-foreground">
-                    {data.jobTitle ? data.jobTitle : "N/A"}
+                    {data.jobTitle ? data.jobTitle : 'N/A'}
                   </p>
                 </div>
               </div>
@@ -104,14 +104,14 @@ export async function BasicView({ data }: OppsViewProps) {
                 </div>
               </div>
               <div className="-mx-2 flex items-start justify-between space-x-4 rounded-md p-2 transition-all hover:bg-accent hover:text-accent-foreground">
-                <div className="flex mt-px gap-5">
+                <div className="mt-px flex gap-5">
                   <EnvelopeClosedIcon className="mt-px h-5 w-5" />
                   <div className="space-y-1">
                     <p className="text-sm font-medium leading-none">Email</p>
                     {data?.email ? (
                       <Link
                         href={`mailto:${data.email}`}
-                        className="flex items-center  gap-5 text-sm text-muted-foreground"
+                        className="flex items-center gap-5 text-sm text-muted-foreground"
                       >
                         {data.email}
                         <EnvelopeClosedIcon />
@@ -128,7 +128,7 @@ export async function BasicView({ data }: OppsViewProps) {
                     {data?.website ? (
                       <Link href={data.website}>{data.website}</Link>
                     ) : (
-                      "N/A"
+                      'N/A'
                     )}
                   </p>
                 </div>
@@ -158,7 +158,7 @@ export async function BasicView({ data }: OppsViewProps) {
                 <div className="space-y-1">
                   <p className="text-sm font-medium leading-none">Created</p>
                   <p className="text-sm text-muted-foreground">
-                    {moment(data.created_on).format("MMM DD YYYY")}
+                    {moment(data.created_on).format('MMM DD YYYY')}
                   </p>
                 </div>
                 <div className="space-y-1">
@@ -175,7 +175,7 @@ export async function BasicView({ data }: OppsViewProps) {
                     Last update
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    {moment(data.updatedAt).format("MMM DD YYYY")}
+                    {moment(data.updatedAt).format('MMM DD YYYY')}
                   </p>
                 </div>
                 <div className="space-y-1">

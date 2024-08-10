@@ -1,12 +1,12 @@
-"use server";
+'use server';
 
-import axios from "axios";
+import axios from 'axios';
 
-import { prismadb } from "@/lib/prisma";
-import resendHelper from "@/lib/resend";
+import { prismadb } from '@/lib/prisma';
+import resendHelper from '@/lib/resend';
 
-import AiProjectReportEmail from "@/emails/AiProjectReport";
-import { Session } from "next-auth";
+import AiProjectReportEmail from '@/emails/AiProjectReport';
+import { Session } from 'next-auth';
 
 export async function getAiReport(session: Session, boardId: string) {
   /*
@@ -20,7 +20,7 @@ export async function getAiReport(session: Session, boardId: string) {
     },
   });
 
-  if (!user) return { message: "No user found" };
+  if (!user) return { message: 'No user found' };
 
   const boardData = await prismadb.sections.findMany({
     where: {
@@ -47,20 +47,20 @@ export async function getAiReport(session: Session, boardId: string) {
   )}.`;
 
   switch (user.userLanguage) {
-    case "en":
+    case 'en':
       prompt = prompt + `Response must be in English language and MDX format.`;
       break;
-    case "cz":
+    case 'cz':
       prompt = prompt + `Odpověď musí být v českém jazyce a ve formátu MDX.`;
       break;
-    case "de":
+    case 'de':
       prompt =
         prompt +
         `Die Antwort muss in englischer Sprache und im MDX-Format erfolgen.`;
       break;
   }
 
-  if (!prompt) return { message: "No prompt found" };
+  if (!prompt) return { message: 'No prompt found' };
 
   const getAiResponse = await axios
     .post(
@@ -71,7 +71,7 @@ export async function getAiReport(session: Session, boardId: string) {
       },
       {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       }
     )
@@ -82,7 +82,7 @@ export async function getAiReport(session: Session, boardId: string) {
 
   //skip if api response is error
   if (getAiResponse.error) {
-    console.log("Error from OpenAI API");
+    console.log('Error from OpenAI API');
   } else {
     try {
       const data = await resend.emails.send({
@@ -100,7 +100,7 @@ export async function getAiReport(session: Session, boardId: string) {
       });
       //console.log(data, "Email sent");
     } catch (error) {
-      console.log(error, "Error from get-user-ai-tasks");
+      console.log(error, 'Error from get-user-ai-tasks');
     }
   }
 

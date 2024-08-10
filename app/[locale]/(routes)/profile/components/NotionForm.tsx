@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -13,19 +13,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { useToast } from "@/components/ui/use-toast";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+} from '@/components/ui/select';
+import { useToast } from '@/components/ui/use-toast';
+import { Input } from '@/components/ui/input';
+import { useState } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const FormSchema = z.object({
   databaseId: z.string().min(3).max(50),
@@ -49,7 +49,7 @@ export function NotionForm({ userId }: { userId: string }) {
       await axios.post(`/api/user/${userId}/setnotiondb`, data);
       //TODO: send data to the server
       toast({
-        title: "You submitted the following values:",
+        title: 'You submitted the following values:',
         description: (
           <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
             <code className="text-white">{JSON.stringify(data, null, 2)}</code>
@@ -59,10 +59,10 @@ export function NotionForm({ userId }: { userId: string }) {
       router.refresh();
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description:
-          "Something went wrong while activating your notion integration.",
+          'Something went wrong while activating your notion integration.',
       });
     } finally {
       setIsLoading(false);
@@ -73,7 +73,7 @@ export function NotionForm({ userId }: { userId: string }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex space-x-5 w-full p-5 items-end"
+        className="flex w-full items-end space-x-5 p-5"
       >
         <FormField
           control={form.control}

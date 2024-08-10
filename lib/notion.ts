@@ -1,6 +1,6 @@
-import { Client } from "@notionhq/client";
-import { prismadb } from "./prisma";
-import { error } from "console";
+import { Client } from '@notionhq/client';
+import { prismadb } from './prisma';
+import { error } from 'console';
 
 const initNotionClient = async (userId: string) => {
   //console.log(userId, "User ID from Notion - lib");
@@ -16,7 +16,7 @@ const initNotionClient = async (userId: string) => {
 
     if (!apiKey) {
       const notionItems = {
-        error: "API key not found in the database.",
+        error: 'API key not found in the database.',
       };
       console.log(error);
       return notionItems;
@@ -31,7 +31,7 @@ const initNotionClient = async (userId: string) => {
 
     return notion;
   } catch (error) {
-    console.error("Failed to initialize Notion client:", error);
+    console.error('Failed to initialize Notion client:', error);
     throw error;
   }
 };

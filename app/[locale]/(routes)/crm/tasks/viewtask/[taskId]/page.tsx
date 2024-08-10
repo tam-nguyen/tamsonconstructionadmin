@@ -1,18 +1,18 @@
-import React from "react";
-import moment from "moment";
+import React from 'react';
+import moment from 'moment';
 
-import { getDocuments } from "@/actions/documents/get-documents";
-import { getTaskComments } from "@/actions/projects/get-task-comments";
-import { getTaskDocuments } from "@/actions/projects/get-task-documents";
+import { getDocuments } from '@/actions/documents/get-documents';
+import { getTaskComments } from '@/actions/projects/get-task-comments';
+import { getTaskDocuments } from '@/actions/projects/get-task-documents';
 
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
 
-import { TeamConversations } from "./components/team-conversation";
-import { TaskDataTable } from "./components/data-table";
-import { columns } from "./components/columns";
-import { columnsTask } from "./components/columns-task";
-import { getCrMTask } from "@/actions/crm/account/get-task";
+import { TeamConversations } from './components/team-conversation';
+import { TaskDataTable } from './components/data-table';
+import { columns } from './components/columns';
+import { columnsTask } from './components/columns-task';
+import { getCrMTask } from '@/actions/crm/account/get-task';
 
 type TaskPageProps = {
   params: {
@@ -29,55 +29,55 @@ const CRMTaskPage = async ({ params }: TaskPageProps) => {
   const comments: any = await getTaskComments(taskId);
 
   return (
-    <div className="flex flex-col md:flex-row w-full px-2 space-x-2 ">
-      <div className="flex flex-col w-full md:w-2/3">
-        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight py-5">
+    <div className="flex w-full flex-col space-x-2 px-2 md:flex-row">
+      <div className="flex w-full flex-col md:w-2/3">
+        <h4 className="scroll-m-20 py-5 text-xl font-semibold tracking-tight">
           Task details
         </h4>
-        <div className="w-full border rounded-lg mb-5">
+        <div className="mb-5 w-full rounded-lg border">
           {/*          <pre>
             <code>{JSON.stringify(task, null, 2)}</code>
           </pre> */}
           <table className="min-w-full text-sm">
             <thead>
               <tr>
-                <th className="py-2 px-4 border-b font-semibold">
+                <th className="border-b px-4 py-2 font-semibold">
                   <span className="flex justify-start">Property</span>
                 </th>
-                <th className="py-2 px-4 border-b font-semibold">
+                <th className="border-b px-4 py-2 font-semibold">
                   <span className="flex justify-start">Value</span>
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="py-2 px-4 border-b">ID</td>
-                <td className="py-2 px-4 border-b">{task.id}</td>
+                <td className="border-b px-4 py-2">ID</td>
+                <td className="border-b px-4 py-2">{task.id}</td>
               </tr>
               <tr>
-                <td className="py-2 px-4 border-b">Date created</td>
-                <td className="py-2 px-4 border-b">
-                  {moment(task.createdAt).format("YYYY-MM-DD")}
+                <td className="border-b px-4 py-2">Date created</td>
+                <td className="border-b px-4 py-2">
+                  {moment(task.createdAt).format('YYYY-MM-DD')}
                 </td>
               </tr>
               <tr>
-                <td className="py-2 px-4 border-b">Date due</td>
-                <td className="py-2 px-4 border-b">
-                  {moment(task.dueDateAt).format("YYYY-MM-DD")}
+                <td className="border-b px-4 py-2">Date due</td>
+                <td className="border-b px-4 py-2">
+                  {moment(task.dueDateAt).format('YYYY-MM-DD')}
                 </td>
               </tr>
               <tr>
-                <td className="py-2 px-4 border-b">Date modified</td>
-                <td className="py-2 px-4 border-b">
-                  {moment(task.lastEditedAt).format("YYYY-MM-DD")}
+                <td className="border-b px-4 py-2">Date modified</td>
+                <td className="border-b px-4 py-2">
+                  {moment(task.lastEditedAt).format('YYYY-MM-DD')}
                 </td>
               </tr>
               <tr>
-                <td className="py-2 px-4 border-b">Priority</td>
-                <td className="py-2 px-4 border-b">
+                <td className="border-b px-4 py-2">Priority</td>
+                <td className="border-b px-4 py-2">
                   <Badge
                     variant={
-                      task.priority === "high" ? `destructive` : `outline`
+                      task.priority === 'high' ? `destructive` : `outline`
                     }
                   >
                     {task.priority}
@@ -85,17 +85,17 @@ const CRMTaskPage = async ({ params }: TaskPageProps) => {
                 </td>
               </tr>
               <tr>
-                <td className="py-2 px-4 border-b">Title</td>
-                <td className="py-2 px-4 border-b">{task.title}</td>
+                <td className="border-b px-4 py-2">Title</td>
+                <td className="border-b px-4 py-2">{task.title}</td>
               </tr>
               <tr>
-                <td className="py-2 px-4 border-b">Content</td>
-                <td className="py-2 px-4 border-b">{task.content}</td>
+                <td className="border-b px-4 py-2">Content</td>
+                <td className="border-b px-4 py-2">{task.content}</td>
               </tr>
               <tr>
-                <td className="py-2 px-4 border-b">Assigned to</td>
-                <td className="py-2 px-4 border-b">
-                  {task.assigned_user?.name || "Not assigned"}
+                <td className="border-b px-4 py-2">Assigned to</td>
+                <td className="border-b px-4 py-2">
+                  {task.assigned_user?.name || 'Not assigned'}
                 </td>
               </tr>
             </tbody>
@@ -104,12 +104,12 @@ const CRMTaskPage = async ({ params }: TaskPageProps) => {
         {/*         <pre>
           <code>{JSON.stringify(taskDocuments, null, 2)}</code>
         </pre> */}
-        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight py-5">
+        <h4 className="scroll-m-20 py-5 text-xl font-semibold tracking-tight">
           Task documents ({taskDocuments.length})
         </h4>
         <TaskDataTable data={taskDocuments} columns={columnsTask} />
         <Separator />
-        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight py-5">
+        <h4 className="scroll-m-20 py-5 text-xl font-semibold tracking-tight">
           Available documents ({documents.length})
         </h4>
         <TaskDataTable data={documents} columns={columns} />

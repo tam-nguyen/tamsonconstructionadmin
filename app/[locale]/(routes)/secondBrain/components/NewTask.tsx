@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useAppStore } from "@/store/store";
+import { useAppStore } from '@/store/store';
 
-import NewTaskDialog from "../dialogs/NewTask";
+import NewTaskDialog from '../dialogs/NewTask';
 
 type Props = {
   users: any;

@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getOpportunities = async () => {
   const data = await prismadb.crm_Opportunities.findMany({
@@ -30,9 +30,9 @@ export const getOpportunitiesByMonth = async () => {
     (acc: Record<string, number>, opportunity) => {
       if (opportunity?.created_on) {
         const month = new Date(opportunity.created_on).toLocaleString(
-          "default",
+          'default',
           {
-            month: "long",
+            month: 'long',
           }
         );
         acc[month] = (acc[month] || 0) + 1;
@@ -64,7 +64,7 @@ export const getOpportunitiesByStage = async () => {
     },
   });
 
-  console.log(opportunities, "opportunities");
+  console.log(opportunities, 'opportunities');
   if (!opportunities) {
     return {};
   }

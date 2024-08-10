@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from '@tanstack/react-table';
 
-import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
 
-import { Contact } from "../table-data/schema";
-import { DataTableColumnHeader } from "./data-table-column-header";
-import { DataTableRowActions } from "./data-table-row-actions";
-import moment from "moment";
+import { Contact } from '../table-data/schema';
+import { DataTableColumnHeader } from './data-table-column-header';
+import { DataTableRowActions } from './data-table-row-actions';
+import moment from 'moment';
 
 export const columns: ColumnDef<Contact>[] = [
   /*   {
@@ -33,20 +33,20 @@ export const columns: ColumnDef<Contact>[] = [
     enableHiding: false,
   }, */
   {
-    accessorKey: "created_on",
+    accessorKey: 'created_on',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Date created" />
     ),
     cell: ({ row }) => (
       <div className="w-[80px]">
-        {moment(row.getValue("created_on")).format("YY-MM-DD")}
+        {moment(row.getValue('created_on')).format('YY-MM-DD')}
       </div>
     ),
     enableSorting: false,
     enableHiding: false,
   },
   {
-    accessorKey: "assigned_to_user",
+    accessorKey: 'assigned_to_user',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Assigned to" />
     ),
@@ -56,7 +56,7 @@ export const columns: ColumnDef<Contact>[] = [
         {
           //@ts-ignore
           //TODO: fix this
-          row.getValue("assigned_to_user")?.name ?? "Unassigned"
+          row.getValue('assigned_to_user')?.name ?? 'Unassigned'
         }
       </div>
     ),
@@ -64,7 +64,7 @@ export const columns: ColumnDef<Contact>[] = [
     enableHiding: true,
   },
   {
-    accessorKey: "assigned_account",
+    accessorKey: 'assigned_account',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Assigned account" />
     ),
@@ -73,7 +73,7 @@ export const columns: ColumnDef<Contact>[] = [
       <div className="min-w-[150px]">
         {
           //@ts-ignore
-          row.original.assigned_accounts?.name ?? "Unassigned"
+          row.original.assigned_accounts?.name ?? 'Unassigned'
         }
       </div>
     ),
@@ -81,59 +81,59 @@ export const columns: ColumnDef<Contact>[] = [
     enableHiding: true,
   },
   {
-    accessorKey: "first_name",
+    accessorKey: 'first_name',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Name" />
     ),
 
-    cell: ({ row }) => <div className="">{row.getValue("first_name")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue('first_name')}</div>,
     enableSorting: true,
     enableHiding: true,
   },
   {
-    accessorKey: "last_name",
+    accessorKey: 'last_name',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Sure name" />
     ),
 
-    cell: ({ row }) => <div className="">{row.getValue("last_name")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue('last_name')}</div>,
     enableSorting: true,
     enableHiding: true,
   },
   {
-    accessorKey: "email",
+    accessorKey: 'email',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="E-mail" />
     ),
 
-    cell: ({ row }) => <div className="">{row.getValue("email")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue('email')}</div>,
     enableSorting: true,
     enableHiding: true,
   },
   {
-    accessorKey: "mobile_phone",
+    accessorKey: 'mobile_phone',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Mobile" />
     ),
 
-    cell: ({ row }) => <div className="">{row.getValue("mobile_phone")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue('mobile_phone')}</div>,
     enableSorting: true,
     enableHiding: true,
   },
   {
-    accessorKey: "status",
+    accessorKey: 'status',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Status" />
     ),
 
     cell: ({ row }) => (
-      <div className="">{row.original.status ? "Active" : "Inactive"}</div>
+      <div className="">{row.original.status ? 'Active' : 'Inactive'}</div>
     ),
     enableSorting: true,
     enableHiding: true,
   },
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ];

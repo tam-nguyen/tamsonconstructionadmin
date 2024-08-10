@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getTask = async (taskId: string) => {
   const data = await prismadb.tasks.findFirst({

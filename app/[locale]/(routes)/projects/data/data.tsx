@@ -7,15 +7,15 @@ import {
   CrossCircledIcon,
   QuestionMarkCircledIcon,
   StopwatchIcon,
-} from "@radix-ui/react-icons";
+} from '@radix-ui/react-icons';
 
 export const visibility = [
   {
-    value: "public",
-    label: "Public",
+    value: 'public',
+    label: 'Public',
   },
   {
-    value: "private",
-    label: "Private",
+    value: 'private',
+    label: 'Private',
   },
 ];

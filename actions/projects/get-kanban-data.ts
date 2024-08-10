@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getKanbanData = async (boardId: string) => {
   const board = await prismadb.boards.findUnique({
@@ -14,12 +14,12 @@ export const getKanbanData = async (boardId: string) => {
       board: boardId,
     },
     orderBy: {
-      position: "asc",
+      position: 'asc',
     },
     include: {
       tasks: {
         orderBy: {
-          position: "desc",
+          position: 'desc',
         },
       },
     },

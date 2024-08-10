@@ -1,39 +1,39 @@
-"use client";
+'use client';
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from '@tanstack/react-table';
 
-import { Badge } from "@/components/ui/badge";
+import { Badge } from '@/components/ui/badge';
 
-import { visibility } from "../data/data";
-import { Task } from "../data/schema";
-import { DataTableColumnHeader } from "./data-table-column-header";
-import { DataTableRowActions } from "./data-table-row-actions";
-import moment from "moment";
-import Link from "next/link";
+import { visibility } from '../data/data';
+import { Task } from '../data/schema';
+import { DataTableColumnHeader } from './data-table-column-header';
+import { DataTableRowActions } from './data-table-row-actions';
+import moment from 'moment';
+import Link from 'next/link';
 
 export const columns: ColumnDef<Task>[] = [
   {
-    accessorKey: "date_created",
+    accessorKey: 'date_created',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Date Created" />
     ),
     cell: ({ row }) => (
       <div className="w-[80px]">
-        {moment(row.getValue("date_created")).format("YY-MM-DD")}
+        {moment(row.getValue('date_created')).format('YY-MM-DD')}
       </div>
     ),
     enableSorting: true,
     enableHiding: false,
   },
   {
-    accessorKey: "assigned_user",
+    accessorKey: 'assigned_user',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Assigned to" />
     ),
 
     cell: ({ row }) => (
       <div className="w-[150px]">
-        {row.original.assigned_user.name ?? "Unassigned"}
+        {row.original.assigned_user.name ?? 'Unassigned'}
       </div>
     ),
     enableSorting: true,
@@ -41,33 +41,33 @@ export const columns: ColumnDef<Task>[] = [
   },
 
   {
-    accessorKey: "title",
+    accessorKey: 'title',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Name" />
     ),
     cell: ({ row }) => (
       <Link href={`/projects/boards/${row.original.id}`}>
-        <div className="w-[300px]">{row.getValue("title")}</div>
+        <div className="w-[300px]">{row.getValue('title')}</div>
       </Link>
     ),
   },
   {
-    accessorKey: "description",
+    accessorKey: 'description',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Description" />
     ),
     cell: ({ row }) => (
-      <div className="w-[300px]">{row.getValue("description")}</div>
+      <div className="w-[300px]">{row.getValue('description')}</div>
     ),
   },
   {
-    accessorKey: "visibility",
+    accessorKey: 'visibility',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Visibility" />
     ),
     cell: ({ row }) => {
       const status = visibility.find(
-        (status) => status.value === row.getValue("visibility")
+        (status) => status.value === row.getValue('visibility')
       );
 
       if (!status) {
@@ -82,11 +82,11 @@ export const columns: ColumnDef<Task>[] = [
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id));
-    },    
+    },
   },
 
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ];

@@ -1,9 +1,9 @@
-import { authOptions } from "@/lib/auth";
-import { prismadb } from "@/lib/prisma";
-import sendEmail from "@/lib/sendmail";
-import { fillXmlTemplate } from "@/lib/xml-generator";
-import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { authOptions } from '@/lib/auth';
+import { prismadb } from '@/lib/prisma';
+import sendEmail from '@/lib/sendmail';
+import { fillXmlTemplate } from '@/lib/xml-generator';
+import { getServerSession } from 'next-auth';
+import { NextResponse } from 'next/server';
 
 export async function GET(
   req: Request,
@@ -11,7 +11,7 @@ export async function GET(
 ) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return NextResponse.json({ status: 401, body: { error: "Unauthorized" } });
+    return NextResponse.json({ status: 401, body: { error: 'Unauthorized' } });
   }
 
   const { invoiceId } = params;
@@ -19,7 +19,7 @@ export async function GET(
   if (!invoiceId) {
     return NextResponse.json({
       status: 400,
-      body: { error: "Bad Request - invoice id is mandatory" },
+      body: { error: 'Bad Request - invoice id is mandatory' },
     });
   }
 
@@ -41,7 +41,7 @@ export async function GET(
   if (!buffer) {
     return NextResponse.json({
       status: 400,
-      body: { error: "Bad Request - buffer is empty. Nothing to send." },
+      body: { error: 'Bad Request - buffer is empty. Nothing to send.' },
     });
   }
 
@@ -55,7 +55,7 @@ export async function GET(
       status: 400,
       body: {
         error:
-          "Bad Request - accountant email is empty. Nothing to send. Fill the accountant email in the settings.",
+          'Bad Request - accountant email is empty. Nothing to send. Fill the accountant email in the settings.',
       },
     });
   }
@@ -71,19 +71,19 @@ export async function GET(
         {
           filename: `invoice-${invoiceId}.xml`,
           content: buffer,
-          contentType: "application/xml",
+          contentType: 'application/xml',
         },
       ],
     });
     return NextResponse.json({
       status: 200,
-      body: { message: "Email with XML send to its destination" },
+      body: { message: 'Email with XML send to its destination' },
     });
   }
   return NextResponse.json(
     {
       message:
-        "There is no accountant email in the database. Nothing to send. Fill the accountant email in the settings.",
+        'There is no accountant email in the database. Nothing to send. Fill the accountant email in the settings.',
     },
     { status: 400 }
   );

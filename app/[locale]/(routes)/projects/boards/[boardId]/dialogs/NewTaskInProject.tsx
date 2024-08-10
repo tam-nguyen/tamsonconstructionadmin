@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import LoadingComponent from "@/components/LoadingComponent";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+import LoadingComponent from '@/components/LoadingComponent';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
 import {
   Dialog,
   DialogContent,
@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -19,32 +19,32 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from '@/components/ui/popover';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
-import { cn } from "@/lib/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/components/ui/use-toast';
+import { cn } from '@/lib/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+import { format } from 'date-fns';
+import { CalendarIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 type Props = {
   users: any;
@@ -64,7 +64,7 @@ const NewTaskInProjectDialog = ({ users, boardId, sections }: Props) => {
   const formSchema = z.object({
     title: z.string().min(3).max(255),
     user: z.string().min(3).max(255),
-    dueDateAt: z.date().default(new Date()),    
+    dueDateAt: z.date().default(new Date()),
     priority: z.string().min(3).max(10),
     section: z.string().min(3).max(255),
     content: z.string().min(3).max(500),
@@ -92,25 +92,25 @@ const NewTaskInProjectDialog = ({ users, boardId, sections }: Props) => {
     try {
       await axios.post(`/api/projects/tasks/create-task/${boardId}`, data);
       toast({
-        title: "Success",
+        title: 'Success',
         description: `New task: ${data.title}, created successfully`,
       });
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
       setIsLoading(false);
       setOpen(false);
       form.reset({
-        title: "",
-        content: "",
-        user: "",
-        priority: "",
-        section: "",
-      });      
+        title: '',
+        content: '',
+        user: '',
+        priority: '',
+        section: '',
+      });
       router.refresh();
     }
   };
@@ -135,7 +135,7 @@ const NewTaskInProjectDialog = ({ users, boardId, sections }: Props) => {
         {isLoading ? (
           <LoadingComponent />
         ) : (
-          <div className="flex w-full ">
+          <div className="flex w-full">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -186,14 +186,14 @@ const NewTaskInProjectDialog = ({ users, boardId, sections }: Props) => {
                           <PopoverTrigger asChild>
                             <FormControl>
                               <Button
-                                variant={"outline"}
+                                variant={'outline'}
                                 className={cn(
-                                  "w-[240px] pl-3 text-left font-normal",
-                                  !field.value && "text-muted-foreground"
+                                  'w-[240px] pl-3 text-left font-normal',
+                                  !field.value && 'text-muted-foreground'
                                 )}
                               >
                                 {field.value ? (
-                                  format(field.value, "PPP")
+                                  format(field.value, 'PPP')
                                 ) : (
                                   <span>Pick a expected close date</span>
                                 )}
@@ -208,7 +208,7 @@ const NewTaskInProjectDialog = ({ users, boardId, sections }: Props) => {
                               //@ts-ignore
                               //TODO: fix this
                               onSelect={field.onChange}
-                              disabled={(date) => date < new Date("1900-01-01")}
+                              disabled={(date) => date < new Date('1900-01-01')}
                               initialFocus
                             />
                           </PopoverContent>
@@ -216,7 +216,7 @@ const NewTaskInProjectDialog = ({ users, boardId, sections }: Props) => {
                         <FormMessage />
                       </FormItem>
                     )}
-                  />                  
+                  />
                   <FormField
                     control={form.control}
                     name="user"
@@ -300,9 +300,9 @@ const NewTaskInProjectDialog = ({ users, boardId, sections }: Props) => {
                 </div>
                 <div className="flex w-full justify-end space-x-2 pt-2">
                   <DialogTrigger asChild>
-                    <Button variant={"destructive"}>Cancel</Button>
+                    <Button variant={'destructive'}>Cancel</Button>
                   </DialogTrigger>
-                  <Button type="submit">Create</Button>                  
+                  <Button type="submit">Create</Button>
                 </div>
               </form>
             </Form>

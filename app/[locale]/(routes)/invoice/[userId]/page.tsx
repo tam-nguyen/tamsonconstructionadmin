@@ -1,12 +1,12 @@
-import React from "react";
-import Container from "../../components/ui/Container";
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
-import { getUserInvoices } from "@/actions/invoice/get-user-invoices";
-import { UsersInvoiceDataTable } from "./data-table/data-table";
-import { columns } from "../data-table/columns";
+import React from 'react';
+import Container from '../../components/ui/Container';
+import { authOptions } from '@/lib/auth';
+import { getServerSession } from 'next-auth';
+import { getUserInvoices } from '@/actions/invoice/get-user-invoices';
+import { UsersInvoiceDataTable } from './data-table/data-table';
+import { columns } from '../data-table/columns';
 
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation';
 
 interface UserInvoicesPageProps {
   params: {
@@ -21,7 +21,7 @@ const MyInvoicesPage = async ({ params }: UserInvoicesPageProps) => {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    redirect("/signin");
+    redirect('/signin');
   }
 
   return (

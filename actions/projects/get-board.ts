@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getBoard = async (id: string) => {
   const board = await prismadb.boards.findFirst({
@@ -19,12 +19,12 @@ export const getBoard = async (id: string) => {
       board: id,
     },
     orderBy: {
-      position: "asc",
+      position: 'asc',
     },
     include: {
       tasks: {
         orderBy: {
-          position: "desc",
+          position: 'desc',
         },
       },
     },

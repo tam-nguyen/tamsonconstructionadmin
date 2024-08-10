@@ -121,12 +121,17 @@ function removePickedOption(groupOption: GroupOption, picked: Option[]) {
   const cloneOption = JSON.parse(JSON.stringify(groupOption)) as GroupOption;
 
   for (const [key, value] of Object.entries(cloneOption)) {
-    cloneOption[key] = value.filter((val) => !picked.find((p) => p.value === val.value));
+    cloneOption[key] = value.filter(
+      (val) => !picked.find((p) => p.value === val.value)
+    );
   }
   return cloneOption;
 }
 
-const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorProps>(
+const MultipleSelector = React.forwardRef<
+  MultipleSelectorRef,
+  MultipleSelectorProps
+>(
   (
     {
       value,
@@ -151,7 +156,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
       commandProps,
       inputProps,
     }: MultipleSelectorProps,
-    ref: React.Ref<MultipleSelectorRef>,
+    ref: React.Ref<MultipleSelectorRef>
   ) => {
     const inputRef = React.useRef<HTMLInputElement>(null);
     const [open, setOpen] = React.useState(false);
@@ -159,7 +164,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
 
     const [selected, setSelected] = React.useState<Option[]>(value || []);
     const [options, setOptions] = React.useState<GroupOption>(
-      transToGroupOption(arrayDefaultOptions, groupBy),
+      transToGroupOption(arrayDefaultOptions, groupBy)
     );
     const [inputValue, setInputValue] = React.useState('');
     const debouncedSearchTerm = useDebounce(inputValue, delay || 500);
@@ -170,7 +175,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
         selectedValue: [...selected],
         input: inputRef.current as HTMLInputElement,
       }),
-      [selected],
+      [selected]
     );
 
     const handleUnselect = React.useCallback(
@@ -179,7 +184,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
         setSelected(newOptions);
         onChange?.(newOptions);
       },
-      [onChange, selected],
+      [onChange, selected]
     );
 
     const handleKeyDown = React.useCallback(
@@ -197,7 +202,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
           }
         }
       },
-      [handleUnselect, selected],
+      [handleUnselect, selected]
     );
 
     useEffect(() => {
@@ -294,7 +299,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
 
     const selectables = React.useMemo<GroupOption>(
       () => removePickedOption(options, selected),
-      [options, selected],
+      [options, selected]
     );
 
     return (
@@ -304,15 +309,20 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
           handleKeyDown(e);
           commandProps?.onKeyDown?.(e);
         }}
-        className={cn('overflow-visible bg-transparent', commandProps?.className)}
+        className={cn(
+          'overflow-visible bg-transparent',
+          commandProps?.className
+        )}
         shouldFilter={
-          commandProps?.shouldFilter !== undefined ? commandProps.shouldFilter : !onSearch
+          commandProps?.shouldFilter !== undefined
+            ? commandProps.shouldFilter
+            : !onSearch
         } // When onSearch is provided, we don't want to filter the options. You can still override it.
       >
         <div
           className={cn(
             'group rounded-md border border-input px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
-            className,
+            className
           )}
         >
           <div className="flex flex-wrap gap-1">
@@ -323,7 +333,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                   className={cn(
                     'data-[disabled]:bg-muted-foreground data-[disabled]:text-muted data-[disabled]:hover:bg-muted-foreground',
                     'data-[fixed]:bg-muted-foreground data-[fixed]:text-muted data-[fixed]:hover:bg-muted-foreground',
-                    badgeClassName,
+                    badgeClassName
                   )}
                   data-fixed={option.fixed}
                   data-disabled={disabled}
@@ -332,7 +342,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                   <button
                     className={cn(
                       'ml-1 rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2',
-                      (disabled || option.fixed) && 'hidden',
+                      (disabled || option.fixed) && 'hidden'
                     )}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
@@ -369,10 +379,14 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                 triggerSearchOnFocus && onSearch?.(debouncedSearchTerm);
                 inputProps?.onFocus?.(event);
               }}
-              placeholder={hidePlaceholderWhenSelected && selected.length !== 0 ? '' : placeholder}
+              placeholder={
+                hidePlaceholderWhenSelected && selected.length !== 0
+                  ? ''
+                  : placeholder
+              }
               className={cn(
                 'ml-2 flex-1 bg-transparent outline-none placeholder:text-muted-foreground',
-                inputProps?.className,
+                inputProps?.className
               )}
             />
           </div>
@@ -386,9 +400,15 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                 <>
                   {EmptyItem()}
                   {CreatableItem()}
-                  {!selectFirstItem && <CommandItem value="-" className="hidden" />}
+                  {!selectFirstItem && (
+                    <CommandItem value="-" className="hidden" />
+                  )}
                   {Object.entries(selectables).map(([key, dropdowns]) => (
-                    <CommandGroup key={key} heading={key} className="h-full overflow-auto">
+                    <CommandGroup
+                      key={key}
+                      heading={key}
+                      className="h-full overflow-auto"
+                    >
                       <>
                         {dropdowns.map((option) => {
                           return (
@@ -412,7 +432,8 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                               }}
                               className={cn(
                                 'cursor-pointer',
-                                option.disable && 'cursor-default text-muted-foreground',
+                                option.disable &&
+                                  'cursor-default text-muted-foreground'
                               )}
                             >
                               {option.label}
@@ -429,7 +450,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
         </div>
       </Command>
     );
-  },
+  }
 );
 
 MultipleSelector.displayName = 'MultipleSelector';

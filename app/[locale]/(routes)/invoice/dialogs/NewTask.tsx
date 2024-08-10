@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import LoadingComponent from "@/components/LoadingComponent";
-import { Button } from "@/components/ui/button";
+import LoadingComponent from '@/components/LoadingComponent';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -10,7 +10,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -18,25 +18,25 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
-import { useAppStore } from "@/store/store";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/components/ui/use-toast';
+import { useAppStore } from '@/store/store';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 type Props = {
   users: any;
@@ -62,7 +62,7 @@ const NewTaskDialog = ({ users, boards }: Props) => {
     board: z.string().min(3).max(255),
     priority: z.string().min(3).max(10),
     content: z.string().min(3).max(500),
-    notionUrl: z.string().min(3).max(500),    
+    notionUrl: z.string().min(3).max(500),
   });
 
   type NewAccountFormValues = z.infer<typeof formSchema>;
@@ -87,13 +87,13 @@ const NewTaskDialog = ({ users, boards }: Props) => {
     try {
       await axios.post(`/api/projects/tasks/create-task`, data);
       toast({
-        title: "Success",
+        title: 'Success',
         description: `New task: ${data.title}, created successfully`,
       });
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
@@ -117,7 +117,7 @@ const NewTaskDialog = ({ users, boards }: Props) => {
         {isLoading ? (
           <LoadingComponent />
         ) : (
-          <div className="flex flex-col w-full ">
+          <div className="flex w-full flex-col">
             {/*     <pre>
               <code>{JSON.stringify(form.getValues(), null, 2)}</code>
             </pre> */}
@@ -245,7 +245,7 @@ const NewTaskDialog = ({ users, boards }: Props) => {
                 </div>
                 <div className="flex w-full justify-end space-x-2 pt-2">
                   <DialogTrigger asChild>
-                    <Button variant={"destructive"}>Cancel</Button>
+                    <Button variant={'destructive'}>Cancel</Button>
                   </DialogTrigger>
                   <Button type="submit">Create</Button>
                 </div>

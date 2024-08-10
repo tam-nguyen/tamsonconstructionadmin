@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
 import type { ElementRef, FC } from 'react';
 import { useRef, useState } from 'react';
 import { LoadingButton } from '@/components/ui/loading-button';
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
-import { useTheme } from "next-themes";
-import { PlayCircle, XCircle } from "lucide-react";
+import { useTheme } from 'next-themes';
+import { PlayCircle, XCircle } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import type { OnChange, OnMount } from '@monaco-editor/react';
 import { Editor } from '@monaco-editor/react';
@@ -19,10 +19,12 @@ import {
   DialogContent,
   DialogFooter,
   DialogTitle,
-} from "@/components/ui/dialog"
+} from '@/components/ui/dialog';
 
 const startNowSchema = z.object({
-  global: z.record(z.string(), z.any()).refine((val) => !Object.keys(val).includes(''), 'Empty keys is not valid'),
+  global: z
+    .record(z.string(), z.any())
+    .refine((val) => !Object.keys(val).includes(''), 'Empty keys is not valid'),
 });
 
 type StartNowSchema = z.infer<typeof startNowSchema>;
@@ -39,7 +41,8 @@ const StartNowDialog: FC<Props> = ({ workflowDefinitionId }) => {
   const theme = useTheme();
   const editorRef = useRef<ElementRef<typeof Editor>>();
 
-  const [startWorkflowLoading, setStartWorkflowLoading] = useState<boolean>(false);
+  const [startWorkflowLoading, setStartWorkflowLoading] =
+    useState<boolean>(false);
 
   const { handleSubmit, setValue, reset, formState } = useForm<StartNowSchema>({
     resolver: zodResolver(startNowSchema),
@@ -79,25 +82,22 @@ const StartNowDialog: FC<Props> = ({ workflowDefinitionId }) => {
   };
 
   const onMount: OnMount = (editor) => {
-    editorRef.current = editor as ElementRef<typeof Editor>;;
+    editorRef.current = editor as ElementRef<typeof Editor>;
   };
 
   const startWorkflowHandler = handleSubmit(async (values) => {
     setStartWorkflowLoading(() => true);
 
     axios
-      .post(
-        '/transport/start',
-        {
-          workflowDefinitionId,
-          globalParams: values.global,
-        },
-      )
+      .post('/transport/start', {
+        workflowDefinitionId,
+        globalParams: values.global,
+      })
       .then((res) => {
         console.log(res.data);
         toast({
-          title: "Success",
-          description: "Workflow started successfully."
+          title: 'Success',
+          description: 'Workflow started successfully.',
         });
         handleDialogClose();
       })
@@ -108,9 +108,9 @@ const StartNowDialog: FC<Props> = ({ workflowDefinitionId }) => {
           console.error(error);
         }
         toast({
-          title: "Error",
-          description: "Workflow start failed."
-        })
+          title: 'Error',
+          description: 'Workflow start failed.',
+        });
       })
       .finally(() => {
         setStartWorkflowLoading(() => false);
@@ -120,7 +120,8 @@ const StartNowDialog: FC<Props> = ({ workflowDefinitionId }) => {
   return (
     <>
       <Button variant="outline" onClick={handleDialogOpen}>
-        Start Now&nbsp;<PlayCircle width="15" height="15" />
+        Start Now&nbsp;
+        <PlayCircle width="15" height="15" />
       </Button>
       <Dialog open={open}>
         <DialogTitle>Start Now</DialogTitle>
@@ -128,7 +129,7 @@ const StartNowDialog: FC<Props> = ({ workflowDefinitionId }) => {
           <div className="gap-y-0.5">
             <Label>Global Params</Label>
             {!!error && (
-              <div className="flex flex-row justify-start items-center gap-x-0.5">
+              <div className="flex flex-row items-center justify-start gap-x-0.5">
                 <XCircle color="error" />
                 <Label>{error}</Label>
               </div>

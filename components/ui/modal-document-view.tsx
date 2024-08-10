@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Dialog, DialogContent } from "./dialog-document-view";
+import { Dialog, DialogContent } from './dialog-document-view';
 
 interface ModalProps {
   isOpen: boolean;
@@ -21,7 +21,7 @@ export default function ModalDocumentView({
 
   return (
     <Dialog open={isOpen} onOpenChange={onChange}>
-      <DialogContent className="w-full h-4/5">
+      <DialogContent className="h-4/5 w-full">
         <div className="h-full py-10">{children}</div>
       </DialogContent>
     </Dialog>

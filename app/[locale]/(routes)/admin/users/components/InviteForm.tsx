@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -12,27 +12,27 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { useToast } from "@/components/ui/use-toast";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { Icons } from "@/components/ui/icons";
+} from '@/components/ui/select';
+import { useToast } from '@/components/ui/use-toast';
+import { Input } from '@/components/ui/input';
+import { useState } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import { Icons } from '@/components/ui/icons';
 
 const FormSchema = z.object({
   name: z.string().min(3).max(50),
   email: z.string().email(),
   language: z
     .string({
-      required_error: "Please select a user language.",
+      required_error: 'Please select a user language.',
     })
     .min(2),
 });
@@ -49,33 +49,33 @@ export function InviteForm() {
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    setIsLoading(true);  
+    setIsLoading(true);
     try {
-      const response = await axios.post("/api/user/inviteuser", data);
+      const response = await axios.post('/api/user/inviteuser', data);
 
       if (response.data.error) {
         toast({
-          variant: "destructive",
-          title: "Error",
+          variant: 'destructive',
+          title: 'Error',
           description: response.data.error,
         });
       } else {
         toast({
-          title: "Success!",
-          description: "User invited successfully.",
+          title: 'Success!',
+          description: 'User invited successfully.',
         });
       }
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Something went wrong while inviting the user.",
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Something went wrong while inviting the user.',
       });
-    } finally {      
+    } finally {
       form.reset({
-        name: "",
-        email: "",
-        language: "en",
+        name: '',
+        email: '',
+        language: 'en',
       });
       router.refresh();
       setIsLoading(false);
@@ -86,7 +86,7 @@ export function InviteForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex space-x-5 w-full p-5 items-end"
+        className="flex w-full items-end space-x-5 p-5"
       >
         <FormField
           control={form.control}
@@ -143,7 +143,7 @@ export function InviteForm() {
           {isLoading ? (
             <Icons.spinner className="animate-spin" />
           ) : (
-            "Invite user"
+            'Invite user'
           )}
         </Button>
       </form>

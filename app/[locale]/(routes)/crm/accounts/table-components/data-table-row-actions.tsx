@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { Row } from "@tanstack/react-table";
+import { DotsHorizontalIcon } from '@radix-ui/react-icons';
+import { Row } from '@tanstack/react-table';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,17 +11,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 
-import { accountSchema } from "../table-data/schema";
-import { useRouter } from "next/navigation";
-import AlertModal from "@/components/modals/alert-modal";
-import { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
-import axios from "axios";
-import RightViewModalNoTrigger from "@/components/modals/right-view-notrigger";
-import { UpdateAccountForm } from "../components/UpdateAccountForm";
-import { Eye, EyeOff } from "lucide-react";
+import { accountSchema } from '../table-data/schema';
+import { useRouter } from 'next/navigation';
+import AlertModal from '@/components/modals/alert-modal';
+import { useState } from 'react';
+import { useToast } from '@/components/ui/use-toast';
+import axios from 'axios';
+import RightViewModalNoTrigger from '@/components/modals/right-view-notrigger';
+import { UpdateAccountForm } from '../components/UpdateAccountForm';
+import { Eye, EyeOff } from 'lucide-react';
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -44,15 +44,15 @@ export function DataTableRowActions<TData>({
     try {
       await axios.delete(`/api/crm/account/${account.id}`);
       toast({
-        title: "Success",
-        description: "Opportunity has been deleted",
+        title: 'Success',
+        description: 'Opportunity has been deleted',
       });
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description:
-          "Something went wrong while deleting opportunity. Please try again.",
+          'Something went wrong while deleting opportunity. Please try again.',
       });
     } finally {
       setLoading(false);
@@ -67,13 +67,13 @@ export function DataTableRowActions<TData>({
       await axios.post(`/api/crm/account/${account.id}/watch`);
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error, Account not watched. Please try again.",
+        variant: 'destructive',
+        title: 'Error, Account not watched. Please try again.',
       });
       console.log(error);
     } finally {
       toast({
-        title: "Success",
+        title: 'Success',
         description: `You are now Account: ${account.name}, watcher`,
       });
       setLoading(false);
@@ -86,13 +86,13 @@ export function DataTableRowActions<TData>({
       await axios.post(`/api/crm/account/${account.id}/unwatch`);
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error, Account not watched. Please try again.",
+        variant: 'destructive',
+        title: 'Error, Account not watched. Please try again.',
       });
       console.log(error);
     } finally {
       toast({
-        title: "Success",
+        title: 'Success',
         description: `You are no longer Project: ${account.name}, watcher`,
       });
       setLoading(false);
@@ -108,7 +108,7 @@ export function DataTableRowActions<TData>({
         loading={loading}
       />
       <RightViewModalNoTrigger
-        title={"Update Account" + " - " + account?.name}
+        title={'Update Account' + ' - ' + account?.name}
         description="Update account details"
         open={updateOpen}
         setOpen={setUpdateOpen}
@@ -137,14 +137,14 @@ export function DataTableRowActions<TData>({
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={onWatch}>
-            <Eye className="mr-2 w-4 h-4" />
+            <Eye className="mr-2 h-4 w-4" />
             Watch Account
           </DropdownMenuItem>
           <DropdownMenuItem onClick={onUnWatch}>
-            <EyeOff className="mr-2 w-4 h-4" />
+            <EyeOff className="mr-2 h-4 w-4" />
             Stop watching Account
           </DropdownMenuItem>
-          <DropdownMenuSeparator />          
+          <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => setOpen(true)}>
             Delete
             <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>

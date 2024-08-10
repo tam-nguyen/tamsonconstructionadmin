@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import sendEmail from "@/lib/sendmail";
+import { NextResponse } from 'next/server';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import sendEmail from '@/lib/sendmail';
 
 export async function POST(
   req: Request,
@@ -11,7 +11,7 @@ export async function POST(
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   try {
@@ -20,17 +20,17 @@ export async function POST(
         id: params.userId,
       },
       data: {
-        userStatus: "ACTIVE",
+        userStatus: 'ACTIVE',
       },
     });
 
     let message;
 
     switch (user.userLanguage) {
-      case "en":
+      case 'en':
         message = `Your account has been activated in ${process.env.NEXT_PUBLIC_APP_NAME}. \n\n Your username is: ${user.email} \n\n Please login to ${process.env.NEXT_PUBLIC_APP_URL} \n\n Thank you \n\n ${process.env.NEXT_PUBLIC_APP_NAME}`;
         break;
-      case "de":
+      case 'de':
         message = `Ihr Konto wurde aktiviert ${process.env.NEXT_PUBLIC_APP_NAME}. \n\n Dein Benutzername ist: ${user.email} \n\n  Bitte melden Sie sich an ${process.env.NEXT_PUBLIC_APP_URL} \n\n Danke \n\n ${process.env.NEXT_PUBLIC_APP_NAME}`;
         break;
       default:
@@ -47,7 +47,7 @@ export async function POST(
 
     return NextResponse.json(user);
   } catch (error) {
-    console.log("[USER_ACTIVATE_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[USER_ACTIVATE_POST]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

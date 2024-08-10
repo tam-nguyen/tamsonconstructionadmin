@@ -1,4 +1,4 @@
-import { StateCreator } from "zustand";
+import { StateCreator } from 'zustand';
 
 export interface IsOpenSliceInterface {
   isOpen: boolean;
@@ -9,7 +9,7 @@ export interface IsOpenSliceInterface {
 
 export const createIsOpenSlice: StateCreator<IsOpenSliceInterface> = (set) => ({
   isOpen: false,
-  notionUrl: "",
+  notionUrl: '',
   setIsOpen: (isOpen: boolean) => set({ isOpen }),
   setNotionUrl: (notionUrl: string) => set({ notionUrl }),
 });

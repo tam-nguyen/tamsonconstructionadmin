@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 import {
   Card,
@@ -8,14 +8,14 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import RightViewModal from "@/components/modals/right-view-modal";
+} from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import RightViewModal from '@/components/modals/right-view-modal';
 
-import { columns } from "../leads/table-components/columns";
-import { NewLeadForm } from "../leads/components/NewLeadForm";
-import { LeadDataTable } from "../leads/table-components/data-table";
-import { useRouter } from "next/navigation";
+import { columns } from '../leads/table-components/columns';
+import { NewLeadForm } from '../leads/components/NewLeadForm';
+import { LeadDataTable } from '../leads/table-components/data-table';
+import { useRouter } from 'next/navigation';
 
 const LeadsView = ({ data, crmData }: any) => {
   const router = useRouter();
@@ -37,7 +37,7 @@ const LeadsView = ({ data, crmData }: any) => {
         <div className="flex justify-between">
           <div>
             <CardTitle
-              onClick={() => router.push("/crm/leads")}
+              onClick={() => router.push('/crm/leads')}
               className="cursor-pointer"
             >
               Leads
@@ -45,7 +45,7 @@ const LeadsView = ({ data, crmData }: any) => {
             <CardDescription></CardDescription>
           </div>
           <div className="flex space-x-2">
-            <RightViewModal label={"+"} title="Create new lead" description="">
+            <RightViewModal label={'+'} title="Create new lead" description="">
               <NewLeadForm users={users} accounts={accounts} />
             </RightViewModal>
           </div>
@@ -55,7 +55,7 @@ const LeadsView = ({ data, crmData }: any) => {
       <CardContent>
         {!data ||
           (data.length === 0 ? (
-            "No assigned leads found"
+            'No assigned leads found'
           ) : (
             <LeadDataTable data={data} columns={columns} />
           ))}

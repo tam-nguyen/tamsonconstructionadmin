@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import axios from "axios";
-import { useRouter } from "next/navigation";
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
-import { getTaskDone } from "@/app/[locale]/(routes)/projects/actions/get-task-done";
-import { Badge } from "@/components/ui/badge";
-import { CheckSquare, Pencil } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import UpdateTaskDialog from "@/app/[locale]/(routes)/projects/dialogs/UpdateTask";
-import { getActiveUsers } from "@/actions/get-users";
-import { useState } from "react";
-import { Icons } from "@/components/ui/icons";
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
+import { getTaskDone } from '@/app/[locale]/(routes)/projects/actions/get-task-done';
+import { Badge } from '@/components/ui/badge';
+import { CheckSquare, Pencil } from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import UpdateTaskDialog from '@/app/[locale]/(routes)/projects/dialogs/UpdateTask';
+import { getActiveUsers } from '@/actions/get-users';
+import { useState } from 'react';
+import { Icons } from '@/components/ui/icons';
 
 const TaskViewActions = ({
   taskId,
@@ -37,16 +37,16 @@ const TaskViewActions = ({
 
   //Actions
   const onDone = async () => {
-    setIsLoading(true);    
+    setIsLoading(true);
     try {
       await getTaskDone(taskId);
       toast({
-        title: "Success, task marked as done.",
-      });      
+        title: 'Success, task marked as done.',
+      });
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error, task not marked as done.",
+        variant: 'destructive',
+        title: 'Error, task not marked as done.',
       });
     } finally {
       setIsLoading(false);
@@ -58,27 +58,27 @@ const TaskViewActions = ({
     <div className="space-x-2 pb-2">
       Task Actions:
       <Separator className="mb-5" />
-      {initialData.taskStatus !== "COMPLETE" && (
+      {initialData.taskStatus !== 'COMPLETE' && (
         <Badge
-          variant={"outline"}
+          variant={'outline'}
           onClick={onDone}
           className="cursor-pointer"
           aria-disabled={isLoading}
         >
-          <CheckSquare className="w-4 h-4 mr-2" />
+          <CheckSquare className="mr-2 h-4 w-4" />
           {isLoading ? (
-            <Icons.spinner className="animate-spin w-4 h-4 mr-2" />
+            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
           ) : (
-            "Mark as done"
+            'Mark as done'
           )}
         </Badge>
       )}
       <Badge
-        variant={"outline"}
+        variant={'outline'}
         className="cursor-pointer"
         onClick={() => setOpenEdit(true)}
       >
-        <Pencil className="w-4 h-4 mr-2" />
+        <Pencil className="mr-2 h-4 w-4" />
         Edit
         <Sheet open={openEdit} onOpenChange={() => setOpenEdit(false)}>
           <SheetContent>
@@ -88,8 +88,11 @@ const TaskViewActions = ({
               initialData={initialData}
               onDone={() => setOpenEdit(false)}
             />
-            <div className="flex pt-2 w-full justify-end">
-              <Button onClick={() => setOpenEdit(false)} variant={"destructive"}>
+            <div className="flex w-full justify-end pt-2">
+              <Button
+                onClick={() => setOpenEdit(false)}
+                variant={'destructive'}
+              >
                 Close
               </Button>
             </div>

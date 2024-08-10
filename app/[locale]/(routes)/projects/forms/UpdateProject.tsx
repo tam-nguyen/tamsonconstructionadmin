@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { DialogTrigger } from "@/components/ui/dialog";
+import { Button } from '@/components/ui/button';
+import { DialogTrigger } from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -9,25 +9,25 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Icons } from "@/components/ui/icons";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Icons } from '@/components/ui/icons';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/components/ui/use-toast';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 type Props = {
   initialData: any;
@@ -70,15 +70,15 @@ const UpdateProjectForm = ({ initialData, openEdit }: Props) => {
   const onSubmit = async (data: NewAccountFormValues) => {
     setIsLoading(true);
     try {
-      await axios.put("/api/projects/", data);
+      await axios.put('/api/projects/', data);
       toast({
-        title: "Success",
+        title: 'Success',
         description: `Project: ${data.title}, update successfully`,
       });
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
@@ -90,7 +90,7 @@ const UpdateProjectForm = ({ initialData, openEdit }: Props) => {
   };
 
   return (
-    <div className="flex w-full py-5 ">
+    <div className="flex w-full py-5">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -148,8 +148,8 @@ const UpdateProjectForm = ({ initialData, openEdit }: Props) => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value={"public"}>{`Public`}</SelectItem>
-                      <SelectItem value={"private"}>{`Private`}</SelectItem>
+                      <SelectItem value={'public'}>{`Public`}</SelectItem>
+                      <SelectItem value={'private'}>{`Private`}</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -159,13 +159,13 @@ const UpdateProjectForm = ({ initialData, openEdit }: Props) => {
           </div>
           <div className="flex w-full justify-end space-x-2 pt-2">
             <DialogTrigger asChild>
-              <Button variant={"destructive"}>Cancel</Button>
+              <Button variant={'destructive'}>Cancel</Button>
             </DialogTrigger>
             <Button type="submit" disabled={isLoading}>
               {isLoading ? (
                 <Icons.spinner className="animate-spin" />
               ) : (
-                "Update"
+                'Update'
               )}
             </Button>
           </div>

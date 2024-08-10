@@ -10,11 +10,11 @@ export async function GET(
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   if (!params.runtimeId) {
-    return new NextResponse("Runtime ID is required", { status: 400 });
+    return new NextResponse('Runtime ID is required', { status: 400 });
   }
 
   try {
@@ -30,15 +30,15 @@ export async function GET(
             definitionStatus: true,
             description: true,
             createdAt: true,
-            updatedAt: true
-          }
-        }
+            updatedAt: true,
+          },
+        },
       },
-    })
+    });
 
-    return NextResponse.json({runtime});
+    return NextResponse.json({ runtime });
   } catch (error) {
-    console.log("[RUNTIME_DETAIL_GET]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[RUNTIME_DETAIL_GET]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getTaskDocuments = async (taskId: string) => {
   const data = await prismadb.documents.findMany({
@@ -28,6 +28,6 @@ export const getTaskDocuments = async (taskId: string) => {
         },
       },
     },
-  }); */  
+  }); */
   return data;
 };

@@ -1,13 +1,24 @@
-"use client";
+'use client';
 
-import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+} from '@/components/ui/card';
 import type { FC } from 'react';
 import { useCallback } from 'react';
 import type { NodeProps } from 'reactflow';
 import { Handle, Position, useReactFlow } from 'reactflow';
 
-import { ShieldCheck } from "lucide-react";
-import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
+import { ShieldCheck } from 'lucide-react';
+import {
+  TooltipProvider,
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from '@/components/ui/tooltip';
 import type { GuardConfigSchema } from './Config/page';
 import GuardConfigPanel from './Config/page';
 
@@ -62,20 +73,29 @@ const GuardTask: FC<NodeProps<DataProp>> = ({ data, id }) => {
                 <ShieldCheck width="15" height="15" />
               </TooltipTrigger>
               <TooltipContent side="bottom">
-                  {['ID', id].join(' : ')}
+                {['ID', id].join(' : ')}
               </TooltipContent>
             </Tooltip>
-          </TooltipProvider>          
+          </TooltipProvider>
         </CardTitle>
         <CardDescription className="text-md text-muted-foreground">
           {'Guard'}
-        </CardDescription>  
+        </CardDescription>
       </CardHeader>
       <CardFooter>
-        <GuardConfigPanel id={id} initialValue={data} deleteNode={deleteNode} onSubmit={changeValues} />
+        <GuardConfigPanel
+          id={id}
+          initialValue={data}
+          deleteNode={deleteNode}
+          onSubmit={changeValues}
+        />
       </CardFooter>
 
-      <Handle type="source" position={Position.Bottom} id={data?.outputBoundId} />
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id={data?.outputBoundId}
+      />
     </Card>
   );
 };

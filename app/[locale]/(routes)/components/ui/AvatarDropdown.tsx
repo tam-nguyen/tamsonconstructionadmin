@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,19 +8,19 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { signOut } from "next-auth/react";
+} from '@/components/ui/dropdown-menu';
+import { signOut } from 'next-auth/react';
 
-import { LogOut, Settings } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import useAvatarStore from "@/store/useAvatarStore";
+import { LogOut, Settings } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import useAvatarStore from '@/store/useAvatarStore';
 
 type Props = {
   avatar: string;
   userId: string;
   name: string;
-  email: string;  
+  email: string;
 };
 
 const AvatarDropdown = ({ avatar, userId, name, email }: Props) => {
@@ -35,7 +35,7 @@ const AvatarDropdown = ({ avatar, userId, name, email }: Props) => {
 
   useEffect(() => {
     setNewAvatar(getAvatar);
-  }, [getAvatar]);  
+  }, [getAvatar]);
 
   //console.log(newAvatar, "newAvatar");
   return (
@@ -58,7 +58,7 @@ const AvatarDropdown = ({ avatar, userId, name, email }: Props) => {
         </DropdownMenuLabel>
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => router.push("/projects/dashboard")}>
+        <DropdownMenuItem onClick={() => router.push('/projects/dashboard')}>
           Todo dashboard
         </DropdownMenuItem>
         <DropdownMenuItem
@@ -67,13 +67,13 @@ const AvatarDropdown = ({ avatar, userId, name, email }: Props) => {
           Sales dashboard
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => router.push("/profile")}>
-          <Settings className="w-4 h-4 inline-block mr-2 stroke-current text-gray-500" />
+        <DropdownMenuItem onClick={() => router.push('/profile')}>
+          <Settings className="mr-2 inline-block h-4 w-4 stroke-current text-gray-500" />
           <span>Profile settings</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => signOut()}>
-          <LogOut className="w-4 h-4 inline-block mr-2 stroke-current text-gray-500" />
+          <LogOut className="mr-2 inline-block h-4 w-4 stroke-current text-gray-500" />
           <span>Sign out</span>
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -1,14 +1,14 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getAllCrmData = async () => {
   const users = await prismadb.users.findMany({
     where: {
-      userStatus: "ACTIVE",
+      userStatus: 'ACTIVE',
     },
   });
   const accounts = await prismadb.crm_Accounts.findMany({});
   const opportunities = await prismadb.crm_Opportunities.findMany({});
-  const leads = await prismadb.crm_Leads.findMany({});  
+  const leads = await prismadb.crm_Leads.findMany({});
   const contacts = await prismadb.crm_Contacts.findMany({});
   const saleTypes = await prismadb.crm_Opportunities_Type.findMany({});
   const saleStages = await prismadb.crm_Opportunities_Sales_Stages.findMany({});
@@ -19,7 +19,7 @@ export const getAllCrmData = async () => {
     users,
     accounts,
     opportunities,
-    leads,    
+    leads,
     contacts,
     saleTypes,
     saleStages,

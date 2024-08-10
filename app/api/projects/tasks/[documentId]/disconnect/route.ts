@@ -1,7 +1,7 @@
-import { authOptions } from "@/lib/auth";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { authOptions } from '@/lib/auth';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { NextResponse } from 'next/server';
 
 export async function POST(
   req: Request,
@@ -9,18 +9,18 @@ export async function POST(
 ) {
   const session = await getServerSession(authOptions);
   if (!session)
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const body = await req.json();
 
-  if (!body) return NextResponse.json({ error: "No body" }, { status: 400 });
+  if (!body) return NextResponse.json({ error: 'No body' }, { status: 400 });
 
   const { taskId } = body;
 
-  console.log(taskId, "taskId");
+  console.log(taskId, 'taskId');
 
   const { documentId } = params;
-  console.log(documentId, "documentId");
+  console.log(documentId, 'documentId');
 
   try {
     const task = await prismadb.tasks.findUnique({
@@ -59,10 +59,10 @@ export async function POST(
 
       return NextResponse.json(updateTask);
     } else {
-      return NextResponse.json({ error: "Task not found" }, { status: 404 });
+      return NextResponse.json({ error: 'Task not found' }, { status: 404 });
     }
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ error: "Task not found" }, { status: 404 });
+    return NextResponse.json({ error: 'Task not found' }, { status: 404 });
   }
 }

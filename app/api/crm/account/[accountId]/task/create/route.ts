@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { NextResponse } from 'next/server';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
-import NewTaskFromCRMEmail from "@/emails/NewTaskFromCRM";
-import NewTaskFromCRMToWatchersEmail from "@/emails/NewTaskFromCRMToWatchers";
-import resendHelper from "@/lib/resend";
+import NewTaskFromCRMEmail from '@/emails/NewTaskFromCRM';
+import NewTaskFromCRMToWatchersEmail from '@/emails/NewTaskFromCRMToWatchers';
+import resendHelper from '@/lib/resend';
 
 //Create new task from CRM in project route
 export async function POST(req: Request) {
@@ -19,11 +19,11 @@ export async function POST(req: Request) {
   const { title, user, priority, content, account, dueDateAt } = body;
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   if (!title || !user || !priority || !content || !account) {
-    return new NextResponse("Missing one of the task data ", { status: 400 });
+    return new NextResponse('Missing one of the task data ', { status: 400 });
   }
 
   try {
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
         createdBy: user,
         updatedBy: user,
         user: user,
-        taskStatus: "ACTIVE",
+        taskStatus: 'ACTIVE',
       },
     });
 
@@ -53,15 +53,15 @@ export async function POST(req: Request) {
         await resend.emails.send({
           from:
             process.env.NEXT_PUBLIC_APP_NAME +
-            " <" +
+            ' <' +
             process.env.EMAIL_FROM +
-            ">",
+            '>',
           to: notifyRecipient?.email!,
           subject:
-            session.user.userLanguage === "en"
+            session.user.userLanguage === 'en'
               ? `New task -  ${title}.`
               : `Eine neue Aufgabe - ${title}.`,
-          text: "", // Add this line to fix the types issue
+          text: '', // Add this line to fix the types issue
           react: NewTaskFromCRMEmail({
             taskFromUser: session.user.name!,
             username: notifyRecipient?.name!,
@@ -95,19 +95,19 @@ export async function POST(req: Request) {
             id: userID.id,
           },
         });
-        console.log("Send email to user: ", user?.email!);
+        console.log('Send email to user: ', user?.email!);
         await resend.emails.send({
           from:
             process.env.NEXT_PUBLIC_APP_NAME +
-            " <" +
+            ' <' +
             process.env.EMAIL_FROM +
-            ">",
+            '>',
           to: user?.email!,
           subject:
-            session.user.userLanguage === "en"
+            session.user.userLanguage === 'en'
               ? `New task -  ${title}.`
               : `Nový úkol - ${title}.`,
-          text: "", // Add this line to fix the types issue
+          text: '', // Add this line to fix the types issue
           react: NewTaskFromCRMToWatchersEmail({
             taskFromUser: session.user.name!,
             username: user?.name!,
@@ -118,11 +118,11 @@ export async function POST(req: Request) {
       }
     } catch (error) {
       console.log(error);
-    }    
+    }
 
     return NextResponse.json({ status: 200 });
   } catch (error) {
-    console.log("[NEW_BOARD_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[NEW_BOARD_POST]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

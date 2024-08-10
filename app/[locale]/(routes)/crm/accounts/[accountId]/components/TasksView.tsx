@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { FC, useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
+import { FC, useEffect, useState } from 'react';
 
-import { crm_Accounts } from "@prisma/client";
+import { crm_Accounts } from '@prisma/client';
 
 import {
   Card,
@@ -11,20 +11,20 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+} from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
 
-import { columns } from "../tasks-data-table/components/columns";
-import { TasksDataTable } from "../tasks-data-table/components/data-table";
+import { columns } from '../tasks-data-table/components/columns';
+import { TasksDataTable } from '../tasks-data-table/components/data-table';
 
-import NewTaskForm from "./NewTaskForm";
+import NewTaskForm from './NewTaskForm';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
 
 //TODO:
 interface TasksViewProps {
@@ -52,7 +52,7 @@ const AccountsTasksView: FC<TasksViewProps> = ({ data, account }) => {
         <div className="flex justify-between">
           <div>
             <CardTitle
-              onClick={() => router.push("/projects/tasks")}
+              onClick={() => router.push('/projects/tasks')}
               className="cursor-pointer"
             >
               Tasks
@@ -85,7 +85,7 @@ const AccountsTasksView: FC<TasksViewProps> = ({ data, account }) => {
       </CardHeader>
       <CardContent>
         {!data || data.length === 0 ? (
-          "No assigned tasks found"
+          'No assigned tasks found'
         ) : (
           <TasksDataTable data={data} columns={columns} />
         )}

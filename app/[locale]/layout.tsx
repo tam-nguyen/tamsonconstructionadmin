@@ -1,17 +1,17 @@
-import "./globals.css";
+import './globals.css';
 
-import { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 
-import { ReactNode } from "react";
-import { notFound } from "next/navigation";
-import { createTranslator, NextIntlClientProvider } from "next-intl";
+import { ReactNode } from 'react';
+import { notFound } from 'next/navigation';
+import { createTranslator, NextIntlClientProvider } from 'next-intl';
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as SonnerToaster } from "@/components/ui/sonner";
-import { ThemeProvider } from "@/app/providers/ThemeProvider";
+import { Toaster } from '@/components/ui/toaster';
+import { Toaster as SonnerToaster } from '@/components/ui/sonner';
+import { ThemeProvider } from '@/app/providers/ThemeProvider';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 type Props = {
   children: ReactNode;
@@ -32,26 +32,26 @@ export async function generateMetadata({ params: { locale } }: Props) {
   const t = createTranslator({ locale, messages });
 
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL!),    
-    title: t("RootLayout.title"),
-    description: t("RootLayout.description"),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL!),
+    title: t('RootLayout.title'),
+    description: t('RootLayout.description'),
     openGraph: {
       images: [
         {
-          url: "/images/opengraph-image.png",
+          url: '/images/opengraph-image.png',
           width: 1200,
           height: 630,
-          alt: t("RootLayout.title"),
+          alt: t('RootLayout.title'),
         },
       ],
     },
     twitter: {
-      cardType: "summary_large_image",
-      image: "/images/opengraph-image.png",
+      cardType: 'summary_large_image',
+      image: '/images/opengraph-image.png',
       width: 1200,
       height: 630,
-      alt: t("RootLayout.title"),
-    },    
+      alt: t('RootLayout.title'),
+    },
   };
 }
 
@@ -87,7 +87,7 @@ export default async function RootLayout({
         />
         <meta name="twitter:image" content="https://saashq.org/api/og" />
       </head>
-      <body className={inter.className + "h-screen overflow-hidden"}>
+      <body className={inter.className + 'h-screen overflow-hidden'}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}

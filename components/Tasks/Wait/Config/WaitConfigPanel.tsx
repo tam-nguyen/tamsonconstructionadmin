@@ -3,9 +3,9 @@ import type { FC } from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import { useReactFlow } from 'reactflow';
-import { Input } from "@/components/ui/input";
+import { Input } from '@/components/ui/input';
 import {
   Sheet,
   SheetClose,
@@ -15,7 +15,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet';
 import {
   Form,
   FormControl,
@@ -23,7 +23,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/components/ui/use-toast';
 import MultipleSelector, { Option } from '@/components/ui/multiple-selector';
@@ -48,17 +48,24 @@ interface Props {
   id: string;
 }
 
-const WaitConfigPanel: FC<Props> = ({ onSubmit, initialValue, deleteNode, id }) => {
+const WaitConfigPanel: FC<Props> = ({
+  onSubmit,
+  initialValue,
+  deleteNode,
+  id,
+}) => {
   const [isLoading] = useState<boolean>(false);
   const { toast } = useToast();
 
-  const [ openConfigPanel, setOpenConfigPanel ] = useState<boolean>(false);  
+  const [openConfigPanel, setOpenConfigPanel] = useState<boolean>(false);
   const { getNodes } = useReactFlow();
 
   let OPTIONS: Option[] = useMemo(() => [], []);
 
   const [labelUniqueError, setLabelUniqueError] = useState<string | null>(null);
-  const [taskNamesUnknownError, setTaskNamesUnknownError] = useState<string | null>(null);
+  const [taskNamesUnknownError, setTaskNamesUnknownError] = useState<
+    string | null
+  >(null);
 
   const { handleSubmit, watch } = useForm<WaitConfigSchema>({
     resolver: zodResolver(waitConfigSchema),
@@ -80,7 +87,7 @@ const WaitConfigPanel: FC<Props> = ({ onSubmit, initialValue, deleteNode, id }) 
       params: initialValue?.params ?? {
         taskNames: [],
       },
-    },    
+    },
   });
 
   useEffect(() => {
@@ -110,30 +117,39 @@ const WaitConfigPanel: FC<Props> = ({ onSubmit, initialValue, deleteNode, id }) 
     const unknownNodes = taskNamesValue.filter((item) => !nodes.includes(item));
 
     if (unknownNodes && unknownNodes.length > 0) {
-      setTaskNamesUnknownError(() => `${unknownNodes.join(', ')} is/are unknown Tasks`);
+      setTaskNamesUnknownError(
+        () => `${unknownNodes.join(', ')} is/are unknown Tasks`
+      );
     } else {
       setTaskNamesUnknownError(() => null);
     }
   }, [getNodes, taskNamesValue]);
 
-  useEffect(() => {  
-    const nodes = getNodes().filter((node) => node.id !== id).map((node) => node?.data?.label);
+  useEffect(() => {
+    const nodes = getNodes()
+      .filter((node) => node.id !== id)
+      .map((node) => node?.data?.label);
     const delimitNodes = [...nodes.values()].flat().join('&');
-    const options = delimitNodes.split('&');  
+    const options = delimitNodes.split('&');
 
-    for (let i=0; i<nodes.length; i++) {
-      OPTIONS.push({ label: options[i], value: options[i] } as unknown as Option);
-    };
-  }, [OPTIONS, getNodes, id]);   
+    for (let i = 0; i < nodes.length; i++) {
+      OPTIONS.push({
+        label: options[i],
+        value: options[i],
+      } as unknown as Option);
+    }
+  }, [OPTIONS, getNodes, id]);
 
-  const submitHandler = handleSubmit(async (value: z.infer<typeof waitConfigSchema>) => {
-    onSubmit(value);
-    toast({
-      title: "Success",
-      description: "Config changed successfully."
-    })
-    handleConfigPanelClose();
-  });
+  const submitHandler = handleSubmit(
+    async (value: z.infer<typeof waitConfigSchema>) => {
+      onSubmit(value);
+      toast({
+        title: 'Success',
+        description: 'Config changed successfully.',
+      });
+      handleConfigPanelClose();
+    }
+  );
 
   const handleConfigPanelOpen = () => {
     setOpenConfigPanel(() => true);
@@ -141,35 +157,39 @@ const WaitConfigPanel: FC<Props> = ({ onSubmit, initialValue, deleteNode, id }) 
 
   const handleConfigPanelClose = () => {
     setOpenConfigPanel(() => false);
-  };  
+  };
 
   return (
     <>
       <Sheet open={openConfigPanel} onOpenChange={setOpenConfigPanel}>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(submitHandler as any)}>          
+          <form onSubmit={form.handleSubmit(submitHandler as any)}>
             <SheetTrigger asChild>
               <Button variant="outline" onClick={handleConfigPanelOpen}>
                 Configure
                 <span>
                   {Object.keys(form?.formState.errors).length > 0 ? (
-                    <span className="absolute bg-red-500 text-red-100 px-2 py-1 text-xs font-bold rounded-full -top-2 -right-2">
-                      {Object.keys(form?.formState.errors).length + (labelUniqueError ? 1 : 0) + (taskNamesUnknownError ? 1 : 0)}
-                    </span>  
+                    <span className="absolute -right-2 -top-2 rounded-full bg-red-500 px-2 py-1 text-xs font-bold text-red-100">
+                      {Object.keys(form?.formState.errors).length +
+                        (labelUniqueError ? 1 : 0) +
+                        (taskNamesUnknownError ? 1 : 0)}
+                    </span>
                   ) : null}
-                </span>            
+                </span>
               </Button>
             </SheetTrigger>
             <SheetContent className="sm:max-w-[540px]">
               <SheetHeader>
-                <SheetTitle>{[initialValue?.label, 'Configuration'].join(' ')}</SheetTitle>
-                  <SheetDescription>
-                    Make changes to Wait Configuration panel.
-                  </SheetDescription>
-                </SheetHeader>
+                <SheetTitle>
+                  {[initialValue?.label, 'Configuration'].join(' ')}
+                </SheetTitle>
+                <SheetDescription>
+                  Make changes to Wait Configuration panel.
+                </SheetDescription>
+              </SheetHeader>
               <Separator className="mt-6" />
               <div className="grid gap-4 py-4">
-                <div className="space-y-2 w-full">
+                <div className="w-full space-y-2">
                   <FormField
                     control={form.control}
                     name="label"
@@ -188,7 +208,7 @@ const WaitConfigPanel: FC<Props> = ({ onSubmit, initialValue, deleteNode, id }) 
                     )}
                   />
                 </div>
-                <div className="space-y-2 w-full">
+                <div className="w-full space-y-2">
                   <FormField
                     control={form.control}
                     name="params.taskNames"
@@ -209,7 +229,7 @@ const WaitConfigPanel: FC<Props> = ({ onSubmit, initialValue, deleteNode, id }) 
                             }
                           />
                         </FormControl>
-                      <FormMessage />
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -217,14 +237,14 @@ const WaitConfigPanel: FC<Props> = ({ onSubmit, initialValue, deleteNode, id }) 
               </div>
               <SheetFooter className="mt-25">
                 <SheetClose asChild>
-                  <Button 
+                  <Button
                     type="submit"
                     onClick={() => {
                       toast({
-                        title: "Success",
-                        description: "Task changed successfully."
+                        title: 'Success',
+                        description: 'Task changed successfully.',
                       });
-                    }}                  
+                    }}
                   >
                     Submit
                   </Button>
@@ -239,7 +259,7 @@ const WaitConfigPanel: FC<Props> = ({ onSubmit, initialValue, deleteNode, id }) 
                 </Button>
               </SheetFooter>
             </SheetContent>
-          </form>  
+          </form>
         </Form>
       </Sheet>
     </>

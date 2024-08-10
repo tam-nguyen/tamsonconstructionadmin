@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from '@tanstack/react-table';
 
-import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
 
-import { Employee } from "../table-data/schema";
-import { DataTableColumnHeader } from "./data-table-column-header";
-import { DataTableRowActions } from "./data-table-row-actions";
-import moment from "moment";
+import { Employee } from '../table-data/schema';
+import { DataTableColumnHeader } from './data-table-column-header';
+import { DataTableRowActions } from './data-table-row-actions';
+import moment from 'moment';
 
 export const columns: ColumnDef<Employee>[] = [
   /*   {
@@ -33,74 +33,73 @@ export const columns: ColumnDef<Employee>[] = [
     enableHiding: false,
   }, */
   {
-    accessorKey: "createdAt",
+    accessorKey: 'createdAt',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Date created" />
     ),
     cell: ({ row }) => (
       <div className="w-[80px]">
-        {moment(row.getValue("createdAt")).format("YY-MM-DD")}
+        {moment(row.getValue('createdAt')).format('YY-MM-DD')}
       </div>
     ),
     enableSorting: false,
     enableHiding: false,
   },
- 
- 
+
   {
-    accessorKey: "firstName",
+    accessorKey: 'firstName',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="First Name" />
     ),
 
-    cell: ({ row }) => <div className="">{row.getValue("firstName")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue('firstName')}</div>,
     enableSorting: true,
     enableHiding: true,
   },
-  
+
   {
-    accessorKey: "email",
+    accessorKey: 'email',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="E-mail" />
     ),
 
-    cell: ({ row }) => <div className="">{row.getValue("email")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue('email')}</div>,
     enableSorting: true,
     enableHiding: true,
   },
   {
-    accessorKey: "phone",
+    accessorKey: 'phone',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Mobile" />
     ),
 
-    cell: ({ row }) => <div className="">{row.getValue("phone")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue('phone')}</div>,
     enableSorting: true,
     enableHiding: true,
   },
   {
-    accessorKey: "position",
+    accessorKey: 'position',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Position" />
     ),
 
-    cell: ({ row }) => <div className="">{row.getValue("position")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue('position')}</div>,
     enableSorting: true,
     enableHiding: true,
   },
   {
-    accessorKey: "salary",
+    accessorKey: 'salary',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Salary" />
     ),
 
-    cell: ({ row }) => <div className="">{row.getValue("salary")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue('salary')}</div>,
     enableSorting: true,
     enableHiding: true,
   },
- 
+
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ];

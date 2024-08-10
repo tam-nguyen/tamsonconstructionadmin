@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 const H2Title = ({ children }: { children: ReactNode }) => {
   return (

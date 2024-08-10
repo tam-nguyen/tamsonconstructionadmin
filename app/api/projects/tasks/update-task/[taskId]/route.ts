@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { NextResponse } from 'next/server';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
-import NewTaskFromProject from "@/emails/NewTaskFromProject";
-import resendHelper from "@/lib/resend";
+import NewTaskFromProject from '@/emails/NewTaskFromProject';
+import resendHelper from '@/lib/resend';
 
 //Create new task in project route
 /*
@@ -17,7 +17,7 @@ export async function PUT(
   /*
   Resend.com function init - this is a helper function that will be used to send emails
   */
-  const resend = await resendHelper();  
+  const resend = await resendHelper();
   const session = await getServerSession(authOptions);
   const body = await req.json();
   //console.log(body, "body");
@@ -35,15 +35,15 @@ export async function PUT(
   const taskId = params.taskId;
 
   if (!taskId) {
-    return new NextResponse("Missing task id", { status: 400 });
+    return new NextResponse('Missing task id', { status: 400 });
   }
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   if (!title || !user || !priority || !content) {
-    return new NextResponse("Missing one of the task data ", { status: 400 });
+    return new NextResponse('Missing one of the task data ', { status: 400 });
   }
 
   try {
@@ -53,12 +53,12 @@ export async function PUT(
         board: board,
       },
       orderBy: {
-        position: "asc",
+        position: 'asc',
       },
     });
 
     if (!sectionId) {
-      return new NextResponse("No section found", { status: 400 });
+      return new NextResponse('No section found', { status: 400 });
     }
 
     const tasksCount = await prismadb.tasks.count({
@@ -70,7 +70,7 @@ export async function PUT(
     let contentUpdated = content;
 
     if (notionUrl) {
-      contentUpdated = content + "\n\n" + notionUrl;
+      contentUpdated = content + '\n\n' + notionUrl;
     }
 
     const task = await prismadb.tasks.update({
@@ -82,7 +82,7 @@ export async function PUT(
         title: title,
         content: contentUpdated,
         updatedBy: user,
-        dueDateAt: dueDateAt,        
+        dueDateAt: dueDateAt,
         user: user,
       },
     });
@@ -95,7 +95,7 @@ export async function PUT(
       data: {
         updatedAt: new Date(),
       },
-    });    
+    });
 
     /*  //Notification to user who is not a task creator
     if (user !== session.user.id) {
@@ -135,7 +135,7 @@ export async function PUT(
 
     return NextResponse.json({ status: 200 });
   } catch (error) {
-    console.log("[NEW_BOARD_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[NEW_BOARD_POST]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

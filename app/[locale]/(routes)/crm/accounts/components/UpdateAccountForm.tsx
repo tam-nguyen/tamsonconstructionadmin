@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import React from "react";
-import { z } from "zod";
+import React from 'react';
+import { z } from 'zod';
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from '@/components/ui/use-toast';
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
-import { Input } from "@/components/ui/input";
+import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
@@ -21,24 +21,24 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import fetcher from "@/lib/fetcher";
-import useSWR from "swr";
-import SuspenseLoading from "@/components/loadings/suspense";
-import { crm_Accounts } from "@prisma/client";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import fetcher from '@/lib/fetcher';
+import useSWR from 'swr';
+import SuspenseLoading from '@/components/loadings/suspense';
+import { crm_Accounts } from '@prisma/client';
 
 interface UpdateAccountFormProps {
   //TODO: fix this any
   initialData: any;
-  open: (value: boolean) => void;  
+  open: (value: boolean) => void;
 }
 
 export function UpdateAccountForm({
@@ -50,11 +50,11 @@ export function UpdateAccountForm({
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const { data: industries, isLoading: isLoadingIndustries } = useSWR(
-    "/api/crm/industries",
+    '/api/crm/industries',
     fetcher
   );
   const { data: users, isLoading: isLoadingUsers } = useSWR(
-    "/api/user",
+    '/api/user',
     fetcher
   );
 
@@ -95,30 +95,30 @@ export function UpdateAccountForm({
     defaultValues: initialData
       ? initialData
       : {
-          id: "",
-          name: "",
-          office_phone: "" as string | null,
-          website: "",
-          fax: "",
-          company_id: "",
-          vat: "",
-          email: "",
-          billing_street: "",
-          billing_postal_code: "",
-          billing_city: "",
-          billing_state: "",
-          billing_country: "",
-          shipping_street: "",
-          shipping_postal_code: "",
-          shipping_city: "",
-          shipping_state: "",
-          shipping_country: "",
-          description: "",
-          assigned_to: "",
-          status: "",
-          annual_revenue: "",
-          member_of: "",
-          industry: "",
+          id: '',
+          name: '',
+          office_phone: '' as string | null,
+          website: '',
+          fax: '',
+          company_id: '',
+          vat: '',
+          email: '',
+          billing_street: '',
+          billing_postal_code: '',
+          billing_city: '',
+          billing_state: '',
+          billing_country: '',
+          shipping_street: '',
+          shipping_postal_code: '',
+          shipping_city: '',
+          shipping_state: '',
+          shipping_country: '',
+          description: '',
+          assigned_to: '',
+          status: '',
+          annual_revenue: '',
+          member_of: '',
+          industry: '',
         },
   });
 
@@ -126,15 +126,15 @@ export function UpdateAccountForm({
     //console.log(data);
     setIsLoading(true);
     try {
-      await axios.put("/api/crm/account", data);
+      await axios.put('/api/crm/account', data);
       toast({
-        title: "Success",
-        description: "Account updated successfully",
+        title: 'Success',
+        description: 'Account updated successfully',
       });
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
@@ -158,7 +158,7 @@ export function UpdateAccountForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full h-full px-10"
+        className="h-full w-full px-10"
       >
         {/*    <div>
           <pre>
@@ -169,8 +169,8 @@ export function UpdateAccountForm({
           <code>{JSON.stringify(initialData, null, 2)}</code>
         </pre> */}
 
-        <div className=" w-[800px] text-sm">
-          <div className="pb-5 space-y-2">
+        <div className="w-[800px] text-sm">
+          <div className="space-y-2 pb-5">
             <FormField
               control={form.control}
               name="name"
@@ -514,7 +514,7 @@ export function UpdateAccountForm({
                           <SelectValue placeholder="Select new account industry" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="flex overflow-y-auto h-56">
+                      <SelectContent className="flex h-56 overflow-y-auto">
                         {industries.map((industry: any) => (
                           <SelectItem key={industry.id} value={industry.id}>
                             {industry.name}
@@ -541,7 +541,7 @@ export function UpdateAccountForm({
                           <SelectValue placeholder="Select a user to assign the account" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="overflow-y-auto h-56">
+                      <SelectContent className="h-56 overflow-y-auto">
                         {users &&
                           users.map((user: any) => (
                             <SelectItem key={user.id} value={user.id}>

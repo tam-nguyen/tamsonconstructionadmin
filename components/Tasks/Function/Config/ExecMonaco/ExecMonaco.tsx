@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
 import type { OnChange, OnMount } from '@monaco-editor/react';
 import { Editor } from '@monaco-editor/react';
-import { useTheme } from "next-themes";
+import { useTheme } from 'next-themes';
 import type { ElementRef, FC } from 'react';
 import { useRef } from 'react';
 //@ts-ignore-next-line
@@ -18,7 +18,12 @@ interface Props {
   params: Record<string, any>;
 }
 
-const ExecMonaco: FC<Props> = ({ initialValue, setError, setValue, params }) => {
+const ExecMonaco: FC<Props> = ({
+  initialValue,
+  setError,
+  setValue,
+  params,
+}) => {
   const theme = useTheme();
   const { getNodes } = useReactFlow();
   const editorRef = useRef<ElementRef<typeof Editor>>();

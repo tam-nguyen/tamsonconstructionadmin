@@ -1,9 +1,9 @@
-import { Mail } from "lucide-react";
+import { Mail } from 'lucide-react';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import { usePathname } from "next/navigation";
-import React from "react";
+import { usePathname } from 'next/navigation';
+import React from 'react';
 
 type Props = {
   open: boolean;
@@ -12,16 +12,16 @@ type Props = {
 
 const EmailsModuleMenu = ({ open, title }: Props) => {
   const pathname = usePathname();
-  const isPath = pathname.includes("emails");
+  const isPath = pathname.includes('emails');
 
   return (
-    <div className="flex flex-row items-center mx-auto p-2">
+    <div className="mx-auto flex flex-row items-center p-2">
       <Link
-        href={"/emails"}
-        className={`flex gap-2 p-2 ${isPath ? "text-muted-foreground" : null}`}
+        href={'/emails'}
+        className={`flex gap-2 p-2 ${isPath ? 'text-muted-foreground' : null}`}
       >
         <Mail className="w-6" />
-        <span className={open ? "" : "hidden"}>{title}</span>
+        <span className={open ? '' : 'hidden'}>{title}</span>
       </Link>
     </div>
   );

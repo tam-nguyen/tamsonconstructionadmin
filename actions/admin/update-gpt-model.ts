@@ -1,11 +1,11 @@
-"use server";
+'use server';
 
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 const updateModel = async (model: string) => {
   await prismadb.gpt_models.updateMany({
     data: {
-      status: "INACTIVE",
+      status: 'INACTIVE',
     },
   });
 
@@ -14,10 +14,10 @@ const updateModel = async (model: string) => {
       id: model,
     },
     data: {
-      status: "ACTIVE",
+      status: 'ACTIVE',
     },
   });
-  console.log("change GPT model to:", setCronGPT);
+  console.log('change GPT model to:', setCronGPT);
 };
 
 export default updateModel;

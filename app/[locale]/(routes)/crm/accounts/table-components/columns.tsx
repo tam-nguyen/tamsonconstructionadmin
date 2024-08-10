@@ -1,30 +1,30 @@
-"use client";
+'use client';
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from '@tanstack/react-table';
 
-import { statuses } from "../table-data/data";
-import { Account } from "../table-data/schema";
-import { DataTableColumnHeader } from "./data-table-column-header";
-import { DataTableRowActions } from "./data-table-row-actions";
-import moment from "moment";
-import Link from "next/link";
+import { statuses } from '../table-data/data';
+import { Account } from '../table-data/schema';
+import { DataTableColumnHeader } from './data-table-column-header';
+import { DataTableRowActions } from './data-table-row-actions';
+import moment from 'moment';
+import Link from 'next/link';
 
 export const columns: ColumnDef<Account>[] = [
   {
-    accessorKey: "createdAt",
+    accessorKey: 'createdAt',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Created" />
     ),
     cell: ({ row }) => (
       <div className="">
-        {moment(row.getValue("createdAt")).format("YY/MM/DD-HH:mm")}
+        {moment(row.getValue('createdAt')).format('YY/MM/DD-HH:mm')}
       </div>
     ),
     enableSorting: false,
     enableHiding: false,
   },
   {
-    accessorKey: "assigned_to_user",
+    accessorKey: 'assigned_to_user',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Assigned to" />
     ),
@@ -34,7 +34,7 @@ export const columns: ColumnDef<Account>[] = [
         {
           //@ts-ignore
           //TODO: fix this
-          row.getValue("assigned_to_user")?.name ?? "Unassigned"
+          row.getValue('assigned_to_user')?.name ?? 'Unassigned'
         }
       </div>
     ),
@@ -42,7 +42,7 @@ export const columns: ColumnDef<Account>[] = [
     enableHiding: true,
   },
   {
-    accessorKey: "name",
+    accessorKey: 'name',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Name" />
     ),
@@ -53,7 +53,7 @@ export const columns: ColumnDef<Account>[] = [
           {
             //@ts-ignore
             //TODO: fix this
-            row.getValue("name")
+            row.getValue('name')
           }
         </div>
       </Link>
@@ -62,17 +62,17 @@ export const columns: ColumnDef<Account>[] = [
     enableHiding: true,
   },
   {
-    accessorKey: "email",
+    accessorKey: 'email',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="E-mail" />
     ),
 
-    cell: ({ row }) => <div className="w-[150px]">{row.getValue("email")}</div>,
+    cell: ({ row }) => <div className="w-[150px]">{row.getValue('email')}</div>,
     enableSorting: true,
     enableHiding: true,
   },
   {
-    accessorKey: "contacts",
+    accessorKey: 'contacts',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Account contact" />
     ),
@@ -80,7 +80,7 @@ export const columns: ColumnDef<Account>[] = [
     cell: ({ row }) => (
       <div className="w-[150px]">
         {row.original.contacts?.map(
-          (contact: any) => contact.first_name + " " + contact.last_name
+          (contact: any) => contact.first_name + ' ' + contact.last_name
         )}
       </div>
     ),
@@ -88,13 +88,13 @@ export const columns: ColumnDef<Account>[] = [
     enableHiding: true,
   },
   {
-    accessorKey: "status",
+    accessorKey: 'status',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }) => {
       const status = statuses.find(
-        (status) => status.value === row.getValue("status")
+        (status) => status.value === row.getValue('status')
       );
 
       if (!status) {
@@ -115,7 +115,7 @@ export const columns: ColumnDef<Account>[] = [
     },
   },
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ];

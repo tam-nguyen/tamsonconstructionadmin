@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import LoadingComponent from "@/components/LoadingComponent";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+import LoadingComponent from '@/components/LoadingComponent';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
 import {
   Dialog,
   DialogContent,
@@ -10,7 +10,7 @@ import {
   DialogTrigger,
   DialogTitle,
   DialogDescription,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -18,41 +18,41 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Icons } from "@/components/ui/icons";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Icons } from '@/components/ui/icons';
+import { Input } from '@/components/ui/input';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from '@/components/ui/popover';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { SheetTrigger } from "@/components/ui/sheet";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
-import { cn } from "@/lib/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
+} from '@/components/ui/select';
+import { SheetTrigger } from '@/components/ui/sheet';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/components/ui/use-toast';
+import { cn } from '@/lib/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+import { format } from 'date-fns';
+import { CalendarIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 type Props = {
   users: any;
   boards: any;
-  boardId?: string;  
+  boardId?: string;
   initialData: any;
-  onDone?: () => void;  
+  onDone?: () => void;
 };
 
 const UpdateTaskDialog = ({
@@ -75,7 +75,7 @@ const UpdateTaskDialog = ({
     dueDateAt: z.date(),
     priority: z.string().min(3).max(10),
     content: z.string().min(3).max(500),
-    boardId: z.string().min(3).max(255),    
+    boardId: z.string().min(3).max(255),
   });
 
   type UpdatedTaskForm = z.infer<typeof formSchema>;
@@ -111,13 +111,13 @@ const UpdateTaskDialog = ({
         data
       );
       toast({
-        title: "Success",
+        title: 'Success',
         description: `Task: ${data.title}, updated successfully`,
       });
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
@@ -128,7 +128,7 @@ const UpdateTaskDialog = ({
   };
 
   return (
-    <div className="flex w-full ">
+    <div className="flex w-full">
       {/*       <div>
         <pre>
           {JSON.stringify(
@@ -139,7 +139,7 @@ const UpdateTaskDialog = ({
             2
           )}
         </pre>
-      </div> */}    
+      </div> */}
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -190,14 +190,14 @@ const UpdateTaskDialog = ({
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
-                          variant={"outline"}
+                          variant={'outline'}
                           className={cn(
-                            "w-[240px] pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
+                            'w-[240px] pl-3 text-left font-normal',
+                            !field.value && 'text-muted-foreground'
                           )}
                         >
                           {field.value ? (
-                            format(field.value, "PPP")
+                            format(field.value, 'PPP')
                           ) : (
                             <span>Pick a expected close date</span>
                           )}
@@ -212,7 +212,7 @@ const UpdateTaskDialog = ({
                         //@ts-ignore
                         //TODO: fix this
                         onSelect={field.onChange}
-                        disabled={(date) => date < new Date("1900-01-01")}
+                        disabled={(date) => date < new Date('1900-01-01')}
                         initialFocus
                       />
                     </PopoverContent>
@@ -220,7 +220,7 @@ const UpdateTaskDialog = ({
                   <FormMessage />
                 </FormItem>
               )}
-            />            
+            />
             <FormField
               control={form.control}
               name="user"
@@ -281,7 +281,7 @@ const UpdateTaskDialog = ({
               {isLoading ? (
                 <Icons.spinner className="animate-spin" />
               ) : (
-                "Update"
+                'Update'
               )}
             </Button>
           </div>

@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getLeads = async () => {
   const data = await prismadb.crm_Leads.findMany({
@@ -10,7 +10,7 @@ export const getLeads = async () => {
       },
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   });
   return data;

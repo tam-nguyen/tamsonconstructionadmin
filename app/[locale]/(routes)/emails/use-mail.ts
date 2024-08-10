@@ -1,9 +1,9 @@
-import { atom, useAtom } from "jotai";
+import { atom, useAtom } from 'jotai';
 
-import { Mail, mails } from "@/app/[locale]/(routes)/emails//data";
+import { Mail, mails } from '@/app/[locale]/(routes)/emails//data';
 
 type Config = {
-  selected: Mail["id"] | null;
+  selected: Mail['id'] | null;
 };
 
 const configAtom = atom<Config>({

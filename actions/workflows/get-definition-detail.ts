@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 import { z } from 'zod';
 
 const ResponseSchema = z.object({
@@ -26,21 +26,21 @@ export const getDefinitionDetail = async (definitionId: string) => {
       id: definitionId,
     },
     select: {
-        id: true,
-        name: true,
-        description: true,
-        definitionStatus: true,
-        createdAt: true,
-        updatedAt: true,
-        runtimes: {
-          select: {
-            id: true,
-            workflowStatus: true,
-            createdAt: true,
-            updatedAt: true
-          }
-        }
-      },    
+      id: true,
+      name: true,
+      description: true,
+      definitionStatus: true,
+      createdAt: true,
+      updatedAt: true,
+      runtimes: {
+        select: {
+          id: true,
+          workflowStatus: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      },
+    },
   });
   return ResponseSchema.parse(data);
 };

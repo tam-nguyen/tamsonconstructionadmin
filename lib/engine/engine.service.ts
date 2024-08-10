@@ -1,7 +1,7 @@
-import { Task, TaskStatusType } from "./tasks";
-import { LogObject } from "./logger";
-import { prismadb } from "../prisma";
-import { RuntimeStatus } from "@prisma/client";
+import { Task, TaskStatusType } from './tasks';
+import { LogObject } from './logger';
+import { prismadb } from '../prisma';
+import { RuntimeStatus } from '@prisma/client';
 
 export class EngineService {
   constructor() {}
@@ -10,7 +10,7 @@ export class EngineService {
     return await prismadb.runtimes.findUnique({
       where: {
         id: id,
-      }
+      },
     });
   }
 
@@ -22,7 +22,7 @@ export class EngineService {
     const runtimeData = await prismadb.runtimes.findUnique({
       where: {
         id: workflowRuntimeId,
-      }
+      },
     });
 
     if (!runtimeData) {
@@ -47,11 +47,11 @@ export class EngineService {
         // @ts-ignore-next-line
         tasks: mappedTask,
         runtimeTasks: {
-          update: []
+          update: [],
         },
         runtimeLogs: {
-          update: []
-        }
+          update: [],
+        },
       },
       where: {
         id: workflowRuntimeId,
@@ -67,7 +67,7 @@ export class EngineService {
     const runtimeData = await prismadb.runtimes.findUnique({
       where: {
         id: workflowRuntimeId,
-      }      
+      },
     });
 
     if (!runtimeData) {
@@ -112,7 +112,7 @@ export class EngineService {
     const runtimeData = await prismadb.runtimes.findUnique({
       where: {
         id: workflowRuntimeId,
-      }      
+      },
     });
 
     if (!runtimeData) {

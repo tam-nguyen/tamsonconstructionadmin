@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import type { OnChange, OnMount } from '@monaco-editor/react';
 import { Editor } from '@monaco-editor/react';
@@ -12,7 +12,11 @@ interface Props {
   setValue: Function;
 }
 
-const WorkflowGlobalMonaco: FC<Props> = ({ initialValue, setError, setValue }) => {
+const WorkflowGlobalMonaco: FC<Props> = ({
+  initialValue,
+  setError,
+  setValue,
+}) => {
   const theme = useTheme();
   const editorRef = useRef<ElementRef<typeof Editor>>();
 
@@ -38,7 +42,7 @@ const WorkflowGlobalMonaco: FC<Props> = ({ initialValue, setError, setValue }) =
   };
 
   const onMount: OnMount = (editor) => {
-    editorRef.current = editor as ElementRef<typeof Editor>;;
+    editorRef.current = editor as ElementRef<typeof Editor>;
   };
 
   return (

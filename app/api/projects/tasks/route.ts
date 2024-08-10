@@ -1,25 +1,25 @@
-import { NextResponse } from "next/server";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { NextResponse } from 'next/server';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 //Update task API endpoint
 export async function PUT(req: Request) {
   const session = await getServerSession(authOptions);
   const body = await req.json();
-  console.log(body, "body");
+  console.log(body, 'body');
   const { id, section } = body;
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   if (!id) {
-    return new NextResponse("Missing board id", { status: 400 });
+    return new NextResponse('Missing board id', { status: 400 });
   }
 
   if (!section) {
-    return new NextResponse("Missing section id", { status: 400 });
+    return new NextResponse('Missing section id', { status: 400 });
   }
 
   try {
@@ -28,14 +28,14 @@ export async function PUT(req: Request) {
         id: id,
       },
       data: {
-        updatedBy: session.user.id,        
+        updatedBy: session.user.id,
         section: section,
       },
     });
     return NextResponse.json({ status: 200 });
   } catch (error) {
-    console.log("[NEW_BOARD_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[NEW_BOARD_POST]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }
 
@@ -43,15 +43,15 @@ export async function PUT(req: Request) {
 export async function DELETE(req: Request) {
   const session = await getServerSession(authOptions);
   const body = await req.json();
-  console.log(body, "body");
+  console.log(body, 'body');
   const { id, section } = body;
 
   if (!session) {
-    return new NextResponse("Unauthenticated", { status: 401 });
+    return new NextResponse('Unauthenticated', { status: 401 });
   }
 
   if (!id) {
-    return new NextResponse("Missing board id", { status: 400 });
+    return new NextResponse('Missing board id', { status: 400 });
   }
 
   try {
@@ -86,7 +86,7 @@ export async function DELETE(req: Request) {
     });
 
     if (!currentTask) {
-      return NextResponse.json({ Message: "NO currentTask" }, { status: 200 });
+      return NextResponse.json({ Message: 'NO currentTask' }, { status: 200 });
     }
     //Find in which sections was current deleted task
     const tasks = await prismadb.tasks.findMany({
@@ -94,7 +94,7 @@ export async function DELETE(req: Request) {
         section: currentTask.section,
       },
       orderBy: {
-        position: "asc",
+        position: 'asc',
       },
     });
     //console.log(tasks, "tasks from deleteTask API call");
@@ -106,15 +106,15 @@ export async function DELETE(req: Request) {
           id: tasks[key].id,
         },
         data: {
-          updatedBy: session.user.id,          
+          updatedBy: session.user.id,
           position: position,
         },
       });
     }
-    
+
     return NextResponse.json({ status: 200 });
   } catch (error) {
-    console.log("[NEW_BOARD_POST]", error);
-    return new NextResponse("Initial error", { status: 500 });
+    console.log('[NEW_BOARD_POST]', error);
+    return new NextResponse('Initial error', { status: 500 });
   }
 }

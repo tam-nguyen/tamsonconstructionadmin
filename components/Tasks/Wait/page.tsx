@@ -1,14 +1,25 @@
-"use client";
+'use client';
 
-import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+} from '@/components/ui/card';
 import type { FC } from 'react';
 import { useCallback } from 'react';
 import type { NodeProps } from 'reactflow';
 import { Handle, Position, useReactFlow } from 'reactflow';
 import type { WaitConfigSchema } from './Config/WaitConfigPanel';
 import WaitConfigPanel from './Config/WaitConfigPanel';
-import { Hand } from "lucide-react";
-import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+import { Hand } from 'lucide-react';
+import {
+  TooltipProvider,
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from '@/components/ui/tooltip';
 
 interface DataProps {
   label: string;
@@ -59,20 +70,29 @@ const WaitTask: FC<NodeProps<DataProps>> = ({ data, id }) => {
                 <Hand width="15" height="15" />
               </TooltipTrigger>
               <TooltipContent side="bottom">
-                  {['ID', id].join(' : ')}
+                {['ID', id].join(' : ')}
               </TooltipContent>
             </Tooltip>
-          </TooltipProvider>          
+          </TooltipProvider>
         </CardTitle>
         <CardDescription className="text-md text-muted-foreground">
           {'Wait'}
-        </CardDescription>  
+        </CardDescription>
       </CardHeader>
       <CardFooter>
-        <WaitConfigPanel id={id} initialValue={data} deleteNode={deleteNode} onSubmit={changeValues} />
+        <WaitConfigPanel
+          id={id}
+          initialValue={data}
+          deleteNode={deleteNode}
+          onSubmit={changeValues}
+        />
       </CardFooter>
 
-      <Handle type="source" position={Position.Bottom} id={data?.outputBoundId} />
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id={data?.outputBoundId}
+      />
     </Card>
   );
 };

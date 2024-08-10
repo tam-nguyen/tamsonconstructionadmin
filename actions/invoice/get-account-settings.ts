@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export async function getAccountSettings() {
   const myAccount = await prismadb.myAccount.findFirst({});

@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-import UploadFileModal from "@/components/modals/upload-file-modal";
-import { Button } from "@/components/ui/button";
+import UploadFileModal from '@/components/modals/upload-file-modal';
+import { Button } from '@/components/ui/button';
 
-import { FileInput } from "./FileInput";
+import { FileInput } from './FileInput';
 
 type Props = {
   buttonLabel: string;

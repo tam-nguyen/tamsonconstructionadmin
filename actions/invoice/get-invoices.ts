@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getInvoices = async () => {
   const data = await prismadb.invoices.findMany({
@@ -10,7 +10,7 @@ export const getInvoices = async () => {
       },
     },
     orderBy: {
-      date_created: "desc",
+      date_created: 'desc',
     },
   });
 

@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getContact = async (contactId: string) => {
   const data = await prismadb.crm_Contacts.findFirst({
@@ -9,7 +9,7 @@ export const getContact = async (contactId: string) => {
       assigned_opportunities: true,
       assigned_documents: true,
       assigned_accounts: true,
-    },    
+    },
   });
   return data;
 };

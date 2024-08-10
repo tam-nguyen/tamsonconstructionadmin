@@ -4,7 +4,7 @@ export const getRossumEmbeddedUrl = async (
 ) => {
   try {
     const data = await fetch(embUrl, {
-      method: "POST",
+      method: 'POST',
       headers: { Authorization: rossumToken },
     })
       .then((r) => r.json())
@@ -14,7 +14,7 @@ export const getRossumEmbeddedUrl = async (
       });
     return data;
   } catch (error) {
-    console.log(error, "error - get Rossum Embedded Url");
+    console.log(error, 'error - get Rossum Embedded Url');
     return error;
   }
 };

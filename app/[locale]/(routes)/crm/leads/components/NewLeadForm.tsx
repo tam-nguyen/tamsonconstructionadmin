@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { z } from "zod";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { CalendarIcon } from "lucide-react";
-import { format } from "date-fns";
+import { useState } from 'react';
+import { z } from 'zod';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+import { CalendarIcon } from 'lucide-react';
+import { format } from 'date-fns';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
-import { useToast } from "@/components/ui/use-toast";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useToast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
@@ -21,26 +21,26 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
+} from '@/components/ui/popover';
+import { Calendar } from '@/components/ui/calendar';
 
 //TODO: fix all the types
 type NewTaskFormProps = {
   users: any[];
-  accounts: any[];  
+  accounts: any[];
 };
 
 export function NewLeadForm({ users, accounts }: NewTaskFormProps) {
@@ -73,33 +73,33 @@ export function NewLeadForm({ users, accounts }: NewTaskFormProps) {
   const onSubmit = async (data: NewLeadFormValues) => {
     setIsLoading(true);
     try {
-      await axios.post("/api/crm/leads", data);
+      await axios.post('/api/crm/leads', data);
       toast({
-        title: "Success",
-        description: "Lead created successfully",
+        title: 'Success',
+        description: 'Lead created successfully',
       });
     } catch (error: any) {
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error?.response?.data,
       });
     } finally {
       setIsLoading(false);
       form.reset({
-        first_name: "",
-        last_name: "",
-        company: "",
-        jobTitle: "",
-        email: "",
-        phone: "",
-        description: "",
-        lead_source: "",
-        refered_by: "",
-        campaign: "",
-        assigned_to: "",
-        accountIDs: "",
-      });      
+        first_name: '',
+        last_name: '',
+        company: '',
+        jobTitle: '',
+        email: '',
+        phone: '',
+        description: '',
+        lead_source: '',
+        refered_by: '',
+        campaign: '',
+        assigned_to: '',
+        accountIDs: '',
+      });
       router.refresh();
     }
   };
@@ -113,8 +113,8 @@ export function NewLeadForm({ users, accounts }: NewTaskFormProps) {
             <code>{JSON.stringify(form.formState.errors, null, 2)}</code>
           </pre>
         </div> */}
-        <div className=" w-[800px] text-sm">
-          <div className="pb-5 space-y-2">
+        <div className="w-[800px] text-sm">
+          <div className="space-y-2 pb-5">
             <FormField
               control={form.control}
               name="first_name"
@@ -297,7 +297,7 @@ export function NewLeadForm({ users, accounts }: NewTaskFormProps) {
                         <SelectValue placeholder="Select a user to assign the account" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className="overflow-y-auto h-56">
+                    <SelectContent className="h-56 overflow-y-auto">
                       {users.map((user) => (
                         <SelectItem key={user.id} value={user.id}>
                           {user.name}
@@ -335,17 +335,17 @@ export function NewLeadForm({ users, accounts }: NewTaskFormProps) {
                   <FormMessage />
                 </FormItem>
               )}
-            />            
+            />
           </div>
         </div>
         <div className="grid gap-2 py-5">
           <Button disabled={isLoading} type="submit">
             {isLoading ? (
-              <span className="flex items-center animate-pulse">
+              <span className="flex animate-pulse items-center">
                 Saving data ...
               </span>
             ) : (
-              "Create lead"
+              'Create lead'
             )}
           </Button>
         </div>

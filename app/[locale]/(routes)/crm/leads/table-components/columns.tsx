@@ -1,45 +1,45 @@
-"use client";
+'use client';
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from '@tanstack/react-table';
 
-import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
 
-import { statuses } from "../table-data/data";
-import { Lead } from "../table-data/schema";
-import { DataTableColumnHeader } from "./data-table-column-header";
-import { DataTableRowActions } from "./data-table-row-actions";
-import moment from "moment";
+import { statuses } from '../table-data/data';
+import { Lead } from '../table-data/schema';
+import { DataTableColumnHeader } from './data-table-column-header';
+import { DataTableRowActions } from './data-table-row-actions';
+import moment from 'moment';
 
 export const columns: ColumnDef<Lead>[] = [
   {
-    accessorKey: "createdAt",
+    accessorKey: 'createdAt',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Expected close" />
     ),
     cell: ({ row }) => (
       <div className="w-[80px]">
-        {moment(row.getValue("createdAt")).format("YY-MM-DD")}
+        {moment(row.getValue('createdAt')).format('YY-MM-DD')}
       </div>
     ),
     enableSorting: false,
     enableHiding: false,
   },
   {
-    accessorKey: "updatedAt",
+    accessorKey: 'updatedAt',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Last update" />
     ),
     cell: ({ row }) => (
       <div className="w-[80px]">
-        {moment(row.getValue("updatedAt")).format("YY-MM-DD")}
+        {moment(row.getValue('updatedAt')).format('YY-MM-DD')}
       </div>
     ),
     enableSorting: false,
     enableHiding: false,
   },
   {
-    accessorKey: "assigned_to_user",
+    accessorKey: 'assigned_to_user',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Assigned to" />
     ),
@@ -49,7 +49,7 @@ export const columns: ColumnDef<Lead>[] = [
         {
           //@ts-ignore
           //TODO: fix this
-          row.getValue("assigned_to_user")?.name ?? "Unassigned"
+          row.getValue('assigned_to_user')?.name ?? 'Unassigned'
         }
       </div>
     ),
@@ -57,7 +57,7 @@ export const columns: ColumnDef<Lead>[] = [
     enableHiding: true,
   },
   {
-    accessorKey: "company",
+    accessorKey: 'company',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Company" />
     ),
@@ -67,7 +67,7 @@ export const columns: ColumnDef<Lead>[] = [
         {
           //@ts-ignore
           //TODO: fix this
-          row.getValue("company") ?? "Unassigned"
+          row.getValue('company') ?? 'Unassigned'
         }
       </div>
     ),
@@ -75,7 +75,7 @@ export const columns: ColumnDef<Lead>[] = [
     enableHiding: true,
   },
   {
-    accessorKey: "firstName",
+    accessorKey: 'firstName',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Name" />
     ),
@@ -83,41 +83,41 @@ export const columns: ColumnDef<Lead>[] = [
     cell: ({ row }) => (
       <div>
         {row.original.firstName
-          ? row.getValue("firstName")
-          : "" + " " + row.original.lastName}
+          ? row.getValue('firstName')
+          : '' + ' ' + row.original.lastName}
       </div>
     ),
     enableSorting: false,
     enableHiding: true,
-  },  
+  },
   {
-    accessorKey: "email",
+    accessorKey: 'email',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="E-mail" />
     ),
 
-    cell: ({ row }) => <div className="w-[150px]">{row.getValue("email")}</div>,
+    cell: ({ row }) => <div className="w-[150px]">{row.getValue('email')}</div>,
     enableSorting: true,
     enableHiding: true,
   },
   {
-    accessorKey: "phone",
+    accessorKey: 'phone',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Phone" />
     ),
 
-    cell: ({ row }) => <div className="w-[150px]">{row.getValue("phone")}</div>,
+    cell: ({ row }) => <div className="w-[150px]">{row.getValue('phone')}</div>,
     enableSorting: false,
     enableHiding: false,
   },
   {
-    accessorKey: "status",
+    accessorKey: 'status',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }) => {
       const status = statuses.find(
-        (status) => status.value === row.getValue("status")
+        (status) => status.value === row.getValue('status')
       );
 
       if (!status) {
@@ -138,7 +138,7 @@ export const columns: ColumnDef<Lead>[] = [
     },
   },
   {
-    id: "actions",
+    id: 'actions',
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ];

@@ -1,32 +1,32 @@
-"use client";
+'use client';
 
-import { useEffect, useOptimistic, useState } from "react";
-import axios from "axios";
-import { format } from "date-fns";
-import { useRouter } from "next/navigation";
-import { ThumbsDown, ThumbsUp } from "lucide-react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { useEffect, useOptimistic, useState } from 'react';
+import axios from 'axios';
+import { format } from 'date-fns';
+import { useRouter } from 'next/navigation';
+import { ThumbsDown, ThumbsUp } from 'lucide-react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import {
   crm_Opportunities,
   crm_Opportunities_Sales_Stages,
-} from "@prisma/client";
+} from '@prisma/client';
 
-import { DotsHorizontalIcon, PlusCircledIcon } from "@radix-ui/react-icons";
+import { DotsHorizontalIcon, PlusCircledIcon } from '@radix-ui/react-icons';
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { useToast } from "@/components/ui/use-toast";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import LoadingModal from "@/components/modals/loading-modal";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
+} from '@/components/ui/dropdown-menu';
+import { useToast } from '@/components/ui/use-toast';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import LoadingModal from '@/components/modals/loading-modal';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Card, CardContent, CardFooter, CardTitle } from '@/components/ui/card';
 
-import { NewOpportunityForm } from "../../opportunities/components/NewOpportunityForm";
+import { NewOpportunityForm } from '../../opportunities/components/NewOpportunityForm';
 
 interface CRMKanbanProps {
   salesStages: crm_Opportunities_Sales_Stages[];
@@ -46,7 +46,7 @@ const CRMKanban = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
-  const [selectedStage, setSelectedStage] = useState("");
+  const [selectedStage, setSelectedStage] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const [opportunities, setOpportunities] = useState(data);
@@ -89,14 +89,14 @@ const CRMKanban = ({
       });
       setOpportunities(response.data.data);
       toast({
-        title: "Success",
-        description: "Opportunity sale stage changed",
+        title: 'Success',
+        description: 'Opportunity sale stage changed',
       });
     } catch (error) {
       console.log(error);
       toast({
-        title: "Error",
-        description: "Something went wrong",
+        title: 'Error',
+        description: 'Something went wrong',
       });
     } finally {
       router.refresh();
@@ -107,12 +107,12 @@ const CRMKanban = ({
 
   const onThumbsUp = (opportunity: crm_Opportunities) => {
     // Implement thumbs up logic
-    alert("Thumbs up - not implemented yet");
+    alert('Thumbs up - not implemented yet');
   };
 
   const onThumbsDown = (opportunity: crm_Opportunities) => {
     // Implement thumbs down logic
-    alert("Thumbs down - not implemented yet");
+    alert('Thumbs down - not implemented yet');
   };
 
   // console.log(opportunities, "opportunities");
@@ -127,7 +127,7 @@ const CRMKanban = ({
       {/* Dialog */}
 
       <Dialog open={isDialogOpen} onOpenChange={() => setIsDialogOpen(false)}>
-        <DialogContent className="min-w-[1000px] py-10 overflow-auto ">
+        <DialogContent className="min-w-[1000px] overflow-auto py-10">
           <NewOpportunityForm
             users={users}
             accounts={accounts}
@@ -142,7 +142,7 @@ const CRMKanban = ({
       </Dialog>
 
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className="flex w-full h-full overflow-x-auto ">
+        <div className="flex h-full w-full overflow-x-auto">
           {salesStages.map((stage: any, index: number) => (
             <Droppable droppableId={stage.id} key={index}>
               {
@@ -154,17 +154,17 @@ const CRMKanban = ({
                   ref={provided.innerRef}
                   className="mx-1 w-full min-w-[300px] overflow-hidden pb-10"
                 >
-                  <CardTitle className="flex gap-2 p-3 justify-between">
+                  <CardTitle className="flex justify-between gap-2 p-3">
                     <span className="text-sm font-bold">{stage.name}</span>
                     <PlusCircledIcon
-                      className="w-5 h-5 cursor-pointer"
+                      className="h-5 w-5 cursor-pointer"
                       onClick={() => {
                         setSelectedStage(stage.id);
                         setIsDialogOpen(true);
                       }}
                     />
                   </CardTitle>
-                  <CardContent className="w-full h-full overflow-y-scroll">
+                  <CardContent className="h-full w-full overflow-y-scroll">
                     {opportunities
                       .filter(
                         (opportunity: any) =>
@@ -191,7 +191,7 @@ const CRMKanban = ({
                                   <div>
                                     <DropdownMenu>
                                       <DropdownMenuTrigger asChild>
-                                        <DotsHorizontalIcon className="w-4 h-4 text-slate-600" />
+                                        <DotsHorizontalIcon className="h-4 w-4 text-slate-600" />
                                       </DropdownMenuTrigger>
                                       <DropdownMenuContent
                                         align="end"
@@ -231,26 +231,26 @@ const CRMKanban = ({
                                         opportunity.close_date &&
                                         new Date(opportunity.close_date) <
                                           new Date()
-                                          ? "text-red-500"
-                                          : ""
+                                          ? 'text-red-500'
+                                          : ''
                                       }
                                     >
                                       {format(
                                         opportunity.close_date
                                           ? new Date(opportunity.close_date)
                                           : new Date(),
-                                        "dd/MM/yyyy"
+                                        'dd/MM/yyyy'
                                       )}
                                     </span>
                                   </div>
                                 </div>
                               </CardContent>
                               <CardFooter className="flex justify-between">
-                                <div className="flex text-xs items-center gap-2">
+                                <div className="flex items-center gap-2 text-xs">
                                   {/*         <pre>
                                     {JSON.stringify(opportunity, null, 2)}
                                   </pre> */}
-                                  <Avatar className="w-6 h-6">
+                                  <Avatar className="h-6 w-6">
                                     <AvatarImage
                                       src={
                                         opportunity.assigned_to_user.avatar
@@ -259,7 +259,7 @@ const CRMKanban = ({
                                       }
                                     />
                                   </Avatar>
-                                  <span className="text-xs ">
+                                  <span className="text-xs">
                                     {opportunity.assigned_to_user.name}
                                   </span>
                                 </div>
@@ -273,7 +273,7 @@ const CRMKanban = ({
                                         )
                                       ) && (
                                       <ThumbsUp
-                                        className="w-4 h-4 text-green-500"
+                                        className="h-4 w-4 text-green-500"
                                         onClick={() =>
                                           onThumbsUp(opportunity.id)
                                         }
@@ -287,7 +287,7 @@ const CRMKanban = ({
                                       )
                                     ) && (
                                     <ThumbsDown
-                                      className="w-4 h-4 text-red-500"
+                                      className="h-4 w-4 text-red-500"
                                       onClick={() =>
                                         onThumbsDown(opportunity.id)
                                       }

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import * as React from "react";
+import * as React from 'react';
 import {
   AlertCircle,
   Archive,
@@ -14,24 +14,24 @@ import {
   ShoppingCart,
   Trash2,
   Users2,
-} from "lucide-react";
+} from 'lucide-react';
 
-import { AccountSwitcher } from "@/app/[locale]/(routes)/emails/components/account-switcher";
-import { MailDisplay } from "@/app/[locale]/(routes)/emails/components/mail-display";
-import { MailList } from "@/app/[locale]/(routes)/emails/components/mail-list";
-import { Nav } from "@/app/[locale]/(routes)/emails/components/nav";
-import { Mail } from "@/app/[locale]/(routes)/emails/data";
-import { useMail } from "@/app/[locale]/(routes)/emails/use-mail";
-import { cn } from "@/lib/utils";
-import { Separator } from "@/components/ui/separator";
-import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { AccountSwitcher } from '@/app/[locale]/(routes)/emails/components/account-switcher';
+import { MailDisplay } from '@/app/[locale]/(routes)/emails/components/mail-display';
+import { MailList } from '@/app/[locale]/(routes)/emails/components/mail-list';
+import { Nav } from '@/app/[locale]/(routes)/emails/components/nav';
+import { Mail } from '@/app/[locale]/(routes)/emails/data';
+import { useMail } from '@/app/[locale]/(routes)/emails/use-mail';
+import { cn } from '@/lib/utils';
+import { Separator } from '@/components/ui/separator';
+import { Input } from '@/components/ui/input';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { TooltipProvider } from '@/components/ui/tooltip';
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from "@/components/ui/resizable";
+} from '@/components/ui/resizable';
 
 interface MailProps {
   accounts: {
@@ -64,7 +64,7 @@ export function MailComponent({
             sizes
           )}`;
         }}
-        className="h-full  items-stretch"
+        className="h-full items-stretch"
       >
         <ResizablePanel
           defaultSize={defaultLayout[0]}
@@ -79,7 +79,7 @@ export function MailComponent({
             )}`;
           }}
           className={cn(
-            isCollapsed && "transition-all duration-300 ease-in-out"
+            isCollapsed && 'transition-all duration-300 ease-in-out'
           )}
         >
           <div className="flex items-center p-2">
@@ -91,15 +91,15 @@ export function MailComponent({
             </div>
           </div>
           <Separator />
-          <div className={cn(isCollapsed ? "block" : "hidden")}>
+          <div className={cn(isCollapsed ? 'block' : 'hidden')}>
             <Nav
               isCollapsed={isCollapsed}
               links={[
                 {
-                  title: "Compose",
-                  label: "",
+                  title: 'Compose',
+                  label: '',
                   icon: PenBox,
-                  variant: "ghost",
+                  variant: 'ghost',
                 },
               ]}
             />
@@ -108,40 +108,40 @@ export function MailComponent({
             isCollapsed={isCollapsed}
             links={[
               {
-                title: "Inbox",
-                label: "128",
+                title: 'Inbox',
+                label: '128',
                 icon: Inbox,
-                variant: "default",
+                variant: 'default',
               },
               {
-                title: "Drafts",
-                label: "9",
+                title: 'Drafts',
+                label: '9',
                 icon: File,
-                variant: "ghost",
+                variant: 'ghost',
               },
               {
-                title: "Sent",
-                label: "",
+                title: 'Sent',
+                label: '',
                 icon: Send,
-                variant: "ghost",
+                variant: 'ghost',
               },
               {
-                title: "Junk",
-                label: "23",
+                title: 'Junk',
+                label: '23',
                 icon: ArchiveX,
-                variant: "ghost",
+                variant: 'ghost',
               },
               {
-                title: "Trash",
-                label: "",
+                title: 'Trash',
+                label: '',
                 icon: Trash2,
-                variant: "ghost",
+                variant: 'ghost',
               },
               {
-                title: "Archive",
-                label: "",
+                title: 'Archive',
+                label: '',
                 icon: Archive,
-                variant: "ghost",
+                variant: 'ghost',
               },
             ]}
           />
@@ -150,34 +150,34 @@ export function MailComponent({
             isCollapsed={isCollapsed}
             links={[
               {
-                title: "Social",
-                label: "972",
+                title: 'Social',
+                label: '972',
                 icon: Users2,
-                variant: "ghost",
+                variant: 'ghost',
               },
               {
-                title: "Updates",
-                label: "342",
+                title: 'Updates',
+                label: '342',
                 icon: AlertCircle,
-                variant: "ghost",
+                variant: 'ghost',
               },
               {
-                title: "Forums",
-                label: "128",
+                title: 'Forums',
+                label: '128',
                 icon: MessagesSquare,
-                variant: "ghost",
+                variant: 'ghost',
               },
               {
-                title: "Shopping",
-                label: "8",
+                title: 'Shopping',
+                label: '8',
                 icon: ShoppingCart,
-                variant: "ghost",
+                variant: 'ghost',
               },
               {
-                title: "Promotions",
-                label: "21",
+                title: 'Promotions',
+                label: '21',
                 icon: Archive,
-                variant: "ghost",
+                variant: 'ghost',
               },
             ]}
           />

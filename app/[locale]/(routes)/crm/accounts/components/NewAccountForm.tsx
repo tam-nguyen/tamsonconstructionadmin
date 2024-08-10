@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { z } from "zod";
-import axios from "axios";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { z } from 'zod';
+import axios from 'axios';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from '@/components/ui/use-toast';
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
   Form,
@@ -17,22 +17,22 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+} from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 
 type Props = {
   industries: any[];
   users: any[];
-  onFinish: () => void;  
+  onFinish: () => void;
 };
 
 export function NewAccountForm({ industries, users }: Props) {
@@ -76,16 +76,16 @@ export function NewAccountForm({ industries, users }: Props) {
     //console.log(data);
     setIsLoading(true);
     try {
-      await axios.post("/api/crm/account", data);
+      await axios.post('/api/crm/account', data);
       toast({
-        title: "Success",
-        description: "Account created successfully",
+        title: 'Success',
+        description: 'Account created successfully',
       });
     } catch (error) {
       toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Something went wrong. Please try again.",
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Something went wrong. Please try again.',
       });
     } finally {
       form.reset();
@@ -102,8 +102,8 @@ export function NewAccountForm({ industries, users }: Props) {
             <code>&#123;JSON.stringify(form.watch(), null, 2)&#125;</code>
           </pre>
         </div> */}
-        <div className=" w-[800px] text-sm">
-          <div className="pb-5 space-y-2">
+        <div className="w-[800px] text-sm">
+          <div className="space-y-2 pb-5">
             <FormField
               control={form.control}
               name="name"
@@ -445,7 +445,7 @@ export function NewAccountForm({ industries, users }: Props) {
                           <SelectValue placeholder="Select new account industry" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="flex overflow-y-auto h-56">
+                      <SelectContent className="flex h-56 overflow-y-auto">
                         {industries.map((industry) => (
                           <SelectItem key={industry.id} value={industry.id}>
                             {industry.name}
@@ -472,7 +472,7 @@ export function NewAccountForm({ industries, users }: Props) {
                           <SelectValue placeholder="Select a user to assign the account" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="overflow-y-auto h-56">
+                      <SelectContent className="h-56 overflow-y-auto">
                         {users.map((user) => (
                           <SelectItem key={user.id} value={user.id}>
                             {user.name}

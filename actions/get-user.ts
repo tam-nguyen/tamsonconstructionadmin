@@ -1,6 +1,6 @@
-import { authOptions } from "@/lib/auth";
-import { prismadb } from "@/lib/prisma";
-import { getServerSession } from "next-auth";
+import { authOptions } from '@/lib/auth';
+import { prismadb } from '@/lib/prisma';
+import { getServerSession } from 'next-auth';
 
 export const getUser = async () => {
   const session = await getServerSession(authOptions);
@@ -9,6 +9,6 @@ export const getUser = async () => {
       id: session?.user?.id,
     },
   });
-  if (!data) throw new Error("User not found");
+  if (!data) throw new Error('User not found');
   return data;
 };

@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/ui/icons";
-import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
-import { useRouter } from "next/navigation";
+import { Button } from '@/components/ui/button';
+import { Icons } from '@/components/ui/icons';
+import { Input } from '@/components/ui/input';
+import { useToast } from '@/components/ui/use-toast';
+import { useRouter } from 'next/navigation';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 type Props = {
   onClose: () => void;
@@ -27,10 +27,10 @@ export function FileInput({ onClose }: Props) {
 
     try {
       const data = new FormData();
-      data.set("file", file);
+      data.set('file', file);
 
-      const res = await fetch("/api/upload", {
-        method: "POST",
+      const res = await fetch('/api/upload', {
+        method: 'POST',
         body: data,
       });
       // handle the error
@@ -41,8 +41,8 @@ export function FileInput({ onClose }: Props) {
     }
     router.refresh();
     toast({
-      title: "Success",
-      description: "Invoice uploaded successfully",
+      title: 'Success',
+      description: 'Invoice uploaded successfully',
     });
     setIsLoading(false);
     onClose();

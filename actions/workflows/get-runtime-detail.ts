@@ -1,5 +1,5 @@
-import { prismadb } from "@/lib/prisma";
-import { NextResponse } from "next/server";
+import { prismadb } from '@/lib/prisma';
+import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
 const ResponseSchema = z.object({
@@ -43,20 +43,20 @@ export type ResponseSchemaType = z.infer<typeof ResponseSchema>;
 export const getRuntimeDetail = async (runtimeId: string) => {
   const data = await prismadb.runtimes.findUnique({
     where: {
-        id: runtimeId,
+      id: runtimeId,
+    },
+    include: {
+      definitions: {
+        select: {
+          id: true,
+          name: true,
+          definitionStatus: true,
+          description: true,
+          createdAt: true,
+          updatedAt: true,
+        },
       },
-      include: {
-        definitions: {
-          select: {
-            id: true,
-            name: true,
-            definitionStatus: true,
-            description: true,
-            createdAt: true,
-            updatedAt: true
-          }
-        }
-      }
-    });
+    },
+  });
   return ResponseSchema.parse(data);
 };

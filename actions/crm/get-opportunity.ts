@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getOpportunity = async (opportunityId: string) => {
   const data = await prismadb.crm_Opportunities.findFirst({
@@ -43,7 +43,7 @@ export const getOpportunity = async (opportunityId: string) => {
           document_name: true,
         },
       },
-    },    
+    },
   });
   return data;
 };

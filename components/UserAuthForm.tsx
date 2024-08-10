@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
-import { signIn } from "next-auth/react";
-import * as React from "react";
-import { FC } from "react";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
+import { cn } from '@/lib/utils';
+import { signIn } from 'next-auth/react';
+import * as React from 'react';
+import { FC } from 'react';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -17,7 +17,7 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
     setIsLoading(true);
 
     try {
-      await signIn("google");
+      await signIn('google');
     } catch (error) {
     } finally {
       setIsLoading(false);
@@ -25,10 +25,10 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
   };
 
   return (
-    <div className={cn("flex justify-center", className)} {...props}>
+    <div className={cn('flex justify-center', className)} {...props}>
       <Button
         type="button"
-        className="max-w-sm w-full bg-slate-200"
+        className="w-full max-w-sm bg-slate-200"
         onClick={loginWithGoogle}
         disabled={isLoading}
       >

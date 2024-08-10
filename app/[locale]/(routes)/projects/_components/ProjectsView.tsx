@@ -1,21 +1,21 @@
-import React from "react";
-import Link from "next/link";
-import { getServerSession } from "next-auth";
+import React from 'react';
+import Link from 'next/link';
+import { getServerSession } from 'next-auth';
 
-import { getActiveUsers } from "@/actions/get-users";
-import { getBoards } from "@/actions/projects/get-boards";
+import { getActiveUsers } from '@/actions/get-users';
+import { getBoards } from '@/actions/projects/get-boards';
 
-import { authOptions } from "@/lib/auth";
+import { authOptions } from '@/lib/auth';
 
-import NewTaskDialog from "../dialogs/NewTask";
-import NewProjectDialog from "../dialogs/NewProject";
+import NewTaskDialog from '../dialogs/NewTask';
+import NewProjectDialog from '../dialogs/NewProject';
 
-import { Button } from "@/components/ui/button";
-import H2Title from "@/components/typography/h2";
+import { Button } from '@/components/ui/button';
+import H2Title from '@/components/typography/h2';
 
-import { ProjectsDataTable } from "../table-components/data-table";
-import { columns } from "../table-components/columns";
-import AiAssistant from "./AiAssistant";
+import { ProjectsDataTable } from '../table-components/data-table';
+import { columns } from '../table-components/columns';
+import AiAssistant from './AiAssistant';
 
 const ProjectsView = async () => {
   const session = await getServerSession(authOptions);
@@ -41,9 +41,9 @@ const ProjectsView = async () => {
         <Button asChild>
           <Link href="/projects/dashboard">Dashboard</Link>
         </Button>
-        <AiAssistant session={session} />        
+        <AiAssistant session={session} />
       </div>
-      <div className="pt-2 space-y-3">
+      <div className="space-y-3 pt-2">
         <H2Title>Projects</H2Title>
         <ProjectsDataTable data={boards} columns={columns} />
       </div>

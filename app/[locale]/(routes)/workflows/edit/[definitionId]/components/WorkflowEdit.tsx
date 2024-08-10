@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import 'reactflow/dist/style.css';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -7,20 +7,20 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-import { Box } from "@radix-ui/themes";
-import { Button } from "@/components/ui/button";
-import { LoadingButton } from "@/components/ui/loading-button";
-import { 
+} from '@/components/ui/dropdown-menu';
+import { Box } from '@radix-ui/themes';
+import { Button } from '@/components/ui/button';
+import { LoadingButton } from '@/components/ui/loading-button';
+import {
   ChevronDown,
   Sigma,
   PlayCircle,
   CircleOff,
-  ShieldCheck, 
+  ShieldCheck,
   Hand,
   Webhook,
-  Cog
-} from "lucide-react";
+  Cog,
+} from 'lucide-react';
 import type { MouseEvent } from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -34,12 +34,12 @@ import ReactFlow, {
   useReactFlow,
 } from 'reactflow';
 import { z } from 'zod';
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from '@/components/ui/use-toast';
 import { useWorkflowDefinitionContext } from '@/app/contexts/WorkflowDefinitionContext';
 import { useRouter } from 'next/navigation';
 import { nodeTypes, taskCreator } from '@/lib/creators/task';
 import axios from 'axios';
-import { Input } from "@/components/ui/input";
+import { Input } from '@/components/ui/input';
 import {
   Sheet,
   SheetContent,
@@ -47,7 +47,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from '@/components/ui/sheet';
 import {
   Form,
   FormControl,
@@ -55,15 +55,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 import WorkflowGlobalMonaco from '../../../components/WorkflowGlobalMonaco';
 import { Separator } from '@/components/ui/separator';
 import { ResponseSchemaType } from '@/actions/workflows/get-definition-single';
@@ -79,7 +79,9 @@ const workflowMetadataFormSchema = z.object({
       required_error: 'Description is required',
     })
     .min(1, 'Description is required'),
-  global: z.record(z.string(), z.any()).refine((val) => !Object.keys(val).includes(''), 'Empty keys is not valid'),
+  global: z
+    .record(z.string(), z.any())
+    .refine((val) => !Object.keys(val).includes(''), 'Empty keys is not valid'),
   status: z.enum(['active', 'inactive']),
 });
 
@@ -101,24 +103,32 @@ export function WorkflowEditPage({ editData }: EditFormProps) {
   const router = useRouter();
   const [formLoading, setFormLoading] = useState<boolean>(false);
 
-  const [nodes, _, onNodesChange] = useNodesState(editData.uiObject.react.nodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(editData.uiObject.react.edges);
+  const [nodes, _, onNodesChange] = useNodesState(
+    editData.uiObject.react.nodes
+  );
+  const [edges, setEdges, onEdgesChange] = useEdgesState(
+    editData.uiObject.react.edges
+  );
   const { addNodes } = useReactFlow();
 
   const [definitionDialog, setDefinitionDialog] = useState<boolean>(false);
 
-  const [globalEditorError, setGlobalEditorError] = useState<string | null>(null);
+  const [globalEditorError, setGlobalEditorError] = useState<string | null>(
+    null
+  );
 
-  const { setValue, watch, handleSubmit } = useForm<WorkflowMetadataFormSchema>({
-    resolver: zodResolver(workflowMetadataFormSchema),
-    mode: 'all',
-    values: {
-      name: editData.name,
-      description: editData.description,
-      global: editData?.global ?? {},
-      status: editData.definitionStatus,
-    },
-  });
+  const { setValue, watch, handleSubmit } = useForm<WorkflowMetadataFormSchema>(
+    {
+      resolver: zodResolver(workflowMetadataFormSchema),
+      mode: 'all',
+      values: {
+        name: editData.name,
+        description: editData.description,
+        global: editData?.global ?? {},
+        status: editData.definitionStatus,
+      },
+    }
+  );
 
   const globalObjectValue = watch('global');
 
@@ -130,7 +140,7 @@ export function WorkflowEditPage({ editData }: EditFormProps) {
       description: editData.description,
       global: editData?.global ?? {},
       status: editData.definitionStatus,
-    },    
+    },
   });
 
   useEffect(() => {
@@ -142,12 +152,13 @@ export function WorkflowEditPage({ editData }: EditFormProps) {
   };
 
   const definitionStatus = [
-    { name: "Active", id: "Active" },
-    { name: "Inactive", id: "Inactive" },
-  ];   
+    { name: 'Active', id: 'Active' },
+    { name: 'Inactive', id: 'Inactive' },
+  ];
 
   const onConnect = useCallback(
-    (params: Connection) => setEdges((eds) => addEdge({ ...params, animated: true }, eds)),
+    (params: Connection) =>
+      setEdges((eds) => addEdge({ ...params, animated: true }, eds)),
     [setEdges]
   );
 
@@ -172,7 +183,7 @@ export function WorkflowEditPage({ editData }: EditFormProps) {
 
   const closeDefinitionDialog = () => {
     setDefinitionDialog(() => false);
-  };  
+  };
 
   const addNewTask = (type: keyof typeof taskCreator) => {
     addNodes(taskCreator[type]());
@@ -189,11 +200,15 @@ export function WorkflowEditPage({ editData }: EditFormProps) {
       params: item?.data?.params ?? {},
       next: edges
         .filter((val) => val?.sourceHandle === item?.data?.outputBoundId)
-        .map((edge) => nodes.find((node) => node.id === edge.target)?.data?.label)
+        .map(
+          (edge) => nodes.find((node) => node.id === edge.target)?.data?.label
+        )
         .filter((v) => !!v),
       previous: edges
         .filter((val) => val?.targetHandle === item?.data?.inputBoundId)
-        .map((edge) => nodes.find((node) => node.id === edge.source)?.data?.label)
+        .map(
+          (edge) => nodes.find((node) => node.id === edge.source)?.data?.label
+        )
         .filter((v) => !!v),
       ...(item?.data?.exec && {
         exec: item?.data?.exec,
@@ -212,29 +227,26 @@ export function WorkflowEditPage({ editData }: EditFormProps) {
     };
 
     await axios
-      .put(
-        `/api/definition/${editData.id}`,
-        {
-          workflowData,
-          key: 'react',
-          ui: {
-            nodes,
-            edges,
-          }
+      .put(`/api/definition/${editData.id}`, {
+        workflowData,
+        key: 'react',
+        ui: {
+          nodes,
+          edges,
         },
-      )
+      })
       .then(() => {
         toast({
-          title: "Success",
-          description: "Workflow updated successfully."
+          title: 'Success',
+          description: 'Workflow updated successfully.',
         });
         router.push(`/workflows/${editData.id}`);
       })
       .catch((error) => {
         console.error(error);
         toast({
-          title: "Error",
-          description: "Workflow update failed."
+          title: 'Error',
+          description: 'Workflow update failed.',
         });
       })
       .finally(() => {
@@ -244,33 +256,43 @@ export function WorkflowEditPage({ editData }: EditFormProps) {
 
   return (
     <Box>
-      <div className="w-full h-[80vh] justify-start items-start gap-y-1">
-        <div className="flex flex-row justify-between items-center gap-x-0.5 w-full">
-          <div className="flex flex-row justify-start items-center gap-x-2">
+      <div className="h-[80vh] w-full items-start justify-start gap-y-1">
+        <div className="flex w-full flex-row items-center justify-between gap-x-0.5">
+          <div className="flex flex-row items-center justify-start gap-x-2">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(submitHandle as any)}>             
+              <form onSubmit={form.handleSubmit(submitHandle as any)}>
                 <Sheet>
                   <SheetTrigger asChild>
-                    <Button variant="secondary" className="relative" onClick={openDefinitionDialog}>Configure Definition&nbsp; <Cog className="w-[15px] h-[15px]" />
+                    <Button
+                      variant="secondary"
+                      className="relative"
+                      onClick={openDefinitionDialog}
+                    >
+                      Configure Definition&nbsp;{' '}
+                      <Cog className="h-[15px] w-[15px]" />
                       <span>
                         {Object.keys(form?.formState.errors).length > 0 ? (
-                          <span className="absolute bg-red-500 text-red-100 px-2 py-1 text-xs font-bold rounded-full -top-2 -right-2">
+                          <span className="absolute -right-2 -top-2 rounded-full bg-red-500 px-2 py-1 text-xs font-bold text-red-100">
                             {Object.keys(form?.formState.errors).length}
-                          </span>  
+                          </span>
                         ) : null}
-                      </span>                  
+                      </span>
                     </Button>
                   </SheetTrigger>
-                  <SheetContent className="sm:max-w-[540px]" onClose={() => closeDefinitionDialog}>
+                  <SheetContent
+                    className="sm:max-w-[540px]"
+                    onClose={() => closeDefinitionDialog}
+                  >
                     <SheetHeader>
                       <SheetTitle>Create Definition</SheetTitle>
                       <SheetDescription>
-                        Make changes to your workflow definition here. Your work remains intact when this panel is closed.
+                        Make changes to your workflow definition here. Your work
+                        remains intact when this panel is closed.
                       </SheetDescription>
                     </SheetHeader>
                     <Separator className="mt-6" />
                     <div className="grid gap-4 py-4">
-                      <div className="space-y-2 w-full">
+                      <div className="w-full space-y-2">
                         <FormField
                           control={form.control}
                           name="name"
@@ -289,7 +311,7 @@ export function WorkflowEditPage({ editData }: EditFormProps) {
                           )}
                         />
                       </div>
-                      <div className="space-y-2 w-full">
+                      <div className="w-full space-y-2">
                         <FormField
                           control={form.control}
                           name="description"
@@ -308,7 +330,7 @@ export function WorkflowEditPage({ editData }: EditFormProps) {
                           )}
                         />
                       </div>
-                      <div className="space-y-2 w-full">
+                      <div className="w-full space-y-2">
                         <FormField
                           control={form.control}
                           name="status"
@@ -326,7 +348,10 @@ export function WorkflowEditPage({ editData }: EditFormProps) {
                                 </FormControl>
                                 <SelectContent className="flex overflow-y-auto">
                                   {definitionStatus.map((status) => (
-                                    <SelectItem key={status.id} value={status.id}>
+                                    <SelectItem
+                                      key={status.id}
+                                      value={status.id}
+                                    >
                                       {status.name}
                                     </SelectItem>
                                   ))}
@@ -341,23 +366,29 @@ export function WorkflowEditPage({ editData }: EditFormProps) {
                         <FormLabel>Global Editor</FormLabel>
                         {globalEditorError && (
                           <div className="flex gap-2">
-                            <FormLabel className="text-red-600">{globalEditorError}</FormLabel>
+                            <FormLabel className="text-red-600">
+                              {globalEditorError}
+                            </FormLabel>
                           </div>
                         )}
                         <WorkflowGlobalMonaco
-                          initialValue={JSON.stringify(globalObjectValue, undefined, 4)}
+                          initialValue={JSON.stringify(
+                            globalObjectValue,
+                            undefined,
+                            4
+                          )}
                           setValue={setValue}
                           setError={handleGlobalEditorError}
                         />
                       </div>
-                    </div>  
+                    </div>
                   </SheetContent>
                 </Sheet>
                 <Button type="submit" className="absolute right-10 mr-10">
                   Submit
-                </Button>                    
+                </Button>
               </form>
-            </Form>     
+            </Form>
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Button variant="secondary" onClick={handleMenuOpen}>
@@ -365,7 +396,7 @@ export function WorkflowEditPage({ editData }: EditFormProps) {
                   <ChevronDown width="16" height="16" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-[125px]">              
+              <DropdownMenuContent align="start" className="w-[125px]">
                 <DropdownMenuItem onClick={() => addNewTask('function')}>
                   <Sigma width="18" height="18" />
                   <span className="pl-4"> Function </span>
@@ -413,6 +444,6 @@ export function WorkflowEditPage({ editData }: EditFormProps) {
       </div>
     </Box>
   );
-};
+}
 
 export default WorkflowEditPage;

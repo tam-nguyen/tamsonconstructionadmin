@@ -1,4 +1,4 @@
-import { prismadb } from "@/lib/prisma";
+import { prismadb } from '@/lib/prisma';
 
 export const getDocuments = async () => {
   const data = await prismadb.documents.findMany({
@@ -15,7 +15,7 @@ export const getDocuments = async () => {
       },
     },
     orderBy: {
-      date_created: "desc",
+      date_created: 'desc',
     },
   });
   return data;

@@ -1,5 +1,5 @@
-import axios, { AxiosResponse } from "axios";
-import build from "@/buildCount.json";
+import axios, { AxiosResponse } from 'axios';
+import build from '@/buildCount.json';
 
 export default async function getAllCommits(): Promise<number> {
   const perPage = 100;
@@ -39,7 +39,7 @@ export default async function getAllCommits(): Promise<number> {
     //return commitsCount || buildCount;
     return buildCount;
   } catch (error) {
-    console.error("Error fetching commits:", error);
+    console.error('Error fetching commits:', error);
     return 0;
   }
 }
