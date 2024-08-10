@@ -558,6 +558,7 @@ enum Language {
   en
   uk
   ko
+  tr
 }
 
 model system_Modules_Enabled {
