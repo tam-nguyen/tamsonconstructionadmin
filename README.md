@@ -79,7 +79,7 @@ You can try it here [demo.saashq.org](https://demo.saashq.org), login via Google
 2. Email campaigns management - integration with MailChimp and Listmonk - in planning
 3. ~~Docker version - in planning (There will be complete bundle to run SaasHQ on-premise)~~
 4. Testing - Jest + Cypress (if anyone want to help I will be very happy) - in planning
-5. Fix all Types issue (no more "any") - in progress
+5. Fix all Types issue (no more "any") - complete (thanks to Nisarg Bhatt)
 6. i18n - localization - in progress (if anyone want to help I will be very happy)
 7. Turborepo - in planning
 8. Upgrade to Next.js 14 - complete
