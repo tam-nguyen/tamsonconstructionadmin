@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios, { Axios, AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
@@ -34,7 +34,6 @@ import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { CalendarIcon } from '@radix-ui/react-icons';
 import { Calendar } from '@/components/ui/calendar';
-import { any } from 'cypress/types/bluebird';
 
 //TODO: fix all the types
 type NewEmployeeFormProps = {
@@ -55,8 +54,6 @@ export function UpdateEmployeeForm({
     '/api/user',
     fetcher
   );
-
-  const [searchTerm] = useState('');
 
   const formSchema = z.object({
     id: z.string(),
@@ -110,10 +107,6 @@ export function UpdateEmployeeForm({
         <SuspenseLoading />
       </div>
     );
-
-  const filteredData = users.filter((item: any) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   if (!users || !initialData)
     return <div>Something went wrong, there is no data for form</div>;

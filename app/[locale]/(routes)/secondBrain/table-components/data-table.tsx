@@ -47,8 +47,6 @@ export function SecondBrainDataTable<TData, TValue>({
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  const [hide, setHide] = React.useState(false);
-
   const table = useReactTable({
     data,
     columns,

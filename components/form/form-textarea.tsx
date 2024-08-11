@@ -34,7 +34,6 @@ export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>(
       errors,
       className,
       onBlur,
-      onClick,
       onKeyDown,
       defaultValue,
     },

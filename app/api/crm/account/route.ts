@@ -30,7 +30,6 @@ export async function POST(req: Request) {
       shipping_country,
       description,
       assigned_to,
-      status,
       annual_revenue,
       member_of,
       industry,
@@ -148,7 +147,7 @@ export async function PUT(req: Request) {
 }
 
 //GET all accounts route
-export async function GET(req: Request) {
+export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session) {
     return new NextResponse('Unauthenticated', { status: 401 });

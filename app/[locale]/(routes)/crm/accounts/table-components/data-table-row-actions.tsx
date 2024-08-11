@@ -18,7 +18,7 @@ import { useRouter } from 'next/navigation';
 import AlertModal from '@/components/modals/alert-modal';
 import { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import RightViewModalNoTrigger from '@/components/modals/right-view-notrigger';
 import { UpdateAccountForm } from '../components/UpdateAccountForm';
 import { Eye, EyeOff } from 'lucide-react';
@@ -48,7 +48,7 @@ export function DataTableRowActions<TData>({
         description: 'Opportunity has been deleted',
       });
     } catch (error) {
-      if (error instanceof Error) {      
+      if (error instanceof AxiosError) {      
         toast({
           variant: 'destructive',
           title: 'Error',

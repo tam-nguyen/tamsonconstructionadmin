@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { createTranslator } from 'next-intl';
+import { createTranslator, IntlError } from 'next-intl';
 import { GithubIcon, Star } from 'lucide-react';
 
 import '@/app/[locale]/globals.css';
@@ -17,7 +17,7 @@ async function getLocales(locale: string) {
   try {
     return (await import(`@/locales/${locale}.json`)).default;
   } catch (error) {
-    if (error instanceof Error) {
+    if (error instanceof IntlError) {
       notFound();
     }
   }

@@ -10,8 +10,7 @@ import InviteUserEmail from '@/emails/InviteUser';
 import resendHelper from '@/lib/resend';
 
 export async function POST(
-  req: Request,
-  { params }: { params: { userId: string } }
+  req: Request
 ) {
   /*
   Resend.com function init - this is a helper function that will be used to send emails

@@ -42,10 +42,12 @@ const TaskViewActions = ({
         title: 'Success, task marked as done.',
       });
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error, task not marked as done.',
-      });
+      if (error instanceof Error) {      
+        toast({
+          variant: 'destructive',
+          title: 'Error, task not marked as done.',
+        });
+      }
     } finally {
       setIsLoading(false);
       router.refresh();

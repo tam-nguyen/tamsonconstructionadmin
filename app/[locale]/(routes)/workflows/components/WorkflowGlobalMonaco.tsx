@@ -36,7 +36,9 @@ const WorkflowGlobalMonaco: FC<Props> = ({
           setError(null);
         }
       } catch (_error) {
-        setError('Error parsing JSON');
+        if (_error instanceof Error) {
+          setError('Error parsing JSON');
+        }  
       }
     }
   };

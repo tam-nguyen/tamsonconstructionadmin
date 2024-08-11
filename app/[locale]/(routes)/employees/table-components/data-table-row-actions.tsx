@@ -18,7 +18,7 @@ import { useRouter } from 'next/navigation';
 import AlertModal from '@/components/modals/alert-modal';
 import { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import RightViewModalNoTrigger from '@/components/modals/right-view-notrigger';
 import { UpdateEmployeeForm } from '../components/UpdateEmployeeForm';
 
@@ -47,12 +47,14 @@ export function DataTableRowActions<TData>({
         description: 'Employee has been deleted',
       });
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description:
-          'Something went wrong while deleting employee. Please try again.',
-      });
+      if (error instanceof AxiosError) {      
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description:
+            'Something went wrong while deleting employee. Please try again.',
+        });
+      }
     } finally {
       setLoading(false);
       setOpen(false);

@@ -1,6 +1,6 @@
 'use client';
 
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { MoreHorizontal, PowerIcon, PowerOffIcon } from 'lucide-react';
 
@@ -33,7 +33,7 @@ export const CellAction = ({ data }: CellActionProps) => {
         description: 'Module has been activated.',
       });
     } catch (error) {
-      if (error instanceof Error) {
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',
@@ -53,7 +53,7 @@ export const CellAction = ({ data }: CellActionProps) => {
         description: 'Module has been deactivated.',
       });
     } catch (error) {
-      if (error instanceof Error) {
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',

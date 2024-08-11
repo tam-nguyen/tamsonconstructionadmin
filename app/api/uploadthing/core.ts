@@ -5,7 +5,7 @@ import { createUploadthing, type FileRouter } from 'uploadthing/next';
 
 const f = createUploadthing();
 
-const auth = async (req: Request) => {
+const auth = async (_req: Request) => {
   const session = await getServerSession(authOptions);
   const userId = session?.user?.id;
   if (!userId) return false;
@@ -65,7 +65,7 @@ export const ourFileRouter = {
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: user.id };
     })
-    .onUploadComplete(async ({ metadata, file }) => {}),
+    .onUploadComplete(async () => {}),
 
   //FileRoute for documents
   pdfUploader: f({ pdf: { maxFileSize: '64MB', maxFileCount: 1 } })

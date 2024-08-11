@@ -30,8 +30,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
 import { useAppStore } from '@/store/store';
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import axios, { AxiosError } from 'axios';
 
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -52,7 +51,6 @@ const NewTaskDialog = ({ users, boards, open, setOpen, notionUrl }: Props) => {
 
   const [isMounted, setIsMounted] = useState(false);
 
-  const router = useRouter();
   const { toast } = useToast();
 
   const formSchema = z.object({
@@ -90,12 +88,14 @@ const NewTaskDialog = ({ users, boards, open, setOpen, notionUrl }: Props) => {
         title: 'Success',
         description: `New task: ${data.title}, created successfully`,
       });
-    } catch (error: any) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description: error?.response?.data,
-      });
+    } catch (error) {
+      if (error instanceof AxiosError) {      
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description: error?.response?.data,
+        });
+      }
     } finally {
       setIsLoading(false);
       setOpen(false);

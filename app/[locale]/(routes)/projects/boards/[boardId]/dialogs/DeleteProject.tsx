@@ -11,11 +11,8 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog';
 
-
-
-
 import { useToast } from '@/components/ui/use-toast';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { TrashIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -56,12 +53,14 @@ const DeleteProjectDialog = ({ boardId, boardName }: Props) => {
         description: `Project: ${boardName} deleted successfully`,
       });
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description:
-          'Something went wrong while deleting project. Please try again.',
-      });
+      if (error instanceof AxiosError) {      
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description:
+            'Something went wrong while deleting project. Please try again.',
+        });
+      }
     } finally {
       setOpen(false);
       setIsLoading(false);

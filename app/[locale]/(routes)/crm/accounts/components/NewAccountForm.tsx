@@ -1,7 +1,7 @@
 'use client';
 
 import { z } from 'zod';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -82,7 +82,7 @@ export function NewAccountForm({ industries, users }: Props) {
         description: 'Account created successfully',
       });
     } catch (error) {
-      if (error instanceof Error) {
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',

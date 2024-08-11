@@ -109,7 +109,7 @@ const NewTaskForm = ({ account, onFinish }: NewTaskFormProps) => {
         toast({
           variant: 'destructive',
           title: 'Error',
-          description: error instanceof Error ? error?.message : '',
+          description: error instanceof AxiosError ? error?.message : '',
         });
       }
     } finally {

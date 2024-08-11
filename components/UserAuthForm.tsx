@@ -5,12 +5,10 @@ import { signIn } from 'next-auth/react';
 import * as React from 'react';
 import type { FC } from 'react';
 import { Button } from '@/components/ui/button';
-import { useToast } from '@/components/ui/use-toast';
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
-  const toast = useToast();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const loginWithGoogle = async () => {
@@ -19,6 +17,7 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
     try {
       await signIn('google');
     } catch (error) {
+      if (error instanceof Error) { console.log('Google signIn error.') }      
     } finally {
       setIsLoading(false);
     }

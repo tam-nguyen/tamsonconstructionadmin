@@ -3,7 +3,6 @@ import { prismadb } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 
-import resendHelper from '@/lib/resend';
 
 //Create new task in project route
 /*
@@ -16,7 +15,6 @@ export async function PUT(
   /*
   Resend.com function init - this is a helper function that will be used to send emails
   */
-  const resend = await resendHelper();
   const session = await getServerSession(authOptions);
   const body = await req.json();
   //console.log(body, "body");
@@ -28,7 +26,6 @@ export async function PUT(
     priority,
     content,
     notionUrl,
-    dueDateAt,
   } = body;
 
   const taskId = params.taskId;
@@ -60,31 +57,11 @@ export async function PUT(
       return new NextResponse('No section found', { status: 400 });
     }
 
-    const tasksCount = await prismadb.tasks.count({
-      where: {
-        section: sectionId.id,
-      },
-    });
-
-    let contentUpdated = content;
+    let _contentUpdated = content;
 
     if (notionUrl) {
-      contentUpdated = content + '\n\n' + notionUrl;
+      _contentUpdated = content + '\n\n' + notionUrl;
     }
-
-    const task = await prismadb.tasks.update({
-      where: {
-        id: taskId,
-      },
-      data: {
-        priority: priority,
-        title: title,
-        content: contentUpdated,
-        updatedBy: user,
-        dueDateAt: dueDateAt,
-        user: user,
-      },
-    });
 
     //Update Board updated at field
     await prismadb.boards.update({

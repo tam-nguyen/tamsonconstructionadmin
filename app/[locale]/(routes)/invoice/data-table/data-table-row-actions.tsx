@@ -23,7 +23,7 @@ import { useRouter } from 'next/navigation';
 import AlertModal from '@/components/modals/alert-modal';
 import { useToast } from '@/components/ui/use-toast';
 import { useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import InvoiceViewModal from '@/components/modals/invoice-view-modal';
 import RightViewModalNoTrigger from '@/components/modals/right-view-notrigger';
 import RossumCockpit from '../components/RossumCockpit';
@@ -67,12 +67,14 @@ export function DataTableRowActions<TData>({
         description: 'Document has been deleted',
       });
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description:
-          'Something went wrong while deleting document. Please try again.',
-      });
+      if (error instanceof AxiosError) {      
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description:
+            'Something went wrong while deleting document. Please try again.',
+        });
+      }
     } finally {
       setLoading(false);
       setOpen(false);

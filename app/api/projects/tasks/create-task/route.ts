@@ -24,7 +24,6 @@ export async function POST(req: Request) {
     priority,
     content,
     notionUrl,
-    account,
     dueDateAt,
   } = body;
 

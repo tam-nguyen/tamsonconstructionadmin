@@ -10,9 +10,7 @@ import {
   getOpportunitiesByStage,
 } from '@/actions/crm/get-opportunities';
 
-type Props = {};
-
-const ReportsPage = async (props: Props) => {
+const ReportsPage = async () => {
   const newUsersOverall = await getUsersByMonth();
   const newUsers = await getUsersByMonthAndYear(2023);
   const newUsers2024 = await getUsersByMonthAndYear(2024);

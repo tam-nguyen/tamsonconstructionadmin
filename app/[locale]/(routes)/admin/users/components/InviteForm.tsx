@@ -23,7 +23,7 @@ import {
 import { useToast } from '@/components/ui/use-toast';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { Icons } from '@/components/ui/icons';
 
@@ -66,7 +66,7 @@ export function InviteForm() {
         });
       }
     } catch (error) {
-      if (error instanceof Error) {
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',

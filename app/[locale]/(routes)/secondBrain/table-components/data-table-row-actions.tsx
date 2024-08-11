@@ -1,6 +1,6 @@
 'use client';
 
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -58,12 +58,14 @@ export function DataTableRowActions<TData>({
         description: 'The Notion has been deleted.',
       });
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description:
-          'Something went wrong while deleting the product. Please try again.',
-      });
+      if (error instanceof AxiosError) {      
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description:
+            'Something went wrong while deleting the product. Please try again.',
+        });
+      }
     } finally {
       router.refresh();
       setLoading(false);

@@ -35,7 +35,7 @@ type Props = {
 };
 
 const UpdateProjectForm = ({ initialData, openEdit }: Props) => {
-  const [open, setOpen] = useState(false);
+  const [, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const [isMounted, setIsMounted] = useState(false);

@@ -32,7 +32,8 @@ export async function PUT(
       },
     });
 
-    return NextResponse.json({ language: language }, { status: 200 });
+    if (newUserLanguage)
+      return NextResponse.json({ language: language }, { status: 200 });
   } catch (error) {
     console.log('[NEWUSER_LANG_PUT]', error);
     return new NextResponse('Initial error', { status: 500 });

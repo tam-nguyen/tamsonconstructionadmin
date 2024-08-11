@@ -6,10 +6,7 @@ import { PutObjectAclCommand } from '@aws-sdk/client-s3';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 
-const fs = require('fs');
-
 export async function GET(
-  req: Request,
   { params }: { params: { invoiceId: string } }
 ) {
   const session = await getServerSession(authOptions);

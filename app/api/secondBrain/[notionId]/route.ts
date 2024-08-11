@@ -30,8 +30,6 @@ export async function DELETE(
 
     await deleteTweet(notion, notionId, notionDb?.notion_db_id!);
 
-    const databases = await fetchDatabases(notion, notionDb?.notion_db_id!);
-
     return NextResponse.json({ message: 'Account deleted' }, { status: 200 });
   } catch (error) {
     console.log('[Account_DELETE]', error);
@@ -57,12 +55,4 @@ async function deleteTweet(notion: any, notionId: string, notionDb: string) {
   }
 }
 
-async function fetchDatabases(notion: any, notionDb: string) {
-  const response = await notion.databases.query({
-    // database_id: process.env.NOTION_DATABASE_ID,
-    database_id: notionDb,
-  });
-  const databases = response.results;
-  //console.log("Databases:", databases);
-  return databases;
-}
+

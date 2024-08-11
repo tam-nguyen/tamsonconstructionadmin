@@ -31,7 +31,6 @@ import { useToast } from '@/components/ui/use-toast';
 import { useAppStore } from '@/store/store';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
 
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -52,7 +51,6 @@ const NewTaskDialog = ({ users, boards }: Props) => {
 
   const { notionUrl } = useAppStore();
 
-  const router = useRouter();
   const { toast } = useToast();
 
   const formSchema = z.object({

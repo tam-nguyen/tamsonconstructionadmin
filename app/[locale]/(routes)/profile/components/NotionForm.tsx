@@ -18,7 +18,7 @@ import {
 import { useToast } from '@/components/ui/use-toast';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 
 const FormSchema = z.object({
@@ -52,12 +52,14 @@ export function NotionForm({ userId }: { userId: string }) {
       });
       router.refresh();
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description:
-          'Something went wrong while activating your notion integration.',
-      });
+      if (error instanceof AxiosError) {      
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description:
+            'Something went wrong while activating your notion integration.',
+        });
+      }
     } finally {
       setIsLoading(false);
     }

@@ -12,7 +12,6 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function GET(
-  req: Request,
   { params }: { params: { annotationId: string } }
 ) {
   const session = await getServerSession(authOptions);
@@ -334,7 +333,6 @@ export async function GET(
   //const bufferXML = Buffer.from(JSON.stringify(dataXML));
 
   const fileNameJSON = `rossum/invoice_annotation-${annotationId}.json`;
-  const fileNameXML = `rossum/invoice_annotation-${annotationId}.xml`;
 
   const bucketParamsJSON = {
     Bucket: process.env.DO_BUCKET,

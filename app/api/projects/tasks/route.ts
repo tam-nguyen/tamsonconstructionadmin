@@ -44,7 +44,7 @@ export async function DELETE(req: Request) {
   const session = await getServerSession(authOptions);
   const body = await req.json();
   console.log(body, 'body');
-  const { id, section } = body;
+  const { id } = body;
 
   if (!session) {
     return new NextResponse('Unauthenticated', { status: 401 });

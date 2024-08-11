@@ -16,7 +16,7 @@ import { useRouter } from 'next/navigation';
 import AlertModal from '@/components/modals/alert-modal';
 import { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import { Copy, Edit, MoreHorizontal, Trash } from 'lucide-react';
 
@@ -74,7 +74,7 @@ export function DataTableRowActions<TData>({
         description: 'User has been activated.',
       });
     } catch (error) {
-      if (error instanceof Error) {
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',
@@ -98,7 +98,7 @@ export function DataTableRowActions<TData>({
         description: 'User has been deactivated.',
       });
     } catch (error) {
-      if (error instanceof Error) {      
+      if (error instanceof AxiosError) {      
         toast({
           variant: 'destructive',
           title: 'Error',
@@ -121,7 +121,7 @@ export function DataTableRowActions<TData>({
         description: 'User Admin rights has been deactivated.',
       });
     } catch (error) {
-      if (error instanceof Error) {      
+      if (error instanceof AxiosError) {      
         toast({
           variant: 'destructive',
           title: 'Error',
@@ -145,7 +145,7 @@ export function DataTableRowActions<TData>({
         description: 'User Admin rights has been activated.',
       });
     } catch (error) {
-      if (error instanceof Error) {      
+      if (error instanceof AxiosError) {      
         toast({
           variant: 'destructive',
           title: 'Error',

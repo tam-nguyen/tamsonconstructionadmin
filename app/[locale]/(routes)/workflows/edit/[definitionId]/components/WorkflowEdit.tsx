@@ -96,11 +96,10 @@ export function WorkflowEditPage({ editData }: EditFormProps) {
 
   const { setConfig } = useWorkflowDefinitionContext();
 
-  const [menuEl, setMenuEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(menuEl);
+  const [, setMenuEl] = useState<null | HTMLElement>(null);
 
   const router = useRouter();
-  const [formLoading, setFormLoading] = useState<boolean>(false);
+  const [, setFormLoading] = useState<boolean>(false);
 
   const [nodes, _, onNodesChange] = useNodesState(
     editData.uiObject.react.nodes
@@ -110,7 +109,7 @@ export function WorkflowEditPage({ editData }: EditFormProps) {
   );
   const { addNodes } = useReactFlow();
 
-  const [definitionDialog, setDefinitionDialog] = useState<boolean>(false);
+  const [, setDefinitionDialog] = useState<boolean>(false);
 
   const [globalEditorError, setGlobalEditorError] = useState<string | null>(
     null

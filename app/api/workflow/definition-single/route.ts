@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
-const ResponseSchema = z.object({
+const _ResponseSchema = z.object({
   id: z.string(),
   name: z.string(),
   description: z.string(),
@@ -20,10 +20,9 @@ const ResponseSchema = z.object({
   }),
 });
 
-export type ResponseSchemaType = z.infer<typeof ResponseSchema>;
+export type ResponseSchemaType = z.infer<typeof _ResponseSchema>;
 
 export async function GET(
-  req: Request,
   { params }: { params: { definitionId: string } }
 ) {
   const session = await getServerSession(authOptions);

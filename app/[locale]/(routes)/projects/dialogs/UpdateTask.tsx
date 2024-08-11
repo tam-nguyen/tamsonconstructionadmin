@@ -49,7 +49,6 @@ type Props = {
 
 const UpdateTaskDialog = ({
   users,
-  boards,
   boardId,
   initialData,
   onDone,

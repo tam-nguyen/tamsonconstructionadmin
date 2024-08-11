@@ -196,10 +196,10 @@ export function WorkflowCreatePage({ userId }: WorkflowFormProps) {
   const { toast } = useToast();
 
   const { setConfig } = useWorkflowDefinitionContext();
-  const [menuEl, setMenuEl] = useState<null | HTMLElement>(null);
+  const [, setMenuEl] = useState<null | HTMLElement>(null);
 
   const router = useRouter();
-  const [formLoading, setFormLoading] = useState<boolean>(false);
+  const [, setFormLoading] = useState<boolean>(false);
 
   const [nodes, _, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);

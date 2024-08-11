@@ -173,7 +173,7 @@ export async function PUT(req: Request) {
   }
 }
 
-export async function GET(req: Request) {
+export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session) {
     return new NextResponse('Unauthenticated', { status: 401 });

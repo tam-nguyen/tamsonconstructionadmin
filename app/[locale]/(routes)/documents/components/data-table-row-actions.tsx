@@ -19,7 +19,7 @@ import DocumentViewModal from '@/components/modals/document-view-modal';
 import { useState } from 'react';
 import AlertModal from '@/components/modals/alert-modal';
 import { useToast } from '@/components/ui/use-toast';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -47,7 +47,7 @@ export function DataTableRowActions<TData>({
         description: 'Document has been deleted',
       });
     } catch (error) {
-      if (error instanceof Error) {      
+      if (error instanceof AxiosError) {      
         toast({
           variant: 'destructive',
           title: 'Error',

@@ -66,10 +66,12 @@ const ProjectDashboardCockpit = ({
     try {
       await getTaskDone(taskId);
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error, task not marked as done.',
-      });
+      if (error instanceof Error) {      
+        toast({
+          variant: 'destructive',
+          title: 'Error, task not marked as done.',
+        });
+      }
     } finally {
       toast({
         title: 'Success, task marked as done.',

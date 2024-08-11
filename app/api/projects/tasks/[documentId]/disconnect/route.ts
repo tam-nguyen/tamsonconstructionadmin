@@ -43,20 +43,6 @@ export async function POST(
         },
       });
 
-      const updatedDocument = await prismadb.documents.update({
-        where: {
-          id: documentId,
-        },
-        data: {
-          tasks: {
-            //Disconnect the task from the document
-            disconnect: {
-              id: taskId,
-            },
-          },
-        },
-      });
-
       return NextResponse.json(updateTask);
     } else {
       return NextResponse.json({ error: 'Task not found' }, { status: 404 });

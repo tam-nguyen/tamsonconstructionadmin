@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google';
 
 import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
-import { createTranslator, NextIntlClientProvider } from 'next-intl';
+import { createTranslator, IntlError, NextIntlClientProvider } from 'next-intl';
 
 import { Toaster } from '@/components/ui/toaster';
 import { Toaster as SonnerToaster } from '@/components/ui/sonner';
@@ -21,7 +21,9 @@ async function getLocales(locale: string) {
   try {
     return (await import(`@/locales/${locale}.json`)).default;
   } catch (error) {
-    notFound();
+    if (error instanceof IntlError) {    
+      notFound();
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 'use client';
 
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import moment from 'moment';
 import type {
   DropResult} from 'react-beautiful-dnd';
@@ -142,12 +142,14 @@ const Kanban = (props: any) => {
         title: 'Section deleted',
         description: 'Section deleted successfully',
       });
-    } catch (err) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description: 'Something went wrong, during deleting section',
-      });
+    } catch (error) {
+      if (error instanceof AxiosError) {      
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description: 'Something went wrong, during deleting section',
+        });
+      }
     } finally {
       setIsLoadingSection(false);
       setSectionId(null);
@@ -225,10 +227,12 @@ const Kanban = (props: any) => {
         title: 'Success, task marked as done.',
       });
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error, task not marked as done.',
-      });
+      if (error instanceof AxiosError) {      
+        toast({
+          variant: 'destructive',
+          title: 'Error, task not marked as done.',
+        });
+      }
     } finally {
       setIsLoading(false);
       router.refresh();
@@ -342,7 +346,7 @@ const Kanban = (props: any) => {
         <div className="flex">
           <DragDropContext onDragEnd={onDragEnd}>
             <div className="flex flex-row items-start">
-              {data?.map((section: any, index: any) => (
+              {data?.map((section: any) => (
                 <div
                   className="flex h-full w-80 flex-col items-center justify-center"
                   key={section.id}

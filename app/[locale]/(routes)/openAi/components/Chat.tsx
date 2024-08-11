@@ -17,12 +17,12 @@ export default function AiHelpCenter() {
     handleSubmit,
   } = useCompletion({
     api: '/api/openai/completion',
-    onFinish: (response) => {
+    onFinish: () => {
       //console.log(response, "response");
       toast.success('Response received');
       setInput('');
     },
-    onError: (error) => {
+    onError: () => {
       toast.error('Error: no API key found');
     },
   });

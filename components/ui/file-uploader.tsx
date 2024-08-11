@@ -7,7 +7,7 @@ import { UploadButton } from '@/lib/uploadthing';
 import { useToast } from './use-toast';
 
 export default function FileUploader() {
-  const { toast } = useToast();
+  useToast();
   return (
     <main className="flex flex-col items-center justify-between border p-24">
       <UploadButton

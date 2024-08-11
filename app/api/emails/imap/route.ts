@@ -25,7 +25,7 @@ export async function GET(): Promise<NextResponse> {
 
   return new Promise<NextResponse<Email[]>>((resolve, reject) => {
     imap.once('ready', function () {
-      openInbox(function (err: Error, box: any) {
+      openInbox(function (err: Error) {
         if (err) reject(err);
         const f = imap.seq.fetch('1:3', {
           bodies: ['HEADER.FIELDS (FROM TO SUBJECT DATE)', 'TEXT'],
@@ -34,7 +34,7 @@ export async function GET(): Promise<NextResponse> {
 
         const emails: Email[] = [];
 
-        f.on('message', function (msg: any, seqno: any) {
+        f.on('message', function (msg: any) {
           const email: Email = {};
           msg.on('body', function (stream: any, info: any) {
             simpleParser(stream, (err: Error, mail: ParsedMail) => {
@@ -59,7 +59,7 @@ export async function GET(): Promise<NextResponse> {
       });
     });
 
-    imap.once('error', function (err: Error) {
+    imap.once('error', function () {
       reject(new NextResponse('Initial error', { status: 500 }));
     });
 
