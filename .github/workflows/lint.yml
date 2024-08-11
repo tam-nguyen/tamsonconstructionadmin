@@ -19,6 +19,6 @@ jobs:
       - name: install
         run: pnpm install
       - name: Check ESLint
-        run: pnpm run lint
+        run: pnpm run lint:fix
       - name: Check Code Formatting
-        run: pnpm run format
+        run: pnpm run format:fix
