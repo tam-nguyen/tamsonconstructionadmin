@@ -15,7 +15,7 @@ import { MyAccountSettingsForm } from './components/MyAccountSettingsForm';
 
 import { Button } from '@/components/ui/button';
 import RightViewModal from '@/components/modals/right-view-modal';
-import { MyAccount } from '@prisma/client';
+import type { MyAccount } from '@prisma/client';
 import { getActiveUsers } from '@/actions/get-users';
 import { getBoards } from '@/actions/projects/get-boards';
 import NewTaskDialog from './dialogs/NewTask';

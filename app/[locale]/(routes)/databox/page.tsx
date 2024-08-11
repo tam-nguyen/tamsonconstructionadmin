@@ -1,12 +1,7 @@
-import Heading from '@/components/ui/heading';
-import { Separator } from '@/components/ui/separator';
 import React from 'react';
 import Container from '../components/ui/Container';
 
-type Props = {};
-
-const CrmPage = (props: Props) => {
-  return (
+const CrmPage = () => (
     <Container
       title="Databox"
       description={
@@ -16,6 +11,5 @@ const CrmPage = (props: Props) => {
       <div>Module content here</div>
     </Container>
   );
-};
 
 export default CrmPage;

@@ -4,7 +4,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Row } from '@tanstack/react-table';
+import type { Row } from '@tanstack/react-table';
 import { Copy, Edit, LinkIcon, MoreHorizontal, Trash } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';

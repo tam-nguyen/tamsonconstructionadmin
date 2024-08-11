@@ -5,7 +5,7 @@ import { getServerSession } from 'next-auth';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import TryAgain from './components/TryAgain';
-import { Users } from '@prisma/client';
+import type { Users } from '@prisma/client';
 import {
   Card,
   CardContent,

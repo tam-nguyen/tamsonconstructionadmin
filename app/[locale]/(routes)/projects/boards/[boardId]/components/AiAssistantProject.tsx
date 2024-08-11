@@ -1,14 +1,14 @@
 'use client';
 
-import { FC, useState } from 'react';
+import type { FC} from 'react';
+import { useState } from 'react';
 
-import { getUserAiTasks } from '@/actions/cron/get-user-ai-tasks';
 
 import { Icons } from '@/components/ui/icons';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { getAiReport } from '@/actions/ai/projects/boards/getAiReport';
-import { Session } from 'next-auth';
+import type { Session } from 'next-auth';
 
 const AiAssistantProject: FC<{
   session: Session;

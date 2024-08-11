@@ -1,12 +1,10 @@
 'use client';
 
-import { ColumnDef } from '@tanstack/react-table';
+import type { ColumnDef } from '@tanstack/react-table';
 
-import { Badge } from '@/components/ui/badge';
-import { Checkbox } from '@/components/ui/checkbox';
 
 import { statuses } from '../table-data/data';
-import { Opportunity } from '../table-data/schema';
+import type { Opportunity } from '../table-data/schema';
 import { DataTableColumnHeader } from './data-table-column-header';
 import { DataTableRowActions } from './data-table-row-actions';
 import moment from 'moment';
@@ -104,9 +102,9 @@ export const columns: ColumnDef<Opportunity>[] = [
       <DataTableColumnHeader column={column} title="Budget" />
     ),
 
-    cell: ({ row }) => {
+    cell: ({ row }) => 
       //console.log(row.original.budget);
-      return (
+       (
         <div>
           {row.original.budget
             ? row.original.budget.toLocaleString('en-US', {
@@ -115,8 +113,8 @@ export const columns: ColumnDef<Opportunity>[] = [
               })
             : 'N/A'}
         </div>
-      );
-    },
+      )
+    ,
     enableSorting: true,
     enableHiding: true,
   },
@@ -155,9 +153,7 @@ export const columns: ColumnDef<Opportunity>[] = [
         </div>
       );
     },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
-    },
+    filterFn: (row, id, value) => value.includes(row.getValue(id)),
   },
   {
     id: 'actions',

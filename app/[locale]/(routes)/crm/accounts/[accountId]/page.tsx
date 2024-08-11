@@ -14,7 +14,7 @@ import LeadsView from '../../components/LeadsView';
 import ContactsView from '../../components/ContactsView';
 import DocumentsView from '../../components/DocumentsView';
 
-import {
+import type {
   Documents,
   crm_Accounts,
   crm_Accounts_Tasks,

@@ -6,8 +6,7 @@ type Props = {
   search: string | null;
 };
 
-const ResultPage = ({ results, search }: Props) => {
-  return (
+const ResultPage = ({ results, search }: Props) => (
     <div className="flex h-full w-full flex-col p-2">
       {/*       <pre>
         {JSON.stringify(
@@ -73,6 +72,5 @@ const ResultPage = ({ results, search }: Props) => {
         </div> */}
     </div>
   );
-};
 
 export default ResultPage;

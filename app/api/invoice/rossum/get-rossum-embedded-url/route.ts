@@ -21,10 +21,10 @@ export async function POST(req: Request) {
       headers: { Authorization: token },
     })
       .then((r) => r.json())
-      .then((data) => {
+      .then((data) => 
         //console.log(data);
-        return data;
-      });
+         data
+      );
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
     console.log(error, "error - get Rossum Embedded Url");

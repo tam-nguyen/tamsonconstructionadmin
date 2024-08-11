@@ -36,7 +36,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import {
+import type {
   crm_Accounts,
   crm_Contacts,
   crm_Opportunities_Sales_Stages,

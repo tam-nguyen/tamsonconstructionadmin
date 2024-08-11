@@ -6,8 +6,7 @@ interface HeadingProps {
   visibility?: string;
 }
 
-const Heading = ({ title, description, visibility }: HeadingProps) => {
-  return (
+const Heading = ({ title, description, visibility }: HeadingProps) => (
     <div className="">
       <h2 className="flex gap-2 text-3xl font-bold tracking-tight">
         {title}
@@ -16,6 +15,5 @@ const Heading = ({ title, description, visibility }: HeadingProps) => {
       <p className="py-5 text-sm text-muted-foreground">{description}</p>
     </div>
   );
-};
 
 export default Heading;

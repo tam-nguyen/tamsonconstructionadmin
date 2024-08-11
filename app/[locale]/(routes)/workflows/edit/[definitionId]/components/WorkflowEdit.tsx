@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Box } from '@radix-ui/themes';
 import { Button } from '@/components/ui/button';
-import { LoadingButton } from '@/components/ui/loading-button';
 import {
   ChevronDown,
   Sigma,
@@ -66,7 +65,7 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import WorkflowGlobalMonaco from '../../../components/WorkflowGlobalMonaco';
 import { Separator } from '@/components/ui/separator';
-import { ResponseSchemaType } from '@/actions/workflows/get-definition-single';
+import type { ResponseSchemaType } from '@/actions/workflows/get-definition-single';
 
 const workflowMetadataFormSchema = z.object({
   name: z

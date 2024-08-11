@@ -11,10 +11,8 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -68,11 +66,13 @@ export function TeamConversations({
         title: 'Success, comment added.',
       });
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description: 'Something went wrong while sending comment to the DB',
-      });
+      if (error instanceof Error) {
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description: 'Something went wrong while sending comment to the DB',
+        });
+      }
     } finally {
       form.reset({
         comment: '',

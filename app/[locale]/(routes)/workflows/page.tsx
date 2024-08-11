@@ -4,7 +4,7 @@ import Container from '../components/ui/Container';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { redirect } from 'next/navigation';
-import { Session } from 'next-auth';
+import type { Session } from 'next-auth';
 
 import WorkflowListView from './components/WorkflowListView';
 import SuspenseLoading from '@/components/loadings/suspense';

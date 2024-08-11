@@ -82,6 +82,4 @@ export function safeSync<T = unknown>(
   }
 }
 
-export const sleep = (timeout: number) => {
-  return new Promise<void>((resolve) => setTimeout(resolve, timeout));
-};
+export const sleep = (timeout: number) => new Promise<void>((resolve) => setTimeout(resolve, timeout));

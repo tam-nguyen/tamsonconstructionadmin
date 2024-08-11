@@ -2,7 +2,6 @@ import { authOptions } from '@/lib/auth';
 import { openAiHelper } from '@/lib/openai';
 import { OpenAIStream, StreamingTextResponse } from 'ai';
 import { getServerSession } from 'next-auth';
-import OpenAI from 'openai';
 
 // IMPORTANT! Set the runtime to edge
 //export const runtime = "edge";

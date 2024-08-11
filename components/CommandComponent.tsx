@@ -2,12 +2,8 @@
 
 import * as React from 'react';
 import {
-  Calculator,
-  Calendar,
-  CreditCard,
   LogOut,
   Settings,
-  Smile,
   User,
 } from 'lucide-react';
 

@@ -1,9 +1,8 @@
 import './globals.css';
 
-import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
 import { createTranslator, NextIntlClientProvider } from 'next-intl';
 

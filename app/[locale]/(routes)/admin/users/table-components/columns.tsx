@@ -3,10 +3,10 @@
 import moment from 'moment';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
-import { ColumnDef } from '@tanstack/react-table';
+import type { ColumnDef } from '@tanstack/react-table';
 
 import { statuses } from '../table-data/data';
-import { AdminUser } from '../table-data/schema';
+import type { AdminUser } from '../table-data/schema';
 import { DataTableRowActions } from './data-table-row-actions';
 import { DataTableColumnHeader } from './data-table-column-header';
 
@@ -105,9 +105,7 @@ export const columns: ColumnDef<AdminUser>[] = [
         </div>
       );
     },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
-    },
+    filterFn: (row, id, value) => value.includes(row.getValue(id)),
   },
   {
     accessorKey: 'userLanguage',

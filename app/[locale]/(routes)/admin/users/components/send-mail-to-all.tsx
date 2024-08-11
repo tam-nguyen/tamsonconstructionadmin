@@ -2,7 +2,8 @@
 
 import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
-import React, { ElementRef, useRef, useState } from 'react';
+import type { ElementRef} from 'react';
+import React, { useRef } from 'react';
 
 import { sendMailToAll } from '@/actions/admin/send-mail-to-all';
 
@@ -18,7 +19,7 @@ const SendMailToAll = () => {
   const closeRef = useRef<ElementRef<'button'>>(null);
 
   const { execute, fieldErrors, isLoading } = useAction(sendMailToAll, {
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast.success('Message sent!');
       closeRef.current?.click();
     },

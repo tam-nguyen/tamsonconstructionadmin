@@ -1,14 +1,13 @@
 'use client';
 
-import { Card, Title, BarChart, Subtitle } from '@tremor/react';
+import { Card, Title, BarChart } from '@tremor/react';
 
-const dataFormatter = (number: number) => {
+const dataFormatter = (number: number) => 
   // return number no decimal places
-  return number.toFixed(0);
-};
+   number.toFixed(0)
+;
 
-export const BarChartDemo = ({ chartData, title }: any) => {
-  return (
+export const BarChartDemo = ({ chartData, title }: any) => (
     <Card className="rounded-md">
       <Title>{title}</Title>
 
@@ -23,4 +22,3 @@ export const BarChartDemo = ({ chartData, title }: any) => {
       />
     </Card>
   );
-};

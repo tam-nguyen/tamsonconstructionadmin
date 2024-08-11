@@ -1,9 +1,9 @@
 'use client';
 
-import { ColumnDef } from '@tanstack/react-table';
+import type { ColumnDef } from '@tanstack/react-table';
 
 import { statuses } from '../table-data/data';
-import { Account } from '../table-data/schema';
+import type { Account } from '../table-data/schema';
 import { DataTableColumnHeader } from './data-table-column-header';
 import { DataTableRowActions } from './data-table-row-actions';
 import moment from 'moment';
@@ -110,9 +110,7 @@ export const columns: ColumnDef<Account>[] = [
         </div>
       );
     },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
-    },
+    filterFn: (row, id, value) => value.includes(row.getValue(id)),
   },
   {
     id: 'actions',

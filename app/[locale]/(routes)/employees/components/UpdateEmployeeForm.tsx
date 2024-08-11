@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios from 'axios';
+import axios, { Axios, AxiosError } from 'axios';
 
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
@@ -18,16 +18,10 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+
+
 import { Textarea } from '@/components/ui/textarea';
 
-import { Switch } from '@/components/ui/switch';
 import fetcher from '@/lib/fetcher';
 import useSWR from 'swr';
 import SuspenseLoading from '@/components/loadings/suspense';
@@ -40,6 +34,7 @@ import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { CalendarIcon } from '@radix-ui/react-icons';
 import { Calendar } from '@/components/ui/calendar';
+import { any } from 'cypress/types/bluebird';
 
 //TODO: fix all the types
 type NewEmployeeFormProps = {
@@ -61,7 +56,7 @@ export function UpdateEmployeeForm({
     fetcher
   );
 
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm] = useState('');
 
   const formSchema = z.object({
     id: z.string(),
@@ -94,12 +89,14 @@ export function UpdateEmployeeForm({
         title: 'Success',
         description: 'Employee updated successfully',
       });
-    } catch (error: any) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description: error?.response?.data,
-      });
+    } catch (error) {
+      if (error instanceof AxiosError) {      
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description: error?.response?.data,
+        });
+      }  
     } finally {
       setIsLoading(false);
       router.refresh();
@@ -113,12 +110,6 @@ export function UpdateEmployeeForm({
         <SuspenseLoading />
       </div>
     );
-
-  const yearArray = Array.from(
-    //start in 1923 and count to +100 years
-    { length: 100 },
-    (_, i) => i + 1923
-  );
 
   const filteredData = users.filter((item: any) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())

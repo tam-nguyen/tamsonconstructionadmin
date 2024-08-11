@@ -5,8 +5,7 @@ import Link from 'next/link';
 import { Button } from './ui/button';
 import { DiscordLogoIcon, GitHubLogoIcon } from '@radix-ui/react-icons';
 
-const SupportComponent = () => {
-  return (
+const SupportComponent = () => (
     <Popover>
       <PopoverTrigger className="rounded-md border p-3">
         <HelpCircle className="h-4 w-4 cursor-pointer" />
@@ -42,6 +41,5 @@ const SupportComponent = () => {
       </PopoverContent>
     </Popover>
   );
-};
 
 export default SupportComponent;

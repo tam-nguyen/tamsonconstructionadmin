@@ -26,7 +26,8 @@ import {
 } from '@/components/ui/form';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/components/ui/use-toast';
-import MultipleSelector, { Option } from '@/components/ui/multiple-selector';
+import type { Option } from '@/components/ui/multiple-selector';
+import MultipleSelector from '@/components/ui/multiple-selector';
 
 const waitConfigSchema = z.object({
   label: z
@@ -60,7 +61,7 @@ const WaitConfigPanel: FC<Props> = ({
   const [openConfigPanel, setOpenConfigPanel] = useState<boolean>(false);
   const { getNodes } = useReactFlow();
 
-  let OPTIONS: Option[] = useMemo(() => [], []);
+  const OPTIONS: Option[] = useMemo(() => [], []);
 
   const [labelUniqueError, setLabelUniqueError] = useState<string | null>(null);
   const [taskNamesUnknownError, setTaskNamesUnknownError] = useState<

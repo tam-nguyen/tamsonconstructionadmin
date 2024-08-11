@@ -5,12 +5,10 @@
 import MultiSelect from '@/shadcn-examples/MultiSelect';
 import React from 'react';
 
-const DevModePage = () => {
-  return (
+const DevModePage = () => (
     <div className="space-y-5">
       <MultiSelect />
     </div>
   );
-};
 
 export default DevModePage;

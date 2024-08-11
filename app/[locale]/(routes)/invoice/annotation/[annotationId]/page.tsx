@@ -21,10 +21,10 @@ async function AnnotationPage({
     }
   )
     .then((r) => r.json())
-    .then((data) => {
+    .then((data) => 
       //console.log(data);
-      return data;
-    });
+       data
+    );
 
   return (
     <div>

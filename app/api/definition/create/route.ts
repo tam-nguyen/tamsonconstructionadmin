@@ -1,6 +1,6 @@
 import { prismadb } from '@/lib/prisma';
 import { safeAsync } from '@/lib/utils';
-import { ServerRuntime } from 'next';
+import type { ServerRuntime } from 'next';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 

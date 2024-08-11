@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import { useState } from 'react';
-import { Row } from '@tanstack/react-table';
+import type { Row } from '@tanstack/react-table';
 import { useRouter } from 'next/navigation';
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 

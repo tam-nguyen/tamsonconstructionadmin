@@ -2,7 +2,6 @@ import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
 import React from 'react';
 import Container from '../../../components/ui/Container';
-import { getAccountsTasks } from '@/actions/crm/account/get-tasks';
 import { getUserCRMTasks } from '@/actions/crm/tasks/get-user-tasks';
 
 const UserCRMDashboard = async () => {

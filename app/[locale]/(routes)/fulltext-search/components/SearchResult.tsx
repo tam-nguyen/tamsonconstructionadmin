@@ -5,9 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import ResultPage from '../search/components/ResultPage';
 
-type Props = {};
-
-const SearchResult = (props: Props) => {
+const SearchResult = () => {
   const searchParams = useSearchParams();
 
   const search = searchParams?.get('q');

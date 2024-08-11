@@ -9,7 +9,7 @@ type Props = {
   title: string;
 };
 
-const WorkflowsModuleMenu = ({ open, title }: Props) => {
+const WorkflowsModuleMenu = ({ open }: Props) => {
   const pathname = usePathname();
   const isPath = pathname.includes('workflows');
   return (

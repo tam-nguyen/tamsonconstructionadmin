@@ -1,5 +1,5 @@
 'use client';
-import { Comment } from '@/app/[locale]/(routes)/projects/dashboard/components/ProjectDasboard';
+import type { Comment } from '@/app/[locale]/(routes)/projects/dashboard/components/ProjectDasboard';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -12,10 +12,8 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import { Icons } from '@/components/ui/icons';

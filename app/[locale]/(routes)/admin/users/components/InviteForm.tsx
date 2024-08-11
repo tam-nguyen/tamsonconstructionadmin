@@ -66,11 +66,13 @@ export function InviteForm() {
         });
       }
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description: 'Something went wrong while inviting the user.',
-      });
+      if (error instanceof Error) {
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description: 'Something went wrong while inviting the user.',
+        });
+      }
     } finally {
       form.reset({
         name: '',

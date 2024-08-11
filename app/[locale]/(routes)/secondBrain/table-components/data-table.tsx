@@ -1,11 +1,12 @@
 'use client';
 
 import * as React from 'react';
-import {
+import type {
   ColumnDef,
   ColumnFiltersState,
   SortingState,
-  VisibilityState,
+  VisibilityState} from '@tanstack/react-table';
+import {
   flexRender,
   getCoreRowModel,
   getFacetedRowModel,
@@ -28,7 +29,6 @@ import {
 import { DataTablePagination } from './data-table-pagination';
 import { DataTableToolbar } from './data-table-toolbar';
 
-import { PanelTopClose, PanelTopOpen } from 'lucide-react';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -79,8 +79,7 @@ export function SecondBrainDataTable<TData, TValue>({
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
+                {headerGroup.headers.map((header) => (
                     <TableHead key={header.id}>
                       {header.isPlaceholder
                         ? null
@@ -89,8 +88,7 @@ export function SecondBrainDataTable<TData, TValue>({
                             header.getContext()
                           )}
                     </TableHead>
-                  );
-                })}
+                  ))}
               </TableRow>
             ))}
           </TableHeader>

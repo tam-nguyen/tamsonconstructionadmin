@@ -1,9 +1,10 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { FC, useEffect, useState } from 'react';
+import type { FC} from 'react';
+import { useEffect, useState } from 'react';
 
-import { crm_Accounts } from '@prisma/client';
+import type { crm_Accounts } from '@prisma/client';
 
 import {
   Card,

@@ -14,8 +14,7 @@ const Container = ({
   description,
   visibility,
   children,
-}: ContainerProps) => {
-  return (
+}: ContainerProps) => (
     <div className="h-full flex-1 space-y-4 overflow-hidden border-l p-8 pt-6">
       <Heading
         title={title}
@@ -28,6 +27,5 @@ const Container = ({
       </div>
     </div>
   );
-};
 
 export default Container;

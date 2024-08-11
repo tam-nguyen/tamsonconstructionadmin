@@ -1,6 +1,5 @@
 'use client';
 
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
@@ -9,9 +8,8 @@ import { getTaskDone } from '@/app/[locale]/(routes)/projects/actions/get-task-d
 import { Badge } from '@/components/ui/badge';
 import { CheckSquare, Pencil } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent } from '@/components/ui/sheet';
 import UpdateTaskDialog from '@/app/[locale]/(routes)/projects/dialogs/UpdateTask';
-import { getActiveUsers } from '@/actions/get-users';
 import { useState } from 'react';
 import { Icons } from '@/components/ui/icons';
 

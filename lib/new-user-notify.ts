@@ -1,4 +1,4 @@
-import { Users } from '@prisma/client';
+import type { Users } from '@prisma/client';
 
 import { prismadb } from './prisma';
 import sendEmail from './sendmail';

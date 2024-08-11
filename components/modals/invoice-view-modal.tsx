@@ -3,8 +3,6 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import ModalDocumentView from '../ui/modal-document-view';
-import DocViewer, { DocViewerRenderers } from 'react-doc-viewer';
-import Link from 'next/link';
 
 interface AlertModalProps {
   isOpen: boolean;

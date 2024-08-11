@@ -8,8 +8,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { AdminUserDataTable } from './table-components/data-table';
 import { columns } from './table-components/columns';
-import { Users } from '@prisma/client';
-import { Button } from '@/components/ui/button';
+import type { Users } from '@prisma/client';
 import SendMailToAll from './components/send-mail-to-all';
 
 const AdminUsersPage = async () => {

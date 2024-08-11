@@ -2,18 +2,19 @@
 
 import axios from 'axios';
 import moment from 'moment';
+import type {
+  DropResult} from 'react-beautiful-dnd';
 import {
   DragDropContext,
   Droppable,
-  Draggable,
-  DropResult,
+  Draggable
 } from 'react-beautiful-dnd';
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, useEffect, useState } from 'react';
+import type { ChangeEvent} from 'react';
+import { useEffect, useState } from 'react';
 import { Check, EyeIcon, Pencil, PlusCircle, PlusIcon } from 'lucide-react';
 
 import {
-  ChatBubbleIcon,
   DotsHorizontalIcon,
   ExclamationTriangleIcon,
   TrashIcon,

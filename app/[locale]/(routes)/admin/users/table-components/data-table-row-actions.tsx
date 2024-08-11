@@ -1,6 +1,6 @@
 'use client';
 
-import { Row } from '@tanstack/react-table';
+import type { Row } from '@tanstack/react-table';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -32,7 +32,6 @@ export function DataTableRowActions<TData>({
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [updateOpen, setUpdateOpen] = useState(false);
 
   const { toast } = useToast();
   const onCopy = (id: string) => {
@@ -75,12 +74,14 @@ export function DataTableRowActions<TData>({
         description: 'User has been activated.',
       });
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description:
-          'Something went wrong while activating user. Please try again.',
-      });
+      if (error instanceof Error) {
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description:
+            'Something went wrong while activating user. Please try again.',
+        });
+      }
     } finally {
       setLoading(false);
       setOpen(false);
@@ -97,12 +98,14 @@ export function DataTableRowActions<TData>({
         description: 'User has been deactivated.',
       });
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description:
-          'Something went wrong while deactivating user. Please try again.',
-      });
+      if (error instanceof Error) {      
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description:
+            'Something went wrong while deactivating user. Please try again.',
+        });
+      }
     } finally {
       setLoading(false);
       setOpen(false);
@@ -118,12 +121,14 @@ export function DataTableRowActions<TData>({
         description: 'User Admin rights has been deactivated.',
       });
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description:
-          'Something went wrong while deactivating user as a admin. Please try again.',
-      });
+      if (error instanceof Error) {      
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description:
+            'Something went wrong while deactivating user as a admin. Please try again.',
+        });
+      }
     } finally {
       setLoading(false);
       setOpen(false);
@@ -140,12 +145,14 @@ export function DataTableRowActions<TData>({
         description: 'User Admin rights has been activated.',
       });
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description:
-          'Something went wrong while activating uses as a admin. Please try again.',
-      });
+      if (error instanceof Error) {      
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description:
+            'Something went wrong while activating uses as a admin. Please try again.',
+        });
+      }
     } finally {
       setLoading(false);
       setOpen(false);

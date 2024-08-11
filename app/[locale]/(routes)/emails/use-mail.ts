@@ -1,6 +1,7 @@
 import { atom, useAtom } from 'jotai';
 
-import { Mail, mails } from '@/app/[locale]/(routes)/emails//data';
+import type { Mail} from '@/app/[locale]/(routes)/emails//data';
+import { mails } from '@/app/[locale]/(routes)/emails//data';
 
 type Config = {
   selected: Mail['id'] | null;

@@ -45,7 +45,7 @@ export async function GET(
     });
   }
 
-  let message = `Hello, \n\n Please find attached invoice in XML format. \n\n Thank you \n\n ${process.env.NEXT_PUBLIC_APP_NAME}`;
+  const message = `Hello, \n\n Please find attached invoice in XML format. \n\n Thank you \n\n ${process.env.NEXT_PUBLIC_APP_NAME}`;
 
   //Get accountant email from database (MyAccount table)
   const accountantEmail = await prismadb.myAccount.findFirst({});

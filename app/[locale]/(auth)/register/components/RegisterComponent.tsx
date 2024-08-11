@@ -109,6 +109,7 @@ export function RegisterComponent() {
         callbackUrl: process.env.NEXT_PUBLIC_APP_URL,
       });
     } catch (error) {
+      console.log(error);
     } finally {
       setIsLoading(false);
     }

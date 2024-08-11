@@ -3,7 +3,6 @@ import { prismadb } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 
-import NewTaskCommentEmail from '@/emails/NewTaskComment';
 import resendHelper from '@/lib/resend';
 
 export async function POST(

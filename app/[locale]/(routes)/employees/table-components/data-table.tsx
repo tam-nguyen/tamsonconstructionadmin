@@ -1,11 +1,12 @@
 'use client';
 
 import * as React from 'react';
-import {
+import type {
   ColumnDef,
   ColumnFiltersState,
   SortingState,
-  VisibilityState,
+  VisibilityState} from '@tanstack/react-table';
+import {
   flexRender,
   getCoreRowModel,
   getFacetedRowModel,
@@ -109,8 +110,7 @@ export function EmployeeDataTable<TData, TValue>({
               <TableHeader>
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow key={headerGroup.id}>
-                    {headerGroup.headers.map((header) => {
-                      return (
+                    {headerGroup.headers.map((header) => (
                         <TableHead key={header.id}>
                           {header.isPlaceholder
                             ? null
@@ -119,8 +119,7 @@ export function EmployeeDataTable<TData, TValue>({
                                 header.getContext()
                               )}
                         </TableHead>
-                      );
-                    })}
+                      ))}
                   </TableRow>
                 ))}
               </TableHeader>

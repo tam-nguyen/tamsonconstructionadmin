@@ -6,11 +6,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { getDictionary } from '@/dictionaries';
+import type { getDictionary } from '@/dictionaries';
 import { Coins } from 'lucide-react';
 
 import { usePathname, useRouter } from 'next/navigation';
-import { FC } from 'react';
+import type { FC } from 'react';
 
 type Props = {
   open: boolean;

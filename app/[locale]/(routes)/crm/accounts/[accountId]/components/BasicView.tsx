@@ -5,30 +5,20 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { crm_Opportunities } from '@prisma/client';
 import {
   CalendarDays,
-  ClipboardList,
   CoinsIcon,
-  Combine,
   File,
-  Globe,
   Globe2,
   Landmark,
-  List,
   MoreHorizontal,
   Percent,
-  Phone,
-  SquareStack,
-  Text,
   User,
 } from 'lucide-react';
 import moment from 'moment';
-import { Clapperboard } from 'lucide-react';
 import { prismadb } from '@/lib/prisma';
 import Link from 'next/link';
 import { EnvelopeClosedIcon, LightningBoltIcon } from '@radix-ui/react-icons';
-import { LucideLandmark } from 'lucide-react';
 
 interface OppsViewProps {
   data: any;

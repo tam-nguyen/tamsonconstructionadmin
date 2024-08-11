@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useOptimistic, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { ThumbsDown, ThumbsUp } from 'lucide-react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-import {
+import type {
   crm_Opportunities,
   crm_Opportunities_Sales_Stages,
 } from '@prisma/client';
@@ -23,7 +23,7 @@ import {
 import { useToast } from '@/components/ui/use-toast';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import LoadingModal from '@/components/modals/loading-modal';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Card, CardContent, CardFooter, CardTitle } from '@/components/ui/card';
 
 import { NewOpportunityForm } from '../../opportunities/components/NewOpportunityForm';
@@ -44,7 +44,7 @@ const CRMKanban = ({
   const { toast } = useToast();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
+  const [, setIsMounted] = useState(false);
 
   const [selectedStage, setSelectedStage] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -105,12 +105,12 @@ const CRMKanban = ({
     // If start is the same as end, we're in the same column
   };
 
-  const onThumbsUp = (opportunity: crm_Opportunities) => {
+  const onThumbsUp = (_id: any) => {
     // Implement thumbs up logic
     alert('Thumbs up - not implemented yet');
   };
 
-  const onThumbsDown = (opportunity: crm_Opportunities) => {
+  const onThumbsDown = (_id: any) => {
     // Implement thumbs down logic
     alert('Thumbs down - not implemented yet');
   };

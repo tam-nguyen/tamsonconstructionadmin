@@ -1,7 +1,7 @@
 'use client';
 
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
-import { Row } from '@tanstack/react-table';
+import type { Row } from '@tanstack/react-table';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -19,10 +19,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import {
   Eye,
-  EyeIcon,
   EyeOff,
   Glasses,
-  Magnet,
   Pencil,
   Trash,
 } from 'lucide-react';

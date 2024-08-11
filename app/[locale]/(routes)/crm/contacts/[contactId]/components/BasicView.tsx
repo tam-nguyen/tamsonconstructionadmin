@@ -5,27 +5,19 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { crm_Opportunities } from '@prisma/client';
 import {
   CalendarDays,
-  ClipboardList,
   CoinsIcon,
-  Combine,
   Facebook,
   Instagram,
-  Landmark,
   LayoutGrid,
   Linkedin,
-  List,
   MoreHorizontal,
-  SquareStack,
-  Text,
   Twitter,
   User,
   Youtube,
 } from 'lucide-react';
 import moment from 'moment';
-import { Clapperboard } from 'lucide-react';
 import { prismadb } from '@/lib/prisma';
 import Link from 'next/link';
 import { EnvelopeClosedIcon } from '@radix-ui/react-icons';

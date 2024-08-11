@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { crm_Opportunities } from '@prisma/client';
+import type { crm_Opportunities } from '@prisma/client';
 import {
   CalendarDays,
   ClipboardList,
@@ -14,7 +14,6 @@ import {
   Landmark,
   List,
   SquareStack,
-  Text,
   User,
 } from 'lucide-react';
 import moment from 'moment';

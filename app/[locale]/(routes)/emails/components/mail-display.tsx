@@ -38,7 +38,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Mail } from '@/app/[locale]/(routes)/emails/data';
+import type { Mail } from '@/app/[locale]/(routes)/emails/data';
 
 interface MailDisplayProps {
   mail: Mail | null;

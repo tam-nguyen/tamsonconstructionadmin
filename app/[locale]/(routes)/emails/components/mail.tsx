@@ -20,7 +20,7 @@ import { AccountSwitcher } from '@/app/[locale]/(routes)/emails/components/accou
 import { MailDisplay } from '@/app/[locale]/(routes)/emails/components/mail-display';
 import { MailList } from '@/app/[locale]/(routes)/emails/components/mail-list';
 import { Nav } from '@/app/[locale]/(routes)/emails/components/nav';
-import { Mail } from '@/app/[locale]/(routes)/emails/data';
+import type { Mail } from '@/app/[locale]/(routes)/emails/data';
 import { useMail } from '@/app/[locale]/(routes)/emails/use-mail';
 import { cn } from '@/lib/utils';
 import { Separator } from '@/components/ui/separator';

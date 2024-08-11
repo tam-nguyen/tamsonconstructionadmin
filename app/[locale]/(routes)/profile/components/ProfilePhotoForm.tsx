@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Users } from '@prisma/client';
+import type { Users } from '@prisma/client';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 

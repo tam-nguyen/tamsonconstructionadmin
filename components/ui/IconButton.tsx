@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { MouseEventHandler } from 'react';
+import type { MouseEventHandler } from 'react';
 
 interface IconButtonProps {
   onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
@@ -7,8 +7,7 @@ interface IconButtonProps {
   className?: string;
 }
 
-const IconButton = ({ onClick, icon, className }: IconButtonProps) => {
-  return (
+const IconButton = ({ onClick, icon, className }: IconButtonProps) => (
     <button
       onClick={onClick}
       className={cn(
@@ -19,6 +18,5 @@ const IconButton = ({ onClick, icon, className }: IconButtonProps) => {
       {icon}
     </button>
   );
-};
 
 export default IconButton;

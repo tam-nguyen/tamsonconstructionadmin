@@ -82,11 +82,13 @@ export function NewAccountForm({ industries, users }: Props) {
         description: 'Account created successfully',
       });
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description: 'Something went wrong. Please try again.',
-      });
+      if (error instanceof Error) {
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description: 'Something went wrong. Please try again.',
+        });
+      }
     } finally {
       form.reset();
       router.refresh();

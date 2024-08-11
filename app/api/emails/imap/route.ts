@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import Imap from 'imap';
-import { simpleParser, ParsedMail } from 'mailparser';
+import type { ParsedMail } from 'mailparser';
+import { simpleParser } from 'mailparser';
 
 interface Email {
   body?: string;

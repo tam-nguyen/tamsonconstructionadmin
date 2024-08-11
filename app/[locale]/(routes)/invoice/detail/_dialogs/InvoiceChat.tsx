@@ -10,8 +10,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 
-const InvoiceChat = () => {
-  return (
+const InvoiceChat = () => (
     <Sheet>
       <SheetTrigger asChild>
         <MessagesSquare className="m-2 h-6 w-6 cursor-pointer" />
@@ -24,6 +23,5 @@ const InvoiceChat = () => {
       </SheetContent>
     </Sheet>
   );
-};
 
 export default InvoiceChat;

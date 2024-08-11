@@ -1,20 +1,15 @@
 'use client';
 
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
-import { Row } from '@tanstack/react-table';
+import type { Row } from '@tanstack/react-table';
 
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
   DropdownMenuLabel,
 } from '@/components/ui/dropdown-menu';
@@ -25,13 +20,12 @@ import { useRouter } from 'next/navigation';
 import AlertModal from '@/components/modals/alert-modal';
 import { useToast } from '@/components/ui/use-toast';
 import { useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import InvoiceViewModal from '@/components/modals/invoice-view-modal';
 import RightViewModalNoTrigger from '@/components/modals/right-view-notrigger';
 import RossumCockpit from '../../components/RossumCockpit';
 import Link from 'next/link';
 import LoadingModal from '@/components/modals/loading-modal';
-import { set } from 'date-fns';
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -61,12 +55,14 @@ export function DataTableRowActions<TData>({
         description: 'Document has been deleted',
       });
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description:
-          'Something went wrong while deleting document. Please try again.',
-      });
+      if (error instanceof AxiosError) {      
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description:
+            'Something went wrong while deleting document. Please try again.',
+        });
+      }
     } finally {
       setLoading(false);
       setOpen(false);
@@ -85,12 +81,14 @@ export function DataTableRowActions<TData>({
         description: `Data from invoice with annotation ID ${invoice.rossum_annotation_id} has been extracted`,
       });
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description:
-          'Something went wrong while extracting data. Please try again.',
-      });
+      if (error instanceof AxiosError) {      
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description:
+            'Something went wrong while extracting data. Please try again.',
+        });
+      }
     } finally {
       setLoadingOpen(false);
       setLoading(false);

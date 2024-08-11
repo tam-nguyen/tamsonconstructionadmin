@@ -9,9 +9,7 @@ export async function getRossumToken() {
     headers: { 'Content-Type': 'application/json' },
   })
     .then((r) => r.json())
-    .then(({ key }) => {
-      return key;
-    });
+    .then(({ key }) => key);
 
   const token = 'token ' + ' ' + key;
 

@@ -32,12 +32,12 @@ import { useToast } from '@/components/ui/use-toast';
 import fetcher from '@/lib/fetcher';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { crm_Accounts } from '@prisma/client';
+import type { crm_Accounts } from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -52,7 +52,7 @@ interface NewTaskFormProps {
 const NewTaskForm = ({ account, onFinish }: NewTaskFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const [date, setDate] = useState<Date>();
+  const [date] = useState<Date>();
   //  const [userSearch, setUserSearch] = useState<string>("");
 
   const { data: users, isLoading: isLoadingUsers } = useSWR(

@@ -66,7 +66,6 @@ import { Textarea } from '@/components/ui/textarea';
 import WorkflowGlobalMonaco from '../../components/WorkflowGlobalMonaco';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/components/ui/use-toast';
-import { LoadingButton } from '@/components/ui/loading-button';
 
 const workflowMetadataFormSchema = z.object({
   name: z

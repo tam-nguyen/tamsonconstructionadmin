@@ -12,7 +12,8 @@ import { EngineService } from '../engine.service';
 
 import { EngineTransport } from '../engine.transport';
 import { BadRequestException } from '../engine.interface';
-import { RuntimeStatus, Runtimes } from '@prisma/client';
+import type { Runtimes } from '@prisma/client';
+import { RuntimeStatus } from '@prisma/client';
 
 export class Processor {
   private engineService: EngineService;

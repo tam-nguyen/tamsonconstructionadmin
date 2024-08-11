@@ -10,7 +10,7 @@ import { prismadb } from '@/lib/prisma';
 import SetGptModel from '../forms/SetGptModel';
 
 import OnTestButton from './OnTestButton';
-import { gpt_models } from '@prisma/client';
+import type { gpt_models } from '@prisma/client';
 
 const GptCard = async () => {
   const gptModels: gpt_models[] = await prismadb.gpt_models.findMany();

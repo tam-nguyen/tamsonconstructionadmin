@@ -1,11 +1,12 @@
 'use client';
 
 import * as React from 'react';
-import {
+import type {
   ColumnDef,
   ColumnFiltersState,
   SortingState,
-  VisibilityState,
+  VisibilityState} from '@tanstack/react-table';
+import {
   flexRender,
   getCoreRowModel,
   getFacetedRowModel,
@@ -27,10 +28,7 @@ import {
 
 import { DataTablePagination } from './data-table-pagination';
 import { DataTableToolbar } from './data-table-toolbar';
-import { Button } from '@/components/ui/button';
-import { Divide, PanelTopClose, PanelTopOpen } from 'lucide-react';
-import RightViewModal from '@/components/modals/right-view-modal';
-import { NewAccountForm } from '../components/NewAccountForm';
+import { PanelTopClose, PanelTopOpen } from 'lucide-react';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -42,8 +40,6 @@ interface DataTableProps<TData, TValue> {
 export function AccountDataTable<TData, TValue>({
   columns,
   data,
-  industries,
-  users,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
@@ -116,8 +112,7 @@ export function AccountDataTable<TData, TValue>({
               <TableHeader>
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow key={headerGroup.id}>
-                    {headerGroup.headers.map((header) => {
-                      return (
+                    {headerGroup.headers.map((header) => (
                         <TableHead key={header.id}>
                           {header.isPlaceholder
                             ? null
@@ -126,8 +121,7 @@ export function AccountDataTable<TData, TValue>({
                                 header.getContext()
                               )}
                         </TableHead>
-                      );
-                    })}
+                      ))}
                   </TableRow>
                 ))}
               </TableHeader>

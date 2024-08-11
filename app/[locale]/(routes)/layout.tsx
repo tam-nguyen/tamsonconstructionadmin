@@ -7,7 +7,7 @@ import Header from './components/Header';
 import SideBar from './components/SideBar';
 import Footer from './components/Footer';
 import getAllCommits from '@/actions/github/get-repo-commits';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   metadataBase: new URL(

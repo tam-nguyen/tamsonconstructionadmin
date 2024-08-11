@@ -16,8 +16,7 @@ type Props = {
   lang: string;
 };
 
-const Header = ({ id, name, email, avatar, lang }: Props) => {
-  return (
+const Header = ({ id, name, email, avatar }: Props) => (
     <>
       <div className="flex h-20 items-center justify-between space-x-5 p-5">
         <div className="flex justify-center">
@@ -40,6 +39,5 @@ const Header = ({ id, name, email, avatar, lang }: Props) => {
       <Separator />
     </>
   );
-};
 
 export default Header;

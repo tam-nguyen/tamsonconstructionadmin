@@ -1,6 +1,8 @@
-import { ReactNode, Suspense } from 'react';
+import { Suspense } from 'react';
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
+import type {
+  LucideIcon} from 'lucide-react';
 import {
   CoinsIcon,
   Contact,
@@ -8,7 +10,6 @@ import {
   GitFork,
   HeartHandshakeIcon,
   LandmarkIcon,
-  LucideIcon,
   UserIcon,
   Users2Icon,
 } from 'lucide-react';

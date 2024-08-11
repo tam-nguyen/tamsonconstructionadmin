@@ -2,15 +2,14 @@
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { CrossIcon, PencilIcon } from 'lucide-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 type Props = {
   open2: boolean;
   setOpen2: (open: boolean) => void;
 };
 
-const PasswordResetDialog = ({ open2, setOpen2 }: Props) => {
-  return (
+const PasswordResetDialog = ({ open2, setOpen2 }: Props) => (
     <div>
       <Dialog.Root open={open2} onOpenChange={setOpen2}>
         <Dialog.Trigger className="rounded p-2">
@@ -30,6 +29,5 @@ const PasswordResetDialog = ({ open2, setOpen2 }: Props) => {
       </Dialog.Root>
     </div>
   );
-};
 
 export default PasswordResetDialog;

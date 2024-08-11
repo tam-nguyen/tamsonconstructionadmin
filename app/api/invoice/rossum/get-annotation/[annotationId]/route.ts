@@ -7,7 +7,7 @@ import { authOptions } from "@/lib/auth";
 import { s3Client } from "@/lib/digital-ocean-s3";
 import { getRossumToken } from "@/lib/get-rossum-token";
 import { prismadb } from "@/lib/prisma";
-import { PutObjectAclCommand, PutObjectCommand } from "@aws-sdk/client-s3";
+import { PutObjectAclCommand } from "@aws-sdk/client-s3";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
@@ -48,10 +48,10 @@ export async function GET(
     }
   )
     .then((r) => r.json())
-    .then((data) => {
+    .then((data) => 
       //console.log(data);
-      return data;
-    });
+       data
+    );
 
   //console.log(data.results[0].status, "data from get annotation route");
 

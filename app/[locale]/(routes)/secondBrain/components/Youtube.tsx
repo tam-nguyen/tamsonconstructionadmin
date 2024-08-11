@@ -2,8 +2,7 @@
 import React from 'react';
 import YouTube from 'react-youtube';
 
-const Youtube = () => {
-  return (
+const Youtube = () => (
     <YouTube
       videoId="lmYtUwsbdYU"
       opts={{
@@ -16,6 +15,5 @@ const Youtube = () => {
       }}
     />
   );
-};
 
 export default Youtube;

@@ -2,9 +2,7 @@
 
 import { Card, Title, AreaChart } from '@tremor/react';
 
-const dataFormatter = (number: number) => {
-  return Intl.NumberFormat('us').format(number).toString();
-};
+const dataFormatter = (number: number) => Intl.NumberFormat('us').format(number).toString();
 
 export const AreaChartDemo = ({ chartData, title }: any) => (
   <Card>

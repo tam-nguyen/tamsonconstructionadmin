@@ -3,8 +3,7 @@ import Container from '../components/ui/Container';
 import MainPageView from './components/MainPageView';
 import SuspenseLoading from '@/components/loadings/suspense';
 
-const CrmPage = async () => {
-  return (
+const CrmPage = async () => (
     <Container
       title="CRM"
       description={'Everything you need to know about sales'}
@@ -17,6 +16,5 @@ const CrmPage = async () => {
       </Suspense>
     </Container>
   );
-};
 
 export default CrmPage;

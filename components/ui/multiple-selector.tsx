@@ -326,8 +326,7 @@ const MultipleSelector = React.forwardRef<
           )}
         >
           <div className="flex flex-wrap gap-1">
-            {selected.map((option) => {
-              return (
+            {selected.map((option) => (
                 <Badge
                   key={option.value}
                   className={cn(
@@ -358,8 +357,7 @@ const MultipleSelector = React.forwardRef<
                     <X className="h-3 w-3 text-slate-100 hover:text-slate-300" />
                   </button>
                 </Badge>
-              );
-            })}
+              ))}
             {/* Avoid having the "Search" Icon */}
             <CommandPrimitive.Input
               {...inputProps}
@@ -410,8 +408,7 @@ const MultipleSelector = React.forwardRef<
                       className="h-full overflow-auto"
                     >
                       <>
-                        {dropdowns.map((option) => {
-                          return (
+                        {dropdowns.map((option) => (
                             <CommandItem
                               key={option.value}
                               value={option.value}
@@ -438,8 +435,7 @@ const MultipleSelector = React.forwardRef<
                             >
                               {option.label}
                             </CommandItem>
-                          );
-                        })}
+                          ))}
                       </>
                     </CommandGroup>
                   ))}

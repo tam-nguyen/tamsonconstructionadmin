@@ -1,4 +1,3 @@
-import axios from 'axios';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { createTranslator } from 'next-intl';
@@ -18,7 +17,9 @@ async function getLocales(locale: string) {
   try {
     return (await import(`@/locales/${locale}.json`)).default;
   } catch (error) {
-    notFound();
+    if (error instanceof Error) {
+      notFound();
+    }
   }
 }
 

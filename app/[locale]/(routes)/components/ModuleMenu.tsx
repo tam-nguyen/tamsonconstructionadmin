@@ -1,6 +1,7 @@
 'use client';
 
-import React, { FC, useEffect, useState } from 'react';
+import type { FC} from 'react';
+import React, { useEffect, useState } from 'react';
 
 import ProjectModuleMenu from './menu-items/Projects';
 import SecondBrainModuleMenu from './menu-items/SecondBrain';

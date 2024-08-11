@@ -22,19 +22,9 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
-import fetcher from '@/lib/fetcher';
-import useSWR from 'swr';
-import SuspenseLoading from '@/components/loadings/suspense';
-import { MyAccount, crm_Accounts } from '@prisma/client';
-import { init } from 'next/dist/compiled/@vercel/og/satori';
+
+
+import type { MyAccount} from '@prisma/client';
 import { Switch } from '@/components/ui/switch';
 
 interface UpdateAccountFormProps {

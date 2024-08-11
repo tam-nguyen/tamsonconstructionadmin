@@ -1,7 +1,7 @@
-import { Task, TaskStatusType } from './tasks';
-import { LogObject } from './logger';
+import type { Task, TaskStatusType } from './tasks';
+import type { LogObject } from './logger';
 import { prismadb } from '../prisma';
-import { RuntimeStatus } from '@prisma/client';
+import type { RuntimeStatus } from '@prisma/client';
 
 export class EngineService {
   constructor() {}
@@ -119,7 +119,7 @@ export class EngineService {
       return;
     }
 
-    let updatedLogs = runtimeData.logs as unknown as LogObject[];
+    const updatedLogs = runtimeData.logs as unknown as LogObject[];
 
     updatedLogs.push(...logs);
 

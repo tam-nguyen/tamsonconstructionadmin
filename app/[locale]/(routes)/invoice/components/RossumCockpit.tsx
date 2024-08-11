@@ -2,7 +2,7 @@
 
 import SuspenseLoading from '@/components/loadings/suspense';
 import axios from 'axios';
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 type Props = {
   invoiceData: any;

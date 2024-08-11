@@ -1,15 +1,10 @@
 'use client';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Lightbulb, ServerIcon, UserIcon } from 'lucide-react';
+
+
+import { Lightbulb } from 'lucide-react';
 import Link from 'next/link';
 
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 
 type Props = {

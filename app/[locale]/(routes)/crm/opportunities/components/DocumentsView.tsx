@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu';
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
-import { CoinsIcon, File, PlusIcon } from 'lucide-react';
+import { File, PlusIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 interface DocumentsViewProps {

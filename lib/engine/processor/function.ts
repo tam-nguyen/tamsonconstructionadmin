@@ -1,11 +1,11 @@
 import type { Task } from '../../engine/tasks/index';
 import { safeAsync } from '@/lib/utils';
 import { performance } from 'node:perf_hooks';
-import { createContext, runInNewContext, measureMemory } from 'vm';
+import { createContext, runInNewContext } from 'vm';
 
 import { LogSeverity, type WorkflowLogger } from '../logger';
 import axios from 'axios';
-import { ProcessorProcess } from '../engine.interface';
+import type { ProcessorProcess } from '../engine.interface';
 
 const httpClient = async (...args: any[]) => {
   //@ts-ignore-next-line

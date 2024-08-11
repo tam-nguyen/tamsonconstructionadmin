@@ -1,7 +1,6 @@
 import React from 'react';
 import Container from '../../../components/ui/Container';
 import { getInvoice } from '@/actions/invoice/get-invoice';
-import { MessageCircle, MessagesSquare } from 'lucide-react';
 import InvoiceChat from '../_dialogs/InvoiceChat';
 
 interface InvoiceDetailProps {

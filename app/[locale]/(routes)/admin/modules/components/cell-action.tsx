@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 
-import { ModuleColumn } from './Columns';
+import type { ModuleColumn } from './Columns';
 
 interface CellActionProps {
   data: ModuleColumn;
@@ -33,12 +33,14 @@ export const CellAction = ({ data }: CellActionProps) => {
         description: 'Module has been activated.',
       });
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description:
-          'Something went wrong while activating module. Please try again.',
-      });
+      if (error instanceof Error) {
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description:
+            'Something went wrong while activating module. Please try again.',
+        });
+      }  
     }
   };
 
@@ -51,12 +53,14 @@ export const CellAction = ({ data }: CellActionProps) => {
         description: 'Module has been deactivated.',
       });
     } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description:
-          'Something went wrong while deactivating module. Please try again.',
-      });
+      if (error instanceof Error) {
+        toast({
+          variant: 'destructive',
+          title: 'Error',
+          description:
+            'Something went wrong while deactivating module. Please try again.',
+        });       
+      }
     }
   };
 

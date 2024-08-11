@@ -1,5 +1,4 @@
 import {
-  CircleIcon,
   QuestionMarkCircledIcon,
   StopwatchIcon,
 } from '@radix-ui/react-icons';

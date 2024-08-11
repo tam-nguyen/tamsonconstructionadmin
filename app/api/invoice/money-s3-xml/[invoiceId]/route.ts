@@ -2,7 +2,7 @@ import { authOptions } from '@/lib/auth';
 import { s3Client } from '@/lib/digital-ocean-s3';
 import { prismadb } from '@/lib/prisma';
 import { fillXmlTemplate } from '@/lib/xml-generator';
-import { PutObjectAclCommand, PutObjectCommand } from '@aws-sdk/client-s3';
+import { PutObjectAclCommand } from '@aws-sdk/client-s3';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 

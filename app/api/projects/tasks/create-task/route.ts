@@ -3,7 +3,6 @@ import { prismadb } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 
-import NewTaskFromCRMEmail from '@/emails/NewTaskFromCRM';
 import NewTaskFromProject from '@/emails/NewTaskFromProject';
 import resendHelper from '@/lib/resend';
 

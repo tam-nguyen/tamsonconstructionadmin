@@ -10,7 +10,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '../ui/dialog';
-import { type } from 'os';
 
 type LoadingModalProps = {
   isOpen: boolean;

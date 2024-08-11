@@ -1,8 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { LightbulbIcon } from 'lucide-react';
 
-const LoadingBox = () => {
-  return (
+const LoadingBox = () => (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="animate-pulse bg-gray-200 text-sm font-medium text-gray-200">
@@ -17,6 +16,5 @@ const LoadingBox = () => {
       </CardContent>
     </Card>
   );
-};
 
 export default LoadingBox;

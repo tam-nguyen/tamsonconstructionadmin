@@ -1,7 +1,6 @@
 import { RegisterComponent } from './components/RegisterComponent';
 
-const RegisterPage = async () => {
-  return (
+const RegisterPage = async () => (
     <div className="flex h-full w-full flex-col space-y-5 overflow-auto p-10">
       <div className="">
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
@@ -11,6 +10,5 @@ const RegisterPage = async () => {
       <RegisterComponent />
     </div>
   );
-};
 
 export default RegisterPage;
