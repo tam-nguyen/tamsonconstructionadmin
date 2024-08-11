@@ -10,10 +10,12 @@ export type ActionState<TInput, TOutput> = {
   data?: TOutput;
 };
 
-export const createSafeAction = <TInput, TOutput>(
-  schema: z.Schema<TInput>,
-  handler: (validatedData: TInput) => Promise<ActionState<TInput, TOutput>>
-) => async (data: TInput): Promise<ActionState<TInput, TOutput>> => {
+export const createSafeAction =
+  <TInput, TOutput>(
+    schema: z.Schema<TInput>,
+    handler: (validatedData: TInput) => Promise<ActionState<TInput, TOutput>>
+  ) =>
+  async (data: TInput): Promise<ActionState<TInput, TOutput>> => {
     const validationResult = schema.safeParse(data);
     if (!validationResult.success) {
       return {

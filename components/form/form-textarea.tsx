@@ -1,6 +1,6 @@
 'use client';
 
-import type { KeyboardEventHandler} from 'react';
+import type { KeyboardEventHandler } from 'react';
 import { forwardRef } from 'react';
 
 import { Label } from '@/components/ui/label';

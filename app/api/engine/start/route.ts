@@ -1,5 +1,5 @@
 import { Processor } from '@/lib/engine/processor';
-import type { Task} from '@/lib/engine/tasks';
+import type { Task } from '@/lib/engine/tasks';
 import { TaskStatus, TaskType } from '@/lib/engine/tasks';
 import { prismadb } from '@/lib/prisma';
 import { safeAsync } from '@/lib/utils';

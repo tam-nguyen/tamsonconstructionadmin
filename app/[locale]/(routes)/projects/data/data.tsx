@@ -1,6 +1,3 @@
-
-
-
 export const visibility = [
   {
     value: 'public',

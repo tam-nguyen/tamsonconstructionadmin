@@ -58,7 +58,7 @@ export function DataTableRowActions<TData>({
         description: 'The Notion has been deleted.',
       });
     } catch (error) {
-      if (error instanceof AxiosError) {      
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',

@@ -53,7 +53,7 @@ const DeleteProjectDialog = ({ boardId, boardName }: Props) => {
         description: `Project: ${boardName} deleted successfully`,
       });
     } catch (error) {
-      if (error instanceof AxiosError) {      
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',

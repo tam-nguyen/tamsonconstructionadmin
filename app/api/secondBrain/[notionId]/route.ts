@@ -54,5 +54,3 @@ async function deleteTweet(notion: any, notionId: string, notionDb: string) {
     console.error(error.body);
   }
 }
-
-

@@ -1,11 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import {
-  LogOut,
-  Settings,
-  User,
-} from 'lucide-react';
+import { LogOut, Settings, User } from 'lucide-react';
 
 import {
   CommandDialog,

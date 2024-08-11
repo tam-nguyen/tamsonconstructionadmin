@@ -3,7 +3,6 @@ import { prismadb } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 
-
 //Create new task in project route
 /*
 TODO: there is second route for creating task in board, but it is the same as this one. Consider merging them (/api/projects/tasks/create-task/[boardId]). 
@@ -18,15 +17,7 @@ export async function PUT(
   const session = await getServerSession(authOptions);
   const body = await req.json();
   //console.log(body, "body");
-  const {
-    title,
-    user,
-    board,
-    boardId,
-    priority,
-    content,
-    notionUrl,
-  } = body;
+  const { title, user, board, boardId, priority, content, notionUrl } = body;
 
   const taskId = params.taskId;
 

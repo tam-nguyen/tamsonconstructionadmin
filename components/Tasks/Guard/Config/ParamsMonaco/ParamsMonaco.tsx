@@ -34,7 +34,7 @@ const ParamsMonaco: FC<Props> = ({ initialValue, setError, setValue }) => {
       } catch (_error) {
         if (_error instanceof Error) {
           setError('Error parsing JSON');
-        }  
+        }
       }
     }
   };

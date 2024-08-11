@@ -2,7 +2,6 @@
 
 import type { ColumnDef } from '@tanstack/react-table';
 
-
 import { statuses } from '../table-data/data';
 import type { Opportunity } from '../table-data/schema';
 import { DataTableColumnHeader } from './data-table-column-header';
@@ -102,19 +101,17 @@ export const columns: ColumnDef<Opportunity>[] = [
       <DataTableColumnHeader column={column} title="Budget" />
     ),
 
-    cell: ({ row }) => 
+    cell: ({ row }) => (
       //console.log(row.original.budget);
-       (
-        <div>
-          {row.original.budget
-            ? row.original.budget.toLocaleString('en-US', {
-                style: 'currency',
-                currency: 'USD',
-              })
-            : 'N/A'}
-        </div>
-      )
-    ,
+      <div>
+        {row.original.budget
+          ? row.original.budget.toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            })
+          : 'N/A'}
+      </div>
+    ),
     enableSorting: true,
     enableHiding: true,
   },

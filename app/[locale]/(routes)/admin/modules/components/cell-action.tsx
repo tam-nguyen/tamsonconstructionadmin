@@ -40,7 +40,7 @@ export const CellAction = ({ data }: CellActionProps) => {
           description:
             'Something went wrong while activating module. Please try again.',
         });
-      }  
+      }
     }
   };
 
@@ -59,7 +59,7 @@ export const CellAction = ({ data }: CellActionProps) => {
           title: 'Error',
           description:
             'Something went wrong while deactivating module. Please try again.',
-        });       
+        });
       }
     }
   };

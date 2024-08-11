@@ -21,7 +21,7 @@ async function getLocales(locale: string) {
   try {
     return (await import(`@/locales/${locale}.json`)).default;
   } catch (error) {
-    if (error instanceof IntlError) {    
+    if (error instanceof IntlError) {
       notFound();
     }
   }

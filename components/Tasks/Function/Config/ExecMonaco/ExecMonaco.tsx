@@ -42,7 +42,7 @@ const ExecMonaco: FC<Props> = ({
         setValue('exec', jsCode);
         setValue('execTs', value);
       } catch (_error) {
-        if (_error instanceof Error) {        
+        if (_error instanceof Error) {
           setError('Unable to transpile current code');
         }
       }

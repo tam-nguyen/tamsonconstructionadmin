@@ -23,8 +23,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 
-
-import type { MyAccount} from '@prisma/client';
+import type { MyAccount } from '@prisma/client';
 import { Switch } from '@/components/ui/switch';
 
 interface UpdateAccountFormProps {

@@ -98,7 +98,7 @@ export function DataTableRowActions<TData>({
         description: 'User has been deactivated.',
       });
     } catch (error) {
-      if (error instanceof AxiosError) {      
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',
@@ -121,7 +121,7 @@ export function DataTableRowActions<TData>({
         description: 'User Admin rights has been deactivated.',
       });
     } catch (error) {
-      if (error instanceof AxiosError) {      
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',
@@ -145,7 +145,7 @@ export function DataTableRowActions<TData>({
         description: 'User Admin rights has been activated.',
       });
     } catch (error) {
-      if (error instanceof AxiosError) {      
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',

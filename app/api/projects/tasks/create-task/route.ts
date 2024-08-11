@@ -17,15 +17,7 @@ export async function POST(req: Request) {
   const resend = await resendHelper();
   const session = await getServerSession(authOptions);
   const body = await req.json();
-  const {
-    title,
-    user,
-    board,
-    priority,
-    content,
-    notionUrl,
-    dueDateAt,
-  } = body;
+  const { title, user, board, priority, content, notionUrl, dueDateAt } = body;
 
   if (!session) {
     return new NextResponse('Unauthenticated', { status: 401 });

@@ -17,13 +17,7 @@ import { useRouter } from 'next/navigation';
 import AlertModal from '@/components/modals/alert-modal';
 import { useState } from 'react';
 import axios from 'axios';
-import {
-  Eye,
-  EyeOff,
-  Glasses,
-  Pencil,
-  Trash,
-} from 'lucide-react';
+import { Eye, EyeOff, Glasses, Pencil, Trash } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import {
   Sheet,

@@ -67,7 +67,7 @@ export function DataTableRowActions<TData>({
         description: 'Document has been deleted',
       });
     } catch (error) {
-      if (error instanceof AxiosError) {      
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',

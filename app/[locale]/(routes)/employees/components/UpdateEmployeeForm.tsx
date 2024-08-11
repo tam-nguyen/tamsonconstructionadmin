@@ -19,7 +19,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 
-
 import { Textarea } from '@/components/ui/textarea';
 
 import fetcher from '@/lib/fetcher';
@@ -87,13 +86,13 @@ export function UpdateEmployeeForm({
         description: 'Employee updated successfully',
       });
     } catch (error) {
-      if (error instanceof AxiosError) {      
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',
           description: error?.response?.data,
         });
-      }  
+      }
     } finally {
       setIsLoading(false);
       router.refresh();

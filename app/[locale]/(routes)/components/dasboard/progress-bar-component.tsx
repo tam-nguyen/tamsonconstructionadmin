@@ -5,6 +5,8 @@ import { ProgressBar } from '@tremor/react';
 
 interface ProgressBarComponentProps extends ProgressBarProps {}
 
-const ProgressBarComponent = (props: ProgressBarComponentProps) => <ProgressBar {...props} />;
+const ProgressBarComponent = (props: ProgressBarComponentProps) => (
+  <ProgressBar {...props} />
+);
 
 export default ProgressBarComponent;

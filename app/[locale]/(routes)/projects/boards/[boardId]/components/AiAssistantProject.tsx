@@ -1,8 +1,7 @@
 'use client';
 
-import type { FC} from 'react';
+import type { FC } from 'react';
 import { useState } from 'react';
-
 
 import { Icons } from '@/components/ui/icons';
 import { Button } from '@/components/ui/button';

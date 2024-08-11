@@ -2,15 +2,10 @@
 
 import axios, { AxiosError } from 'axios';
 import moment from 'moment';
-import type {
-  DropResult} from 'react-beautiful-dnd';
-import {
-  DragDropContext,
-  Droppable,
-  Draggable
-} from 'react-beautiful-dnd';
+import type { DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useRouter } from 'next/navigation';
-import type { ChangeEvent} from 'react';
+import type { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
 import { Check, EyeIcon, Pencil, PlusCircle, PlusIcon } from 'lucide-react';
 
@@ -143,7 +138,7 @@ const Kanban = (props: any) => {
         description: 'Section deleted successfully',
       });
     } catch (error) {
-      if (error instanceof AxiosError) {      
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',
@@ -227,7 +222,7 @@ const Kanban = (props: any) => {
         title: 'Success, task marked as done.',
       });
     } catch (error) {
-      if (error instanceof AxiosError) {      
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error, task not marked as done.',

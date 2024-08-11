@@ -2,7 +2,7 @@
 
 import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
-import type { ElementRef} from 'react';
+import type { ElementRef } from 'react';
 import React, { useRef } from 'react';
 
 import { sendMailToAll } from '@/actions/admin/send-mail-to-all';

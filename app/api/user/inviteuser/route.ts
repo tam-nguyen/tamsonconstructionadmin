@@ -9,9 +9,7 @@ import { hash } from 'bcryptjs';
 import InviteUserEmail from '@/emails/InviteUser';
 import resendHelper from '@/lib/resend';
 
-export async function POST(
-  req: Request
-) {
+export async function POST(req: Request) {
   /*
   Resend.com function init - this is a helper function that will be used to send emails
   */

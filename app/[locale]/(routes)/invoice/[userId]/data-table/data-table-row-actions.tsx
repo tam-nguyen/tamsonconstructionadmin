@@ -55,7 +55,7 @@ export function DataTableRowActions<TData>({
         description: 'Document has been deleted',
       });
     } catch (error) {
-      if (error instanceof AxiosError) {      
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',
@@ -81,7 +81,7 @@ export function DataTableRowActions<TData>({
         description: `Data from invoice with annotation ID ${invoice.rossum_annotation_id} has been extracted`,
       });
     } catch (error) {
-      if (error instanceof AxiosError) {      
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',

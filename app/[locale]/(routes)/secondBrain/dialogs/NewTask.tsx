@@ -89,7 +89,7 @@ const NewTaskDialog = ({ users, boards, open, setOpen, notionUrl }: Props) => {
         description: `New task: ${data.title}, created successfully`,
       });
     } catch (error) {
-      if (error instanceof AxiosError) {      
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',

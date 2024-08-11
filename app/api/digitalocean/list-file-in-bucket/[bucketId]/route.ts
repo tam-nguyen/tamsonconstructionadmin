@@ -1,9 +1,7 @@
-import type { NextRequest} from 'next/server';
+import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { s3Client } from '@/lib/digital-ocean-s3';
-import {
-  ListObjectsCommand,
-} from '@aws-sdk/client-s3';
+import { ListObjectsCommand } from '@aws-sdk/client-s3';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 

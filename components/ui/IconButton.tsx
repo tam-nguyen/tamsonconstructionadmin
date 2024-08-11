@@ -8,15 +8,15 @@ interface IconButtonProps {
 }
 
 const IconButton = ({ onClick, icon, className }: IconButtonProps) => (
-    <button
-      onClick={onClick}
-      className={cn(
-        'items-center justify-center rounded-full p-2 transition hover:scale-110',
-        className
-      )}
-    >
-      {icon}
-    </button>
-  );
+  <button
+    onClick={onClick}
+    className={cn(
+      'items-center justify-center rounded-full p-2 transition hover:scale-110',
+      className
+    )}
+  >
+    {icon}
+  </button>
+);
 
 export default IconButton;

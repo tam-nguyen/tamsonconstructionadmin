@@ -17,7 +17,9 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
     try {
       await signIn('google');
     } catch (error) {
-      if (error instanceof Error) { console.log('Google signIn error.') }      
+      if (error instanceof Error) {
+        console.log('Google signIn error.');
+      }
     } finally {
       setIsLoading(false);
     }

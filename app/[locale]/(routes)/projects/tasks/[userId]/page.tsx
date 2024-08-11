@@ -3,7 +3,7 @@ import Container from '@/app/[locale]/(routes)/components/ui/Container';
 import React from 'react';
 import { TasksDataTable } from '../components/data-table';
 import { columns } from '../components/columns';
-import type { Session} from 'next-auth';
+import type { Session } from 'next-auth';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 

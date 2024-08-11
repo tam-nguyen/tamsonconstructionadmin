@@ -14,7 +14,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 
-
 import { useToast } from '@/components/ui/use-toast';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
@@ -52,7 +51,7 @@ export function NotionForm({ userId }: { userId: string }) {
       });
       router.refresh();
     } catch (error) {
-      if (error instanceof AxiosError) {      
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',

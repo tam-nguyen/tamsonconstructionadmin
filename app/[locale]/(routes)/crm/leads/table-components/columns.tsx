@@ -2,7 +2,6 @@
 
 import type { ColumnDef } from '@tanstack/react-table';
 
-
 import { statuses } from '../table-data/data';
 import type { Lead } from '../table-data/schema';
 import { DataTableColumnHeader } from './data-table-column-header';

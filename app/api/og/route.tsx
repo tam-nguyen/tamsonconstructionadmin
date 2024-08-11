@@ -73,8 +73,8 @@ export async function GET(request: Request) {
       }
     );
   } catch (error) {
-    if (error instanceof Error) {    
+    if (error instanceof Error) {
       return new Response('Failed to generate OG image', { status: 500 });
-    }  
+    }
   }
 }

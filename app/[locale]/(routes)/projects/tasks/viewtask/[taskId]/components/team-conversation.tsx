@@ -56,7 +56,7 @@ export function TeamConversations({
         title: 'Success, comment added.',
       });
     } catch (error) {
-      if (error instanceof AxiosError) {      
+      if (error instanceof AxiosError) {
         toast({
           variant: 'destructive',
           title: 'Error',

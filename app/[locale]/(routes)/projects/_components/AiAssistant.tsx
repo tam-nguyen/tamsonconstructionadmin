@@ -1,6 +1,6 @@
 'use client';
 
-import type { FC} from 'react';
+import type { FC } from 'react';
 import { useState } from 'react';
 
 import { getUserAiTasks } from '@/actions/cron/get-user-ai-tasks';

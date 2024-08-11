@@ -3,7 +3,6 @@
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 
-
 import {
   Form,
   FormControl,
@@ -47,12 +46,7 @@ type Props = {
   onDone?: () => void;
 };
 
-const UpdateTaskDialog = ({
-  users,
-  boardId,
-  initialData,
-  onDone,
-}: Props) => {
+const UpdateTaskDialog = ({ users, boardId, initialData, onDone }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [isMounted, setIsMounted] = useState(false);

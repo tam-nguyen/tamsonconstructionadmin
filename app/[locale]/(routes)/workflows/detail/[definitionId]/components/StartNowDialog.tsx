@@ -76,7 +76,7 @@ const StartNowDialog: FC<Props> = ({ workflowDefinitionId }) => {
           setError(null);
         }
       } catch (_error) {
-        if (_error instanceof Error) {        
+        if (_error instanceof Error) {
           setError('Error parsing JSON');
         }
       }
