@@ -32,10 +32,6 @@ the Workflow-Engine project by Nisarg Bhatt.
 <br/>
 
 
-## Online Demo
-
-You can try it here [demo.saashq.org](https://demo.saashq.org), login via Google/Github account or create new user and password.
-
 ## Tech Stack + Features
 
 ### Frameworks
